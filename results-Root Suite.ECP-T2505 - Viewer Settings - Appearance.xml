@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="366.501" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:04:11" tests="0" file="cypress/e2e/test-suites/ECP-T2505-ViewerSettingAppearance.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2505 - Viewer Settings - Appearance" timestamp="2024-12-15T02:04:11" tests="4" time="366.479" failures="0">
+    <testcase name="Test Preparation - Before Step - Upload exam and get viewer URL" time="157.508" classname="ECP-T2505 - Viewer Settings - Appearance">
+    </testcase>
+    <testcase name="ECP-T2505 - Viewer Settings - Appearance - Steps 1 - 6" time="78.636" classname="ECP-T2505 - Viewer Settings - Appearance">
+    </testcase>
+    <testcase name="Step 6,7, 8 ,9 ,10" time="103.039" classname="ECP-T2505 - Viewer Settings - Appearance">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.935" classname="ECP-T2505 - Viewer Settings - Appearance">
+    </testcase>
+  </testsuite>
+</testsuites>

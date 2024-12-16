@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="422.556" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:21:10" tests="0" file="cypress/e2e/test-suites/ECP-T3058-SwitchCustomerContextforUserwithMultipleCustomer.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3058 - Switch Customer Context for User with Multiple Customer" timestamp="2024-12-15T02:21:10" tests="3" time="422.520" failures="0">
+    <testcase name="Login with System admin and Customer admin" time="260.939" classname="ECP-T3058 - Switch Customer Context for User with Multiple Customer">
+    </testcase>
+    <testcase name="Login with Facility admin and User" time="139.489" classname="ECP-T3058 - Switch Customer Context for User with Multiple Customer">
+    </testcase>
+    <testcase name="Post step - Cleanup" time="7.011" classname="ECP-T3058 - Switch Customer Context for User with Multiple Customer">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="120.966" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:22:07" tests="0" file="cypress/e2e/test-suites/ECP-T2543-PACS Workflow - Organization Time Zone Selector.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-2543-PACS Workflow - Organization Time Zone Selector" timestamp="2024-12-15T03:22:07" tests="2" time="120.942" failures="0">
+    <testcase name="ECP-T2543" time="104.378" classname="ECP-2543-PACS Workflow - Organization Time Zone Selector">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.374" classname="ECP-2543-PACS Workflow - Organization Time Zone Selector">
+    </testcase>
+  </testsuite>
+</testsuites>

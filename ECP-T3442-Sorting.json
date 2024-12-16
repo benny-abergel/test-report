@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:36:28.932Z",
+    "end": "2024-12-15T02:39:30.217Z",
+    "duration": 181285,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "4812bcaf-5e41-4969-8eaf-8c4267b5aa9d",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3442-Sorting.spec.ts",
+      "file": "cypress/test-suites/ECP-T3442-Sorting.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e2fe01f1-f19b-4944-ad8f-06a29bcfdf81",
+          "title": "ECP-T3442 - Filtering",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3442 - data prep",
+              "fullTitle": "ECP-T3442 - Filtering ECP-T3442 - data prep",
+              "timedOut": null,
+              "duration": 92707,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.reload();\n// switch to Mongo-Search\ncommon_1.Common.navigateTo('My Organization');\ncy.get('[data-template=\"customerAdminSettings\"]').click();\ncy.get('[data-key=\"useAtlasSearchInWorklist\"]').then(function ($checkBox) {\n    if ($checkBox.prop('checked')) {\n        cy.get(\"[data-key=\\\"useAtlasSearchInWorklist\\\"]\").click();\n        cy.get('button:contains(\"Disable Atlas Search\")').click();\n        cy.get('.js-adminSettings-save').click();\n    }\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true\n}, facilityName);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    //Upload a-01 study from resources folder\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    //Upload a-02 study from resources folder\n    examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-02\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n}).catch(function (err) {\n    console.log(err);\n});",
+              "err": {},
+              "uuid": "9e0ecc46-ac1e-49b7-81cd-73fa31e8991b",
+              "parentUUID": "e2fe01f1-f19b-4944-ad8f-06a29bcfdf81",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T3442 - step 1-6",
+              "fullTitle": "ECP-T3442 - Filtering ECP-T3442 - step 1-6",
+              "timedOut": null,
+              "duration": 67928,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, accAdmUser, accAdmPass);\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(accAdmUser, accAdmPass));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\ndeleteAllViews();\n// Step 2 - Sort using any column\n//clear filter and sorting\ncy.get('[data-cy=\"filterChipsContainer\"]').then(function ($sortingChips) {\n    if ($sortingChips.find('button:contains(Clear All)').length) {\n        cy.get('[data-cy=\"filterChipsContainer\"]').children().contains('Clear All').click();\n    }\n});\ncy.get('[data-cy=\"sortingChipsContainer\"]').then(function ($sortingChips) {\n    if ($sortingChips.find('button:contains(Clear All)').length) {\n        cy.get('[data-cy=\"sortingChipsContainer\"]').children().contains('Clear All').click();\n    }\n});\n// set to sort by MRN\ncy.get('[data-cy=\"mRNColumn\"').click();\ncy.get('.rt-body-worklist.rt-tbody [data-cy=\"patientMrn-cell\"]').first().should('contain.text', \"a-01\");\n// cy.get('[data-cy=\"worklistTableBody\"] span[title=\"a-02\"]', { timeout: configFile.longTimeout }).should('exist');\ncy.get('[data-cy=\"sortChip_patientMrn\"]').should('exist');\ncy.get('[data-cy=\"sortChip_patientMrn\"] .chip-box').should('contain.text', \"ASC\");\n// set to sort by patient name\ncy.get('[data-cy=\"patientColumn\"').click();\ncy.get('.rt-body-worklist.rt-tbody [data-cy=\"patientMrn-cell\"]').first().should('contain.text', \"a-01\");\ncy.get('[data-cy=\"sortChip_patientName\"]').should('exist');\ncy.get('[data-cy=\"sortChip_patientName\"] .chip-box').should('contain.text', \"ASC\");\n// set to sort by gender\ncy.get('[data-cy=\"genderColumn\"').click();\ncy.get('.rt-body-worklist.rt-tbody [data-cy=\"patientMrn-cell\"]').first().should('contain.text', \"a-02\");\ncy.get('[data-cy=\"sortChip_patientGender\"]').should('exist');\ncy.get('[data-cy=\"sortChip_patientGender\"] .chip-box').should('contain.text', \"ASC\");\n// step 3 - Sort in reverse order\ncy.get('[data-cy=\"mRNColumn\"').click();\ncy.wait(1000);\ncy.get('[data-cy=\"mRNColumn\"').click();\ncy.get('.rt-body-worklist.rt-tbody [data-cy=\"patientMrn-cell\"]').first().should('contain.text', \"a-02\");\n// cy.get('[data-cy=\"worklistTableBody\"] span[title=\"a-02\"]', { timeout: configFile.longTimeout }).should('exist');\ncy.get('[data-cy=\"sortChip_patientMrn\"]').should('exist');\ncy.get('[data-cy=\"sortChip_patientMrn\"] .chip-box').should('contain.text', \"DESC\");\n// step 4 - Sort by Priority\ncy.get('[data-cy=\"sortingChipsContainer\"] button:contains(\"Clear All\")').first().click();\nchangePriority(0, 1);\ncy.get('[data-cy=\"priorityColumn\"').click();\ncy.get('[data-cy=\"sortChip_mappedPriority\"]').should('exist');\ncy.get('[data-cy=\"sortChip_mappedPriority\"] .chip-box').should('contain.text', \"High to Low\");\ncy.get('[data-cy=\"sortChip_examDateTime\"]').should('exist');\ncy.get('[data-cy=\"sortChip_examDateTime\"] .chip-box').should('contain.text', \"Oldest to Newest\");\n// check the sort for two chips [the priority chips needed be first]\ncy.get('[data-cy=\"sortingChipsContainer\"] .chips-container .chip').first().should('contain.text', 'Priority:');\ncy.get('.rt-body-worklist.rt-tbody [data-cy=\"patientMrn-cell\"]').first().should('contain.text', \"a-02\");\n// priority DESC\ncy.get('[data-cy=\"priorityColumn\"').click();\ncy.get('[data-cy=\"sortChip_mappedPriority\"]').should('exist');\ncy.get('[data-cy=\"sortChip_mappedPriority\"] .chip-box').should('contain.text', \"Low to High\");\ncy.get('[data-cy=\"sortChip_examDateTime\"]').should('exist');\ncy.get('[data-cy=\"sortChip_examDateTime\"] .chip-box').should('contain.text', \"Oldest to Newest\");\ncy.get('.rt-body-worklist.rt-tbody [data-cy=\"patientMrn-cell\"]').last().should('contain.text', \"a-02\");\n// step 5 - Remove sorting by Priority\ncy.get('[data-cy=\"sortChip_mappedPriority\"] [role=\"button\"].close').first().click();\ncy.get('[data-cy=\"sortChip_mappedPriority\"]').should('not.exist');\ncy.get('[data-cy=\"sortChip_examDateTime\"]').should('exist');\ncy.get('[data-cy=\"sortChip_examDateTime\"] .chip-box').should('contain.text', \"Oldest to Newest\");\n// step 6 - Clear All sorting\ncy.get('[data-cy=\"sortingChipsContainer\"]').then(function ($sortingChips) {\n    if ($sortingChips.find('button:contains(Clear All)').length) {\n        cy.get('[data-cy=\"sortingChipsContainer\"]').children().contains('Clear All').click();\n    }\n});\ncy.get('[data-cy=\"sortingChipsContainer\"] .chips-container').should('be.empty');",
+              "err": {},
+              "uuid": "531d2db4-e94d-47b8-a419-b28ba10f7072",
+              "parentUUID": "e2fe01f1-f19b-4944-ad8f-06a29bcfdf81",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3442 - Filtering Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8081,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "03e29765-bb66-4d81-aa5f-ef7b5e0548d5",
+              "parentUUID": "e2fe01f1-f19b-4944-ad8f-06a29bcfdf81",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9e0ecc46-ac1e-49b7-81cd-73fa31e8991b",
+            "531d2db4-e94d-47b8-a419-b28ba10f7072",
+            "03e29765-bb66-4d81-aa5f-ef7b5e0548d5"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 168716,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

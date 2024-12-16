@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:26:37.120Z",
+    "end": "2024-12-15T02:36:23.839Z",
+    "duration": 586719,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "0f1ead36-8fa1-4325-803a-fc292cee79d6",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2795-SystemAdminCustomers.spec.ts",
+      "file": "cypress/test-suites/ECP-T2795-SystemAdminCustomers.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6fb27e3c-d589-444f-af4c-7080b1efe022",
+          "title": "ECP-T2795 - System Admin - Customers",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting ECP-T2795 - System Admin - Customers",
+              "fullTitle": "ECP-T2795 - System Admin - Customers Starting ECP-T2795 - System Admin - Customers",
+              "timedOut": null,
+              "duration": 297846,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncustomer2Name = customer2Name + '_' + Cypress.currentRetry;\n//Step 1 and 2\ncommon_1.Common.navigateTo('Customers');\ncy.waitUntil(function () { return cy.get('.action-cell > .btn').should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.mediumTimeout);\ncy.get('.rt-th div:Contains(\"NAME\")').should('exist');\ncy.get('.rt-th div:Contains(\"CITY, STATE\")').should('exist');\ncy.get('.rt-th div:Contains(\"PHONE NUMBER\")').should('exist');\ncy.get('.rt-th div:Contains(\"ORG ID\")').should('exist');\ncy.get('.rt-th div:Contains(\"CLASSIFICATION\")').should('exist');\ncy.get('.rt-th div:Contains(\"CONTACT REQUESTED\")').should('exist');\ncy.get('.rt-th div:Contains(\"CONTACTED\")').should('exist');\ncy.get('.rt-th div:Contains(\"STATUS\")').should('exist');\ncy.get('.rt-th div:Contains(\"ACTIONS\")').should('exist');\ncy.get('.action-cell > .btn').first().should('exist');\n//Classification\ncy.get('.Select-value').first().click({ force: true });\ncy.get('[aria-label=\"Any\"]').should('exist');\ncy.get('[aria-label=\"Enterprise\"]').should('exist');\ncy.get('[aria-label=\"Spoke\"]').should('exist');\ncy.get('[aria-label=\"Standard\"]').should('exist');\ncy.wait(configFile.tinyTimeout);\n//Contact Requested\ncy.get('.Select-value').eq(1).click({ force: true });\ncy.get('[aria-label=\"Any\"]').should('exist');\ncy.get('[aria-label=\"Yes\"]').should('exist');\ncy.get('[aria-label=\"No\"]').should('exist');\ncy.wait(configFile.tinyTimeout);\n//Contacted\ncy.get('.Select-value').eq(2).click({ force: true });\ncy.get('[aria-label=\"Any\"]').should('exist');\ncy.get('[aria-label=\"Yes\"]').should('exist');\ncy.get('[aria-label=\"No\"]').should('exist');\ncy.wait(configFile.tinyTimeout);\n//Status\ncy.get('.Select-value').eq(3).click({ force: true });\ncy.get('[aria-label=\"Any Status\"]').should('exist');\ncy.get('[aria-label=\"Active\"]').should('exist');\ncy.get('[aria-label=\"Inactive\"]').should('exist');\ncy.wait(configFile.tinyTimeout);\n//Step 3, 4 and 8\nvar col = ['CITY, STATE', 'PHONE NUMBER', 'ORG ID', 'CLASSIFICATION', 'CONTACT REQUESTED', 'CONTACTED', 'STATUS', 'NAME'];\nfor (var i = 0; i < 8; i++) {\n    cy.get('.rt-th div:Contains(\"' + col[i] + '\")').click();\n    cy.get('.-sort-asc').should('exist');\n}\ncy.get('.form-control').first().should('not.have.attr', 'disabled', { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.form-control').first().type(\"\".concat(customerName, \"{enter}\"), { force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.action-cell > .btn').click();\ncy.get('#orgName').should('exist');\ncy.get('[title=\"Enterprise\"]').should('exist');\ncy.get('#addressLine1').should('exist');\ncy.get('#city').should('exist');\ncy.get('#zip').should('exist');\ncy.get('#phoneNumber').should('exist');\ncy.get('button:contains(\"Cancel\")').should('exist');\ncy.get('button:contains(\"Save\")').should('exist');\ncy.get('button:contains(\"Reset\")').should('exist');\ncy.get('.js-contacted-btn').should('exist');\ncy.get('label:contains(Type)').parents('.form-group').find('.Select-placeholder').should('exist');\ncy.get('label:contains(State)').parents('.form-group').find('.Select-placeholder').should('exist');\ncy.get('label:contains(Time Zone)').parents('.form-group').find('.Select-value').should('exist');\n//Step 9 and 10\ncy.get('#orgName').clear().type(\"test\".concat(date));\ncy.get('button:contains(\"Reset\")').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#orgName').invoke('val').then(function (text) {\n    var cus = text;\n    expect(cus).to.equal(customerName);\n});\ncy.get('#orgName').clear().type('System');\ncy.get('div:contains(\"Name already exists in Stratus Imaging PACS.\")').should('exist');\ncy.wait(configFile.tinyTimeout);\ncy.get('#orgName').clear().type(updatecustomername);\ncy.get('button:contains(\"Cancel\")').click();\ncy.get('[title=\"' + customerName + '\"]').should('exist');\ncy.get('.action-cell > .btn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#orgName').clear().type(updatecustomername);\ncy.get('button:contains(\"Save\")').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"' + customerName + '\"]').should('not.exist');\ncy.get('button:contains(\"Clear\")').click();\ncy.waitUntil(function () { return cy.get('.action-cell > .btn').should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.form-control').first().type(\"System{enter}\");\n//Step 5\ncy.get('[title=\"system\"]').should('not.exist');\ncy.get('button:contains(\"Clear\")').click();\n//Step 6\ncy.get('.NewOrgButton > .btn').click({ force: true });\ncy.get('[data-id=\"general\"]').should('exist');\n//Step 7\ncy.wait(configFile.smallTimeout);\ncy.get('#orgName').should('exist');\ncy.get('.rqrd').should('exist');\ncy.get('[title=\"Standard\"]').should('exist');\ncy.get('label:contains(Customer Classification)').parents('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"Enterprise\"]').should('exist');\ncy.get('[aria-label=\"Spoke\"]').should('exist');\ncy.get('[aria-label=\"Standard\"]').should('exist');\ncy.get('#addressLine1').should('exist');\ncy.get('#city').should('exist');\ncy.get('#zip').should('exist');\ncy.get('#phoneNumber').should('exist');\ncy.get('button:contains(\"Cancel\")').should('exist');\ncy.get('button:contains(\"Save\")').should('exist');\ncy.get('.js-contacted-btn').should('exist');\ncy.get('label:contains(Customer Host)').parents('.form-group').find('.Select-placeholder').should('exist');\ncy.get('label:contains(Type)').parents('.form-group').find('.Select-placeholder').should('exist');\ncy.get('label:contains(State)').parents('.form-group').find('.Select-placeholder').should('exist');\ncy.get('label:contains(Time Zone)').parents('.form-group').find('.Select-placeholder').should('exist');\n//Step 12\ncy.get('label:contains(Type)').parents('.form-group').find('.Select-placeholder').click({ force: true });\ncy.get('[aria-label=\"Corporate\"]').should('exist');\ncy.get('[aria-label=\"Government (non-hospital)\"]').should('exist');\ncy.get('[aria-label=\"Health System/Hospital\"]').should('exist');\ncy.get('[aria-label=\"Imaging Center\"]').should('exist');\ncy.get('[aria-label=\"Law Firm\"]').should('exist');\ncy.get('[aria-label=\"Specialty Clinic\"]').should('exist');\ncy.get('[aria-label=\"University/College (non-hospital)\"]').should('exist');\ncy.get('[aria-label=\"Urgent Care\"]').should('exist');\ncy.get('[aria-label=\"Other\"]').should('exist');\ncy.get('[aria-label=\"Health System/Hospital\"]').click();\ncy.get('label:contains(Subtype)').parents('.form-group').find('.Select-placeholder').click();\ncy.get('[aria-label=\"Community Hospital\"]').should('exist');\ncy.get('[aria-label=\"University/Academic\"]').should('exist');\ncy.get('[aria-label=\"Government\"]').should('exist');\ncy.get('[aria-label=\"Other\"]').should('exist');\ncy.get('[title=\"Health System/Hospital\"]').click();\ncy.get('[aria-label=\"Specialty Clinic\"]').click({ force: true });\ncy.get('label:contains(Subtype)').parents('.form-group').find('.Select-placeholder').click();\ncy.get('[aria-label=\"Radiology\"]').should('exist');\ncy.get('[aria-label=\"Orthopedic\"]').should('exist');\ncy.get('[aria-label=\"Neurology\"]').should('exist');\ncy.get('[aria-label=\"Cardiology\"]').should('exist');\ncy.get('[aria-label=\"Oncology\"]').should('exist');\ncy.get('[aria-label=\"Surgery\"]').should('exist');\ncy.get('[aria-label=\"Other\"]').should('exist');\n//Step 13\ncy.get('[title=\"Specialty Clinic\"]').click({ force: true });\ncy.get('[aria-label=\"Imaging Center\"]').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('label:contains(Subtype)').should('not.exist');\ncy.get('[title=\"Imaging Center\"]').click({ force: true });\ncy.get('[aria-label=\"Other\"]').click({ force: true });\ncy.get('label:contains(Subtype)').should('not.exist');\n//Step 14\ncy.get('#zip').clear().type('1234567');\ncy.wait(configFile.tinyTimeout);\ncy.get('div:contains(\"Please enter a valid ZIP.\")').should('exist');\ncy.get('#zip').clear().type('12345');\ncy.get('div:contains(\"Please enter a valid ZIP.\")').should('not.exist');\ncy.get('#phoneNumber').clear().type('0000000');\ncy.get('button:contains(\"Save\")').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('div:contains(\"Please enter a valid phone number.\")').should('exist');\ncy.get('#phoneNumber').clear().type('0000000000');\ncy.get('[placeholder=\"(###) ###-####\"]').should('exist');\n//Step 16 and 17\ncy.get('#orgName').type(customer2Name);\ncy.get('label:contains(Customer Classification)').parents('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"Enterprise\"]').click();\ncy.get('.Select-placeholder').last().click();\n// cy.get('.adminEditOrganizationDialog div:nth-child(5) .Select-control .Select-multi-value-wrapper .Select-placeholder').first().click();\ncy.get('#timezone-picker').type('Central Time', { force: true });\n// cy.get('.adminEditOrganizationForm .Select-multi-value-wrapper .Select-input #timezone-picker').type('Central Time');\ncy.get('.adminEditOrganizationForm .Select-menu-outer .Select-option span.needsclick').first().click();\ncy.wait(configFile.smallTimeout);\ncy.get('button[type=\"submit\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('button.btn.btn-primary.btn--with-spinner .circularLoader', { timeout: configFile.longTimeout }).should('not.exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.modal-header .close').length > 0) {\n        cy.get('.modal-header .close').click();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.switchToCustomer(customer2Name);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c5_-Palette_Color_secondary_capture -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"c-05\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.shareExam').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('#organization').type(facility2Name);\ncy.get('.multiStateButtonWrapper > .btn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.iconCircleCheck').click();\ncy.get('#shareExam').click();\ncy.wait(configFile.tinyTimeout);\ncy.reload();\ncy.wait(configFile.smallTimeout);\ncy.get('.shareExam').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('.btn-pro-share').click();\ncy.get('#organization').type(facilityName);\ncy.get('.multiStateButtonWrapper > .btn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.iconCircleCheck').click();\ncy.get('#shareExam').click();\ncy.wait(configFile.tinyTimeout);\ncy.reload();\ncy.wait(configFile.smallTimeout);\ncy.get('.shareExam').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.btn-statshare-share').click();\ncy.waitUntil(function () { return cy.get('#recipientAddress').should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('#recipientAddress').focus().clear().type(\"test\".concat(date, \"@abc.com\"));\ncy.wait(configFile.tinyTimeout);\ncy.get('#createStatShare').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#statShareUrl').then(function (el) {\n    staturl = el.text();\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Facilities');\ncy.wait(configFile.smallTimeout);\ncy.get('.action-cell > .btn').first().click();\ncy.wait(configFile.smallTimeout);\ncy.get('.js-status-btn').uncheck();\ncy.get('.pull-right > .btn-primary').click();\ncy.wait(configFile.smallTimeout);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);\ncy.reload();\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('Customers');\ncy.waitUntil(function () { return cy.get('.action-cell > .btn').should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.form-control').first().clear().type(\"\".concat(customer2Name, \"{enter}\"));\ncy.wait(configFile.smallTimeout);\ncy.get('.action-cell > .btn').click();\ncy.get('.js-status-btn').uncheck();\ncy.get('.pull-right > .btn-primary').click();\ncy.wait(configFile.smallTimeout);\ncy.get('button.btn.btn-primary.btn--with-spinner .circularLoader', { timeout: configFile.longTimeout }).should('not.exist');\ncy.wait(configFile.smallTimeout);\n// Step 11\ncy.get('#customerSelector button').click();\ncy.get('.CustomerSelector .Select-input input').first().type(customer2Name, { force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('div:contains(\"No results found\")').should('exist');\ncy.get('.modal-header > .close > span').click();\ncommon_1.Common.switchToCustomer(updatecustomername);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('[title=\"c-05\"]').should('not.exist');\ncy.get('#examsSharedWithMe').click();\ncy.get('[title=\"c-05\"]').should('not.exist');\n// m.changeFacilityStatus(facility2Name,false);\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "78af7e20-becc-4cb0-a1c0-6c2788ae6a59",
+              "parentUUID": "6fb27e3c-d589-444f-af4c-7080b1efe022",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 17 -22",
+              "fullTitle": "ECP-T2795 - System Admin - Customers Step 17 -22",
+              "timedOut": null,
+              "duration": 255634,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 11\ncommon_1.Common.login(customerName, orgadmin1, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(orgadmin1, userpassword));\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('div:contains(\"There are no customers for you to select. Contact your administrator.\")').should('exist');\ncy.wait(configFile.smallTimeout);\n//Step 17.2\ncy.visit(staturl);\ncy.get('p:contains(\"No StatShare is available for this URL. Please contact the StatShare sender for assistance.\")').should('exist');\ncy.clearAllLocalStorage();\ncy.go('back');\n//Step 17.3\ncommon_1.Common.login(customerName, orgadmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(orgadmin, userpassword));\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('#examsSharedWithMe').click();\ncy.get('[title=\"c-05\"]').should('not.exist');\ncommon_1.Common.logout();\n//Step 18\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('Customers');\ncy.waitUntil(function () { return cy.get('.action-cell > .btn').should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.form-control').first().type(\"\".concat(customer2Name, \"{enter}\"));\ncy.wait(configFile.smallTimeout);\ncy.get('.action-cell > .btn').click();\ncy.get('.js-status-btn').check();\ncy.get('.pull-right > .btn-primary').click();\ncy.wait(configFile.smallTimeout);\ncy.get('button.btn.btn-primary.btn--with-spinner .circularLoader', { timeout: configFile.longTimeout }).should('not.exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.modal-header .close').length > 0) {\n        cy.get('.modal-header .close').click();\n    }\n});\ncommon_1.Common.switchToCustomer(customer2Name);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Facilities');\ncy.wait(configFile.smallTimeout);\ncy.get('.action-cell > .btn').click();\ncy.get('.js-status-btn').check();\ncy.get('.pull-right > .btn-primary').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncommon_1.Common.login(updatecustomername, orgadmin, userpassword);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('#examsSharedWithMe').click();\ncy.get('[title=\"c-05\"]').should('exist');\ncommon_1.Common.logout();\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(updatecustomername, configFile.timeout, true);\n//Step 19\ncy.visit(configFile.url + '/facilities');\ncy.wait(configFile.smallTimeout);\ncy.get('.action-cell > .btn').last().click();\ncy.get('.js-status-btn').uncheck();\ncy.get('.pull-right > .btn-primary').click();\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.switchToCustomer(customer2Name);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('[title=\"c-05\"]').should('exist');\n//Step 20\ncommon_1.Common.switchToCustomer(updatecustomername);\ncy.visit(configFile.url + '/facilities');\ncy.wait(configFile.smallTimeout);\ncy.get('.action-cell > .btn').last().click();\ncy.get('.js-status-btn').check();\ncy.get('.pull-right > .btn-primary').click();\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('[title=\"c-05\"]').should('not.exist');",
+              "err": {},
+              "uuid": "5765e9ac-4b99-4c5a-a932-c641ab524a7d",
+              "parentUUID": "6fb27e3c-d589-444f-af4c-7080b1efe022",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2795 - System Admin - Customers Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 11284,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "88c8cc55-d410-474e-bd34-0726588e0bde",
+              "parentUUID": "6fb27e3c-d589-444f-af4c-7080b1efe022",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "78af7e20-becc-4cb0-a1c0-6c2788ae6a59",
+            "5765e9ac-4b99-4c5a-a932-c641ab524a7d",
+            "88c8cc55-d410-474e-bd34-0726588e0bde"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 564764,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

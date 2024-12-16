@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="222.866" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:09:27" tests="0" file="cypress/e2e/test-suites/ECP-T2676-FeatureSwitch-ReportQuerySources.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2676 - Feature Switch - Report Query Sources" timestamp="2024-12-15T02:09:27" tests="2" time="222.801" failures="0">
+    <testcase name="Starting Feature Switch - Report Query Sources Test - all 7 Steps in one" time="201.154" classname="ECP-T2676 - Feature Switch - Report Query Sources">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.399" classname="ECP-T2676 - Feature Switch - Report Query Sources">
+    </testcase>
+  </testsuite>
+</testsuites>

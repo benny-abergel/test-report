@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="91.697" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T04:11:35" tests="0" file="cypress/e2e/test-suites/ECP-T2805-SystemSettings-DefaultValues.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2805 - System Settings - Default Values" timestamp="2024-12-15T04:11:35" tests="3" time="91.667" failures="0">
+    <testcase name="Before step" time="67.217" classname="ECP-T2805 - System Settings - Default Values">
+    </testcase>
+    <testcase name="Starting System Settings - Default Values Test - all 7 Steps in one" time="10.273" classname="ECP-T2805 - System Settings - Default Values">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.057" classname="ECP-T2805 - System Settings - Default Values">
+    </testcase>
+  </testsuite>
+</testsuites>

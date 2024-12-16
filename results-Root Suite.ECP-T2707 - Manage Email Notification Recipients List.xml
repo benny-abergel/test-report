@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="228.550" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:04:11" tests="0" file="cypress/e2e/test-suites/ECP-T2707-ManageEmailNotificationRecipientsList.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2707 - Manage Email Notification Recipients List" timestamp="2024-12-15T02:04:11" tests="2" time="228.520" failures="0">
+    <testcase name="Starting test ECP-T2707 - Manage Email Notification Recipients List - Step 1 - 12" time="212.058" classname="ECP-T2707 - Manage Email Notification Recipients List">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.791" classname="ECP-T2707 - Manage Email Notification Recipients List">
+    </testcase>
+  </testsuite>
+</testsuites>

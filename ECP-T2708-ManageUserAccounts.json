@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:04:11.838Z",
+    "end": "2024-12-15T02:07:54.326Z",
+    "duration": 222488,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2deffe75-645e-4dd3-ad92-5c0e3eb0ffd8",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2708-ManageUserAccounts.spec.ts",
+      "file": "cypress/test-suites/ECP-T2708-ManageUserAccounts.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "40b3e790-70d7-4580-b339-1d85e579fe03",
+          "title": "ECP-T2708 - Manage User Accounts",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 - 8",
+              "fullTitle": "ECP-T2708 - Manage User Accounts Step 1 - 8",
+              "timedOut": null,
+              "duration": 204339,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('User Management');\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('.editUserBtn').eq(0).should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.test-e2e-email').type(\"\".concat(Orgadmin, \"{enter}\"));\n//Step 2\ncy.wait(configFile.smallTimeout);\ncy.get('.editUserBtn').click({ force: true });\ncy.get('#firstNameField').clear().type('test');\ncy.get('#lastNameField').clear().type('test');\ncy.get('.save-account-info').click({ force: true });\ncy.wait(configFile.mediumTimeout);\ncy.get('.modal-header > [aria-label=\"Close\"]').click();\n//Step 3\ncy.wait(configFile.smallTimeout);\ncy.get('.editUserBtn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#activeUser').click();\ncy.get('.save-account-info').click({ force: true });\ncy.get('#confirm-saveDeactivatedUser').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.modal-header > [aria-label=\"Close\"]').click();\n// Step 4 and 5 for removing the User as Customer admin and facility admin\ncy.wait(configFile.smallTimeout);\ncy.get('.editUserBtn').click();\ncy.get('#organizationsTab').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.table-col-action').eq(1).trigger('mouseover');\ncy.get('a:contains(\"Remove\")').eq(0).click();\ncy.get('#saveUserBtn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.modal-header > [aria-label=\"Close\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.editUserBtn').click();\ncy.get('#organizationsTab').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.table-col-action').eq(1).trigger('mouseover');\ncy.get('a:contains(\"Remove\")').eq(0).click();\ncy.get('#saveUserBtn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.modal-header > [aria-label=\"Close\"]').click();\n//Step 4 and 5 for adding User as Customer and Facility admin\ncy.wait(configFile.smallTimeout);\ncy.get('.editUserBtn').click();\ncy.get('#organizationsTab').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.form-group > label:contains(\"Organization\")').parent('.form-group').find('.Select-arrow-zone').click({ force: true });\ncy.get('.form-group > label:contains(\"Organization\")').parent('.form-group').find('.Select-placeholder').type(customerName);\ncy.get('[aria-label=\"' + customerName + '\"]').click();\ncy.get('#addOrganizationBtn').click();\ncy.get('.form-group > label:contains(\"Group Membership For\")').parent('.form-group').find('.Select-arrow-zone').first().click({ force: true });\n// cy.get('.Select-placeholder').eq(1).click()\ncy.get('[aria-label=\"Customer Administrators\"]').click();\ncy.get('.form-group > label:contains(\"Organization\")').parent('.form-group').find('.Select-value').type(facility2Name);\ncy.get('[aria-label=\"' + facility2Name + '\"]').click();\ncy.get('#addOrganizationBtn').click();\ncy.get('[aria-label=\"Interpreting Provider\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[role=\"combobox\"]').last().click();\ncy.get('.modal-title').click();\ncy.get('#saveUserBtn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.modal-header > [aria-label=\"Close\"]').click();\n// Step 6\ncy.get('.editUserBtn').click();\ncy.get('#organizationsTab').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"' + facilityName + '\"]').click();\ncy.get('.form-group > label:contains(\"Group Membership For\")').parent('.form-group').find('.Select-arrow-zone').first().click({ force: true });\ncy.get('[aria-label=\"Interpreting Provider\"]').click();\ncy.get('[aria-label=\"Users\"]').click();\ncy.get('.Select-value-icon').eq(2).click();\ncy.get('#saveUserBtn').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.modal-header > [aria-label=\"Close\"]').click();\ncy.get('.editUserBtn').click();\ncy.get('#organizationsTab').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.table-col-name').eq(2).click({ force: true });\ncy.get('span:contains(\"Users\")').should('not.exist');\ncy.get('span:contains(\"Interpreting Provider\")').should('exist');\ncy.get('.modal-header > [aria-label=\"Close\"]').click();\n//Step 7 and 8\ncy.wait(configFile.smallTimeout);\ncy.get('.test-e2e-expander').click();\ncy.waitUntil(function () { return cy.get('.editUserBtn').eq(0).should('exist'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.custom-value').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('[aria-label=\"Patient\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.hipaaLogBtn').length > 0) {\n        cy.get('.hipaaLogBtn').eq(0).click();\n        cy.waitUntil(function () { return cy.get('.table-cell-createdAt').eq(0).should('exist'); }, { timeout: configFile.hugeTimeout });\n        cy.get('.modal-header > [aria-label=\"Close\"]').click();\n        cy.wrap(meteor_1.Meteor.getPatientID('')).then(function (UserID) {\n            cy.log(UserID);\n            cy.visit(configFile.url + '/patient/' + UserID + '/exams');\n        });\n        cy.get('.date-received').should('exist');\n    }\n});",
+              "err": {},
+              "uuid": "0b56944d-d602-4865-83ac-d746bf615401",
+              "parentUUID": "40b3e790-70d7-4580-b339-1d85e579fe03",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2708 - Manage User Accounts Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 10614,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "3719f246-f485-4756-9150-0749797b853e",
+              "parentUUID": "40b3e790-70d7-4580-b339-1d85e579fe03",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0b56944d-d602-4865-83ac-d746bf615401",
+            "3719f246-f485-4756-9150-0749797b853e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 214953,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

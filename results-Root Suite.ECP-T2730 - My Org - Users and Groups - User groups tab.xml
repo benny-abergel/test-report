@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="227.100" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:21:29" tests="0" file="cypress/e2e/test-suites/ECP-T2730-MyOrg-UserGroupsTab.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2730 - My Org - Users and Groups - User groups tab" timestamp="2024-12-15T02:21:29" tests="2" time="227.063" failures="0">
+    <testcase name="Step 1 - 42 " time="210.822" classname="ECP-T2730 - My Org - Users and Groups - User groups tab">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.119" classname="ECP-T2730 - My Org - Users and Groups - User groups tab">
+    </testcase>
+  </testsuite>
+</testsuites>

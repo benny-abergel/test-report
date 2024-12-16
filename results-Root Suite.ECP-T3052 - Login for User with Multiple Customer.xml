@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="387.426" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:31:34" tests="0" file="cypress/e2e/test-suites/ECP-T3052-LoginforUserwithMultipleCustomer.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3052 - Login for User with Multiple Customer" timestamp="2024-12-15T03:31:34" tests="3" time="387.392" failures="0">
+    <testcase name="Step as System admin and Customer admin" time="226.788" classname="ECP-T3052 - Login for User with Multiple Customer">
+    </testcase>
+    <testcase name="Step as Facility Admin and IP User to verify Multiple Customer Access" time="137.807" classname="ECP-T3052 - Login for User with Multiple Customer">
+    </testcase>
+    <testcase name="Post step - Cleanup" time="7.178" classname="ECP-T3052 - Login for User with Multiple Customer">
+    </testcase>
+  </testsuite>
+</testsuites>

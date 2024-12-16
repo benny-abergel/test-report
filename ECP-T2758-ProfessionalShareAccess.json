@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:23:38.788Z",
+    "end": "2024-12-15T02:31:21.658Z",
+    "duration": 462870,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "414deca3-87b9-482e-8899-41ea1b99b76c",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2758-ProfessionalShareAccess.spec.ts",
+      "file": "cypress/test-suites/ECP-T2758-ProfessionalShareAccess.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "79dc74d6-4745-46b1-a568-242a2c389335",
+          "title": "ECP-T2758 - Professional Share access Step ",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1-5",
+              "fullTitle": "ECP-T2758 - Professional Share access Step  Step 1-5",
+              "timedOut": null,
+              "duration": 253108,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowAutomaticActions: true,\n    allowWorklist: false,\n    allowEdgeServer: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowAPIs: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c5_-Palette_Color_secondary_capture -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"c-05\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wrap(meteor_1.Meteor.addUser(EmailID, password, facility2Name, 'Organization Administrators'), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncy.get('.shareExam').click();\ncy.get('.btn-pro-share').click();\ncy.get('#organization').type(facility2Name);\ncy.wait(configFile.smallTimeout);\ncy.get('.multiStateButtonWrapper > .btn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.addRecipientBtn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#shareExam').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.plus').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[data-cy=deleteExamBtn]').click();\ncy.get('p:contains(\" This exam has active shares.\")').should('exist');\ncy.get('p:contains(\"Deleting the exam will revoke the shares.\")').should('exist');\ncy.get('p:contains(\"Do you want to Delete Exam?\")').should('exist');\ncy.get('.btn-default').first().click();\ncy.get('[data-cy=deleteExamBtn]').click();\ncy.get('[data-cy=confirmDeleteYes]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.viewCellBox > .viewExam').should('not.exist');\n//Step 2\ncy.get('[data-cy=\"restoreNavLink\"]').click();\ncy.get('button:contains(\"Study Deleted\")').first().should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('button:contains(\"Study Deleted\")').first().rightclick();\ncy.get('[data-cy=\"restore\"]').click();\ncy.get('[data-cy=\"actionYesButton\"]').click();\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.tinyTimeout);\ncy.get('.plus').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.shareHistoryTab').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.revokeShareBtn').should('not.exist');\ncy.wrap(meteor_1.Meteor.addUser(EmailID1, password, facility2Name, 'Organization Administrators'), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\n//Step 3\ncy.get('.shareExam').click();\ncy.get('.btn-pro-share').click();\ncy.get('#organization').type(facility2Name);\ncy.wait(configFile.tinyTimeout);\ncy.get('.multiStateButtonWrapper > .btn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.addRecipientBtn').eq(0).click();\ncy.get('.multiStateButtonWrapper > .btn').click({ force: true });\ncy.get('.addRecipientBtn').eq(1).click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#shareExam').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n//Step 4\n//m.login(customerName,'#headerLogo', configFile.url, false, EmailID, password);\ncommon_1.Common.login(customerName, EmailID, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(EmailID, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.tinyTimeout);\ncy.get('#examsSharedWithMe').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.plus').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[data-cy=deleteExamBtn]').click();\ncy.get('[data-cy=confirmDeleteYes]').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n//Step 5\n// m.login(customerName,'#headerLogo', configFile.url, false, EmailID1, password);\ncommon_1.Common.login(customerName, EmailID1, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(EmailID1, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.tinyTimeout);\ncy.get('#examsSharedWithMe').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.viewCellBox > .viewExam').should('exist');\ncy.get('.plus').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[data-cy=deleteExamBtn]').click();\ncy.get('[data-cy=confirmDeleteYes]').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "476b86ed-aee7-4cf0-9ff1-9a0775b9aecc",
+              "parentUUID": "79dc74d6-4745-46b1-a568-242a2c389335",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 6- 12",
+              "fullTitle": "ECP-T2758 - Professional Share access Step  Step 6- 12",
+              "timedOut": null,
+              "duration": 186859,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFeatures({\n    allowAutomaticActions: true,\n    allowWorklist: false,\n    allowEdgeServer: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowAPIs: true\n}, facility2Name);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wrap(meteor_1.Meteor.addUser(EmailID2, password, facilityName, 'Organization Administrators'), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\n// Step 6 \ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.tinyTimeout);\ncy.get('.shareExam').click();\ncy.get('.btn-pro-share').click();\ncy.get('#organization').type(facility2Name);\ncy.get('.multiStateButtonWrapper > .btn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.addRecipientBtn').eq(0).click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#shareExam').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Reports');\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.shareExam').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.btn-pro-share').click();\ncy.get('#organization').type(facility2Name);\ncy.get('.multiStateButtonWrapper > .btn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.addRecipientBtn').eq(0).click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#shareExam').click();\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n// Step 8\n//m.login(customerName,'#headerLogo', configFile.url, false, EmailID, password);\ncommon_1.Common.login(customerName, EmailID, password);\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.get('#examsSharedWithMe').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.plus').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[data-cy=deleteExamBtn]').click();\ncy.get('[data-cy=confirmDeleteYes]').click();\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n//Step 7\n// m.login(customerName,'#headerLogo', configFile.url, false, EmailID1, password);\ncommon_1.Common.login(customerName, EmailID1, password);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.get('#examsSharedWithMe').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.viewCellBox > .viewExam').should('exist');\n// Step 10\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c5_-Palette_Color_secondary_capture -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"c-05\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.shareExam').click();\ncy.get('.btn-pro-share').click();\ncy.get('#organization').type(facilityName);\ncy.get('.multiStateButtonWrapper > .btn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.addRecipientBtn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#shareExam').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.plus').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.shareHistoryTab').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.revokeShareBtn').click();\ncy.get('#revokeShareYes').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n// Skipped  Step 9 and 10 as Unable to remove the Org admin due to bug\n// Step 12\n//m.login(customerName,'#headerLogo', configFile.url, false, EmailID2, password);\ncommon_1.Common.login(customerName, EmailID2, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(EmailID2, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.get('#examsSharedWithMe').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.viewCellBox > .viewExam').should('not.exist');",
+              "err": {},
+              "uuid": "2a529710-b9e8-483d-b770-3c5633afac95",
+              "parentUUID": "79dc74d6-4745-46b1-a568-242a2c389335",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2758 - Professional Share access Step  Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7775,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "9890ed48-515d-4302-ba4a-4b4bf2a2b2f3",
+              "parentUUID": "79dc74d6-4745-46b1-a568-242a2c389335",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "476b86ed-aee7-4cf0-9ff1-9a0775b9aecc",
+            "2a529710-b9e8-483d-b770-3c5633afac95",
+            "9890ed48-515d-4302-ba4a-4b4bf2a2b2f3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 447742,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

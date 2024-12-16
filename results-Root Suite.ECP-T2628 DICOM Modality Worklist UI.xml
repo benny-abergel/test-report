@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="193.770" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:07:18" tests="0" file="cypress/e2e/test-suites/ECP-T2628-DICOMModaityWorklistUI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2628 DICOM Modality Worklist UI" timestamp="2024-12-15T02:07:18" tests="3" time="193.692" failures="0">
+    <testcase name="Test Preparation - Before Step" time="71.819" classname="ECP-T2628 DICOM Modality Worklist UI">
+    </testcase>
+    <testcase name="ECP-T2628 DICOM Modality Worklist UI - Steps 1 - 12" time="102.727" classname="ECP-T2628 DICOM Modality Worklist UI">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.362" classname="ECP-T2628 DICOM Modality Worklist UI">
+    </testcase>
+  </testsuite>
+</testsuites>

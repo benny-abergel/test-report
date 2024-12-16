@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="143.527" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:36:56" tests="0" file="cypress/e2e/test-suites/ECP-T3059-LoginandNavigationforSystemAdmin.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3059 - Login and Navigation for System Admin" timestamp="2024-12-15T03:36:56" tests="2" time="143.497" failures="0">
+    <testcase name="Step 1 -8" time="126.910" classname="ECP-T3059 - Login and Navigation for System Admin">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.229" classname="ECP-T3059 - Login and Navigation for System Admin">
+    </testcase>
+  </testsuite>
+</testsuites>

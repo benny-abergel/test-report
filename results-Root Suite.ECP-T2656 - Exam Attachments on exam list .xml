@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="215.454" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:29:08" tests="0" file="cypress/e2e/test-suites/ECP-T2656-ExamAttachmentsonexamlist.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2656 - Exam Attachments on exam list " timestamp="2024-12-15T03:29:08" tests="2" time="215.434" failures="0">
+    <testcase name="Step 1-21" time="198.356" classname="ECP-T2656 - Exam Attachments on exam list ">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.751" classname="ECP-T2656 - Exam Attachments on exam list ">
+    </testcase>
+  </testsuite>
+</testsuites>

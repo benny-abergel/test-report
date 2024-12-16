@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:52:32.712Z",
+    "end": "2024-12-15T03:56:08.324Z",
+    "duration": 215612,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c49ded10-b20d-4ef7-bbdf-9ef256e78478",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3451-ExamPriorityMapping.ts",
+      "file": "cypress/test-suites/ECP-T3451-ExamPriorityMapping.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "23535354-2705-451b-bbbc-23a02db582dc",
+          "title": "ECP-T3451- Exam priority mapping",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3451 - data preperation",
+              "fullTitle": "ECP-T3451- Exam priority mapping ECP-T3451 - data preperation",
+              "timedOut": null,
+              "duration": 82844,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true\n}, facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n//create procrdures\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    return cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: __assign(__assign({}, procedureBody), { procedureInfo: __assign(__assign({}, procedureBody.procedureInfo), { \"priority\": \"R\", accessionNumber: \"11\" }), \"patientInfo\": __assign(__assign({}, procedureBody.patientInfo), { \"mrn\": \"11\" }) }),\n        headers: header\n    }).then(function () { return cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: __assign(__assign({}, procedureBody), { procedureInfo: __assign(__assign({}, procedureBody.procedureInfo), { \"priority\": \"S\", accessionNumber: \"22\" }), \"patientInfo\": __assign(__assign({}, procedureBody.patientInfo), { \"mrn\": \"22\" }) }),\n        headers: header\n    }); }).then(function () { return cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: __assign(__assign({}, procedureBody), { procedureInfo: __assign(__assign({}, procedureBody.procedureInfo), { \"priority\": \"OP Urgent\", accessionNumber: \"33\" }), \"patientInfo\": __assign(__assign({}, procedureBody.patientInfo), { \"mrn\": \"33\" }) }),\n        headers: header\n    }); }).then(function () {\n        var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c-01 -keepAlive=1\");\n        cy.exec(examUploadCmd, {\n            log: true,\n            env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n        })\n            .then(function (_a) {\n            var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n            console.log(code, stdout, stderr);\n        });\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "49b2dd2f-2a63-4405-8c3d-8851bdc26814",
+              "parentUUID": "23535354-2705-451b-bbbc-23a02db582dc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "steps 1 - 10",
+              "fullTitle": "ECP-T3451- Exam priority mapping steps 1 - 10",
+              "timedOut": null,
+              "duration": 57668,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var usedColors = [];\nvar allAvailableColors = [];\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncy.reload();\ncommon_1.Common.navigateTo('Workflow Configurations');\ncy.get('#workflowTabs-tab-1').click();\n//verify 5 priorities\ncy.get('.priority-card').should('have.length', 5);\ncy.get('.priority-card').eq(3).should('contain.text', \"Default\");\n//Verify the system pre-defined Exam Priorities\ncy.get('.priority-cards-list').children().each(function (element, index) {\n    cy.wrap(element).click();\n    cy.wait(configFile.tinyTimeout);\n    cy.wrap(element).invoke('text').then(function (text) {\n        //populate array of used colors\n        cy.get('.priority-color > div').then(function (el) {\n            usedColors.push(el.attr(\"color\"));\n        });\n        if (index >= 0 && index < 2 || index === 3) {\n            cy.get('#incomingPriorities').find('tbody').children().each(function (tr, index) {\n                expect(tr.first().text()).be.oneOf([\"\".concat(obj[text][index]), \"TEST\"]);\n            });\n        }\n        else {\n            cy.wrap(obj[text]).should(\"be.empty\");\n        }\n    });\n});\n// check STAT color\ncy.contains('Highest').click().then(function () {\n    cy.get('.priority-color > div').should('have.attr', 'color', '#D63E3E');\n    cy.get('[data-cy=paintBucketIcon]').should('not.exist');\n});\ncy.get('[data-cy=selectPriorityCard]').eq(1).click();\ncy.get('[data-cy=paintBucketIcon]').click();\ncy.wait(configFile.tinyTimeout);\n//populate array of all available colors\ncy.get(\".color-selection-box\").children().each(function (el) {\n    allAvailableColors.push(el.attr(\"data-cy\"));\n}).then(function () {\n    //set priority to unused color\n    unusedColor = allAvailableColors.find(function (color) { return usedColors.indexOf(color) < 0; });\n    cy.get(\"[data-cy=\\\"\".concat(unusedColor, \"\\\"]\")).children().first().click();\n    cy.wait(configFile.tinyTimeout);\n    cy.get('[data-cy=\"savePriorityDetailsChangesButton\"]').click();\n    cy.waitUntil(function () { return cy.contains(\"Saved\"); }, { timeout: configFile.hugeTimeout });\n    //check color is saved\n    cy.get(\".priority-color > div\").should('have.attr', 'color', unusedColor);\n    //set other priority to same color\n    cy.get('[data-cy=selectPriorityCard]').eq(2).click();\n    cy.get('[data-cy=paintBucketIcon]').click();\n    cy.wait(configFile.tinyTimeout);\n    cy.get(\"[data-cy=\\\"\".concat(unusedColor, \"\\\"]\")).children().first().click();\n    cy.get('[data-cy=\"confirmOverridePriorityColorSelectionButton\"]').click();\n    cy.waitUntil(function () { return cy.contains(\"Save Priority Details\", { timeout: configFile.longTimeout }).should('be.visible').and('be.enabled'); }, { timeout: configFile.longTimeout });\n    cy.get('[data-cy=\"savePriorityDetailsChangesButton\"]').click();\n    cy.waitUntil(function () { return cy.contains(\"Saved\"); }, { timeout: configFile.hugeTimeout });\n    cy.get(\".priority-color > div\").should('have.attr', 'color', unusedColor);\n    //check priority can be without color\n    cy.get('[data-cy=paintBucketIcon]').click();\n    cy.waitUntil(function () { return cy.get(\".color-selection-box\", { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\n    cy.get(\"[data-cy=\\\"transparent\\\"]\").children().first().click();\n    cy.waitUntil(function () { return cy.contains(\"Save Priority Details\", { timeout: configFile.longTimeout }).should('be.visible').and('be.enabled'); }, { timeout: configFile.longTimeout });\n    cy.get('[data-cy=\"savePriorityDetailsChangesButton\"]').click();\n    cy.waitUntil(function () { return cy.contains(\"Saved\"); }, { timeout: configFile.hugeTimeout });\n    cy.get(\".priority-color > div\").should('have.attr', 'color', \"transparent\");\n});\n//check change name of priority\ncy.get('input[name=\"editPriorityName\"]').clear().type(\"NEW TEXT\");\ncy.waitUntil(function () { return cy.contains(\"Save Priority Details\", { timeout: configFile.longTimeout }).should('be.visible').and('be.enabled'); }, { timeout: configFile.longTimeout });\ncy.get('[data-cy=\"savePriorityDetailsChangesButton\"]').click();\ncy.waitUntil(function () { return cy.contains(\"Saved\"); }, { timeout: configFile.hugeTimeout });\ncy.get('input[name=\"editPriorityName\"]').should('have.value', \"NEW TEXT\");\ncy.get('input[name=\"editPriorityName\"]').clear();\ncy.get('input[name=\"editPriorityName\"]').type(\"Medium\");\ncy.waitUntil(function () { return cy.contains(\"Save Priority Details\", { timeout: configFile.longTimeout }).should('be.visible').and('be.enabled'); }, { timeout: configFile.longTimeout });\ncy.get('[data-cy=\"savePriorityDetailsChangesButton\"]').click();\ncy.waitUntil(function () { return cy.contains(\"Saved\").should('be.visible'); }, { timeout: configFile.hugeTimeout });\n//check duplicate names of priorities\ncy.get('[data-cy=selectPriorityCard]').eq(3).click();\ncy.wait(configFile.tinyTimeout);\ncy.get('input[name=\"editPriorityName\"]').clear();\ncy.get('input[name=\"editPriorityName\"]').type(\"Medium\");\ncy.get('[data-cy=\"savePriorityDetailsChangesButton\"]').should('have.attr', 'disabled');\ncy.contains(\"This name already exists\");\ncy.get('input[name=\"editPriorityName\"]').clear();\ncy.get('input[name=\"editPriorityName\"]').type(\"Routine\");\n//check mapping of incoming pririty\ncy.get('.add-incoming-priority').find(\"button\").click();\ncy.wait(configFile.tinyTimeout);\ncy.get('input[name=\"addIncomingPriority\"]').type(\"TEST\");\ncy.get(\"#add-incoming-priority-popover\").find(\".btn-primary\").click();\ncy.wait(5000);\ncy.get(\"#incomingPriorities tr:contains('TEST')\");\ncy.waitUntil(function () { return cy.contains(\"Save Priority Details\", { timeout: configFile.longTimeout }).should('be.visible').and('be.enabled'); }, { timeout: configFile.longTimeout });\ncy.get('[data-cy=\"savePriorityDetailsChangesButton\"]').click();\ncy.waitUntil(function () { return cy.contains(\"Saved\"); }, { timeout: configFile.hugeTimeout });\n//check duplicate mapping of incoming priority\ncy.get('[data-cy=selectPriorityCard]').eq(4).click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.add-incoming-priority').find(\"button\").click();\ncy.wait(configFile.tinyTimeout);\ncy.get('input[name=\"addIncomingPriority\"]').type(\"TEST\");\ncy.wait(configFile.tinyTimeout);\ncy.get('input[name=\"addIncomingPriority\"]').should('have.css', 'border-color', 'rgb(214, 62, 62)');\ncy.get(\"div.validationError\");\ncy.wait(configFile.tinyTimeout);\ncy.get('[data-cy=selectPriorityCard]').eq(3).click();\ncy.wait(configFile.tinyTimeout);\ncy.get(\"[data-cy='deleteIncomingPriorityIcon'\").last().click();\ncy.wait(configFile.tinyTimeout);\ncy.contains(\"Yes, Delete\").click();\ncy.waitUntil(function () { return cy.contains(\"Save Priority Details\", { timeout: configFile.longTimeout }).should('be.visible').and('be.enabled'); }, { timeout: configFile.longTimeout });\ncy.get('[data-cy=\"savePriorityDetailsChangesButton\"]').click();\ncy.waitUntil(function () { return cy.contains(\"Saved\"); }, { timeout: configFile.hugeTimeout });",
+              "err": {},
+              "uuid": "94b87526-a61d-4a1e-b941-b06be4c3a728",
+              "parentUUID": "23535354-2705-451b-bbbc-23a02db582dc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "steps 11-18",
+              "fullTitle": "ECP-T3451- Exam priority mapping steps 11-18",
+              "timedOut": null,
+              "duration": 65950,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.navigateTo('Worklist');\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.contains(\"Clear All\").first().click();\n// verify priority column values\ncy.get(\"[data-cy='mappedPriorityDropDown']\").click();\ncy.wait(configFile.tinyTimeout);\nvar priorityCheckboxes = [];\ncy.get(\".checkbox-tooltip-content\").children().each(function (checkbox) {\n    priorityCheckboxes.push(checkbox.text());\n}).then(function () {\n    expect(priorityCheckboxes).to.deep.equal(priorityMappings);\n});\n//sort by priority\ncy.get(\"[data-cy='priorityColumn']\").first().click().then(function (priorityColumn) {\n    if (priorityColumn.hasClass(\"-sort-asc\")) {\n        console.log(\"has class sort-asc\");\n        cy.get(\"[data-cy='priorityColumn']\").first().click();\n    }\n    else {\n        console.log(\"has class sort-des\");\n    }\n});\n//verify the order of priorities\ncy.wait(5000);\ncy.get(\"[data-cy='wl-gridAllRefreshButton']\").click();\ncy.wait(500);\nvar cells = [];\ncy.get(\"[data-cy='mappedPriorityCell']\").each(function (cell) {\n    if (cells.indexOf(cell.text()) < 0)\n        cells.push(cell.text());\n}).then(function () {\n    expect(cells).to.deep.equal([\"STAT\", \"High\", \"Routine\"]);\n});\n//verify unmatched  studies has Routine priority\ncy.get(\"[data-cy='matchStatusDropDown']\").click();\ncy.wait(configFile.tinyTimeout);\ncy.get(\".checkbox-tooltip-content\").children().eq(2).click();\ncy.wait(configFile.tinyTimeout);\ncy.get(\"[data-cy='wl-gridAllRefreshButton']\").click();\ncy.wait(configFile.tinyTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.waitUntil(function () { return cy.get(':nth-child(1) > .react-contextmenu-wrapper > .tooltip-div > .rt-tr', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.wait(configFile.tinyTimeout);\ncy.get(\"[data-cy='mappedPriorityCell']\").each(function ($el) {\n    cy.wrap($el).invoke('text').should('eq', \"Routine\");\n});\n//match study to procedure\ncy.get(\".icon__eyeView\").first().rightclick();\ncy.wait(configFile.tinyTimeout);\ncy.get('[data-cy=\"workflowAdministration\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[data-cy=\"matchUnmatch\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get(\"input#patientMrn\").type(\"11\");\ncy.get(\"[name='search']\").click();\ncy.waitUntil(function () { return cy.get(\".react-table-row > :nth-child(1) > .nui-checkbox\", { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(\".react-table-row > :nth-child(1) > .nui-checkbox\").first().click();\ncy.contains(\"Match Selected\").click();\ncy.contains(\"Yes, Continue\").click();\n//verify priority of exam changed to priority of procedure\ncy.contains(\"Clear All\").first().click();\ncy.waitUntil(function () { return cy.get(':nth-child(1) > .react-contextmenu-wrapper > .tooltip-div > .rt-tr', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(\"[data-cy='patientMrnFilter']\").type(\"22\");\ncy.wait(2000);\ncy.get(\"[data-cy='FilterApplyAll']\").click();\ncy.waitUntil(function () { return cy.get(':nth-child(1) > .react-contextmenu-wrapper > .tooltip-div > .rt-tr', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(\"[data-cy='mappedPriorityCell']\").first().should(\"have.text\", \"STAT\");\n//create new procudure\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\nvar header = {\n    Authorization: \"Bearer \".concat(token),\n    Accept: 'application/json; charset=utf-8',\n    'Content-Type': 'application/json; charset=utf-8'\n};\ncy.request({\n    url: procedureUrl,\n    method: 'POST',\n    body: __assign(__assign({}, procedureBody), { procedureInfo: __assign(__assign({}, procedureBody.procedureInfo), { \"priority\": \"S\", accessionNumber: \"55\" }), \"patientInfo\": __assign(__assign({}, procedureBody.patientInfo), { \"mrn\": \"55\" }) }),\n    headers: header\n}).then(function () {\n    //change priority of new procedure\n    common_1.Common.navigateTo('Worklist');\n    cy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\n    cy.contains(\"Clear All\").first().click();\n    cy.waitUntil(function () { return cy.get(':nth-child(1) > .react-contextmenu-wrapper > .tooltip-div > .rt-tr', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\n    cy.get(\"[data-cy='patientMrnFilter']\").clear().type(\"55\");\n    cy.wait(2000);\n    cy.get(\"[data-cy='FilterApplyAll']\").click();\n    cy.waitUntil(function () { return cy.get(':nth-child(1) > .react-contextmenu-wrapper > .tooltip-div > .rt-tr', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\n    cy.get(\".icon__eyeView\").first().rightclick();\n    cy.wait(configFile.tinyTimeout);\n    cy.get('[data-cy=\"changePriority\"]').click();\n    cy.wait(configFile.tinyTimeout);\n    cy.contains(\"Select...\").click();\n    cy.get(\".change-priority-to-confirmation\").children().contains(\"Medium\").click();\n    cy.get(\"button\").contains(\"Change Priority\").click();\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: __assign(__assign({}, procedureBody), { procedureInfo: __assign(__assign({}, procedureBody.procedureInfo), { \"priority\": \"R\", accessionNumber: \"55\" }), \"patientInfo\": __assign(__assign({}, procedureBody.patientInfo), { \"mrn\": \"55\" }) }),\n        headers: header\n    }).then(function (res) {\n        common_1.Common.navigateTo('Worklist');\n        cy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\n        cy.wait(2000);\n        cy.contains(\"Clear All\").first().click();\n        cy.waitUntil(function () { return cy.get(':nth-child(1) > .react-contextmenu-wrapper > .tooltip-div > .rt-tr', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\n        cy.wait(configFile.tinyTimeout);\n        cy.get(\"[data-cy='patientMrnFilter']\").clear().type(\"55\");\n        cy.wait(2000);\n        cy.get(\"[data-cy='FilterApplyAll']\").click();\n        cy.waitUntil(function () { return cy.get(':nth-child(1) > .react-contextmenu-wrapper > .tooltip-div > .rt-tr', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\n        cy.get(\"[data-cy='wl-gridAllRefreshButton']\").click();\n        cy.get(\"[data-cy='mappedPriorityCell']\").first().should(\"have.text\", \"Routine\");\n        cy.get(\"[data-cy='wl-gridAllRefreshButton']\").click();\n        cy.wait(5000);\n        cy.get(\".icon__eyeView\").first().rightclick();\n        cy.get(\"[data-cy='hipaaLog']\").click();\n        cy.contains(\"Worklist Added\");\n        cy.contains(\"Change Priority\");\n    });\n});",
+              "err": {},
+              "uuid": "f6e76370-613f-4c7e-9f2c-43d83a712c6d",
+              "parentUUID": "23535354-2705-451b-bbbc-23a02db582dc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "clear data",
+              "fullTitle": "ECP-T3451- Exam priority mapping clear data",
+              "timedOut": null,
+              "duration": 6396,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "643babd7-cddd-47b9-8faa-b6ddc5fadabd",
+              "parentUUID": "23535354-2705-451b-bbbc-23a02db582dc",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "49b2dd2f-2a63-4405-8c3d-8851bdc26814",
+            "94b87526-a61d-4a1e-b941-b06be4c3a728",
+            "f6e76370-613f-4c7e-9f2c-43d83a712c6d",
+            "643babd7-cddd-47b9-8faa-b6ddc5fadabd"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 212858,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

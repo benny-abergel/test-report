@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="146.723" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:35:49" tests="0" file="cypress/e2e/test-suites/ECP-T2655-ExamAttachmentViewAPI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2655 - Exam Attachment View API " timestamp="2024-12-15T03:35:49" tests="3" time="146.706" failures="0">
+    <testcase name="Step 1-2" time="131.159" classname="ECP-T2655 - Exam Attachment View API ">
+    </testcase>
+    <testcase name="Step 3" time="0.779" classname="ECP-T2655 - Exam Attachment View API ">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.315" classname="ECP-T2655 - Exam Attachment View API ">
+    </testcase>
+  </testsuite>
+</testsuites>

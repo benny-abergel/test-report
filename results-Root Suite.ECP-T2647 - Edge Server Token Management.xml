@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="139.363" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:26:42" tests="0" file="cypress/e2e/test-suites/ECP-T2647-EdgeServerTokenManagement.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2647 - Edge Server Token Management" timestamp="2024-12-15T03:26:42" tests="3" time="139.338" failures="0">
+    <testcase name="Test Preparation - Before Step" time="76.296" classname="ECP-T2647 - Edge Server Token Management">
+    </testcase>
+    <testcase name="Starting Edge Server Token Management Test - All 16 steps in one" time="45.739" classname="ECP-T2647 - Edge Server Token Management">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.418" classname="ECP-T2647 - Edge Server Token Management">
+    </testcase>
+  </testsuite>
+</testsuites>

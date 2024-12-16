@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:26:14.361Z",
+    "end": "2024-12-15T03:28:09.883Z",
+    "duration": 115522,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f884f719-fa24-4de0-8f06-732a8dd05607",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2623-ContactCustomerSupport.spec.ts",
+      "file": "cypress/test-suites/ECP-T2623-ContactCustomerSupport.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5615086b-2b49-4202-aa55-2b650ee52bb9",
+          "title": "ECP-T2623 - Contact Customer Support (Failed due to bug ECP-26090)",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting Contact Customer Support Test - All 1 - 8 Steps in one",
+              "fullTitle": "ECP-T2623 - Contact Customer Support (Failed due to bug ECP-26090) Starting Contact Customer Support Test - All 1 - 8 Steps in one",
+              "timedOut": null,
+              "duration": 100217,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.switchToCustomer('System');\ncy.wait(configFile.tinyTimeout);\n// c.navigateTo('Sharing List');\n// cy.wait(configFile.tinyTimeout);\n// Step 1 - Verify contact support icon is correct. Confirm icon displayed correctly in compact/non-compact and light/dark modes.\ncy.get(support.customSupportIcon).should('be.visible');\ncy.get(support.darkModeToggle).click();\ncy.wait(configFile.smallTimeout);\ncy.get(support.customSupportIcon).should('be.visible');\ncy.wait(configFile.smallTimeout);\ncy.get(support.darkModeToggle).click();\ncy.wait(configFile.smallTimeout);\ncy.get(support.compactModeToggle).click();\ncy.wait(configFile.smallTimeout);\ncy.get(support.customSupportIcon).should('be.visible');\ncy.wait(configFile.smallTimeout);\ncy.get(support.compactModeToggle).click();\ncy.wait(configFile.smallTimeout);\ncy.get(support.darkModeToggle).then(function (el) {\n    if (el.attr('title') === 'Switch to light mode.') {\n        cy.get(support.darkModeToggle).click();\n        cy.wait(configFile.timeout);\n    }\n});\ncy.get(support.compactModeToggle).then(function (el) {\n    if (el.attr('title') === 'Switch to normal mode.') {\n        cy.get(support.compactModeToggle).click();\n        cy.wait(configFile.smallTimeout);\n    }\n});\n//  Step 2 - The support menu says: Have Questions of Comments? Give us a call 855-723-7427 Send us a message free text box SEND button\ncy.get(support.openSupportPanel).click();\ncy.get(support.supportHeading).should('contain', 'Send us a message');\ncy.get(support.giveUsCall).should('contain', 'Give us a call');\n// cy.get(support.contactPhone).should('contain', '858-251-3999'); // commented by mahipal, because content is 858-251-3440\ncy.get(support.contactPhone).should('contain', '858-251-3440');\n// cy.get(support.sendMessage).should('contain', 'Send us a message');\ncy.get(support.sendEmail).should('contain', \"Send\");\ncy.get(support.comment).should('exist');\n//  Step 3 - Resize the free text field and verify there are no UI/formatting related issues present.\n//    cannot perform this step via automation\n//  Step 4 - Click SEND.\ncy.get(support.sendEmail).click();\ncy.get(support.commentValidation).should('contain', 'Please add comments before sending.');\n//  Step 5 - Add comments, then click outside the expanded support window.\ncy.get(support.comment).type(txt);\n//cy.get('#sendSupportEmail').click();\n//cy.get('#general').click();\n// cy.get('.supportSuccessMsg').should('be.visible',{timeout:configFile.longTimeout});\ncy.get('h2 > .fa').click();\ncy.get(support.supportPanel).should('not.exist');\n//  Step 6 - Click on the support button again.\ncy.get(support.openSupportPanel).click();\ncy.get(support.supportPanel).should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get(support.comment).then(function (el) {\n    expect(el.val()).to.equal(txt); //skip  due to ECP-26090\n});\ncy.get(support.comment).type(txt);\n//  Step 7 - Click SEND.\ncy.get(support.sendEmail).click();\ncy.wait(configFile.smallTimeout);\ncy.get(support.successMsg, { timeout: configFile.longTimeout }).should('contain', \"Thank you for contacting us. A support team member will be in touch within 1 business day. If you need immediate help, please call the number below.\");\n//  Step 8 - Verify the support email is received.\n//    cannot verify email received, yet",
+              "err": {},
+              "uuid": "17022bab-9a61-4844-a0d6-e306bd58bde9",
+              "parentUUID": "5615086b-2b49-4202-aa55-2b650ee52bb9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2623 - Contact Customer Support (Failed due to bug ECP-26090) Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7647,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "4c05f818-6768-4868-ae9f-37d4cd2494f6",
+              "parentUUID": "5615086b-2b49-4202-aa55-2b650ee52bb9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "17022bab-9a61-4844-a0d6-e306bd58bde9",
+            "4c05f818-6768-4868-ae9f-37d4cd2494f6"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 107864,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

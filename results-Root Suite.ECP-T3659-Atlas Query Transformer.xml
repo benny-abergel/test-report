@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="223.552" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:34:59" tests="0" file="cypress/e2e/test-suites/ECP-T3659-AtlasqueryTransformer.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3659-Atlas Query Transformer" timestamp="2024-12-15T02:34:59" tests="3" time="223.514" failures="0">
+    <testcase name="ECP-T3659" time="129.238" classname="ECP-T3659-Atlas Query Transformer">
+    </testcase>
+    <testcase name="Check Worklist" time="75.372" classname="ECP-T3659-Atlas Query Transformer">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.793" classname="ECP-T3659-Atlas Query Transformer">
+    </testcase>
+  </testsuite>
+</testsuites>

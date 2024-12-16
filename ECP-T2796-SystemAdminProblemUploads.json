@@ -1,0 +1,135 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 0,
+    "passes": 0,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T04:02:34.242Z",
+    "end": "2024-12-15T04:10:54.822Z",
+    "duration": 500580,
+    "testsRegistered": 2,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 1,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "607b35e4-247a-4652-9855-644f1d98ab6c",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2796-SystemAdminProblemUploads.spec.ts",
+      "file": "cypress/test-suites/ECP-T2796-SystemAdminProblemUploads.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0fa4b269-7f6f-4cd8-b3d1-89801b725d58",
+          "title": "ECP-T2796- System Admin Problem Uploader",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1- 10",
+              "fullTitle": "ECP-T2796- System Admin Problem Uploader Step 1- 10",
+              "timedOut": null,
+              "duration": 146275,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowPatientSharing: true,\n    allowStatShares: true,\n    allowGuestUploader: true,\n    allowCdUploader: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.window().then(function (win) {\n    // @ts-ignore - removing Cypress error for missing chrome browser\n    window.top.chrome = true;\n});\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\n//Step -1\ncy.get('a:contains(\"Having trouble uploading an exam?\")').should('exist');\ncy.get('a:contains(\"Having trouble uploading an exam?\")').click();\ncy.get('.troubleMediaUpload').click();\ncy.get('h4:contains(\"You have indicated there have been problems\")').should('exist');\ncy.get('h4:contains(\"uploading this exam.\")').should('exist');\ncy.get('#commentsEditArea').type(text);\ncy.get('#fakeSelectTroubleMedia').click();\nselectDicom({ filePaths: this.datasetsArray });\ncy.wait(configFile.mediumTimeout);\ncy.get('.backToExamList').click();\ncy.visit(configFile.url);\n// Step 2\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('Problem Uploads');\n//Step 3\ncy.wait(configFile.smallTimeout);\ncy.get('#details').should('exist');\ncy.get('#download').should('exist');\ncy.get('#delete').should('exist');\ncy.get('#download').first().click();\ncy.wait(configFile.smallTimeout);\ncy.reload();\n// Step 4\ncy.get('.table-col-createdAt').should('exist');\ncy.get('.table-col-organization').should('exist');\ncy.get('.table-col-userName').should('exist');\ncy.get('.table-col-size').should('exist');\ncy.get('.table-col-uploaded').should('exist');\ncy.get('.table-col-times').should('exist');\ncy.get('.table-col-action').should('exist');\ncy.wait(configFile.smallTimeout);\n// Step 5\ncy.waitUntil(function () { return cy.get('#details').should('be.visible'); }, {\n    timeout: configFile.mediumTimeout,\n});\ncy.wait(configFile.smallTimeout);\ncy.get('#details').first().click();\ncy.get('#userComments').should('exist');\ncy.get('#errors').should('exist');\ncy.get('#notes').should('exist');\ncy.get('#downloadHistory').should('exist');\n//Step 6\ncy.get('.userName').should('exist');\ncy.get('.commentBox').should('exist');\ncy.get('.createdAt').should('exist');\ncy.get('p:contains(\"Test Test Test test test test\")').should('exist');\ncy.get(\"span:contains(\".concat(customerName, \", \").concat(customerName, \")\")).should('exist');\ncy.get('.userComments__scroll').should('exist');\n//  Step 7\ncy.get('#errors').click({ force: true });\ncy.get('.errors__scroll').should('exist');\n//Step 8 and 9\ncy.get('#notes').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.form-vertical > #notes').type('Adding Notes to Problem upload');\ncy.get('.modal-header > .close > span').click();\ncy.get('p:contains(\"Do you want to discard your changes?\")').should('exist');\ncy.get('#back').should('exist');\ncy.get('#discard').should('exist');\ncy.get('#discard').click();\ncy.get('#details').first().click();\ncy.get('#notes').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.form-vertical > #notes').type('Adding Notes to Problem upload');\ncy.get('#save').click();\ncy.wait(configFile.smallTimeout);\n//Step 10\ncy.get('#downloadHistory').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('th:contains(\"Download Date/Time\")').should('exist');\ncy.get('th:contains(\"Downloaded By\")').should('exist');\ncy.get('.table-cell-createdAt').should('exist');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 60000ms: Expected to find element: `.table-col-createdAt`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 60000ms: Expected to find element: `.table-col-createdAt`, but never found it.\n    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2796-SystemAdminProblemUploads.spec.ts:122:39)",
+                "diff": null
+              },
+              "uuid": "9988d7ea-40f2-4b93-9d5c-f5af6f181f38",
+              "parentUUID": "0fa4b269-7f6f-4cd8-b3d1-89801b725d58",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2796- System Admin Problem Uploader Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "2a2e1e69-90b1-4917-9a7a-b77de4337951",
+              "parentUUID": "0fa4b269-7f6f-4cd8-b3d1-89801b725d58",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "9988d7ea-40f2-4b93-9d5c-f5af6f181f38"
+          ],
+          "pending": [],
+          "skipped": [
+            "2a2e1e69-90b1-4917-9a7a-b77de4337951"
+          ],
+          "duration": 146275,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

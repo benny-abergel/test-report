@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="386.381" tests="4" failures="1">
+  <testsuite name="" timestamp="2024-12-15T03:01:57" tests="0" file="cypress/e2e/test-suites/ECP-T3430-ColumnSettings.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3430-Column Settings [REQ-194]" timestamp="2024-12-15T03:01:57" tests="4" time="0.000" failures="1">
+    <testcase name="ECP-T3430 - data prep" time="73.793" classname="ECP-T3430-Column Settings [REQ-194]">
+    </testcase>
+    <testcase name="Step 1-8" time="75.871" classname="ECP-T3430-Column Settings [REQ-194]">
+    </testcase>
+    <testcase name="Step 9-10" time="23.081" classname="ECP-T3430-Column Settings [REQ-194]">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="67.611" classname="ECP-T3430-Column Settings [REQ-194]">
+      <failure message="Timed out retrying after 60000ms: Expected to find element: `[data-cy=&quot;worklistTableBody&quot;]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 60000ms: Expected to find element: `[data-cy="worklistTableBody"]`, but never found it.
+    at cy.waitUntil.timeout (webpack:///./cypress/page-objects/pages/common.ts:67:101)
+    at resolveValue (webpack:///./node_modules/cypress-wait-until/src/index.js:71:0)
+    at Context.waitUntil (webpack:///./node_modules/cypress-wait-until/src/index.js:81:0)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

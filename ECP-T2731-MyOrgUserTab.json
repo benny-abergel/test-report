@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:33:51.395Z",
+    "end": "2024-12-15T02:38:01.152Z",
+    "duration": 249757,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d82f8e80-70f4-4568-b8b8-7bd62e50370d",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2731-MyOrgUserTab.spec.ts",
+      "file": "cypress/test-suites/ECP-T2731-MyOrgUserTab.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2ea1f1d3-358e-42bc-b817-84873b6f7149",
+          "title": "ECP-T2731 - My Org - Users and Groups - User tab",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 -44",
+              "fullTitle": "ECP-T2731 - My Org - Users and Groups - User tab Step 1 -44",
+              "timedOut": null,
+              "duration": 228701,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n//Step 1\ncommon_1.Common.navigateTo('Users & Groups');\n//Step 2\ncy.get('h2:contains(\"Users & Groups\")').should('exist');\ncy.get('span:contains(\"Users\")').should('exist');\ncy.get('span:contains(\"User Groups\")').should('exist');\ncommon_1.Common.switchTab('Users');\ncy.get('span:contains(\"Rows per page:\")').should('exist');\ncy.get('[title=\"Go to Page 1\"]').should('exist');\n//Step 3\ncy.get('.table-col-name').should('exist');\ncy.get('.table-col-email').should('exist');\ncy.get('.table-col-accountType').should('exist');\ncy.get('.table-col-status').should('exist');\ncy.get('.table-col-hasExtendedTimeout').should('exist');\ncy.get('.table-col-actions').should('exist');\n//Step 4\ncy.get('.iconTableFilter').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[name=\"name\"]').should('not.exist');\ncy.get('[name=\"email\"]').should('not.exist');\ncy.get('.iconTableFilter').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[name=\"name\"]').should('exist');\ncy.get('[name=\"email\"]').should('exist');\n//Step 5\ncy.get('[name=\"name\"]').first().type('Test');\ncy.get('[name=\"email\"]').last().type('Test');\ncy.get('[title=\"Any Type\"]').click();\ncy.get('[aria-label=\"Any Type\"]').should('exist');\ncy.get('[aria-label=\"Local\"]').should('exist');\ncy.get('[title=\"Any Status\"]').first().click();\ncy.get('[aria-label=\"Any Status\"]').should('exist');\ncy.get('[aria-label=\"Active\"]').should('exist');\ncy.get('[aria-label=\"Pending\"]').should('exist');\ncy.get('[aria-label=\"Inactive\"]').should('exist');\ncy.get('[aria-label=\"Inactive\"]').should('exist');\ncy.get('[title=\"Any Status\"]').last().click();\ncy.get('[aria-label=\"Any Status\"]').should('exist');\ncy.get('[aria-label=\"Yes\"]').should('exist');\ncy.get('[aria-label=\"No\"]').should('exist');\ncy.get('.filter-clear > a').click();\n//Step 15\ncy.get('span:contains(\"Rows per page:\")').should('exist');\ncy.get('[title=\"25\"]').should('exist');\n//Step 6\n// cy.get('.editUserBtn').click()\ncy.get('span:contains(\"' + name + '\")').last().parents('tr').find('.editUserBtn').click();\n//Step 7,8,36 and 37\ncy.get('h4:contains(\"' + name + ', ' + name + '\")').should('exist');\ncy.get('#firstNameField').should('exist');\ncy.get('#lastNameField').should('exist');\ncy.get('#emailField').should('exist');\ncy.get('#phoneNumber').first().should('exist');\ncy.get('#phoneNumber').last().should('exist');\ncy.get('.userGroupsSelector .Select .Select-control').should('exist');\ncy.get('[for=\"maximumInactivityTimeout\"]').should('exist');\ncy.get('[for=\"inactivityTimeout\"]').should('exist');\ncy.get('.iconWithTooltip > .btn').first().click();\ncy.get('div:contains(\"Maximum Inactivity Timeout applies to all facilities in this customer. The setting allows a user to adjust their timeout up to this value.\")').should('exist');\ncy.get('h3:contains(\"Multi-Factor Authentication\")').should('exist');\ncy.get('.iconWithTooltip > .btn').last().click({ force: true });\ncy.get('span:contains(\"PENDING SETUP\")').should('exist');\n/* cy.get('.Select-placeholder').first().click({force:true})\n cy.get('[aria-label=\"Mobile Phone SMS\"]').should('exist')\n cy.get('[aria-label=\"Secondary Email\"]').should('exist')\n \n cy.get('.Select-placeholder').last().click({force:true})\n cy.get('[aria-label=\"AT&T\"]').should('exist')\n cy.get('[aria-label=\"Boost Mobile\"]').should('exist')\n cy.get('[aria-label=\"Cricket\"]').should('exist')\n cy.get('[aria-label=\"Sprint\"]').should('exist')\n cy.get('[aria-label=\"T-Mobile\"]').should('exist')\n cy.get('[aria-label=\"U.S Cellular\"]').should('exist')\n cy.get('[aria-label=\"Verizon\"]').should('exist')\n cy.get('[aria-label=\"Virgin Mobile\"]').should('exist')\n cy.get('[aria-label=\"Xfinity Mobile\"]').should('exist')\n cy.get('[aria-label=\"Google Fi\"]').should('exist')\n \n cy.get('#secondaryFactorEmail').should('exist')\n cy.get('#confirmSecondaryEmail').should('exist')*/\ncy.get('#epicUserId').should('exist');\ncy.get('#powerScribeUserId').should('exist');\ncy.get('#resetFields').should('exist');\ncy.get('.js-decline').should('exist');\ncy.get('.modal-footer > .btn-primary').should('exist');\ncy.get('.userGroupsSelector .Select .Select-control').click();\ncy.get('[aria-label=\"Users\"]').click();\ncy.get('.Select-value-label').contains('Users');\ncy.get('#resetFields').click();\ncy.get('.Select-value-label').contains('Users').should('not.exist');\ncy.get('.userGroupsSelector .Select .Select-control').click();\ncy.get('[aria-label=\"Users\"]').click();\ncy.get('.js-decline').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.editUserBtn').first().click();\ncy.get('.Select-value-label').contains('Users').should('not.exist');\ncy.get('.userGroupsSelector .Select .Select-control').click();\ncy.get('[aria-label=\"Users\"]').click();\ncy.get('.modal-footer > .btn-primary').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.editUserBtn').first().click();\ncy.get('.removeFromAdminPopover .Select-value-label').last().contains('Users').should('exist');\ncy.get('.modal-header > .close > span').click();\n//Step 10 and 11 and 18\ncy.get('.addExistingUserBtn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#tbUserSearchText').should('exist');\ncy.get('.Select-placeholder').should('exist');\ncy.get('.btn-default').should('exist');\ncy.get('.modal-footer > .btn-primary').should('exist');\ncy.get('.close > span').should('exist');\ncy.get('h4:contains(\"Add Existing User\")').should('exist');\ncy.get('.modal-footer > .btn-primary').click();\ncy.get('div:contains(\"Please make sure you completed all required fields.\")').should('exist');\n//Step 12\ncy.get('#tbUserSearchText').type(\"chc\".concat(date, \"@ch.com{enter}\"));\ncy.get('span:contains(\"No Results\")').should('exist');\n//Step 13\ncy.get('#tbUserSearchText').clear().type(facility2admin);\ncy.wait(configFile.tinyTimeout);\ncy.get('span:contains(\"' + facility2admin + '\")').click();\n//Step 14 is UI and cannot be Automated\n//Step 15\ncy.get('.remove').click();\ncy.get('.required-group').should('exist');\n//Step 16\ncy.get('#tbUserSearchText').clear().type(facility2admin);\ncy.wait(configFile.tinyTimeout);\ncy.get('span:contains(\"' + facility2admin + '\")').click();\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.get('div:contains(\"Please make sure you completed all required fields.\")').should('exist');\n//Step 17\ncy.get('.Select-placeholder').click({ force: true });\ncy.get('[aria-label=\"Organization Administrators\"]').should('exist');\ncy.get('[aria-label=\"Users\"]').should('exist');\ncy.get('[aria-label=\"Restricted Users\"]').should('exist');\ncy.get('[aria-label=\"Referring Provider\"]').should('exist');\ncy.get('[aria-label=\"Technologist\"]').should('exist');\ncy.get('[aria-label=\"Super Technologist\"]').should('exist');\ncy.get('[aria-label=\"Interpreting Provider\"]').should('exist');\ncy.get('[aria-label=\"Read Group Administrator\"]').should('exist');\n//Step 19,20,21,22\ncy.get('[aria-label=\"Organization Administrators\"]').click();\ncy.get('[aria-label=\"Users\"]').click();\ncy.get('.Select-value-icon').last().click();\ncy.get('.Select-value-icon').click();\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.get('div:contains(\"Please make sure you completed all required fields.\")').should('exist');\n//Step 23\ncy.get('.Select-placeholder').click({ force: true });\ncy.get('[aria-label=\"Organization Administrators\"]').click();\ncy.get('[aria-label=\"Download Exams\"]').click();\ncy.get('.Select-value-icon').first().click();\ncy.get('div:contains(\"At least one primary group is required\")').should('exist');\ncy.get('[aria-label=\"Organization Administrators\"]').click();\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.wait(configFile.smallTimeout);\n//Step 24\ncy.get('.tab-label-content').first().contains('2');\n//Step 25\ncy.get('[name=\"email\"]').last().type(facility2admin);\ncy.wait(configFile.tinyTimeout);\ncy.get('[title=\"Go to Page 1\"]').should('exist');\ncy.get('span:Contains(\"Rows per page:\")').should('exist');\ncy.get('[title=\"Go to Page 1\"]').contains('1');\n//Step 26 and 27\ncy.get('.createUserBtn').click();\ncy.get('#firstNameField').should('exist');\ncy.get('#lastNameField').should('exist');\ncy.get('#emailField').should('exist');\ncy.get('#emailConfirmField').should('exist');\n//cy.get('#phoneNumber').should('exist')\ncy.get('.userGroupsSelector .Select .Select-control').should('exist');\ncy.get('[for=\"maximumInactivityTimeout\"]').should('exist');\ncy.get('[for=\"inactivityTimeout\"]').should('exist');\ncy.get('.Select-value-label span:contains(Facility Default)').first().click();\ncy.get('[aria-label=\"5 min\"]').should('exist');\ncy.get('[aria-label=\"10 min\"]').should('exist');\ncy.get('[aria-label=\"30 min\"]').should('exist');\ncy.get('[aria-label=\"1 hour\"]').should('exist');\ncy.get('[aria-label=\"2 hour\"]').should('exist');\ncy.get('[aria-label=\"4 hour\"]').should('exist');\ncy.get('.Select-value-label span:contains(Facility Default)').should('exist');\ncy.get('.iconWithTooltip > .btn').first().click();\ncy.get('div:contains(\"Maximum Inactivity Timeout applies to all facilities in this customer. The setting allows a user to adjust their timeout up to this value.\")').should('exist');\ncy.get('#epicUserId').should('exist');\ncy.get('#powerScribeUserId').should('exist');\n/* cy.get('div:contains(\"Multi-Factor Authentication Details\")').should('exist')\ncy.get('.iconWithTooltip > .btn').last().click({force:true})\ncy.get('div:contains(\"When Multi-Factor Authentication is enabled for any organization this user has access to, the user will be required to enter a MFA code which will be sent to either the mobile phone number or secondary email address the user provided below.\")').should('exist')\ncy.get('[for=\"secondaryFactor\"]').parents('.form-group').find('.Select-placeholder').click();\ncy.get('[aria-label=\"Mobile Phone SMS\"]').should('exist')\ncy.get('[aria-label=\"Secondary Email\"]').should('exist')\ncy.get('.Select-placeholder').last().click({force:true})\ncy.get('[aria-label=\"AT&T\"]').should('exist')\ncy.get('[aria-label=\"Boost Mobile\"]').should('exist')\ncy.get('[aria-label=\"Cricket\"]').should('exist')\ncy.get('[aria-label=\"Sprint\"]').should('exist')\ncy.get('[aria-label=\"T-Mobile\"]').should('exist')\ncy.get('[aria-label=\"U.S Cellular\"]').should('exist')\ncy.get('[aria-label=\"Verizon\"]').should('exist')\ncy.get('[aria-label=\"Virgin Mobile\"]').should('exist')\ncy.get('[aria-label=\"Xfinity Mobile\"]').should('exist')\ncy.get('[aria-label=\"Google Fi\"]').should('exist')\n\ncy.get('#secondaryFactorEmail').should('exist')\ncy.get('#confirmSecondaryEmail').should('exist')\ncy.get('#epicUserId').should('exist')\ncy.get('#powerScribeUserId').should('exist')\ncy.get('.js-decline').should('exist')\ncy.get('.modal-footer > .btn-primary').should('exist')\ncy.get('.close > span').should('exist')\n*/\n//Step 28\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.get('p:contains(\"Please make sure you completed all required fields and resolved all warnings.\")').should('exist');\n//Step 29\ncy.get('#emailField').type(\"abc{enter}\");\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.get('div:contains(\"Email format is not valid\")').should('exist');\n//Step 30 and 31\ncy.get('#emailField').clear().type(facility2admin);\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.get('div:contains(\"Email is already in use\")').should('exist');\ncy.get('.modal-header > .close > span').click();\ncy.wait(configFile.smallTimeout);\n//Step 32\ncy.get('.createUserBtn').click();\ncy.get('#firstNameField').type('test');\ncy.get('#lastNameField').type('test');\ncy.get('#emailField').clear().type(facility3admin);\ncy.get('#emailConfirmField').type(facility3admin);\ncy.get('.userGroupsSelector .Select .Select-control').click();\ncy.get('[aria-label=\"Organization Administrators\"]').click();\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.filter-clear > a').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.form-control').last().type(facility3admin, { force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('td:contains(\"Pending\")').should('exist');\n//Step 33\ncy.get('.editUserBtn').should('exist');\ncy.get('.deleteUserBtn').should('exist');\ncy.get('.resendWelcomeEmail').should('exist');\ncy.get('.filter-clear > a').click();\ncy.get('a:contains(\"Remove\")').should('exist');\n//Step 34\ncy.get('.deleteUserBtn').first().click();\ncy.get('p:contains(\"Do you want to cancel this account?\")').should('exist');\ncy.get('.btn-default').should('exist');\ncy.get('#confirm-RemoveUser').should('exist');\ncy.get('#confirm-RemoveUser').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\n//Step 9\ncommon_1.Common.login(customerName, facilityadmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facilityadmin, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Users & Groups');\ncommon_1.Common.switchTab('Users');\ncy.wait(configFile.smallTimeout);\ncy.get('.removeSelf').click({ force: true });\ncy.get('p:contains(\"You can not remove yourself from an active organization.\")').should('exist');\ncommon_1.Common.logout();\n//Step 35,38 ,39,40,41,43,43 is skipped its related to ES, Adding this all test steps to new Manual Test case\n//Step 44 is covered in Manual Test case",
+              "err": {},
+              "uuid": "3d05d4dd-3059-4111-92b0-08cbc10002c5",
+              "parentUUID": "2ea1f1d3-358e-42bc-b817-84873b6f7149",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2731 - My Org - Users and Groups - User tab Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8551,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "6ec57aa1-ca85-425e-a105-f9b4fd0bad8c",
+              "parentUUID": "2ea1f1d3-358e-42bc-b817-84873b6f7149",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3d05d4dd-3059-4111-92b0-08cbc10002c5",
+            "6ec57aa1-ca85-425e-a105-f9b4fd0bad8c"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 237252,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

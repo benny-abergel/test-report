@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="207.230" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:16:52" tests="0" file="cypress/e2e/test-suites/ECP-T2737-DarkModeUI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2737 - Dark Mode UI" timestamp="2024-12-15T02:16:52" tests="4" time="207.209" failures="0">
+    <testcase name="Precondition" time="90.073" classname="ECP-T2737 - Dark Mode UI">
+    </testcase>
+    <testcase name="Step 1 to 3" time="64.827" classname="ECP-T2737 - Dark Mode UI">
+    </testcase>
+    <testcase name="Step 4 to 10" time="29.565" classname="ECP-T2737 - Dark Mode UI">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.957" classname="ECP-T2737 - Dark Mode UI">
+    </testcase>
+  </testsuite>
+</testsuites>

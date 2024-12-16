@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="361.472" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:04:11" tests="0" file="cypress/e2e/test-suites/ECP-T2649-EmailNotificationTemplateManagement.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2649 - Email Notification - Template Management" timestamp="2024-12-15T02:04:11" tests="4" time="361.448" failures="0">
+    <testcase name="Starting test ECP-T2649 - Email Notification - Template Management - Step 1 - 10" time="184.409" classname="ECP-T2649 - Email Notification - Template Management">
+    </testcase>
+    <testcase name="Step 11 - 14 - my org notification" time="124.829" classname="ECP-T2649 - Email Notification - Template Management">
+    </testcase>
+    <testcase name="Revert all system admin settings" time="26.720" classname="ECP-T2649 - Email Notification - Template Management">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.610" classname="ECP-T2649 - Email Notification - Template Management">
+    </testcase>
+  </testsuite>
+</testsuites>

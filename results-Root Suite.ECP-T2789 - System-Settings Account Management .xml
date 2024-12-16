@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="290.692" tests="3" failures="1">
+  <testsuite name="" timestamp="2024-12-15T04:24:04" tests="0" file="cypress/e2e/test-suites/ECP-T2789-SystemAdminAccountManagement.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2789 - System-Settings Account Management " timestamp="2024-12-15T04:24:04" tests="3" time="0.000" failures="1">
+    <testcase name="Starting ECP-T2789 - System Admin - Account management" time="81.358" classname="ECP-T2789 - System-Settings Account Management ">
+      <failure message="Timed out retrying after 60000ms: expected &apos;&lt;div.modal-header&gt;&apos; not to be &apos;visible&apos;" type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 60000ms: expected '<div.modal-header>' not to be 'visible'
+    at cy.waitUntil.timeout (webpack:///./cypress/e2e/test-suites/ECP-T2789-SystemAdminAccountManagement.spec.ts:78:51)
+    at resolveValue (webpack:///./node_modules/cypress-wait-until/src/index.js:71:0)
+    at Context.waitUntil (webpack:///./node_modules/cypress-wait-until/src/index.js:81:0)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

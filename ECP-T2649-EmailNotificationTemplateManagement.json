@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:04:11.955Z",
+    "end": "2024-12-15T02:10:13.427Z",
+    "duration": 361472,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2563e942-7a24-4f0f-877b-d75732f815c8",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2649-EmailNotificationTemplateManagement.spec.ts",
+      "file": "cypress/test-suites/ECP-T2649-EmailNotificationTemplateManagement.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b06ff19f-e173-48af-8c91-c21082f74c25",
+          "title": "ECP-T2649 - Email Notification - Template Management",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting test ECP-T2649 - Email Notification - Template Management - Step 1 - 10",
+              "fullTitle": "ECP-T2649 - Email Notification - Template Management Starting test ECP-T2649 - Email Notification - Template Management - Step 1 - 10",
+              "timedOut": null,
+              "duration": 184409,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Step 1 - Login with a system admin account, click on the system admin section of the\n// side navigation menu, click on the notifications section, then open the email templates tab.\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateByProperty('data-template=\"notificationManagementPage\"');\ncy.wait(configFile.smallTimeout);\ncy.get('h2.pageTitle').should('contain.text', 'Notifications');\n// Step 2 - Click the edit action icon for the \"Account Cancelled\" email notification template and verify the edit email notification modal window is opened.\ncy.get('.edit-email-template', { timeout: configFile.hugeTimeout }).first().click({ force: true });\ncy.waitUntil(function () { return cy.get('.editEmailTemplateDialog h4.modal-title').should('include.text', 'Edit Email Notification'); }, { timeout: configFile.waitUntilTimeout });\n// Step 3 - Verify the edit email notification modal window contains all the listed items:\n// 1. Subject field (free text)\n// 2. Body\n// 3. Allow organization customization (checkbox)\n// 4. Auto Text section\n// 5. RESET button\n// 6. CANCEL button\n// 7. SAVE button\ncy.get('.editEmailTemplate #emailSubject').should('exist');\ncy.waitUntil(function () { return cy.get('.editEmailTemplateDialog h4.modal-title').should('include.text', 'Edit Email Notification'); }, { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.smallTimeout);\ncy.window().then(function (win) {\n    // @ts-ignore\n    var textAreaId = win.$('.customizeEmailTemplateForm .email-subject-and-body__body-row textarea').attr('id');\n    // @ts-ignore\n    //cy.wait(configFile.smallTimeout)\n    var text = win.$(\"#\".concat(textAreaId, \"_ifr\")).contents().find(\"body\");\n    cy.get(text).clear().type(\"{selectall}\".concat(message));\n});\ncy.get('.multiStateButtonWrapper > .btn').click({ force: true });\ncy.wait(2000);\ncy.get('.editEmailAsSystemAdminForm > .modal-header > .close > span').click();\n//cy.get('.close > span').click();\ncy.wait(1000);\ncy.get('.edit-email-template', { timeout: configFile.hugeTimeout }).first().click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.window().then(function (win) {\n    // @ts-ignore\n    var textAreaId = win.$('.customizeEmailTemplateForm .email-subject-and-body__body-row textarea').attr('id');\n    // @ts-ignore\n    //cy.wait(configFile.smallTimeout)\n    var text = win.$(\"#\".concat(textAreaId, \"_ifr\")).contents().find(\"body\").text();\n    // @ts-ignore\n    // const text =  win.tinymce.get(textAreaId).getContent({ format: \"text\" });\n    // expect(text).to.contains(' × Recipient Name test ');\n    //expect(text).to.contains('Hello,  × Recipient Name .The Nucleus.io user account created for you was cancelled by  × Originator Name  ( × Originator Email ) You can still register for a Nucleus.io account on your own by going to  × Registration Link Regards,The NucleusHealth Team');\n    //expect(text).to.contains('Hello,  × Recipient Name .The Stratus Imaging PACS user account created for you was cancelled by  × Originator Name  ( × Originator Email ) You can still register for an account on your own by going to  × Registration Link Regards,Stratus Imaging PACS');\n    expect(text.replaceAll('\\n', '').replaceAll('\\r', '').replaceAll('\\t', '').replaceAll(' ', '')).to.contains(message.replaceAll('\\n', '').replaceAll('\\r', '').replaceAll('\\t', '').replaceAll(' ', ''));\n});\ncy.get('.editEmailTemplate #allowGroupCustomization').should('exist');\ncy.get('.item-list__text[data-replace-id=\"orgLogo\"]').should('exist');\ncy.get('.editEmailTemplate #reset_btn').should('exist');\ncy.get('.editEmailTemplate #cancel_btn').should('exist');\ncy.get('.editEmailTemplate .save-auto-text-info').should('exist');\n// Step 4 - Verify the text in the subject and body fields can be edited/updated/removed by the user.\ncy.get('.editEmailTemplate #emailSubject').type('${selectall}{backspace}');\ncy.get('.editEmailTemplate #emailSubject').should('contain.text', '');\ncy.get('.editEmailTemplate #emailSubject').type('${selectall}Account Cancelled - Edited');\ncy.get('.editEmailTemplate #emailSubject').should('contain.text', 'Account Cancelled - Edited');\ncy.get('.editEmailTemplate #emailSubject').type('${selectall}Account Cancelled');\ncy.get('.editEmailTemplate #emailSubject').should('contain.text', 'Account Cancelled');\n// Step 5 - Verify once the auto text tile are dropped in both fields they appear as a blue tile with the placeholder text visible and an \"x\" to remove the auto text tile.\n// TODO - can not drag drop\n// Step 6 - Verify when the \"x\" is clicked on the auto text tile that the tile is removed.\n// TODO - depend on Step 5\n// Step 8 - Make various changes, then click the SAVE button and verify the changes are\n// retained in the email template. Verify when the SAVE button is clicked it reverts to it's original form.\ncy.get('.editEmailTemplate #emailSubject').type('${selectall}Account Cancelled - Edited');\ncy.get('.editEmailTemplate #emailSubject').should('contain.text', 'Account Cancelled - Edited');\ncy.wait(configFile.smallTimeout);\ncy.get('.editEmailTemplate .save-auto-text-info').click({ force: true });\ncy.get('.editEmailTemplate .modal-header .close').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-email-template', { timeout: configFile.hugeTimeout }).first().click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.editEmailTemplate #emailSubject').should('contain.text', 'Account Cancelled - Edited');\ncy.get('.editEmailTemplate #emailSubject').type('${selectall}Account Cancelled');\ncy.get('.editEmailTemplate #emailSubject').should('contain.text', 'Account Cancelled');\ncy.wait(configFile.smallTimeout);\ncy.get('.editEmailTemplate .save-auto-text-info').click({ force: true });\n// Step 7 - Verify the SAVE button is disabled until a change has been made to the template.\ncy.wait(configFile.smallTimeout);\ncy.get('.editEmailTemplate .save-auto-text-info').should('be.disabled');\n// Step 9 - Make various changes to the email template, click RESET and verify the\n// unsaved changes are discarded and the template returns the most recently saved version.\ncy.get('.editEmailTemplate #emailSubject').type('${selectall}Account Cancelled - Edited');\ncy.get('.editEmailTemplate #emailSubject').should('contain.text', 'Account Cancelled - Edited');\ncy.get('.editEmailTemplate #reset_btn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.editEmailTemplate #emailSubject').should('contain.text', 'Account Cancelled');\n// Step 10 - Make various changes to the email template, click CANCEL and verify after\n// confirming YES the changes are discarded and the edit email notification modal window is closed.\ncy.get('.editEmailTemplate #emailSubject').type('${selectall}Account Cancelled - Edited');\ncy.get('.editEmailTemplate #cancel_btn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#cancelConfirm .btn.btn-danger').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.editEmailTemplate #emailSubject').should('not.exist');\ncy.get('.edit-email-template', { timeout: configFile.hugeTimeout }).first().click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.editEmailTemplate #emailSubject').should('contain.text', 'Account Cancelled');\nvar q = [2, 3, 4, 5, 18, 20, 21, 22];\nfor (var i = 2; i < 23; i++) {\n    cy.get('#notificationManagement table tbody:nth-child(' + i + ') tr td.action-cell .edit-email-template').click({ force: true });\n    if (q.includes(i)) {\n        cy.get('#allowGroupCustomization').check({ force: true });\n    }\n    else {\n        cy.get('#allowGroupCustomization').uncheck({ force: true });\n    }\n    cy.get('.save-auto-text-info').click({ force: true });\n    cy.wait(oneSecondWait);\n    cy.get('#cancel_btn').click();\n}\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "24d67da1-33e7-499c-b716-a1879c51d12d",
+              "parentUUID": "b06ff19f-e173-48af-8c91-c21082f74c25",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 11 - 14 - my org notification",
+              "fullTitle": "ECP-T2649 - Email Notification - Template Management Step 11 - 14 - my org notification",
+              "timedOut": null,
+              "duration": 124829,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateByProperty('data-template=\"orgNotificationManagementPage\"');\n// Step 11 - Navigate to My Org > Notifications > Email templates and verify the table\n// is populated with the email templates allowed by default for customization by the org admins.\ncy.get('.table__email-templates tr', { timeout: configFile.hugeTimeout }).should('include.text', 'Account Cancelled');\ncy.get('.table__email-templates tr').should('include.text', 'Add User To Organization');\ncy.get('.table__email-templates tr').should('include.text', 'Admin Welcome');\ncy.get('.table__email-templates tr').should('include.text', 'Approve New Email Address');\ncy.get('.table__email-templates tr').should('include.text', 'Send Patient Share');\ncy.get('.table__email-templates tr').should('include.text', 'StatShare Support Email');\ncy.get('.table__email-templates tr').should('include.text', 'Verify New Email Address');\ncy.get('.table__email-templates tr').should('include.text', 'Welcome');\n// Step 12 - Trigger the org specific notification and verify the correct version is sent/received via email.\n// TODO - can not trigger email\n// Step 13 - Using the system admin account, edit the system email template for \"Account\n// Cancelled\", but leave it available for org level customization. Open the\n// my org > Notifications page > email templates tab and verify the changes to\n// the system defaults are reflected at the org level when \"original\" is selected.\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateByProperty('data-template=\"notificationManagementPage\"');\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-email-template', { timeout: configFile.hugeTimeout }).first().click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('#container .container-fluid div:first', { timeout: configFile.hugeTimeout }).should('not.have.text', '');\n// c.elementExist('.editEmailTemplateDialog', configFile.smallTimeout)\ncy.waitUntil(function () { return cy.get('.editEmailTemplateDialog h4.modal-title').should('include.text', 'Edit Email Notification'); }, {\n    timeout: configFile.longTimeout\n});\ncy.get('.editEmailTemplate #emailSubject').type('${selectall}Account Cancelled - Edited');\ncy.get('.editEmailTemplate #emailSubject').should('contain.text', 'Account Cancelled - Edited');\ncy.wait(configFile.smallTimeout);\ncy.get('.editEmailTemplate .save-auto-text-info').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.editEmailTemplate .modal-header .close').click();\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateByProperty('data-template=\"orgNotificationManagementPage\"');\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-email-template', { timeout: configFile.hugeTimeout }).first().click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('#container .container-fluid div:first', { timeout: 7000 }).should('not.have.text', '');\n// c.elementExist('.editEmailTemplateDialog', configFile.smallTimeout)\ncy.waitUntil(function () { return cy.get('.editEmailTemplateDialog h4.modal-title').should('include.text', 'Edit -'); }, {\n    timeout: configFile.longTimeout\n});\ncy.get('#emailSubject').should('include.text', 'Account Cancelled - Edited');\ncy.wait(configFile.smallTimeout);\ncy.get('#editAutoText .modal-header .close').click();\n// Step 14 - Verify updates made by the system admin to the auto text name and\n// description fields are present on the edit email template modal when org\n// admins are editing an email template that uses that particular auto text value.\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateByProperty('data-template=\"notificationManagementPage\"');\ncommon_1.Common.switchTab('Email Auto Text');\ncy.get('.react-table-row').contains('Org Name').parent().contains('Edit').click();\n// cy.get('tbody:nth-child(5) button.edit-auto-text').first().click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('#editAutoText h4.modal-title').should('contain.text', 'Edit Auto Text'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#editAutoText input[name=\"autoTextName\"]').clear().type('{selectall}Org Name - Modified');\ncy.get('#editAutoText input[name=\"description\"]').type('{selectall}The name of your organization - Modified');\ncy.wait(configFile.smallTimeout);\ncy.get('.save-auto-text-info').click({ force: true });\ncy.wait(configFile.timeout);\ncy.get('#editAutoText .modal-header .close').click();\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateByProperty('data-template=\"orgNotificationManagementPage\"');\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-email-template', { timeout: configFile.hugeTimeout }).first().click({ force: true });\n// cy.wait(configFile.longTimeout);\ncy.wait(configFile.smallTimeout);\ncy.get('#container .container-fluid div:first', { timeout: 7000 }).should('not.have.text', '');\n// c.elementExist('.editEmailTemplateDialog', configFile.smallTimeout)\ncy.waitUntil(function () { return cy.get('.editEmailTemplateDialog h4.modal-title').should('include.text', 'Edit -'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick').first().click({ force: true });\ncy.get('.editEmailTemplateDialog .Select-menu-outer > .Select-menu .Select-option .needsclick').contains('Custom').click();\ncy.get('.item-list__text[data-replace-id=\"orgName\"]').should('contain.text', 'Org Name - Modified');\ncy.get('.item-list__text[data-replace-id=\"orgName\"]').click();\ncy.get('.auto-text-selector__description-row .auto-text-selector__text').should('contain.text', 'The name of your organization - Modified');\ncy.wait(configFile.smallTimeout);\ncy.get('.editEmailTemplateDialog #cancel_btn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#cancelConfirm .btn.btn-danger').click();\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "3da45c5c-3b71-4df0-8062-f13e6cd19364",
+              "parentUUID": "b06ff19f-e173-48af-8c91-c21082f74c25",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Revert all system admin settings",
+              "fullTitle": "ECP-T2649 - Email Notification - Template Management Revert all system admin settings",
+              "timedOut": null,
+              "duration": 26720,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateByProperty('data-template=\"notificationManagementPage\"');\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-email-template', { timeout: configFile.hugeTimeout }).first().click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('.editEmailTemplateDialog h4.modal-title').should('include.text', 'Edit Email Notification'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('.editEmailTemplate #emailSubject').type('${selectall}Account Cancelled');\ncy.get('.editEmailTemplate #emailSubject').should('contain.text', 'Account Cancelled');\ncy.wait(configFile.smallTimeout);\ncy.get('.editEmailTemplate .save-auto-text-info').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.editEmailTemplate .modal-header .close').click({ force: true });\ncommon_1.Common.switchTab('Email Auto Text');\ncy.get('.react-table-row').contains('orgName').parent().contains('Edit').click();\n// cy.get('tbody:nth-child(5) button.edit-auto-text').first().click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('#editAutoText h4.modal-title').should('contain.text', 'Edit Auto Text'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#editAutoText input[name=\"autoTextName\"]').type('{selectall}Org Name');\ncy.get('#editAutoText input[name=\"description\"]').type('{selectall}The name of your organization');\ncy.wait(configFile.smallTimeout);\ncy.get('.save-auto-text-info').click({ force: true });\ncy.get('#editAutoText .modal-header .close').click({ force: true });\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "226ae01e-aa3a-4391-8643-de2d80d5009b",
+              "parentUUID": "b06ff19f-e173-48af-8c91-c21082f74c25",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2649 - Email Notification - Template Management Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7610,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "c8e90872-7c8e-41f8-8c36-0c5e9d9c965e",
+              "parentUUID": "b06ff19f-e173-48af-8c91-c21082f74c25",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "24d67da1-33e7-499c-b716-a1879c51d12d",
+            "3da45c5c-3b71-4df0-8062-f13e6cd19364",
+            "226ae01e-aa3a-4391-8643-de2d80d5009b",
+            "c8e90872-7c8e-41f8-8c36-0c5e9d9c965e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 343568,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

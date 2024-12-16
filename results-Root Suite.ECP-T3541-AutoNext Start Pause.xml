@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="723.866" tests="10" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:39:27" tests="0" file="cypress/e2e/test-suites/ECP-T3541-AutoNextStartPause.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3541-AutoNext Start Pause" timestamp="2024-12-15T03:39:27" tests="10" time="723.827" failures="0">
+    <testcase name="ECP-T3541 - data prep" time="105.848" classname="ECP-T3541-AutoNext Start Pause">
+    </testcase>
+    <testcase name="Step 1 - 4 Load Worklist run viewer with unmatched studis" time="77.247" classname="ECP-T3541-AutoNext Start Pause">
+    </testcase>
+    <testcase name="Step 5,6 Close Exam with Active Auto-Next - Unmatched Study" time="75.768" classname="ECP-T3541-AutoNext Start Pause">
+    </testcase>
+    <testcase name="Step 7 - 8 Single/Multiple Add &amp; Start Reading Queue - Unmatched Study" time="44.677" classname="ECP-T3541-AutoNext Start Pause">
+    </testcase>
+    <testcase name="Renew Data - Unlock all Exams" time="27.958" classname="ECP-T3541-AutoNext Start Pause">
+    </testcase>
+    <testcase name="Add Procedures" time="13.570" classname="ECP-T3541-AutoNext Start Pause">
+    </testcase>
+    <testcase name="Step 9 - 11 Upload Procedures and matched -&gt; Start Auto-Next from Reading Queue &amp; add exams - Matched Exam" time="198.954" classname="ECP-T3541-AutoNext Start Pause">
+    </testcase>
+    <testcase name="Step 12,13 Close Exam with Active Auto-Next - Matched Exam" time="75.102" classname="ECP-T3541-AutoNext Start Pause">
+    </testcase>
+    <testcase name="Step 14 - 16 Add Single/Batch Add &amp; Start Reading Queue - Matched Exam  -&gt; Pause Auto-Next" time="35.584" classname="ECP-T3541-AutoNext Start Pause">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.963" classname="ECP-T3541-AutoNext Start Pause">
+    </testcase>
+  </testsuite>
+</testsuites>

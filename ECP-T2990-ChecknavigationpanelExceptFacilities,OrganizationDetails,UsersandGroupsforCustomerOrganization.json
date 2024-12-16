@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:31:19.634Z",
+    "end": "2024-12-15T03:34:32.591Z",
+    "duration": 192957,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "7bc23007-685f-4ea3-be2a-58ecd39ec4cd",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2990-ChecknavigationpanelExceptFacilities,OrganizationDetails,UsersandGroupsforCustomerOrganization.spec.ts",
+      "file": "cypress/test-suites/ECP-T2990-ChecknavigationpanelExceptFacilities,OrganizationDetails,UsersandGroupsforCustomerOrganization.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4220f21c-9294-4ad0-9889-22fce6c21835",
+          "title": "ECP-T2990 - Check that hided all buttons on navigation panel except Facilities, Organization Details, Users and Groups for Customer organization",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 -13",
+              "fullTitle": "ECP-T2990 - Check that hided all buttons on navigation panel except Facilities, Organization Details, Users and Groups for Customer organization Step 1 -13",
+              "timedOut": null,
+              "duration": 176775,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\n// Step 1 and 2\ncommon_1.Common.login(customerName, userName, userpassword);\n// Step 3 , 4 and 5\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.navigateTo('My Organization');\ncy.get('[title=\"Users & Groups\"]').eq(1).should('exist');\ncy.get('[title=\"Facilities\"]').should('exist');\ncy.get('[title=\"Organization Details\"]').should('exist');\ncy.get('[title=\"My Facility\"]').should('exist');\ncommon_1.Common.logout();\n//Step 6,7 and 8\n//done in prep\n//Step 9\ncommon_1.Common.login(customerName, custadmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(custadmin, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('My Organization');\ncy.get('[title=\"Users & Groups\"]').eq(1).should('exist');\ncy.get('[title=\"Facilities\"]').should('exist');\ncy.get('[title=\"Organization Details\"]').should('exist');\ncy.get('[title=\"My Facility\"]').should('exist');\ncommon_1.Common.logout();\n//Step 11\ncommon_1.Common.login(customerName, facilityadmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facilityadmin, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.get('[title=\"My Facility\"]').should('exist');\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "14c68c80-8275-43d7-a32c-c0fa05a0e7a9",
+              "parentUUID": "4220f21c-9294-4ad0-9889-22fce6c21835",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Post step - Cleanup",
+              "fullTitle": "ECP-T2990 - Check that hided all buttons on navigation panel except Facilities, Organization Details, Users and Groups for Customer organization Post step - Cleanup",
+              "timedOut": null,
+              "duration": 7297,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "900c9008-2aa4-47ec-a676-e765d097f8cb",
+              "parentUUID": "4220f21c-9294-4ad0-9889-22fce6c21835",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "14c68c80-8275-43d7-a32c-c0fa05a0e7a9",
+            "900c9008-2aa4-47ec-a676-e765d097f8cb"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 184072,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

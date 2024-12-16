@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T04:22:00.335Z",
+    "end": "2024-12-15T04:24:48.949Z",
+    "duration": 168614,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "762bffef-1a54-466c-8bec-d6eb84abd3e4",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2798-SystemAdminSystemSettingsGeneral Tab.spec.ts",
+      "file": "cypress/test-suites/ECP-T2798-SystemAdminSystemSettingsGeneral Tab.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "31cb1d7c-7299-4dd4-9462-4de81ed88b7f",
+          "title": "ECP-T2798 - System Admin - System Settings - General Tab",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting ECP-T2798 - System Admin - System Settings - General Tab",
+              "fullTitle": "ECP-T2798 - System Admin - System Settings - General Tab Starting ECP-T2798 - System Admin - System Settings - General Tab",
+              "timedOut": null,
+              "duration": 123842,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Step 1 \ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\n// Step 2\ncy.get('[title=\"General\"]').should('exist');\ncy.get('[title=\"Features\"]').should('exist');\ncy.get('[title=\"HL7 Report Template\"]').should('exist');\ncy.get('[title=\"DICOM Tags\"]').should('exist');\ncy.get('[title=\"Localization\"]').should('exist');\n// Step 3\ncy.get('label:contains(\"Mark Imaging Share Viewer as Non-Diagnostic\")').should('exist');\ncy.get('label:contains(\"Demonstration Only Disclaimer\")').should('exist');\ncy.get('label:contains(\"Default Inactivity Timeout\")').should('exist');\ncy.get('label:contains(\"Maximum Exam Attachment Uploads\")').should('exist');\ncy.get('label:contains(\"Version\")').should('exist');\ncy.get('label:contains(\"Release Date\")').should('exist');\ncy.get('label:contains(\"Min. Share Retention Period\")').should('exist');\ncy.get('label:contains(\"Customer Support Phone Number\")').should('exist');\ncy.get('label:contains(\"MFA Code Timeout\")').should('exist');\n// Reset Values to default\ncy.get('#isNonDiagnostic').uncheck({ force: true });\ncy.get('#isDemo').uncheck({ force: true });\ncy.get('.Select-value').click();\ncy.get('[aria-label=\"5 min\"]').should('exist');\ncy.get('[aria-label=\"10 min\"]').should('exist');\ncy.get('[aria-label=\"15 min\"]').should('exist');\ncy.get('[aria-label=\"30 min\"]').should('exist');\ncy.get('[aria-label=\"15 min\"]').click();\ncy.get('#maximumExamAttachmentUploads').clear().type('25');\ncy.get('.required [for=\"maximumExamAttachmentUploads\"]').should('exist');\ncy.get('#version').should('exist');\ncy.get('.date-range-picker').should('exist');\ncy.get('.required label:contains(\"Release Date\")').should('exist');\ncy.get('.js-revocation-period').clear().type('60');\ncy.get('.required label:contains(\"Min. Share Retention Period\")').should('exist');\ncy.get('.js-customer-support-number').clear().type('858-251-3440');\ncy.get('.required label:contains(\"Customer Support Phone Number\")').should('exist');\ncy.get('#mfaCodeTimeout').clear().type('60');\ncy.get('.required label:contains(\"MFA Code Timeout\")').should('exist');\ncy.get('#save').click({ force: true });\ncy.wait(configFile.smallTimeout);\n// Step 4\ncy.get('#isDemo').should('not.be.checked');\n// cy.get('.disclaimer').should('not.exist')\n// Step 5 and 6\ncy.get('#isDemo').check();\n// Step 11 to 15\ncy.get('#maximumExamAttachmentUploads').clear().type('2');\ncy.get('#version').then(function (ver) {\n    previousversion = ver.val();\n});\ncy.get('#version').clear().type('1.2');\ncy.get('#mfaCodeTimeout').clear().type('80');\ncy.get('.js-customer-support-number').clear().type('858-251-3440');\ncy.get('.js-revocation-period').clear().type('80');\ncy.get('.date-range-picker').click();\ncy.get('.today.available').first().click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('#save').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncy.get('.disclaimer').should('exist');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.navigateTo('User Management');\ncy.get('.disclaimer').should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('p:contains(\"1.2\")').should('exist');\n// Step 7,8,9 and 10\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowWorklist: false,\n    allowEdgeServer: true,\n    allowDICOMReceive: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowAPIs: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\nvar orgId;\ncy.reload();\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    orgId = res.orgId;\n    // upload exam\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(res.token, \" -maxParallel=5 -data=resources/a-01 -keepAlive=1\");\n    return cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout * 2 }) // 10 minutes timeout for uploading exam\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        return console.log(code, stdout, stderr);\n    });\n}).catch(function (err) { return console.log(err); });\n// navigate to viewer\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n//  cy.get(obj.headerLogo).click();\ncy.get(iex.firstExamTableCell).first().click();\ncy.get(iex.moreInfo).click();\ncy.wait(configFile.smallTimeout);\nvar examID = '';\ncy.get(iex.examID).then(function (el) {\n    examID = el.text();\n    meteor_1.Meteor.getViewerUrls(configFile.url, configFile.username, configFile.password, examID, orgId, 'ndxWeb')\n        .then(function (viewerUrls) {\n        // @ts-ignore\n        ndxViewerUrl = viewerUrls;\n    });\n    meteor_1.Meteor.getViewerUrls(configFile.url, configFile.username, configFile.password, examID, orgId, 'nix')\n        .then(function (viewerUrls) {\n        // @ts-ignore\n        nixViewerUrl = viewerUrls;\n    });\n});\ncy.get('.shareExam').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.btn-statshare-share').click();\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('#recipientAddress').should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('#recipientAddress').focus().clear().type(\"test\".concat(date, \"@chc.com\"));\ncy.wait(configFile.tinyTimeout);\ncy.get('#createStatShare').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#statShareUrl').then(function (el) {\n    staturl = el.text();\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncy.log(staturl);",
+              "err": {},
+              "uuid": "3ebb4b55-c19c-4885-8af5-0a4e42ffd608",
+              "parentUUID": "31cb1d7c-7299-4dd4-9462-4de81ed88b7f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Verifying the warning message in StatShare",
+              "fullTitle": "ECP-T2798 - System Admin - System Settings - General Tab Verifying the warning message in StatShare",
+              "timedOut": null,
+              "duration": 15193,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncy.visit(staturl);\ncy.wait(configFile.tinyTimeout);\ncy.get('#statSharePassCode').type('123456');\ncy.wait(configFile.tinyTimeout);\ncy.get('#login').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.imageThumbnailOverlay').should('exist');\ncy.get('.disclaimer').should('exist');",
+              "err": {},
+              "uuid": "f421b92f-6fd8-4364-8159-879f0fd30ba2",
+              "parentUUID": "31cb1d7c-7299-4dd4-9462-4de81ed88b7f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Verifying the warning message in DX Viewer",
+              "fullTitle": "ECP-T2798 - System Admin - System Settings - General Tab Verifying the warning message in DX Viewer",
+              "timedOut": null,
+              "duration": 8768,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// m.login(customerName,'#Layer_1', `${configFile.url}/${ndxViewerUrl}`, true, userName,userpassword, configFile.longTimeout);\n//  m.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${ndxViewerUrl}`, false);\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncy.visit(ndxViewerUrl);\n// c.meteorLogin(`${configFile.url}/${ndxViewerUrl}`,userName,userpassword)\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.get('.disclaimer').should('exist');",
+              "err": {},
+              "uuid": "a2994496-e4df-41be-8bfb-51ae377a799a",
+              "parentUUID": "31cb1d7c-7299-4dd4-9462-4de81ed88b7f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Cleanup the setting and Facility",
+              "fullTitle": "ECP-T2798 - System Admin - System Settings - General Tab Cleanup the setting and Facility",
+              "timedOut": null,
+              "duration": 11322,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncy.get('#maximumExamAttachmentUploads').clear().type('25');\ncy.get('#version').clear().type(previousversion);\ncy.get('.js-revocation-period').clear().type('60');\ncy.get('.js-customer-support-number').clear().type('858-251-3440');\ncy.get('#mfaCodeTimeout').clear().type('60');\ncy.wait(configFile.smallTimeout);\ncy.get('#save').click({ force: true });\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "cc81ad71-dbf9-4f3b-a629-7e555e333c47",
+              "parentUUID": "31cb1d7c-7299-4dd4-9462-4de81ed88b7f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3ebb4b55-c19c-4885-8af5-0a4e42ffd608",
+            "f421b92f-6fd8-4364-8159-879f0fd30ba2",
+            "a2994496-e4df-41be-8bfb-51ae377a799a",
+            "cc81ad71-dbf9-4f3b-a629-7e555e333c47"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 159125,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

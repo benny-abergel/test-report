@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="339.323" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:07:58" tests="0" file="cypress/e2e/test-suites/ECP-T2720-MyOrgGeneralSettings.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2720 - My Org -general settings" timestamp="2024-12-15T02:07:59" tests="4" time="339.300" failures="0">
+    <testcase name="Step 1 to 15" time="198.130" classname="ECP-T2720 - My Org -general settings">
+    </testcase>
+    <testcase name="Login with Invalid password for 7 times" time="113.737" classname="ECP-T2720 - My Org -general settings">
+    </testcase>
+    <testcase name="Login with Invalid password for 10 times " time="6.480" classname="ECP-T2720 - My Org -general settings">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.532" classname="ECP-T2720 - My Org -general settings">
+    </testcase>
+  </testsuite>
+</testsuites>

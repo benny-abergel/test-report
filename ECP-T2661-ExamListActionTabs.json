@@ -1,0 +1,206 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:25:05.276Z",
+    "end": "2024-12-15T02:33:45.616Z",
+    "duration": 520340,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "05fdff71-64c5-46ee-8186-ca8817d24e4e",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2661-ExamListActionTabs.spec.ts",
+      "file": "cypress/test-suites/ECP-T2661-ExamListActionTabs.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ebee5f5c-b284-45df-9ba7-309b3a2514ca",
+          "title": "ECP-T2661 - Exam List Actions and Tabs",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step, creating API token and uploading exams",
+              "fullTitle": "ECP-T2661 - Exam List Actions and Tabs Test Preparation - Before Step, creating API token and uploading exams",
+              "timedOut": null,
+              "duration": 156136,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\n// Verify That All required features are enabled\ncommon_1.Common.createEdgeServerToken(\"es_token\");\ncommon_1.Common.enablePacsDICOMSystem();\ncommon_1.Common.confirmCheckboxState('#showPushType', '#integration .showType');\ncy.get('#saveBtn').click({ force: true });\n// assign the org to restricted user\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateByProperty('data-template=\"usersAndGroups\"');\ncy.reload(true);\ncommon_1.Common.removeNotSupportedWarning();\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/a-17 -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED } })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/a-40 -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED } })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/mister_mr -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED } })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    var header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    cy.request({\n        url: \"\".concat(baseUrl, \"/workflow/diagnostic-report\"),\n        headers: header,\n        method: 'POST',\n        body: {\n            dataSourceSystemName: 'Mirth',\n            patientInfo: {\n                mrn: '832040',\n                name: 'MISTER, MR',\n                birthDate: '19830425',\n                patientSex: 'M'\n            },\n            patientVisit: {\n                admitDateTime: '20190101201212',\n                dischargeDateTime: ''\n            },\n            diagnosticReportInfo: {\n                \"contentType\": \"Text\",\n                \"status\": 'Preliminary',\n                \"content\": \"Testing THIS IS A REPORT!<br><br><br>Report text goes here....<br><br><br><br>CREATED BY LOAD TEST SCRIPT\",\n                \"reportDateTime\": '20190504201220',\n                \"principalInterpretingPhysicianName\": \"ID3^PrincipalInterpreter^Given^Middle^Suffix^Prefix\",\n                \"assistantInterpretingPhysicianName\": \"ID4^AssistantInterpreter^Given^Middle^Suffix^Prefix\",\n                \"customReportInfo\": {\n                    \"custom01\": \"Sample report from test-e2e cypress script\"\n                }\n            },\n            procedureInfo: {\n                \"accessionNumber\": '3000-10',\n                \"procedureCode\": \"CAPC\",\n                \"procedureDescription\": \"CTA CHEST\",\n                \"procedureStatus\": 'Ordered',\n                \"reasonForExam\": \"\",\n                \"relevantClinicalInfo\": \"<NTE.3.1>CREATED BY LOAD SCRIPT - Clinical Indications for requested exam: patient developed foul tasting drainage after dental surgery eval for infection or other abnormality .</NTE.3.1><NTE.3.1>Information desired from requested exam: DX .</NTE.3.1>\",\n                \"orderingDepartment\": \"\",\n                \"modality\": 'MR',\n                \"bodyPart\": \"\",\n                \"priority\": \"R\",\n                \"scheduledDateTime\": \"\",\n                \"startedDateTime\": '20190504201212',\n                \"completedDateTime\": \"\",\n                \"cancelledDateTime\": \"\",\n                \"requestingPhysicianName\": \"Bruce^Banner^^MD^\",\n                \"referringPhysicianName\": \"ASDF^ASDF^ASDFE^^\",\n                \"attendingPhysicianName\": \"\",\n                \"technologist\": \"\",\n                \"visitClass\": \"\",\n                \"visitNumber\": \"\",\n                \"visitPrimaryLocation\": \"RAD\",\n                \"visitCurrentLocation\": \"\"\n            }\n        },\n    }).then(function (res) {\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncommon_1.Common.navigateTo('Worklist');\nmatchProcStudy(832040, 832040);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"MISTER, MR\"]').parents('tr[data-cy=\"examListStudy\"]').find('.expanderCell').click();\ncy.get('.iconWithTooltip > .btn').should('exist');\ncy.get('#editExam').should('be.disabled');",
+              "err": {},
+              "uuid": "0079d969-676d-4c45-af9b-f194d4cd4342",
+              "parentUUID": "ebee5f5c-b284-45df-9ba7-309b3a2514ca",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Starting ECP-T2661 - Exam List Actions and Tabs - Step 1 - 13",
+              "fullTitle": "ECP-T2661 - Exam List Actions and Tabs Starting ECP-T2661 - Exam List Actions and Tabs - Step 1 - 13",
+              "timedOut": null,
+              "duration": 70540,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 1 - Filter with invalid characters: - Use the following characters individually in the filter and verify the\n// returned results for each are correct: /[|\\\\{}()[\\]^$+*?.]\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.wait(configFile.smallTimeout);\ncy.get('#patientName').type(\"/[|\\\\\\\\{{}{}}()[\\\\]^$+*?.]{enter}\");\ncy.get('.patientName i.fa-exclamation-circle').should('exist');\ncy.get('.patientName .validationError .popover-content').should('contain.text', '\\n            \\n            Search format = Last, First \\n            At least a portion of the first and last names are required.\\n          \\n        ');\ncy.get('.filter-row .js-clear').click();\ncy.get('#patientName').type(\"{selectall}/[|\\\\\\\\{{}{}}()[\\\\]^$+*?.],/[|\\\\\\\\{{}{}}()[\\\\]^$+*?.]{enter}\");\ncy.get('.data-tables__rows .data-table__no-results').should('exist');\ncy.get('.filter-row .js-clear').click();\n// Step 2 - Locate an exam owned by the user's organization, click the caret in the left column and verify the exam row expands.\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"Acceptance, Set 17\"]').parents('tr[data-cy=\"examListStudy\"]').find('.expanderCell').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.subRow.expanded').should('exist');\ncy.get('.subRow.expanded .edit-info_mrn').should('exist');\ncy.get('.subRow.expanded .edit-info_patientName').should('exist');\ncy.get('.edit-info_patientBirthDate').should('exist');\ncy.get('.edit-info_gender').should('exist');\ncy.get('.edit-info_acc').should('exist');\ncy.get('.edit-info_description').should('exist');\ncy.get('.edit-info_examDate').should('exist');\ncy.get('.edit-info_examTime').should('exist');\ncy.get('.edit-info_mod').should('exist');\n// Step 3 - Checking the warning message\ncy.get('.fa-exclamation-triangle').first().click();\ncy.get('div:contains(Date is missing.)').should('exist');\ncy.get('.fa-exclamation-triangle').eq(1).click();\ncy.get('div:contains(Unsupported time format.)').should('exist');\n//Step 4 - Save button is disabled\ncy.get('#editExam').click();\ncy.get('.js-edit-save').should('be.disabled');\n// Step 5 - Edit the MRN and click \"Save\".`\ncy.get('#patientId').type(\"{selectall}a-17-edited\");\ncy.get('.js-edit-save').click();\ncy.get('.confirmExamEdit h4.modal-title').should('contain.text', 'Confirm Changes');\ncy.get('.confirmEdit tbody tr:nth-child(1) td.diff').should('exist');\n// Step 6 - On the confirm changes window, click BACK.\ncy.get('.js-edit-confirm-back').click();\ncy.get('#patientId').should('have.value', \"a-17-edited\");\n// Step 7 - Click SAVE, then click CONFIRM.\ncy.get('.js-edit-save').click();\ncy.get('.js-edit-confirm-save').click();\ncy.get('#patientId').should('have.value', \"a-17-edited\");\n// Step 8 - Click edit and verify the existing patient name is visible while in edit mode.\ncy.get('#editExam').click();\ncy.get('#patientId').should('have.value', \"a-17-edited\");\n// Step 9 - Click inside the patient name field and verify the patient name pop-over expands. Verify the patient name can be edited and SAVED.\ncy.get('.edit-info_patientName #patientName').click();\ncy.get('.patientNamePopover .editPatientName #title').should('exist');\ncy.get('.patientNamePopover .editPatientName #firstName').should('exist');\ncy.get('.patientNamePopover .editPatientName #middleName').should('exist');\ncy.get('.patientNamePopover .editPatientName #lastName').should('exist');\ncy.get('.patientNamePopover .editPatientName #suffix').should('exist');\ncy.get('.patientNamePopover .editPatientName button.cancel-patientName').should('exist');\ncy.get('.patientNamePopover .editPatientName button.save-patientName').should('exist');\ncy.get('.patientNamePopover .editPatientName button.save-patientName').should('be.disabled');\ncy.get('.patientNamePopover .editPatientName #lastName').type(\"{selectall}Acceptance-edited\");\ncy.get('.patientNamePopover .editPatientName button.save-patientName').click();\ncy.get('.js-edit-save').click();\ncy.get('.js-edit-confirm-save').click();\ncy.get('.edit-info_patientName #patientName').should('have.value', \"Acceptance-edited, Set 17\");\n// Step 10 - Edit description for any exam for more than 50 characters and verify that\n// on the \"Confirm Changes\" modal window the texts for exam description is not getting cut.\ncy.get('#editExam').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#studyDescription').type(\"{selectall}Palette Color Images - 1234567890123456789012345678901234567890-66\", { force: true });\ncy.get('.js-edit-save').click();\ncy.get('.btn.btn-primary.js-edit-confirm-save').should('exist');\n// cy.get('.confirmEdit tbody tr:nth-child(10) td.overflow-wrap.diff').should('exist');\ncy.get('.btn.btn-primary.js-edit-confirm-save').click();\n//cy.get('.js-edit-confirm-save').click();\ncy.get('.edit-info_description .exam-description').should('contain.text', \"Palette Color Images - 1234567890123456789012345678901234567890-66\");\n// Step 12 - On the exam info tab, click the more info button. Verify the exam details and exam content sections are visible.\ncy.get('.moreInfoBtn').click();\ncy.get('#moreInfo .examInfoExtra').should('exist').should('be.visible');\ncy.get('#moreInfo .examContent').should('exist').should('be.visible');\ncy.get('.examInfoExtra b:contains(Total Instances:)').should('exist');\ncy.get('.examInfoExtra b:contains(Series Count:)').should('exist');\ncy.get('.examInfoExtra b:contains(Exam ID:)').should('exist');\ncy.get('th:contains(Series Description)').should('exist');\ncy.get('th:contains(Type)').should('exist');\ncy.get('th:contains(Instances)').should('exist');\n// Step 13 - Click the more info button again. Verify the info section collapses\ncy.get('.moreInfoBtn').click();\n//  cy.get('#moreInfo .examInfoExtra').should('not.be.visible');\n//  cy.get('#moreInfo .examContent').should('not.be.visible');\ncy.wait(configFile.smallTimeout);\n// Step 14 - Expand an exam row, verify there is a download and delete exam buttons are present and functional.\ncy.get('#downloadExamNow').should('exist');\ncy.get('button[data-cy=\"deleteExamBtn\"]').should('exist');\ncy.get('#downloadExamNow').click();\ncy.get('.DownloadQueue__Button button[title=\"Download Queue\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.DownloadQueue__Table__Wrapper table td.table-cell-patient--ready span[title=\"Acceptance-edited, Set 17\"]').should('exist');\ncy.get('.DownloadQueue__Table__Wrapper table td.action-cell.table-cell-actions span:nth-child(2) button.btn-link').click();\ncy.get('#DownloadQueue__Modal__RemoveButton button.btn-danger').click();\ncy.get('.DownloadQueue__Modal .close').click();\ncy.get('button[data-cy=\"deleteExamBtn\"]').click();\ncy.get('.confirmDelete #confirmDeleteYes').click({ force: true });\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"Acceptance, Set 17\"]').should('not.exist');\n// Step 13 - Navigate to the deleted exams tab. Locate the recently deleted exam and verify the following actions are available for the deleted exam:\n// 1. View exam\n// 2. Exam comments\n// 3. Exam attachments\n// 4. Undelete\n// 5. Purge\n// 6. Download Exam\ncy.get('[data-cy=\"restoreNavLink\"]').click();\ncy.get('button:contains(\"Study Deleted\")').first().should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('[data-cy=\"RestoreEyeView\"]').should('exist');\ncy.get('button:contains(\"Study Deleted\")').first().rightclick();\ncy.get('[data-cy=\"restore\"]').should('exist');\ncy.get('[data-cy=\"details\"]').should('exist');\ncy.get('[data-cy=\"download\"]').should('exist');\ncy.get('[data-cy=\"log\"]').should('exist');\ncy.get('[data-cy=\"purge\"]').should('exist');\ncy.get('[data-cy=\"download\"]').click();\ncy.get('.DownloadQueue__Button button[title=\"Download Queue\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.DownloadQueue__Table__Wrapper table td.table-cell-patient--ready span[title=\"Acceptance-edited, Set 17\"]').should('exist');\ncy.get('.DownloadQueue__Table__Wrapper table td.action-cell.table-cell-actions span:nth-child(2) button.btn-link').click();\ncy.get('#DownloadQueue__Modal__RemoveButton button.btn-danger').click();\ncy.get('.DownloadQueue__Modal .close').click();",
+              "err": {},
+              "uuid": "1e236783-70bb-4cdc-89fd-315b349291d0",
+              "parentUUID": "ebee5f5c-b284-45df-9ba7-309b3a2514ca",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 15 - 18",
+              "fullTitle": "ECP-T2661 - Exam List Actions and Tabs Step 15 - 18",
+              "timedOut": null,
+              "duration": 54878,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 14 - Navigate to the org exams tab as a restricted user, click the Push to PACS icon.\ncommon_1.Common.login(customerName, restrictedUserName, restrictedUserPassword);\n// m.login(customerName,'#headerLogo', configFile.url, false, restrictedUserName, restrictedUserPassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(restrictedUserName, restrictedUserPassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"Acceptance Set 40\"]').parents('tr[data-cy=\"examListStudy\"]').find('.pushCell #p2pSendStudy').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('#requestPopover h3.popover-title').should('contain.text', 'Request Push to PACS');\ncy.get('#requestPopover #requestedFor').should('exist');\ncy.get('#requestPopover #pushPriority').should('exist');\ncy.get('#requestPopover #requestedFor').type('{selectall}Automation requesting push to pacs');\ncy.get('#requestPopover #forFile').click();\ncy.get('#requestPopover #requestPush').first().click();\n// Step 17 - Click the caret in the push to pacs column.\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"Acceptance Set 40\"]').parents('tr[data-cy=\"examListStudy\"]').find('.pushCell .pushStatusTab .fa-chevron-left').click();\ncy.get('#editRequest').should('exist');\ncy.get('#cancelPushRequest').should('exist');\ncy.wait(configFile.tinyTimeout);\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"Acceptance Set 40\"]').parents('tr[data-cy=\"examListStudy\"]').find('.pushCell .pushStatusTab .fa-chevron-left').click();\ncy.get('#editRequest').should('not.exist');\ncy.get('#cancelPushRequest').should('not.exist');\n// Step 15 - Click the edit button on the push to pacs menu.\n// TODO - cannot see the edit button - required edge server\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"Acceptance Set 40\"]').parents('tr[data-cy=\"examListStudy\"]').find('.pushCell .pushStatusTab .fa-chevron-left').click();\ncy.get('#editRequest').click();\ncy.get('#requestPopover #requestedFor').should('exist');\ncy.get('#requestPopover #pushPriority').should('exist');\n// Step 16 - Click cancel. Click the edit button on the push to pacs tab again. Change the request type and click REQUEST PUSH.\ncy.get('#cancelRequest').click();\ncy.get('#editRequest').click();\ncy.get('#requestPopover #requestedFor').should('have.value', 'Automation requesting push to pacs');\ncy.get('#requestPopover #forRead').click();\ncy.get('#requestPopover #requestPush').first().click();",
+              "err": {},
+              "uuid": "d58396c3-a66e-47b4-9d52-213afc733f83",
+              "parentUUID": "ebee5f5c-b284-45df-9ba7-309b3a2514ca",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 19 - 21",
+              "fullTitle": "ECP-T2661 - Exam List Actions and Tabs Step 19 - 21",
+              "timedOut": null,
+              "duration": 55480,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\n// Step 19 - Logout of restricted user and Log back in as an Org Admin. Verify the\n// requested Push to PACS is listed under the Request Push tab on the exam list.\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchTab('Push Requests');\ncy.get('#pushRequestsTable .table-studies tr[data-cy=\"examListStudy\"] td span[title=\"Acceptance Set 40\"]').should('exist');\n// Step 20 - Using the org admin account, on the Image Exchange, verify editing the DOB\n// field allows for 10 characters and follows the desired date format of MM-DD-YYYY\ncommon_1.Common.switchTab('Facility');\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"Acceptance Set 40\"]').parents('tr[data-cy=\"examListStudy\"]').find('.expanderCell').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#editExam').click();\ncy.get('#date_of_birth').type('{selectall}0407199512345');\ncy.get('#accessionNumber').click();\ncy.get('#date_of_birth').should('have.value', '04-07-1995');\ncy.get('#date_of_birth').type('{selectall}15041995');\ncy.get('#accessionNumber').click();\ncy.get('.edit-info_patientBirthDate .validationError .popover-content').should('include.text', 'Unsupported date format.');\ncy.get('#date_of_birth').type('{selectall}04351995');\ncy.get('#accessionNumber').click();\ncy.get('.edit-info_patientBirthDate .validationError .popover-content').should('include.text', 'Unsupported date format.');\ncy.get('#date_of_birth').type('{selectall}04071995');\ncy.get('.edit-info_patientBirthDate .validationError').should('not.exist');\n// Step 21 - On the Image Exchange, verify all information is contained or truncated as\n// expected. Verify this by editing various values in the exam info section and making sure they remained contained.\ncy.get('#patientId').type(\"{selectall}a-02 - 123456789012345678901234567890401234567890123456789062\", { force: true });\ncy.get('.js-edit-save').click();\ncy.get('.js-edit-confirm-save').click();\ncy.get('#tabExamInfo .edit-info_mrn #patientId').should('have.css', 'text-overflow', 'ellipsis');\n// Step 22 - Edit the gender for any exam and click SAVE.\ncy.get('#editExam').click();\ncy.get('.edit-info_gender .Select-multi-value-wrapper .needsclick').first().click();\ncy.get('.Select-menu-outer > .Select-menu .Select-option .needsclick').contains('Other').click();\ncy.get('.js-edit-save').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('.js-edit-confirm-save').click({ force: true });\ncy.wait(configFile.tinyTimeout);",
+              "err": {},
+              "uuid": "b2db8b48-e7d5-4ee8-8072-7580cbc4f1d4",
+              "parentUUID": "ebee5f5c-b284-45df-9ba7-309b3a2514ca",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 23 - 25",
+              "fullTitle": "ECP-T2661 - Exam List Actions and Tabs Step 23 - 25",
+              "timedOut": null,
+              "duration": 51702,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n// Step 22 - Queue an exam for push to pacs, then click the edit button on the exam info and verify a warning message is displayed.\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"MISTER, MR\"]').parents('tr[data-cy=\"examListStudy\"]').find('.pushCell #p2pSendStudy').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.p2pPowerUser #date_of_birth').type('{selectall}04071995');\ncy.get('.pushBtnWrapper .js-push').first().click();\ncy.get('#confirmPushYes').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"MISTER, MR\"]').parents('tr[data-cy=\"examListStudy\"]').find('.expanderCell').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.js-edit-exam-disabled').click();\ncy.get('.exam-edit-buttons .popover .popover-content p').should('contain.text', 'You can not edit any information for this study while a Push to PACS is in progress.');\n// Step 24 - Create an Org Share of an exam that has never been shared and view share icon in the Exam List.\ncommon_1.Common.clickMoreIconOnExam('#tableStudies_wrapper tr[data-cy=\"examListStudy\"]');\n//cy.get('.iconShare').first().should('have.css', 'fill', 'rgb(154, 154, 154)');\ncy.get('.shareExam').first().click();\n// cy.get('#tableStudies_wrapper tr[data-cy=\"examListStudy\"]:nth-child(3) button.shareExam .iconShare').should('have.css', 'fill', 'rgb(154, 154, 154)');\n//  cy.get('#tableStudies_wrapper tr[data-cy=\"examListStudy\"]:nth-child(3) button.shareExam').click();\ncy.get('.orgSharePopover #organization').type(\"{selectall}\".concat(facility2Name));\ncy.get('.orgSharePopover .directory-search-btn button').first().click();\ncy.get('.orgSearchTableBody .selectableRecipientRow .addRecipientBtn').first().click();\ncy.get('.orgSharePopover #shareExam').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.iconShare title').first().should('have.text', 'share-filled');\n// // Step 25 - Verify the pop-over menus do not overlap when the user opens multiple in succession.\ncommon_1.Common.clickMoreIconOnExam();\ncy.get('button.shareExam').first().click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.orgSharePopover').should('exist');\ncy.get('#orgExams').click();\ncommon_1.Common.clickMoreIconOnExam();\ncy.get('button.exam-comments-btn').first().click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.examComments-popover').should('exist');\ncy.get('.orgSharePopover').should('not.exist');\ncy.get('#orgExams').click();\ncommon_1.Common.clickMoreIconOnExam();\ncy.get('button.exam-attachments-btn').first().click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.attachments-popover').should('exist');\ncy.get('.examComments-popover').should('not.exist');\ncy.get('.orgSharePopover').should('not.exist');\n// Step 26 - Logout of the system and open the dev console (f12) and verify there is no\n// PHI still viewable for the study in the \"objects\" listed under the console tab of the dev console.\ncy.get('.js-toggle-account-dropdown span[data-cy=\"usernameLabel\"]').click();\ncy.get('#signOutButton').click();\ncy.wait(configFile.smallTimeout);\ncy.window().then(function (win) {\n    cy.stub(win.console, 'log', function (msg) {\n        expect(msg).to.have.length(0);\n        console.log('msg: ', msg);\n    });\n});",
+              "err": {},
+              "uuid": "543c299c-bfb1-48a1-a33b-42a8a76871cc",
+              "parentUUID": "ebee5f5c-b284-45df-9ba7-309b3a2514ca",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2661 - Exam List Actions and Tabs Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7140,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "617d0b7b-7529-4873-a24e-19d8997970ad",
+              "parentUUID": "ebee5f5c-b284-45df-9ba7-309b3a2514ca",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0079d969-676d-4c45-af9b-f194d4cd4342",
+            "1e236783-70bb-4cdc-89fd-315b349291d0",
+            "d58396c3-a66e-47b4-9d52-213afc733f83",
+            "b2db8b48-e7d5-4ee8-8072-7580cbc4f1d4",
+            "543c299c-bfb1-48a1-a33b-42a8a76871cc",
+            "617d0b7b-7529-4873-a24e-19d8997970ad"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 395876,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

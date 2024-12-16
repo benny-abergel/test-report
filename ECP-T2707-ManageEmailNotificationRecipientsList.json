@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:04:11.519Z",
+    "end": "2024-12-15T02:08:00.069Z",
+    "duration": 228550,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "fe75d670-0c9b-45ca-afbf-0610f3c8c154",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2707-ManageEmailNotificationRecipientsList.spec.ts",
+      "file": "cypress/test-suites/ECP-T2707-ManageEmailNotificationRecipientsList.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "cc3bff0e-075b-48d0-85f1-bdf2e2958120",
+          "title": "ECP-T2707 - Manage Email Notification Recipients List",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting test ECP-T2707 - Manage Email Notification Recipients List - Step 1 - 12",
+              "fullTitle": "ECP-T2707 - Manage Email Notification Recipients List Starting test ECP-T2707 - Manage Email Notification Recipients List - Step 1 - 12",
+              "timedOut": null,
+              "duration": 212058,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Step 1 - Login as a system admin and navigate to system admin > Notifications page >\n// Notification Recipients tab, verify the notification recipients tab is displayed.\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateByProperty('data-template=\"notificationManagementPage\"');\ncy.get('#notificationRecipients').should('exist');\ncommon_1.Common.switchTab('Notification Recipients');\n// Step 2 - Verify the following are present:\n// 2.1. Notifications\ncy.get('h2.pageTitle').should('contain.text', 'Notifications');\n// 2.2. Internal notification recipients section\ncy.get('h3.sectionHeader').should('include.text', 'Internal Notification Recipients');\n// 2.2.1. Customer Support with required email address field\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) input').should('exist');\n// 2.2.2. Inactive User with required email address field\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) input').should('exist');\n// 2.2.3. Problem Uploads with required email address field\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) input').should('exist');\n// 2.2.4. StatShare Support with required email address field\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) input').should('exist');\n// 2.3. CANCEL button\ncy.get('#cancel').should('exist');\n// 2.4. SAVE button\ncy.get('#save').should('exist');\ncy.wait(configFile.smallTimeout);\n// Step 3 - Verify the default recipient for each listed email is qe@statrad.com. -  qe@statrad.com\nvar mail = 'VisionQualityEngineering@changehealthcare.com';\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) span.Select-value-label').should('contain.text', mail);\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) span.Select-value-label').should('contain.text', mail);\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) span.Select-value-label').should('contain.text', mail);\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) span.Select-value-label').should('contain.text', mail);\n// Step 4 - Verify multiple email addresses can be added to each notification.\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) input').type('testing-cypress-1@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) input').type('testing-cypress-2@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) input').type('testing-cypress-3@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) input').type('testing-cypress-1@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) input').type('testing-cypress-2@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) input').type('testing-cypress-3@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) input').type('testing-cypress-1@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) input').type('testing-cypress-2@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) input').type('testing-cypress-3@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) input').type('testing-cypress-1@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) input').type('testing-cypress-2@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) input').type('testing-cypress-3@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#save').click();\ncy.wait(configFile.smallTimeout);\n// Step 5 - Verify email addresses can be removed from each notification.\nfor (var i = 1; i <= 4; i++) {\n    cy.get(\"#notificationManagement .notificationRecipients > div:nth-child(\".concat(i, \") .Select-value .Select-value-icon\")).first().click({ force: true });\n    cy.wait(configFile.tinyTimeout);\n    cy.get(\"#notificationManagement .notificationRecipients > div:nth-child(\".concat(i, \") .Select-value .Select-value-icon\")).first().click({ force: true });\n    cy.wait(configFile.tinyTimeout);\n    cy.get(\"#notificationManagement .notificationRecipients > div:nth-child(\".concat(i, \") .Select-value .Select-value-icon\")).first().click({ force: true });\n    cy.wait(configFile.tinyTimeout);\n    cy.get(\"#notificationManagement .notificationRecipients > div:nth-child(\".concat(i, \") .Select-value .Select-value-icon\")).first().click({ force: true });\n    cy.wait(configFile.tinyTimeout);\n    cy.get(\"#notificationManagement .notificationRecipients > div:nth-child(\".concat(i, \") input\")).type(mail, { force: true });\n    cy.get('#notificationRecipients').click();\n    cy.wait(configFile.tinyTimeout);\n}\ncy.get('#save').click();\ncy.wait(configFile.smallTimeout);\n// Step 6 - Make various changes, click CANCEL, verify after confirming YES all unsaved\n// changes are discarded and the recipient lists return to the previous saved state.\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) input').type('testing-cypress-1@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) input').type('testing-cypress-2@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) input').type('testing-cypress-3@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) input').type('testing-cypress-1@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) input').type('testing-cypress-2@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) input').type('testing-cypress-3@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) input').type('testing-cypress-1@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) input').type('testing-cypress-2@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) input').type('testing-cypress-3@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) input').type('testing-cypress-1@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) input').type('testing-cypress-2@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) input').type('testing-cypress-3@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#cancel').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#confirm-discardChanges').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) .Select-value .Select-value-label').should('not.include.text', 'testing-cypress-1@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) .Select-value .Select-value-label').should('not.include.text', 'testing-cypress-2@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) .Select-value .Select-value-label').should('not.include.text', 'testing-cypress-3@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) .Select-value .Select-value-label').should('not.include.text', 'testing-cypress-1@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) .Select-value .Select-value-label').should('not.include.text', 'testing-cypress-2@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) .Select-value .Select-value-label').should('not.include.text', 'testing-cypress-3@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) .Select-value .Select-value-label').should('not.include.text', 'testing-cypress-1@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) .Select-value .Select-value-label').should('not.include.text', 'testing-cypress-2@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) .Select-value .Select-value-label').should('not.include.text', 'testing-cypress-3@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) .Select-value .Select-value-label').should('not.include.text', 'testing-cypress-1@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) .Select-value .Select-value-label').should('not.include.text', 'testing-cypress-2@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) .Select-value .Select-value-label').should('not.include.text', 'testing-cypress-3@nucleushealth.io');\n// Step 7 - Add multiple email addresses, click SAVE, navigate away from and back to\n// the notification recipients tab and verify saved values are present.\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) input').type('testing-cypress-1@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) input').type('testing-cypress-2@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) input').type('testing-cypress-3@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) input').type('testing-cypress-1@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) input').type('testing-cypress-2@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) input').type('testing-cypress-3@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) input').type('testing-cypress-1@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) input').type('testing-cypress-2@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) input').type('testing-cypress-3@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) input').type('testing-cypress-1@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) input').type('testing-cypress-2@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) input').type('testing-cypress-3@nucleushealth.io');\ncy.get('#notificationRecipients').click();\ncy.get('#save').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchTab('Email Templates');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchTab('Notification Recipients');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) .Select-value .Select-value-label').should('include.text', 'testing-cypress-1@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) .Select-value .Select-value-label').should('include.text', 'testing-cypress-2@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) .Select-value .Select-value-label').should('include.text', 'testing-cypress-3@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) .Select-value .Select-value-label').should('include.text', 'testing-cypress-1@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) .Select-value .Select-value-label').should('include.text', 'testing-cypress-2@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) .Select-value .Select-value-label').should('include.text', 'testing-cypress-3@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) .Select-value .Select-value-label').should('include.text', 'testing-cypress-1@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) .Select-value .Select-value-label').should('include.text', 'testing-cypress-2@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) .Select-value .Select-value-label').should('include.text', 'testing-cypress-3@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) .Select-value .Select-value-label').should('include.text', 'testing-cypress-1@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) .Select-value .Select-value-label').should('include.text', 'testing-cypress-2@nucleushealth.io');\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) .Select-value .Select-value-label').should('include.text', 'testing-cypress-3@nucleushealth.io');\n// Step 8 - 8.1 - Add an email address to the Customer support email\n// TODO - covered in step 4 & 7.\n// Step 8 - 8.2 - trigger the notification and verify the email is received.\n// TODO - can not check email\n// Step 9 - 9.1 - Add an email address to the inactive user email\n// TODO - covered in step 4 & 7.\n// Step 9 - 9.2 - trigger the notification and verify the email is received.\n// TODO - can not check email\n// Step 10 - 10.1 - Add an email address to the Problem uploads email\n// TODO - covered in step 4 & 7.\n// Step 10 - 10.2 - trigger the notification and verify the email is received.\n// TODO - can not check email\n// Step 11 - 11.1 - Add an email address to the StatShare support email\n// TODO - covered in step 4 & 7.\n// Step 11 - 11.2 - trigger the notification and verify the email is received.\n// TODO - can not check email\n// Step 12 - Verify a recipient email address is required for each notification email.\nfor (var i = 1; i <= 4; i++) {\n    cy.get(\"#notificationManagement .notificationRecipients > div:nth-child(\".concat(i, \") .Select-value .Select-value-icon\")).first().click({ force: true });\n    cy.wait(configFile.tinyTimeout);\n    cy.get(\"#notificationManagement .notificationRecipients > div:nth-child(\".concat(i, \") .Select-value .Select-value-icon\")).first().click({ force: true });\n    cy.wait(configFile.tinyTimeout);\n    cy.get(\"#notificationManagement .notificationRecipients > div:nth-child(\".concat(i, \") .Select-value .Select-value-icon\")).first().click({ force: true });\n    cy.wait(configFile.tinyTimeout);\n    cy.get(\"#notificationManagement .notificationRecipients > div:nth-child(\".concat(i, \") .Select-value .Select-value-icon\")).first().click({ force: true });\n    cy.wait(configFile.tinyTimeout);\n}\ncy.wait(configFile.smallTimeout);\ncy.get('#save').should('be.disabled');\ncy.wait(configFile.smallTimeout);\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(1) input').type(mail, { force: true });\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(2) input').type(mail, { force: true });\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(3) input').type(mail, { force: true });\ncy.get('#notificationRecipients').click();\ncy.get('#notificationManagement .notificationRecipients > div:nth-child(4) input').type(mail, { force: true });\ncy.get('#notificationRecipients').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#save').click({ force: true });\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "2631d429-40cc-4794-9905-f296dcef5705",
+              "parentUUID": "cc3bff0e-075b-48d0-85f1-bdf2e2958120",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2707 - Manage Email Notification Recipients List Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7791,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "c07fd4b4-2074-4ab2-9cfe-f81cfbc0cb40",
+              "parentUUID": "cc3bff0e-075b-48d0-85f1-bdf2e2958120",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2631d429-40cc-4794-9905-f296dcef5705",
+            "c07fd4b4-2074-4ab2-9cfe-f81cfbc0cb40"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 219849,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

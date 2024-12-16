@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="132.327" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:13:43" tests="0" file="cypress/e2e/test-suites/ECP-T2800-SystemAdminSystemTools.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2800 - System Admin - System Tools" timestamp="2024-12-15T02:13:43" tests="2" time="132.300" failures="0">
+    <testcase name="All Steps. Login in as System Admin, navigate to the System Tools page, verify all tools exist and launch" time="112.810" classname="ECP-T2800 - System Admin - System Tools">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="11.354" classname="ECP-T2800 - System Admin - System Tools">
+    </testcase>
+  </testsuite>
+</testsuites>

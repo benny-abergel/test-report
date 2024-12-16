@@ -1,0 +1,206 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:24:22.739Z",
+    "end": "2024-12-15T02:35:00.080Z",
+    "duration": 637341,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "6113ff0e-df1c-4d66-a4ab-2c4eeeca5623",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3454-DownloadExam.spec.ts",
+      "file": "cypress/test-suites/ECP-T3454-DownloadExam.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a4ac93fe-5a43-421e-8b8d-25b967a48edf",
+          "title": "ECP-T3454-DownloadExams[206-REQ]",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3454 - data prep",
+              "fullTitle": "ECP-T3454-DownloadExams[206-REQ] ECP-T3454 - data prep",
+              "timedOut": null,
+              "duration": 47665,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true\n}, facilityName);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    //Upload a-01 study from resources folder\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    //Upload a-02 study from resources folder\n    examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-02\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n}).catch(function (err) {\n    console.log(err);\n});",
+              "err": {},
+              "uuid": "9da7ebc4-9137-43f6-b708-ccbf44f05e10",
+              "parentUUID": "a4ac93fe-5a43-421e-8b8d-25b967a48edf",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 1-2",
+              "fullTitle": "ECP-T3454-DownloadExams[206-REQ] Step 1-2",
+              "timedOut": null,
+              "duration": 54932,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(limitedUser, limitedPassword));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\nworklist_common_1.Worklist.deleteAllViews('My Views');\nnewViewName = \"T3454-Do-Not-Use-View\".concat(facilityName).concat(Cypress.currentRetry);\nworklist_common_1.Worklist.createNewView(newViewName);\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(newViewName, \"\\\"]\")).click();\ncy.get('body').then(function (elx) {\n    if (elx.find('.btn-group-actions > .btn-default').length > 0) {\n        cy.get('.btn-group-actions > .btn-default').click();\n    }\n});\ncy.get('button:contains(\"Clear All\")').first().click();\ncy.wait(configFile.smallTimeout);\nworklist_common_1.Worklist.filterByFacility(facilityName);\ncy.wait(configFile.smallTimeout);\nworklist_common_1.Worklist.saveCurrentView();\ncy.get('[data-cy=\"patientName-cell\"][title=\"Acceptance, Set 1\"]').rightclick();\ncy.get('[data-cy=\"downloadStudy\"]').should('have.length.gte', 1);\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.getByDataCy('downloadStudy').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.DownloadQueue__Button').parent().click();\ncy.wait(configFile.smallTimeout);\ncy.get('.DownloadQueue__Table').contains('Acceptance, Set 1').should('exist');\ncy.get('.DownloadQueue__Table').contains('Remove').click();\ncy.wait(configFile.smallTimeout);\ncy.contains('Yes, Remove').click();\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "899d6b6d-3627-4543-bb23-629414418674",
+              "parentUUID": "a4ac93fe-5a43-421e-8b8d-25b967a48edf",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 3 - 4",
+              "fullTitle": "ECP-T3454-DownloadExams[206-REQ] Step 3 - 4",
+              "timedOut": null,
+              "duration": 47939,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nworklist_common_1.Worklist.selectWorklistExamsToDownload(customerName, userName, userpassword, configFile.smallTimeout, facilityName);\ncy.contains('Yes, Download').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.DownloadQueue__Button').parent().click();\ncy.wait(configFile.smallTimeout);\ncy.get('.DownloadQueue__Table').contains('Acceptance, Set 1').should('exist');\ncy.get('.DownloadQueue__Table').contains('Acceptance, Set 2').should('exist');\ncy.get('.DownloadQueue__Table').contains('Remove').click({ multiple: true });\ncy.wait(configFile.smallTimeout);\ncy.contains('Yes, Remove').click();\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "861576ea-04a5-4666-9c3c-9f7461337fbd",
+              "parentUUID": "a4ac93fe-5a43-421e-8b8d-25b967a48edf",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 5",
+              "fullTitle": "ECP-T3454-DownloadExams[206-REQ] Step 5",
+              "timedOut": null,
+              "duration": 37602,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nworklist_common_1.Worklist.selectWorklistExamsToDownload(customerName, limitedUser, limitedPassword, configFile.smallTimeout, facilityName);\ncy.get('.btn.btn-default').contains('No').click();",
+              "err": {},
+              "uuid": "fcc5749a-7910-49fc-aa5c-4656b5ec49d3",
+              "parentUUID": "a4ac93fe-5a43-421e-8b8d-25b967a48edf",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Delete view",
+              "fullTitle": "ECP-T3454-DownloadExams[206-REQ] Delete view",
+              "timedOut": null,
+              "duration": 33428,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Worklist');\nworklist_common_1.Worklist.deleteAllViews('My Views');\ncy.wait(configFile.timeout);",
+              "err": {},
+              "uuid": "c643860c-8662-4edc-b1a5-d063f0ca521b",
+              "parentUUID": "a4ac93fe-5a43-421e-8b8d-25b967a48edf",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3454-DownloadExams[206-REQ] Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 10004,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncy.get('#selectCustomerBtn').click();\ncommon_1.Common.navigateTo('Worklist');\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "6dd9af80-15f5-46d6-afc2-b9acce17b010",
+              "parentUUID": "a4ac93fe-5a43-421e-8b8d-25b967a48edf",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9da7ebc4-9137-43f6-b708-ccbf44f05e10",
+            "899d6b6d-3627-4543-bb23-629414418674",
+            "861576ea-04a5-4666-9c3c-9f7461337fbd",
+            "fcc5749a-7910-49fc-aa5c-4656b5ec49d3",
+            "c643860c-8662-4edc-b1a5-d063f0ca521b",
+            "6dd9af80-15f5-46d6-afc2-b9acce17b010"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 231570,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

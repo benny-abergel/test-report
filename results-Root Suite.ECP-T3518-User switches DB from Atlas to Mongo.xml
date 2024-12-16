@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="100.121" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:52:39" tests="0" file="cypress/e2e/test-suites/ECP-T3518-UserSwitchesDBfromAtlastoMongo.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3518-User switches DB from Atlas to Mongo" timestamp="2024-12-15T03:52:39" tests="2" time="100.089" failures="0">
+    <testcase name="ECP-T3518" time="87.925" classname="ECP-T3518-User switches DB from Atlas to Mongo">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.517" classname="ECP-T3518-User switches DB from Atlas to Mongo">
+    </testcase>
+  </testsuite>
+</testsuites>

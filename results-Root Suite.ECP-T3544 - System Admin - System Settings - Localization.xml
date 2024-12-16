@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="32.466" tests="1" failures="0">
+  <testsuite name="" timestamp="2024-12-15T04:19:09" tests="0" file="cypress/e2e/test-suites/ECP-T3544-System AdminSystemSettingsLocalization.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3544 - System Admin - System Settings - Localization" timestamp="2024-12-15T04:19:09" tests="1" time="32.445" failures="0">
+    <testcase name="Starting ECP-T3544 - System Admin - System Settings - Localization" time="28.539" classname="ECP-T3544 - System Admin - System Settings - Localization">
+    </testcase>
+  </testsuite>
+</testsuites>

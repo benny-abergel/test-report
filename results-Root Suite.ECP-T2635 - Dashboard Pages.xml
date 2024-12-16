@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="141.073" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:10:37" tests="0" file="cypress/e2e/test-suites/ECP-T2635-DashboardPages.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2635 - Dashboard Pages" timestamp="2024-12-15T02:10:37" tests="3" time="141.054" failures="0">
+    <testcase name="Test Preparation - Before Step" time="80.349" classname="ECP-T2635 - Dashboard Pages">
+    </testcase>
+    <testcase name="Starting Dashboard Pages Test - 1 - 7 steps" time="42.255" classname="ECP-T2635 - Dashboard Pages">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.414" classname="ECP-T2635 - Dashboard Pages">
+    </testcase>
+  </testsuite>
+</testsuites>

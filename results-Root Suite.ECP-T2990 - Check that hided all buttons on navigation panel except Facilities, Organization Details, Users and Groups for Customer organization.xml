@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="192.957" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:31:19" tests="0" file="cypress/e2e/test-suites/ECP-T2990-ChecknavigationpanelExceptFacilities,OrganizationDetails,UsersandGroupsforCustomerOrganization.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2990 - Check that hided all buttons on navigation panel except Facilities, Organization Details, Users and Groups for Customer organization" timestamp="2024-12-15T03:31:19" tests="2" time="192.927" failures="0">
+    <testcase name="Step 1 -13" time="176.775" classname="ECP-T2990 - Check that hided all buttons on navigation panel except Facilities, Organization Details, Users and Groups for Customer organization">
+    </testcase>
+    <testcase name="Post step - Cleanup" time="7.297" classname="ECP-T2990 - Check that hided all buttons on navigation panel except Facilities, Organization Details, Users and Groups for Customer organization">
+    </testcase>
+  </testsuite>
+</testsuites>

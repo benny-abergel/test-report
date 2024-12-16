@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="175.649" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T04:17:13" tests="0" file="cypress/e2e/test-suites/ECP-T2797-SystemAdmin-SystemSettings-FeaturesTab.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2797 - System Admin - System Settings - Features tab" timestamp="2024-12-15T04:17:13" tests="2" time="175.631" failures="0">
+    <testcase name="Starting ECP-T2797 - System Admin - System Settings - Features tab Test - all 7 steps in one" time="161.280" classname="ECP-T2797 - System Admin - System Settings - Features tab">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.658" classname="ECP-T2797 - System Admin - System Settings - Features tab">
+    </testcase>
+  </testsuite>
+</testsuites>

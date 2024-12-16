@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:40:23.792Z",
+    "end": "2024-12-15T03:45:15.766Z",
+    "duration": 291974,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b1550e2a-38ad-4e45-bef5-9a0389a3f50c",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3098-Factory public view should be created for any new customer.ts",
+      "file": "cypress/test-suites/ECP-T3098-Factory public view should be created for any new customer.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5bb20e00-1247-4e29-a523-56db706b4dc0",
+          "title": "ECP-T3098-Factory public view should be created for any new customer",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3098 - data prep",
+              "fullTitle": "ECP-T3098-Factory public view should be created for any new customer ECP-T3098 - data prep",
+              "timedOut": null,
+              "duration": 88773,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true\n}, facilityName);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: getProcedureBody('cypress-e2e-test', mrn + '-7Days', patientName, patientDOB, formatAdjustDay(-1), 'last 1 days'),\n        headers: header\n    }).then(function (res) { return console.log; });\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: getProcedureBody('cypress-e2e-test', mrn + '-7Days', patientName, patientDOB, formatAdjustDay(-2), 'last 2 days'),\n        headers: header\n    }).then(function (res) { return console.log; });\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: getProcedureBody('cypress-e2e-test', mrn + '-7Days', patientName, patientDOB, formatAdjustDay(-3), 'last 3 days'),\n        headers: header\n    }).then(function (res) { return console.log; });\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: getProcedureBody('cypress-e2e-test', mrn + '-7Days', patientName, patientDOB, formatAdjustDay(-4), 'last 4 days'),\n        headers: header\n    }).then(function (res) { return console.log; });\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: getProcedureBody('cypress-e2e-test', mrn + '-7Days', patientName, patientDOB, formatAdjustDay(-5), 'last 5 days'),\n        headers: header\n    }).then(function (res) { return console.log; });\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: getProcedureBody('cypress-e2e-test', mrn + '-7Days', patientName, patientDOB, formatAdjustDay(-8), 'last 8 days'),\n        headers: header\n    }).then(function (res) { return console.log; });\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: getProcedureBody('cypress-e2e-test', mrn + '-24Hours', patientName, patientDOB, formatAdjustTime(0), 'last 0 Minutes'),\n        headers: header\n    }).then(function (res) { return console.log; });\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: getProcedureBody('cypress-e2e-test', mrn + '-24Hours', patientName, patientDOB, formatAdjustTime(-1), 'last 1 Minutes'),\n        headers: header\n    }).then(function (res) { return console.log; });\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: getProcedureBody('cypress-e2e-test', mrn + '-24Hours', patientName, patientDOB, formatAdjustTime(-2), 'last 2 Minutes'),\n        headers: header\n    }).then(function (res) { return console.log; });\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: getProcedureBody('cypress-e2e-test', mrn + '-24Hours', patientName, patientDOB, formatAdjustTime(-3), 'last 3 Minutes'),\n        headers: header\n    }).then(function (res) { return console.log; });\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: getProcedureBody('cypress-e2e-test', mrn + '-24Hours', patientName, patientDOB, formatAdjustTime(-4), 'last 4 Minutes'),\n        headers: header\n    }).then(function (res) { return console.log; });\n    cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: getProcedureBody('cypress-e2e-test', mrn + '-24Hours', patientName, patientDOB, formatAdjustTime(-26 * 60), 'last 26 Hours'),\n        headers: header\n    }).then(function (res) { return console.log; });\n});",
+              "err": {},
+              "uuid": "d60c277c-9ef0-4236-bf73-2a11e12391c5",
+              "parentUUID": "5bb20e00-1247-4e29-a523-56db706b4dc0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 1-7",
+              "fullTitle": "ECP-T3098-Factory public view should be created for any new customer Step 1-7",
+              "timedOut": null,
+              "duration": 103157,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(limitedUser, limitedPassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.get('.list-unstyled.components[name=\"My Views\"]').children().each(function (elx) {\n    if (!elx.html().includes('My Views')) {\n        cy.wrap(elx).rightclick();\n        cy.get('#wl__views_contextmenu').children().each(function (eli) {\n            if (eli.html().includes('Delete')) {\n                cy.log('Click Delete');\n                cy.wrap(eli).click({ force: true });\n                cy.wait(configFile.tinyTimeout);\n                cy.get('[data-cy=\"confirmDeleteViewBtn\"]').click({ force: true });\n            }\n        });\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\ncy.wait(configFile.smallTimeout);\ncy.get('.wl__controller_item.active').should('include.text', 'Unread Today');\ncy.get('[data-cy=\"filterViewItem-All Locked\"]').should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('[data-cy=\"filterViewItem-All Locked\"]').click();\ncy.get('[data-cy=\"filterChip_lockStatus\"] > .chip-box').should('contain', 'Lock Status: Locked');\ncy.get('[data-cy=\"sortChip_mappedPriority\"] > .chip-box').should('contain', 'Priority: High to Low');\ncy.get('[data-cy=\"sortChip_examDateTime\"] > .chip-box').should('contain', ' Exam Date: Oldest to Newest');\ncy.get('[data-cy=\"filterViewItem-All Unread\"]').should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('[data-cy=\"filterViewItem-All Unread\"]').click();\ncy.get('[data-cy=\"filterChip_readStatus\"] > .chip-box').should('contain', ' Read Status: Unread');\ncy.get('[data-cy=\"sortChip_mappedPriority\"] > .chip-box').should('contain', 'Priority: High to Low');\ncy.get('[data-cy=\"sortChip_examDateTime\"] > .chip-box').should('contain', ' Exam Date: Oldest to Newest');\ncy.get('[data-cy=\"filterViewItem-Unread Last 24 Hours\"]').should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('[data-cy=\"filterViewItem-Unread Last 24 Hours\"]').click();\ncy.get('[data-cy=\"filterChip_readStatus\"] > .chip-box').should('contain', ' Read Status: Unread');\ncy.get('[data-cy=\"filterChip_examDateTime\"] > .chip-box').should('contain', 'Last 24 hours');\ncy.get('[data-cy=\"sortChip_mappedPriority\"] > .chip-box').should('contain', 'Priority: High to Low');\ncy.get('[data-cy=\"sortChip_examDateTime\"] > .chip-box').should('contain', ' Exam Date: Oldest to Newest');\ncy.get('[data-cy=\"filterViewItem-Unread Last 7 Days\"]').should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('[data-cy=\"filterViewItem-Unread Last 7 Days\"]').click();\ncy.get('[data-cy=\"filterChip_readStatus\"] > .chip-box').should('contain', ' Read Status: Unread');\ncy.get('[data-cy=\"filterChip_examDateTime\"] > .chip-box').should('contain', 'Last 7 days');\ncy.get('[data-cy=\"sortChip_mappedPriority\"] > .chip-box').should('contain', 'Priority: High to Low');\ncy.get('[data-cy=\"sortChip_examDateTime\"] > .chip-box').should('contain', ' Exam Date: Oldest to Newest');\ncy.get('[data-cy=\"filterViewItem-All QA Issues\"]').should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('[data-cy=\"filterViewItem-All QA Issues\"]').click();\ncy.get('[data-cy=\"filterChip_qaIssue\"] > .chip-box').should('contain', 'All Issues');\ncy.get('[data-cy=\"sortChip_mappedPriority\"] > .chip-box').should('contain', 'Priority: High to Low');\ncy.get('[data-cy=\"sortChip_examDateTime\"] > .chip-box').should('contain', ' Exam Date: Oldest to Newest');\ncy.get('[data-cy=\"filterViewItem-Unread Today\"]').should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('[data-cy=\"filterViewItem-Unread Today\"]').click();\ncy.get('[data-cy=\"filterChip_readStatus\"] > .chip-box').should('contain', ' Read Status: Unread');\ncy.get('[data-cy=\"filterChip_examDateTime\"] > .chip-box').should('contain', 'Today');\ncy.get('[data-cy=\"sortChip_mappedPriority\"] > .chip-box').should('contain', 'Priority: High to Low');\ncy.get('[data-cy=\"sortChip_examDateTime\"] > .chip-box').should('contain', ' Exam Date: Oldest to Newest');\ncy.get('[data-cy=\"saveNewViewBtn\"]').click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"viewNameInput\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\nvar viewName1 = \"\".concat(facilityName, \"_1\") + Math.random();\ncy.get('[data-cy=\"viewNameInput\"]').type(viewName1);\n//cy.get('[data-cy=\"newViewSetAsPrivateView\"]').check();\ncy.get('[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName1, \"\\\"]\")).should('be.visible', { timeout: configFile.longTimeout });\ncommon_1.Common.logout();\ncommon_1.Common.login(customerName, limitedUser, limitedPassword);\ncommon_1.Common.navigateTo('Worklist');\ncy.wait(configFile.smallTimeout);\ncy.get('.wl__controller_item.active').should('include.text', viewName1);\ncy.get('[data-cy=\"filterViewItem-All Unread\"]').click();\ncy.get('[data-cy=\"saveNewViewBtn\"]').click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"viewNameInput\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\nvar viewName2 = \"\".concat(facilityName, \"_2\") + Math.random();\ncy.get('[data-cy=\"viewNameInput\"]').type(viewName2);\n//cy.get('[data-cy=\"newViewSetAsPrivateView\"]').check();\ncy.get('[data-cy=\"newViewSetAsDefaultView\"]').check();\ncy.get('[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName2, \"\\\"]\")).should('be.visible', { timeout: configFile.longTimeout });\ncommon_1.Common.logout();\ncommon_1.Common.login(customerName, limitedUser, limitedPassword);\ncommon_1.Common.navigateTo('Worklist');\ncy.wait(configFile.smallTimeout);\ncy.get('.wl__controller_item.active').should('contain', viewName2);\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName2, \"\\\"] > span > .fa\")).should('be.visible', { timeout: configFile.longTimeout });\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName2, \"\\\"]\")).rightclick();\ncy.get('#wl__views_contextmenu').children().each(function (elx) {\n    if (elx.html().includes('Delete')) {\n        cy.wrap(elx).click({ force: true });\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('[data-cy=\"confirmDeleteViewBtn\"]').click({ force: true });\ncy.get('.wl__controller_item.active').should('include.text', viewName1);\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName1, \"\\\"]\")).rightclick();\ncy.get('#wl__views_contextmenu').children().each(function (elx) {\n    if (elx.html().includes('Delete')) {\n        cy.wrap(elx).click({ force: true });\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('[data-cy=\"confirmDeleteViewBtn\"]').click({ force: true });\ncy.reload();\ncy.get('.wl__controller_item.active').should('include.text', \"Unread Today\");",
+              "err": {},
+              "uuid": "d9b5ec81-8032-44f3-835e-52c829d85bd6",
+              "parentUUID": "5bb20e00-1247-4e29-a523-56db706b4dc0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 8 - 11",
+              "fullTitle": "ECP-T3098-Factory public view should be created for any new customer Step 8 - 11",
+              "timedOut": null,
+              "duration": 36587,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncommon_1.Common.navigateTo('Worklist');\ncy.wait(configFile.smallTimeout);\ncy.get('[data-cy=\"filterViewItem-Unread Last 7 Days\"]').should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('[data-cy=\"filterViewItem-Unread Last 7 Days\"]').click();\ncy.get('[data-cy=\"organizationIdDropDown\"]').click();\ncy.get('.rt-table').then(function (elx) {\n    if (elx.find(' .nui-checkbox[for=\"' + facilityName + '\"]').length > 0) {\n        cy.get(' .nui-checkbox[for=\"' + facilityName + '\"]').click();\n        cy.get('[data-cy=filterChipsContainer]').should('contain.text', \"Facility\");\n    }\n});\ncy.get('[data-cy=\"filterChip_matchStatus\"] > .close').click();\ncy.get('[data-cy=patientMrnFilter]').type(mrn + '-7Days' + '{enter}', { force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.rt-tr[role=\"rowgroup\"]', { timeout: configFile.longTimeout }).should('have.lengthOf', '5');\ncy.get('[data-cy=\"filterViewItem-Unread Last 24 Hours\"]').click();\ncy.get('[data-cy=\"organizationIdDropDown\"]').click();\ncy.get('.rt-table').then(function (elx) {\n    if (elx.find(' .nui-checkbox[for=\"' + facilityName + '\"]').length > 0) {\n        cy.get(' .nui-checkbox[for=\"' + facilityName + '\"]').click();\n        cy.get('[data-cy=filterChipsContainer]').should('contain.text', \"Facility\");\n    }\n});\ncy.get('[data-cy=\"filterChip_matchStatus\"] > .close').click();\ncy.get('[data-cy=patientMrnFilter]').type(mrn + '-24Hours' + '{enter}', { force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.rt-tr[role=\"rowgroup\"]', { timeout: configFile.longTimeout }).should('have.lengthOf', '5');\ncy.get('[data-cy=\"filterViewItem-Unread Today\"]').click();\ncy.get('[data-cy=\"organizationIdDropDown\"]').click();\ncy.get('.rt-table').then(function (elx) {\n    if (elx.find(' .nui-checkbox[for=\"' + facilityName + '\"]').length > 0) {\n        cy.get(' .nui-checkbox[for=\"' + facilityName + '\"]').click();\n        cy.get('[data-cy=filterChipsContainer]').should('contain.text', \"Facility\");\n    }\n});\ncy.get('[data-cy=\"filterChip_matchStatus\"] > .close').click();\ncy.get('[data-cy=patientMrnFilter]').type(mrn + '{enter}', { force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.rt-tr[role=\"rowgroup\"]', { timeout: configFile.longTimeout }).should('have.lengthOf', '5');\ncy.get('[data-cy=\"filterViewItem-All Unread\"]').click();\ncy.get('[data-cy=patientMrnFilter]').type(mrn + '{enter}', { force: true });\ncy.waitUntil(function () { return cy.get('.rt-tr[role=\"rowgroup\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get('.rt-tr[role=\"rowgroup\"]').should('contain.text', 'STAT');\ncy.get('.rt-tr[role=\"rowgroup\"]').should('contain.text', 'LUNGS');\ncy.get('.rt-tr[role=\"rowgroup\"]').should('contain.text', 'CR');\ncy.get('.rt-tr[role=\"rowgroup\"]').should('contain.text', facilityName);\ncy.get('.rt-tr[role=\"rowgroup\"]').should('contain.text', 'last 2 days');\ncy.get('.rt-tr[role=\"rowgroup\"]').should('contain.text', 'intubation; assess tube position');\ncy.get('.rt-tr[role=\"rowgroup\"]').should('contain.text', mrn);",
+              "err": {},
+              "uuid": "09e26e9c-b85f-46f4-8d3c-20c7b403d9b4",
+              "parentUUID": "5bb20e00-1247-4e29-a523-56db706b4dc0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 12 - 15",
+              "fullTitle": "ECP-T3098-Factory public view should be created for any new customer Step 12 - 15",
+              "timedOut": null,
+              "duration": 39888,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Worklist');\ncy.wait(configFile.smallTimeout);\ncy.get('[data-cy=\"filterViewItem-Unread Today\"]').should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('[data-cy=\"filterViewItem-Unread Today\"]').click();\ncy.get('[data-cy=\"filterChip_readStatus\"] > .chip-box').should('contain', ' Read Status: Unread');\ncy.get('[data-cy=\"filterChip_examDateTime\"] > .chip-box').should('contain', 'Today');\ncy.get('[data-cy=\"sortChip_mappedPriority\"] > .chip-box').should('contain', 'Priority: High to Low');\ncy.get('[data-cy=\"sortChip_examDateTime\"] > .chip-box').should('contain', ' Exam Date: Oldest to Newest');\ncy.get('[data-cy=\"filterViewItem-All Unread\"]').rightclick();\ncy.get('#wl__views_contextmenu').should('contain.text', 'Rename').should('contain.text', 'Delete').should('contain.text', 'Set as Default');\ncy.get('[data-cy=\"openTableConfigurationButton\"]').click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"columnChooser\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get('[data-cy=\"columnSelectShownItem-organizationId\"]').click();\ncy.get('[data-cy=\"columnSettingsAddToHiddenList\"]').click();\ncy.get('[data-cy=\"columnSelectShownItem-examDescription\"]').click();\ncy.get('[data-cy=\"columnSettingsAddToHiddenList\"]').click();\ncy.get('[data-cy=\"columnSelectShownItem-examReason\"]').click();\ncy.get('[data-cy=\"columnSettingsAddToHiddenList\"]').click();\ncy.get('[data-cy=\"columnSelectShownItem-patientName\"]').click();\ncy.get('[data-cy=\"columnSettingsAddToHiddenList\"]').click();\ncy.get('[data-cy=\"modalPopupButton1\"]').click();\ncy.get('[data-cy=\"filterChip_matchStatus\"] > .close').click();\ncy.get('.rt-tr[role=\"rowgroup\"]').first().should('not.include.value', facilityName);\ncy.get('.rt-tr[role=\"rowgroup\"]').first().should('not.include.value', 'last 2 days');\ncy.get('.rt-tr[role=\"rowgroup\"]').first().should('not.include.value', 'intubation; assess tube position');\ncy.get('.rt-tr[role=\"rowgroup\"]').first().should('not.include.value', patientName);",
+              "err": {},
+              "uuid": "e11c3059-9ea2-4ff9-aeb0-ca6d02a7e991",
+              "parentUUID": "5bb20e00-1247-4e29-a523-56db706b4dc0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3098-Factory public view should be created for any new customer Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7208,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "d920d247-0af5-41ac-bfdc-cc018e41e238",
+              "parentUUID": "5bb20e00-1247-4e29-a523-56db706b4dc0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d60c277c-9ef0-4236-bf73-2a11e12391c5",
+            "d9b5ec81-8032-44f3-835e-52c829d85bd6",
+            "09e26e9c-b85f-46f4-8d3c-20c7b403d9b4",
+            "e11c3059-9ea2-4ff9-aeb0-ca6d02a7e991",
+            "d920d247-0af5-41ac-bfdc-cc018e41e238"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 275613,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

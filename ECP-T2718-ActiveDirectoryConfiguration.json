@@ -1,0 +1,155 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:46:46.307Z",
+    "end": "2024-12-15T03:52:18.526Z",
+    "duration": 332219,
+    "testsRegistered": 3,
+    "passPercent": 33.33333333333333,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 1,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "afb65e45-c2da-42b8-bde9-f9ef55eee0d0",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2718-ActiveDirectoryConfiguration.spec.ts",
+      "file": "cypress/test-suites/ECP-T2718-ActiveDirectoryConfiguration.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0b4dfea8-4936-435f-a14b-2d03e5c00d16",
+          "title": "ECP-T2718 -My Org- Active directory Configuration",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Precondition to active AD domain",
+              "fullTitle": "ECP-T2718 -My Org- Active directory Configuration Precondition to active AD domain",
+              "timedOut": null,
+              "duration": 119912,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowAD: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Integration');\ncy.get('.add-edge-server-token').click();\ncy.get('#tokenDescription').type('test');\ncy.get('.create-token').click();\n// Step 1\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Remote Authentication');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('[id=\"editDomain\"]').length > 0) {\n        cy.get('[id=\"editDomain\"]').click();\n    }\n});\ncy.get('#domain').clear().type(domain);\ncy.get('body').then(function (elx) {\n    if (elx.find('[id=\"activate\"]').length > 0) {\n        cy.get('[id=\"activate\"]').click();\n    }\n    else\n        cy.get('[id=\"saveDomain\"]').click();\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facility2Name);\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowAD: true\n}, facility2Name);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.navigateTo('Integration');\ncy.get('.add-edge-server-token').click();\ncy.get('#tokenDescription').type('test');\ncy.get('.create-token').click();\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Remote Authentication');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('[id=\"editDomain\"]').length > 0) {\n        cy.get('[id=\"editDomain\"]').click();\n    }\n});\ncy.get('#domain').clear().type(domain1);\ncy.get('body').then(function (elx) {\n    if (elx.find('[id=\"activate\"]').length > 0) {\n        cy.get('[id=\"activate\"]').click();\n    }\n    else\n        cy.get('[id=\"saveDomain\"]').click();\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Remote Authentication');\ncy.wait(configFile.smallTimeout);\ncy.get('.js-add-domain').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#domainName').clear().type(domainName);\ncy.get('#domainController').clear().type('test-radconnect.com');\ncy.get('#domainPort').clear().type('389');\ncy.get('#domainController').type('test');\ncy.get('#domainPort').type('735');\ncy.wait(configFile.tinyTimeout);\ncy.get('.js-domain-save').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "3c24597e-305f-40e3-9b37-6540f2c0b4aa",
+              "parentUUID": "0b4dfea8-4936-435f-a14b-2d03e5c00d16",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "AD configuration page should failed due to ECP-19942",
+              "fullTitle": "ECP-T2718 -My Org- Active directory Configuration AD configuration page should failed due to ECP-19942",
+              "timedOut": null,
+              "duration": 65073,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Remote Authentication');\ncy.wait(configFile.smallTimeout);\ncy.get('label:contains(\"LOGO\")').should('exist');\ncy.get('h3:contains(\"Domains\")').should('exist');\ncy.get('h3:contains(\"Authorization Mappings\")').should('exist');\n// Step 3\ncy.get('#domain').should('exist');\ncy.get('label:contains(\"' + domain + '\")').should('exist');\n// Step 4\ncy.get('.imgBtnContainer').trigger('mouseover');\ncy.get('#fakeSelectCustomLogoImage').should('exist');\ncy.get('.js-clear-image').should('exist');\n// Step 5,6 and 7\nvar p = 'download.jpg';\ncy.get('.imgBtnContainer').trigger('mouseover');\ncy.get('#selectCustomLogoImage', { timeout: configFile.hugeTimeout }).attachFile(p);\ncy.wait(configFile.smallTimeout);\ncy.get('.js-adminSettings-save', { timeout: configFile.hugeTimeout }).click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncy.get('span:contains(\"No Logo Selected\")').should('not.exist');\ncy.get('.js-clear-image').click();\ncy.get('.js-adminSettings-save', { timeout: configFile.hugeTimeout }).click({ force: true });\ncy.wait(configFile.smallTimeout);\n// Step 8\ncy.get('.js-add-authorization').click();\ncy.get('#authorizationGroup').should('exist');\ncy.get('label:contains(\"Role Mapping:\")').should('exist');\ncy.get('#authorized').should('exist');\ncy.get('label:contains(\"Denied\")').should('exist');\n// Step 9,10 and 11\ncy.wait(configFile.tinyTimeout);\ncy.get('.Select-placeholder').click();\ncy.get('[aria-label=\"Organization Administrators\"]').should('exist');\ncy.get('[aria-label=\"Users\"]').should('exist');\ncy.get('[aria-label=\"Restricted Users\"]').should('exist');\ncy.get('[aria-label=\"Delete Exams\"]').should('exist');\ncy.get('[aria-label=\"Download Exams\"]').should('exist');\ncy.get('[aria-label=\"Performance Logging\"]').should('exist');\ncy.get('[aria-label=\"Query/Retrieve\"]').should('exist');\ncy.get('[aria-label=\"Interpreting Provider\"]').should('exist');\ncy.get('[aria-label=\"Technologist\"]').should('exist');\ncy.get('[aria-label=\"Super Technologist\"]').should('exist');\ncy.get('[aria-label=\"Download Exams\"]').click();\ncy.get('div:contains(\"At least one primary group is required\")').should('exist');\ncy.get('.Select-value-icon').click();\ncy.get('#authorizationGroup').type('manager@samltest.id');\ncy.get('.Select-placeholder').click();\ncy.get('[aria-label=\"Organization Administrators\"]').click();\ncy.get('#authorized').check({ force: true });\ncy.get('.js-auth-cancel').click({ force: true });\ncy.get('td:contains(\"manager@samltest.id\")').should('not.exist');\n//Step 12 and 13\ncy.get('.js-add-authorization').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#authorizationGroup').type('Group -CN=Nucleus Admin Users,CN=Users,DC=test-radconnect,DC=com');\ncy.get('.Select-placeholder').click();\ncy.get('[aria-label=\"Organization Administrators\"]').click();\ncy.get('#authorized').check({ force: true });\ncy.get('.js-auth-save').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('td:contains(\"Group -CN=Nucleus Admin Users,CN=Users,DC=test-radconnect,DC=com\")').should('exist');\n// Step 14 and 15\ncy.get('.js-edit-authorization').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#authorizationGroup').clear().type('Edited -Text');\ncy.get('.Select-value-icon').click();\ncy.get('.Select-placeholder').click();\ncy.get('[aria-label=\"Users\"]').click();\ncy.get('.js-auth-save').click({ force: true });\ncy.get('td:contains(\"Edited -Text\")').should('exist');\ncy.get('span:contains(\"Users\")').should('exist');\n// Step 16 and 17\ncy.get('.js-delete-authorization').first().click();\ncy.get('p:contains(\"Do you want to delete this Remote Authentication Authorization?\")').should('exist');\ncy.get('.js-decline-delete').click();\ncy.get('.js-delete-authorization').click();\ncy.get('.js-confirm-delete-auth').click();\ncy.wait(configFile.smallTimeout);\ncy.get('td:contains(\"Edited -Text\")').should('not.exist');\n// Step 18 ,19 and 20 and 23\ncy.get('.js-add-domain').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#domainName').clear().type('Test-domain');\ncy.get('#domainController').clear().type('test-radconnect.com');\ncy.get('#domainPort').clear().type('389');\ncy.get('.modal-footer > .btn-default').click();\ncy.get('[title=\"389\"]').should('not.exist');\ncy.get('.js-add-domain').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#domainName').clear().type(\"Test-domain\".concat(date));\ncy.get('#domainController').clear().type('test-radconnect.com');\ncy.get('#domainPort').clear().type('389');\ncy.get('#baseDn').should('exist');\ncy.get('#upnSuffix').should('exist');\ncy.get('.js-domain-save').click();\n// Skiping Step 21 and 22\ncy.get('.js-add-domain').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#domainName').clear().type(domainName);\ncy.get('#domainName').clear().type(domainName);\ncy.get('#domainController').clear().type('test-radconnect.com');\ncy.get('#domainPort').clear().type('389');\ncy.get('.js-domain-save').click();\ncy.get('div:contains(\"Domain is already in use\")').should('exist');\ncy.get('#domainName').clear().type(\"Test-domain\".concat(date));\ncy.get('.js-domain-save').click();\ncy.on('window:alert', function (str) {\n    //assertions\n    expect(str).to.contains('There is already a definition');\n});\ncy.on('window:confirm', function () { return true; });\ncy.get('body').then(function (elx) {\n    if (elx.find('.modal-header > .close > span').length > 0) {\n        cy.get('.modal-header > .close > span').click();\n    }\n});\n// Step 26,27 and 28\ncy.get('.js-delete-domain').eq(0).click();\ncy.get('p:contains(\"Do you want to delete this Domain?\")').should('exist');\ncy.get('.js-decline-delete').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.js-delete-domain').eq(0).click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#confirmDeleteDomainYes').click();\ncy.wait(configFile.smallTimeout);\n// Step 25\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncy.wait(configFile.smallTimeout);\ncy.get('.js-edit-domain').eq(0).click();\nvar editedomain = \"\".concat(date);\ncy.get('#domainName').clear().type(editedomain);\ncy.get('#domainName').type('567');\ncy.get('#domainController').clear().type('domain controller');\ncy.get('#domainPort').clear().type('123');\ncy.get('#baseDn').should('exist');\ncy.get('#upnSuffix').should('exist');\ncy.get('.js-domain-save').click();\ncy.get('[title=\"domain controller\"]').should('exist');\n// Step 29 is skiped as UI  of limited width browser window can't be tested",
+              "err": {
+                "message": "CypressError: `cy.click()` can only be called on a single element. Your subject contained 2 elements. Pass `{ multiple: true }` if you want to serially click each element.\n\nhttps://on.cypress.io/click",
+                "estack": "CypressError: `cy.click()` can only be called on a single element. Your subject contained 2 elements. Pass `{ multiple: true }` if you want to serially click each element.\n\nhttps://on.cypress.io/click\n    at mouseAction (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:132310:76)\n    at Context.click (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:132474:14)\n    at wrapped (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:151126:19)\nFrom Your Spec Code:\n    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2718-ActiveDirectoryConfiguration.spec.ts:231:41)",
+                "diff": null
+              },
+              "uuid": "c5d8d186-c789-466b-b263-7c9d5484856d",
+              "parentUUID": "0b4dfea8-4936-435f-a14b-2d03e5c00d16",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Post step - Cleanup",
+              "fullTitle": "ECP-T2718 -My Org- Active directory Configuration Post step - Cleanup",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "f6af09c4-2938-4aab-bfda-61be47fe471a",
+              "parentUUID": "0b4dfea8-4936-435f-a14b-2d03e5c00d16",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3c24597e-305f-40e3-9b37-6540f2c0b4aa"
+          ],
+          "failures": [
+            "c5d8d186-c789-466b-b263-7c9d5484856d"
+          ],
+          "pending": [],
+          "skipped": [
+            "f6af09c4-2938-4aab-bfda-61be47fe471a"
+          ],
+          "duration": 184985,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

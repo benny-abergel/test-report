@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="572.940" tests="5" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:40:59" tests="0" file="cypress/e2e/test-suites/ECP-T2586-ActiveInactiveUser.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2586 - Activate_Inactive users" timestamp="2024-12-15T02:40:59" tests="5" time="572.921" failures="0">
+    <testcase name="Step 1-7" time="179.875" classname="ECP-T2586 - Activate_Inactive users">
+    </testcase>
+    <testcase name="Step 8" time="90.491" classname="ECP-T2586 - Activate_Inactive users">
+    </testcase>
+    <testcase name="Step 8.2" time="149.620" classname="ECP-T2586 - Activate_Inactive users">
+    </testcase>
+    <testcase name="Step 15-20 , Verfied Statshare, Inactive Error message and Inactive account remove method" time="122.982" classname="ECP-T2586 - Activate_Inactive users">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.274" classname="ECP-T2586 - Activate_Inactive users">
+    </testcase>
+  </testsuite>
+</testsuites>

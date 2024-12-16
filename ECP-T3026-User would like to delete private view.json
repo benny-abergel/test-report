@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:25:29.709Z",
+    "end": "2024-12-15T03:29:51.821Z",
+    "duration": 262112,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "7ee80f40-6ad5-4c32-bdd6-bcb7b0cf4acc",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3026-User would like to delete private view.ts",
+      "file": "cypress/test-suites/ECP-T3026-User would like to delete private view.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "28885f43-9ebb-487d-ad78-cbffbaa8c8b6",
+          "title": "ECP-T3026-User would like to delete private view",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3026 - data prep",
+              "fullTitle": "ECP-T3026-User would like to delete private view ECP-T3026 - data prep",
+              "timedOut": null,
+              "duration": 87947,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true\n}, facilityName);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    var token = res.token;\n    var orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    //Upload a-01 study from resources folder\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n});",
+              "err": {},
+              "uuid": "8983fa52-b799-4b7e-9be7-9d012edb49ce",
+              "parentUUID": "28885f43-9ebb-487d-ad78-cbffbaa8c8b6",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T3026 - step 1-6",
+              "fullTitle": "ECP-T3026-User would like to delete private view ECP-T3026 - step 1-6",
+              "timedOut": null,
+              "duration": 23660,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, accAdmUser, accAdmPass);\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(accAdmUser, accAdmPass));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\ndeleteAllViews();\ncy.get('#mappedPriority div[data-cy=\"priorityColumn\"]').first().click();\ncy.get('button:contains(\"Clear All\")').last().click();\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName);\ncy.get('[data-cy=\"newViewSetAsPrivateView\"]').click();\ncy.get('button[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName, \"\\\"]\")).should('exist');\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName2);\ncy.get('[data-cy=\"newViewSetAsPrivateView\"]').click();\ncy.get('button[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName2, \"\\\"]\")).should('exist');\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName3);\ncy.get('[data-cy=\"newViewSetAsPrivateView\"]').click();\ncy.get('button[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName3, \"\\\"]\")).should('exist');\ncy.get('.list-unstyled.components[name=\"My Views\"]').children('div').eq(0).should('have.text', viewName);\ncy.get('.list-unstyled.components[name=\"My Views\"]').children('div').eq(1).should('have.text', viewName2);\ncy.get('.list-unstyled.components[name=\"My Views\"]').children('div').eq(2).should('have.text', viewName3);\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName3, \"\\\"]\")).rightclick();\ncy.get('[data-cy=\"Delete\"]').should('exist');\ncy.get('[data-cy=\"Rename\"]').should('exist');\ncy.get('[data-cy=\"Delete\"]').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('[data-cy=\"confirmDeleteViewBtn\"]').click({ force: true });\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName3, \"\\\"]\")).should('not.exist');",
+              "err": {},
+              "uuid": "e84e989a-d759-4b4d-b224-a621c68ae5b5",
+              "parentUUID": "28885f43-9ebb-487d-ad78-cbffbaa8c8b6",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T3026 - step 7-8",
+              "fullTitle": "ECP-T3026-User would like to delete private view ECP-T3026 - step 7-8",
+              "timedOut": null,
+              "duration": 22201,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, facAdmUser, facAdmPass);\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facAdmUser, facAdmPass));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\ndeleteAllViews();\ncy.get('#mappedPriority div[data-cy=\"priorityColumn\"]').first().click();\ncy.get('button:contains(\"Clear All\")').last().click();\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName);\ncy.get('button[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName, \"\\\"]\")).should('exist');\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName2);\ncy.get('button[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName2, \"\\\"]\")).should('exist');\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName3);\ncy.get('button[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName3, \"\\\"]\")).should('exist');\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName3, \"\\\"]\")).rightclick();\ncy.get('[data-cy=\"Delete\"]').should('exist');\ncy.get('[data-cy=\"Rename\"]').should('exist');\ncy.get('[data-cy=\"Delete\"]').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('[data-cy=\"confirmDeleteViewBtn\"]').click({ force: true });\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName3, \"\\\"]\")).should('not.exist');",
+              "err": {},
+              "uuid": "493f9f16-818c-49ad-becd-f7a74bab6cf2",
+              "parentUUID": "28885f43-9ebb-487d-ad78-cbffbaa8c8b6",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "step 9-10",
+              "fullTitle": "ECP-T3026-User would like to delete private view step 9-10",
+              "timedOut": null,
+              "duration": 29284,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.navigateTo('Worklist');\ndeleteAllViews();\ncy.get('#mappedPriority div[data-cy=\"priorityColumn\"]').first().click();\ncy.get('button:contains(\"Clear All\")').last().click();\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName);\ncy.get('[data-cy=\"newViewSetAsPrivateView\"]').click();\ncy.get('button[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName, \"\\\"]\")).should('exist');\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName2);\ncy.get('[data-cy=\"newViewSetAsPrivateView\"]').click();\ncy.get('button[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName2, \"\\\"]\")).should('exist');\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName3);\ncy.get('[data-cy=\"newViewSetAsPrivateView\"]').click();\ncy.get('button[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName3, \"\\\"]\")).should('exist');\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName3, \"\\\"]\")).rightclick();\ncy.get('[data-cy=\"Delete\"]').should('exist');\ncy.get('[data-cy=\"Rename\"]').should('exist');\ncy.get('[data-cy=\"Delete\"]').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('[data-cy=\"confirmDeleteViewBtn\"]').click({ force: true });\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName3, \"\\\"]\")).should('not.exist');",
+              "err": {},
+              "uuid": "7453746a-6f8d-4215-a1db-ac7b76e947de",
+              "parentUUID": "28885f43-9ebb-487d-ad78-cbffbaa8c8b6",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3026-User would like to delete private view Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7080,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "9b32719e-8b8e-4891-b314-19402c784caf",
+              "parentUUID": "28885f43-9ebb-487d-ad78-cbffbaa8c8b6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8983fa52-b799-4b7e-9be7-9d012edb49ce",
+            "e84e989a-d759-4b4d-b224-a621c68ae5b5",
+            "493f9f16-818c-49ad-becd-f7a74bab6cf2",
+            "7453746a-6f8d-4215-a1db-ac7b76e947de",
+            "9b32719e-8b8e-4891-b314-19402c784caf"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 170172,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

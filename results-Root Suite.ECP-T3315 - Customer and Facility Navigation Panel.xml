@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="316.233" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:36:49" tests="0" file="cypress/e2e/test-suites/ECP-T3315-CustomerFacilitySelectorResponseToTheNavigationPanel.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3315 - Customer and Facility Navigation Panel" timestamp="2024-12-15T03:36:49" tests="2" time="316.213" failures="0">
+    <testcase name="Step 1 - 12" time="295.643" classname="ECP-T3315 - Customer and Facility Navigation Panel">
+    </testcase>
+    <testcase name="Post step - Cleanup" time="8.944" classname="ECP-T3315 - Customer and Facility Navigation Panel">
+    </testcase>
+  </testsuite>
+</testsuites>

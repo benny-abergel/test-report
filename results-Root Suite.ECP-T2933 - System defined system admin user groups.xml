@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="23.590" tests="1" failures="0">
+  <testsuite name="" timestamp="2024-12-15T04:13:11" tests="0" file="cypress/e2e/test-suites/ECP-T2933-SystemDefinedUserGroups.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2933 - System defined system admin user groups" timestamp="2024-12-15T04:13:11" tests="1" time="23.570" failures="0">
+    <testcase name="Starting ECP-T2933 - System defined system admin user groups" time="19.862" classname="ECP-T2933 - System defined system admin user groups">
+    </testcase>
+  </testsuite>
+</testsuites>

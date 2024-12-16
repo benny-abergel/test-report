@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="341.858" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:38:21" tests="0" file="cypress/e2e/test-suites/ECP-T2670-FeatureSwitch-EdgeServer.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2670 - Feature Switch - Edge Server" timestamp="2024-12-15T03:38:21" tests="4" time="341.842" failures="0">
+    <testcase name="Test Preparation - Before Step " time="27.094" classname="ECP-T2670 - Feature Switch - Edge Server">
+    </testcase>
+    <testcase name="Starting ECP-T2670 - Feature Switch - Edge Server Test - all 1-6 steps in one" time="100.377" classname="ECP-T2670 - Feature Switch - Edge Server">
+    </testcase>
+    <testcase name="Starting ECP-T2670 - Feature Switch - Edge Server Test - all 7-10 steps in one" time="171.537" classname="ECP-T2670 - Feature Switch - Edge Server">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="9.674" classname="ECP-T2670 - Feature Switch - Edge Server">
+    </testcase>
+  </testsuite>
+</testsuites>

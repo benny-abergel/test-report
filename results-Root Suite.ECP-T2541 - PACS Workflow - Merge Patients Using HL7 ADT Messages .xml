@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="583.530" tests="30" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:16:32" tests="0" file="cypress/e2e/test-suites/ECP-T2541-PACSWorkflowMergePatientsUsingHL7ADTMessages.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages " timestamp="2024-12-15T03:16:32" tests="30" time="583.502" failures="0">
+    <testcase name="Sending ADT message Test A" time="123.225" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ADT message Test B" time="0.803" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ORM message Test A" time="33.339" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge message Test A18" time="0.900" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Test A18 message again" time="1.039" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ADT message Test C" time="1.047" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ORM message Test C with Completed Status" time="0.983" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ORM message Test C with In Progress Status" time="42.622" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge message Test C18" time="0.860" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ADT message Test D" time="0.746" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ORU message Test D with Final Status" time="1.241" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ORU message Test D with In Error Status" time="0.906" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ORU message Test D with Preliminary Status" time="0.878" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ORU message Test D with Revised Status" time="36.039" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge message of Test D18" time="1.025" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ADT message Test E" time="0.936" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ORM message Test E with In Progress Status" time="42.387" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge Message of E18" time="50.202" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ADT message Test F" time="1.348" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending ORM message Test F with In Progress Status" time="37.340" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge Message of F18" time="41.237" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge Message of B-A18" time="41.569" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge Message from 9876 to 98761" time="1.081" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge Message from 98761 to 98762" time="0.832" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge Message from 98762 to 98763" time="0.864" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge Message from 98763 to 98764" time="0.727" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge Message from 98764 to 98765" time="1.078" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge Message from 98765 to 98766" time="1.127" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Sending Merge Message from 98766 to 98767" time="38.546" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.340" classname="ECP-T2541 - PACS Workflow - Merge Patients Using HL7 ADT Messages ">
+    </testcase>
+  </testsuite>
+</testsuites>

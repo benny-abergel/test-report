@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="461.544" tests="5" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:36:17" tests="0" file="cypress/e2e/test-suites/ECP-T3072-LoginandNavigationforMultipleUserType.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3072 - Login and Navigation for Multiple User Type" timestamp="2024-12-15T03:36:17" tests="5" time="461.521" failures="0">
+    <testcase name="Mix Customer Facility" time="199.570" classname="ECP-T3072 - Login and Navigation for Multiple User Type">
+    </testcase>
+    <testcase name="Mix Customer Normal User" time="71.369" classname="ECP-T3072 - Login and Navigation for Multiple User Type">
+    </testcase>
+    <testcase name="Mix Facility Normal User" time="75.417" classname="ECP-T3072 - Login and Navigation for Multiple User Type">
+    </testcase>
+    <testcase name="Mix Customer Facility NormalUser" time="87.594" classname="ECP-T3072 - Login and Navigation for Multiple User Type">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.632" classname="ECP-T3072 - Login and Navigation for Multiple User Type">
+    </testcase>
+  </testsuite>
+</testsuites>

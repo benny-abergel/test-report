@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:11:30.660Z",
+    "end": "2024-12-15T02:13:53.617Z",
+    "duration": 142957,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a8db42fa-d66b-4c5d-9b7e-7f83a6ed769e",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2724-MyOrgIntegrationReportQuerySources.spec.ts",
+      "file": "cypress/test-suites/ECP-T2724-MyOrgIntegrationReportQuerySources.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4c65b925-432b-47a7-ac6e-c80890cdf455",
+          "title": "ECP-T2724 - My Org - Integration - Report Query Sources",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step",
+              "fullTitle": "ECP-T2724 - My Org - Integration - Report Query Sources Test Preparation - Before Step",
+              "timedOut": null,
+              "duration": 74493,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowModalityWorklist: true,\n    allowEdgeServer: true,\n    allowPushToPACS: true,\n    allowTagEditing: true,\n    allowNixViewerApi: true,\n    allowDICOMReceive: true,\n    allowReportQuerySources: true,\n    allowWorkstationViewer: true\n}, facilityName);",
+              "err": {},
+              "uuid": "308b97ed-cfba-4105-b862-77042316ff33",
+              "parentUUID": "4c65b925-432b-47a7-ac6e-c80890cdf455",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T2724 - My Org - Integration - Report Query Sources - Steps 1 - 11",
+              "fullTitle": "ECP-T2724 - My Org - Integration - Report Query Sources ECP-T2724 - My Org - Integration - Report Query Sources - Steps 1 - 11",
+              "timedOut": null,
+              "duration": 49654,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 1 - Navigate to My Org > Integration > Report Query Sources tab and verify the tab loads.\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Integration');\ncy.get('#reportQuerySources').should('exist');\ncommon_1.Common.switchTab('Report Query Sources');\n// Step 2 - Verify the Report Query Sources contains no default sources.\ncy.get('#reportQuerySources table tbody:nth-child(2) tr').should('not.exist');\n// Step 3 - Verify the tab contains all the listed items.\ncy.get('#reportQuerySources .js-add').contains('Add Report Query Source').should('exist');\ncy.get('#reportQuerySources table thead tr .table-col-hostName').contains('Host Name').should('exist');\ncy.get('#reportQuerySources table thead tr .table-col-aeTitleSender').contains('Sender AE Title').should('exist');\ncy.get('#reportQuerySources table thead tr .table-col-aeTitleReceiver').contains('Receiver AE Title').should('exist');\ncy.get('#reportQuerySources table thead tr .table-col-port').contains('Port').should('exist');\ncy.get('#reportQuerySources table thead tr .table-col-actions').contains('actions').should('exist');\n// Step 4 - Click the Add Report Query Source button and verify the Add Report Query Source pop-over opens.\ncy.get('#reportQuerySources .js-add').click();\ncy.waitUntil(function () { return cy.get('#siteGuid'); }, { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.smallTimeout);\n// Step 5 - Verify the Add Report Query Source pop-over contains all listed items.\ncy.get('.reportQuerySourceDialog #modal-title').should('exist');\ncy.get('.reportQuerySourceDialog .js-close').should('exist');\ncy.get('#siteGuid').should('exist');\ncy.get('#aeTitleSender').should('exist');\ncy.get('#aeTitleReceiver').should('exist');\ncy.get('#hostName').should('exist');\ncy.get('#port').should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('#port').type('{selectall}123ert4567890');\ncy.get('#port').should('contain.value', '12345');\ncy.get('.reportQuerySourceDialog .modal-footer .js-close').should('exist');\ncy.get('.reportQuerySourceDialog .js-save').should('exist');\ncy.get('.reportQuerySourceDialog .js-save').should('be.disabled');\n// Step 6 - Complete all required fields, click ADD and verify the newly created source is added to the table with the correct values.\ncy.get('#siteGuid').type('{selectall}ECP-T2724-ui-test');\ncy.get('#aeTitleSender').type('{selectall}NHSTORESCP');\ncy.get('#aeTitleReceiver').type('{selectall}ORTHANC');\ncy.get('#hostName').type('{selectall}127.0.0.1');\ncy.get('#port').type('{selectall}4242');\ncy.get('.reportQuerySourceDialog .js-save').click();\ncy.get('#reportQuerySources table tbody:nth-child(2) tr').should('exist');\ncy.get('#reportQuerySources table tbody:nth-child(2) tr td.table-cell-hostName').should('contain.text', '127.0.0.1');\ncy.get('#reportQuerySources table tbody:nth-child(2) tr td.table-cell-aeTitleSender').should('contain.text', 'NHSTORESCP');\ncy.get('#reportQuerySources table tbody:nth-child(2) tr td.table-cell-aeTitleReceiver').should('contain.text', 'ORTHANC');\ncy.get('#reportQuerySources table tbody:nth-child(2) tr td.action-cell .js-edit').should('exist');\ncy.get('#reportQuerySources table tbody:nth-child(2) tr td.action-cell .js-delete').should('exist');\n// Step 7 - Click the edit action button and verify the Edit Report Query Source pop-over opens.\ncy.get('#reportQuerySources table tbody:nth-child(2) tr td.action-cell .js-edit').click();\ncy.waitUntil(function () { return cy.get('#siteGuid'); }, { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('#siteGuid').should('be.disabled');\n// Step 8 - Verify all fields on the Edit Report Query Source are editable except the Site GUID which is view only.\ncy.get('#aeTitleSender').type('{selectall}NHSTORESCP_EDITED');\ncy.get('#aeTitleReceiver').type('{selectall}ORTHANC_EDITED');\ncy.get('#hostName').type('{selectall}127.0.0.1_EDITED');\ncy.get('#port').type('{selectall}42420');\ncy.get('.reportQuerySourceDialog .js-save').click();\n// Step 9 - Verify edits can made to an existing source and are reflected in the table.\ncy.get('#reportQuerySources table tbody:nth-child(2) tr td.table-cell-hostName').should('contain.text', '127.0.0.1_EDITED');\ncy.get('#reportQuerySources table tbody:nth-child(2) tr td.table-cell-aeTitleReceiver').should('contain.text', 'ORTHANC_EDITED');\n// Step 10 - Verify the Site GUID field must be unique within an organization and the user is warned when a duplicate is present.\ncy.get('#reportQuerySources .js-add').click();\ncy.waitUntil(function () { return cy.get('#siteGuid'); }, { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('#siteGuid').type('{selectall}ECP-T2724-ui-test');\ncy.get('.reportQuerySourceDialog .validationError .popover-content').should('contain.text', 'A Report Query Source with this site GUID already exists.');\ncy.get('.reportQuerySourceDialog .modal-footer .js-close').click();\n// Step 11 - Click the delete action button and verify an existing Report Query Source can be deleted after confirmation.\ncy.get('#reportQuerySources table tbody:nth-child(2) tr td.action-cell .js-delete').click();\ncy.get('#confirm-deleteReportQuerySource').click();\ncy.get('#reportQuerySources table tbody:nth-child(2) tr').should('not.exist');",
+              "err": {},
+              "uuid": "e45f2931-1a31-409f-a630-f33253ce652d",
+              "parentUUID": "4c65b925-432b-47a7-ac6e-c80890cdf455",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2724 - My Org - Integration - Report Query Sources Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7588,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "09f0e2d2-9494-48b3-9690-c00dc794fba7",
+              "parentUUID": "4c65b925-432b-47a7-ac6e-c80890cdf455",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "308b97ed-cfba-4105-b862-77042316ff33",
+            "e45f2931-1a31-409f-a630-f33253ce652d",
+            "09f0e2d2-9494-48b3-9690-c00dc794fba7"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 131735,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

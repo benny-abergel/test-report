@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="249.086" tests="6" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:38:07" tests="0" file="cypress/e2e/test-suites/ECP-T3461-Diagnostic-Report-Management.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3461- Diagnostic-Report-Management" timestamp="2024-12-15T03:38:07" tests="6" time="249.058" failures="0">
+    <testcase name="ECP-T3451 - data preperation" time="98.173" classname="ECP-T3461- Diagnostic-Report-Management">
+    </testcase>
+    <testcase name="steps 1-2 - Diagnostic Report version history - different Date/Time values" time="51.264" classname="ECP-T3461- Diagnostic-Report-Management">
+    </testcase>
+    <testcase name="steps 3 - Diagnostic Report version history - same Date/Time values " time="15.266" classname="ECP-T3461- Diagnostic-Report-Management">
+    </testcase>
+    <testcase name="step 4 - Diagnostic Report version history after sending an HL7 with Report" time="16.222" classname="ECP-T3461- Diagnostic-Report-Management">
+    </testcase>
+    <testcase name="steps 5 - Diagnostic Report version history - promote" time="43.049" classname="ECP-T3461- Diagnostic-Report-Management">
+    </testcase>
+    <testcase name="clear data" time="7.330" classname="ECP-T3461- Diagnostic-Report-Management">
+    </testcase>
+  </testsuite>
+</testsuites>

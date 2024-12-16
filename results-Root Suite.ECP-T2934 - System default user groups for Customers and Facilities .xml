@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="96.138" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T04:13:08" tests="0" file="cypress/e2e/test-suites/ECP-T2934-SystemdefaultUserGroupsforCustomersandFacilities.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2934 - System default user groups for Customers and Facilities " timestamp="2024-12-15T04:13:08" tests="2" time="96.112" failures="0">
+    <testcase name="Step 1 to 5- System default user groups for Customers and Facilities" time="83.372" classname="ECP-T2934 - System default user groups for Customers and Facilities ">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.914" classname="ECP-T2934 - System default user groups for Customers and Facilities ">
+    </testcase>
+  </testsuite>
+</testsuites>

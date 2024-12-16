@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:36:34.957Z",
+    "end": "2024-12-15T03:40:17.167Z",
+    "duration": 222210,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "3af3ca22-5901-435c-a36b-32d90de1d064",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3084-Assigned User to New Customer.spec.ts",
+      "file": "cypress/test-suites/ECP-T3084-Assigned User to New Customer.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "aa597ee4-f6f7-4a96-8f22-355798e50873",
+          "title": "ECP-T3084 - Assigned User to New Customer",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 -5",
+              "fullTitle": "ECP-T3084 - Assigned User to New Customer Step 1 -5",
+              "timedOut": null,
+              "duration": 149127,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowWorklist: true,\n    allowAPIs: true\n}, facilityName);\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('User Management');\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('.test-e2e-edit-user-btn').should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.test-e2e-header-email > .form-control').type(\"\".concat(user, \"{enter}\"));\ncy.wait(configFile.smallTimeout);\ncy.wait(configFile.smallTimeout);\ncy.get('.test-e2e-edit-user-btn').first().click();\ncy.get('#organizationsTab').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.form-group > label:contains(\"Organization\")').parent('.form-group').find('.Select-arrow-zone').click({ force: true });\ncy.get('.form-group > label:contains(\"Organization\")').parent('.form-group').find('.Select-placeholder').type(customer2Name);\ncy.get('[aria-label=\"' + customer2Name + '\"]').click();\ncy.get('#addOrganizationBtn').click();\ncy.get('.form-group > label:contains(\"Group Membership For\")').parent('.form-group').find('.Select-arrow-zone').first().click({ force: true });\n// cy.get('.Select-placeholder').eq(1).click()\ncy.get('[aria-label=\"Customer Administrators\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#saveUserBtn').click();\ncy.wait(configFile.smallTimeout);\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "df845e50-50d2-45c9-957a-433736d8281e",
+              "parentUUID": "aa597ee4-f6f7-4a96-8f22-355798e50873",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 6-7",
+              "fullTitle": "ECP-T3084 - Assigned User to New Customer Step 6-7",
+              "timedOut": null,
+              "duration": 52819,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, user, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(user, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customer2Name, configFile.timeout, true);\ncy.get('[title=\"My Organization\"]').should('exist');\ncy.get('[title=\"Facilities\"]').should('exist');\ncy.get('[title=\"Users & Groups\"]').eq(1).should('exist');",
+              "err": {},
+              "uuid": "932820a6-7eb9-4ba3-9f03-33a606c38520",
+              "parentUUID": "aa597ee4-f6f7-4a96-8f22-355798e50873",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3084 - Assigned User to New Customer Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7661,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "09604e89-b8a2-4e0c-9799-965c793a8ad3",
+              "parentUUID": "aa597ee4-f6f7-4a96-8f22-355798e50873",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "df845e50-50d2-45c9-957a-433736d8281e",
+            "932820a6-7eb9-4ba3-9f03-33a606c38520",
+            "09604e89-b8a2-4e0c-9799-965c793a8ad3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 209607,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

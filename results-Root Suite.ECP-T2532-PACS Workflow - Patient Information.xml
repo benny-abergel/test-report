@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="150.114" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:19:31" tests="0" file="cypress/e2e/test-suites/ECP-T2532-PACS Workflow - Patient Information.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2532-PACS Workflow - Patient Information" timestamp="2024-12-15T03:19:31" tests="2" time="150.086" failures="0">
+    <testcase name="ECP-T2543" time="133.049" classname="ECP-T2532-PACS Workflow - Patient Information">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.235" classname="ECP-T2532-PACS Workflow - Patient Information">
+    </testcase>
+  </testsuite>
+</testsuites>

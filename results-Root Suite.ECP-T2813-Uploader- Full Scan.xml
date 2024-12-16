@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="220.433" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:19:22" tests="0" file="cypress/e2e/test-suites/ECP-T2813-UploaderFullScan.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2813-Uploader- Full Scan" timestamp="2024-12-15T02:19:22" tests="2" time="220.404" failures="0">
+    <testcase name="Step 1- 6" time="200.421" classname="ECP-T2813-Uploader- Full Scan">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="9.920" classname="ECP-T2813-Uploader- Full Scan">
+    </testcase>
+  </testsuite>
+</testsuites>

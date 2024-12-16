@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:21:44.396Z",
+    "end": "2024-12-15T02:24:16.507Z",
+    "duration": 152111,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d9700ece-0b91-4e4a-b85a-aa68184f1a9b",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3449-LoadingToViewer.spec.ts",
+      "file": "cypress/test-suites/ECP-T3449-LoadingToViewer.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a6ca3a5d-ca38-462e-9646-381008718b85",
+          "title": "ECP-T3449-Loading To Viewer",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3449 - data prep",
+              "fullTitle": "ECP-T3449-Loading To Viewer ECP-T3449 - data prep",
+              "timedOut": null,
+              "duration": 107895,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorkstationViewer: true,\n    allowWorklist: true\n}, facilityName);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    //Upload a-01 study from resources folder\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n});",
+              "err": {},
+              "uuid": "4ee3e06c-18df-4333-8518-efbb669db774",
+              "parentUUID": "a6ca3a5d-ca38-462e-9646-381008718b85",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 1-3",
+              "fullTitle": "ECP-T3449-Loading To Viewer Step 1-3",
+              "timedOut": null,
+              "duration": 33562,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(limitedUser, limitedPassword));\n        cy.reload();\n    }\n});\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.contains(\"Clear All\").first().click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"a-01\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(\"[data-cy='lockStatusDropDown']\").click();\ncy.get(\".checkbox-tooltip-content\").children().eq(1).click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"a-01\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(\"[data-cy='organizationIdDropDown']\").click();\ncy.get(\".checkbox-tooltip-content\").children().contains(facilityName).click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"a-01\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(\"[data-cy='mappedPriorityCell']\").first().dblclick();\ncheckPJ();\ncy.contains(\"Reading Queue\").click();\ncy.waitUntil(function () { return cy.get('.rt-body-worklistRQ  span[title=\"a-01\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncheckRQ();\ncy.get(\"[id='worklist-tabs-tab-WL']\").click();\ncy.contains(\"Clear All\").first().click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"a-01\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get('[data-cy=\"gridRowEyeIcon\"]').first().click();\ncheckPJ();\ncy.contains(\"Reading Queue\").click();\ncy.waitUntil(function () { return cy.get('.rt-body-worklistRQ span[title=\"a-01\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncheckRQ();",
+              "err": {},
+              "uuid": "4015f0c2-0c2b-451d-8484-4421a5fbf8f5",
+              "parentUUID": "a6ca3a5d-ca38-462e-9646-381008718b85",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3449-Loading To Viewer Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7803,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "8b30698b-7bcc-43fe-80c2-dfc84d2a06b4",
+              "parentUUID": "a6ca3a5d-ca38-462e-9646-381008718b85",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4ee3e06c-18df-4333-8518-efbb669db774",
+            "4015f0c2-0c2b-451d-8484-4421a5fbf8f5",
+            "8b30698b-7bcc-43fe-80c2-dfc84d2a06b4"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 149260,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

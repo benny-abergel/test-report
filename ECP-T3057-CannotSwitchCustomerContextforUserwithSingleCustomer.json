@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:32:49.486Z",
+    "end": "2024-12-15T03:36:11.653Z",
+    "duration": 202167,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2874f9db-24f5-476b-90aa-bb5f433cc8e4",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3057-CannotSwitchCustomerContextforUserwithSingleCustomer.spec.ts",
+      "file": "cypress/test-suites/ECP-T3057-CannotSwitchCustomerContextforUserwithSingleCustomer.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2c4a5b39-585c-492c-b672-a4ca80e80675",
+          "title": "ECP-T3057 - Cannot Switch Customer Context for User with Single Customer",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Login as Customer admin ,Facility admin and Ip User to verify Single Customer access-",
+              "fullTitle": "ECP-T3057 - Cannot Switch Customer Context for User with Single Customer Login as Customer admin ,Facility admin and Ip User to verify Single Customer access-",
+              "timedOut": null,
+              "duration": 187190,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, custadmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(custadmin, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('#customerSelector button').should('be.disabled');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n// Facility Login\ncommon_1.Common.login(customerName, custadmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(custadmin, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.get('#customerSelector button').should('be.disabled');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n// Login as IP User\n// Visit Base URL\ncommon_1.Common.login(customerName, ipuser, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(ipuser, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.get('#customerSelector button').should('be.disabled');\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "b56403e7-d12f-4700-b850-a48aa21649e8",
+              "parentUUID": "2c4a5b39-585c-492c-b672-a4ca80e80675",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Post step - Cleanup",
+              "fullTitle": "ECP-T3057 - Cannot Switch Customer Context for User with Single Customer Post step - Cleanup",
+              "timedOut": null,
+              "duration": 6986,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, custadmin, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "5a9bb19b-dec8-411b-bb39-dda988909e82",
+              "parentUUID": "2c4a5b39-585c-492c-b672-a4ca80e80675",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b56403e7-d12f-4700-b850-a48aa21649e8",
+            "5a9bb19b-dec8-411b-bb39-dda988909e82"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 194176,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

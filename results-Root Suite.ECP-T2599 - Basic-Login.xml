@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="231.010" tests="1" failures="1">
+  <testsuite name="" timestamp="2024-12-15T03:54:29" tests="0" file="cypress/e2e/test-suites/ECP-T2599-BasicLogin.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2599 - Basic-Login" timestamp="2024-12-15T03:54:29" tests="1" time="0.000" failures="1">
+    <testcase name="Verifying basic Login Functionality" time="76.486" classname="ECP-T2599 - Basic-Login">
+      <failure message="Timed out retrying after 60050ms: `cy.click()` failed because this element is not visible:
+
+`&lt;div id=&quot;signOutButton&quot; data-cy=&quot;signOutLink&quot; class=&quot;drop-menu-item js-sign-out&quot;&gt;Sign Out&lt;/div&gt;`
+
+This element `&lt;div#signOutButton.drop-menu-item.js-sign-out&gt;` is not visible because its parent `&lt;div.drop-menu.drop-menu__account&gt;` has CSS property: `display: none`
+
+Fix this problem, or use `{force: true}` to disable error checking.
+
+https://on.cypress.io/element-cannot-be-interacted-with" type="CypressError"><![CDATA[CypressError: Timed out retrying after 60050ms: `cy.click()` failed because this element is not visible:
+
+`<div id="signOutButton" data-cy="signOutLink" class="drop-menu-item js-sign-out">Sign Out</div>`
+
+This element `<div#signOutButton.drop-menu-item.js-sign-out>` is not visible because its parent `<div.drop-menu.drop-menu__account>` has CSS property: `display: none`
+
+Fix this problem, or use `{force: true}` to disable error checking.
+
+https://on.cypress.io/element-cannot-be-interacted-with
+    at runVisibilityCheck (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:151903:66)
+    at Object.isStrictlyVisible (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:151917:10)
+    at runAllChecks (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130555:26)
+    at retryActionability (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130623:16)
+    at tryCatcher (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8914:23)
+    at Promise.attempt.Promise.try (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6188:29)
+    at whenStable (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:146724:65)
+    at <unknown> (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:146165:14)
+    at tryCatcher (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8914:23)
+    at Promise._settlePromiseFromHandler (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6849:31)
+    at Promise._settlePromise (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6906:18)
+    at Promise._settlePromise0 (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6951:10)
+    at Promise._settlePromises (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:7031:18)
+    at Promise._fulfill (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6975:18)
+    at <unknown> (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8589:46)
+From Your Spec Code:
+    at ./cypress/page-objects/pages/common.ts.Common.logout (webpack:///./cypress/page-objects/pages/common.ts:621:29)
+    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2599-BasicLogin.spec.ts:58:14)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

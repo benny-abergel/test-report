@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="367.545" tests="5" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:16:32" tests="0" file="cypress/e2e/test-suites/ECP-T2630-DICOMStructuredReportAttachments.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2630-DICOM Structured Report attachments" timestamp="2024-12-15T03:16:32" tests="5" time="367.513" failures="0">
+    <testcase name="Uploading the Required data set" time="151.035" classname="ECP-T2630-DICOM Structured Report attachments">
+    </testcase>
+    <testcase name="All Steps" time="61.040" classname="ECP-T2630-DICOM Structured Report attachments">
+    </testcase>
+    <testcase name="Viewing the Multi SR report Study" time="66.425" classname="ECP-T2630-DICOM Structured Report attachments">
+    </testcase>
+    <testcase name="Viewing the Empty SR report" time="61.044" classname="ECP-T2630-DICOM Structured Report attachments">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.059" classname="ECP-T2630-DICOM Structured Report attachments">
+    </testcase>
+  </testsuite>
+</testsuites>

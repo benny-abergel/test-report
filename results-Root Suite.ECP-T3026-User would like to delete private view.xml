@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="262.112" tests="5" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:25:29" tests="0" file="cypress/e2e/test-suites/ECP-T3026-User would like to delete private view.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3026-User would like to delete private view" timestamp="2024-12-15T03:25:29" tests="5" time="262.089" failures="0">
+    <testcase name="ECP-T3026 - data prep" time="87.947" classname="ECP-T3026-User would like to delete private view">
+    </testcase>
+    <testcase name="ECP-T3026 - step 1-6" time="23.660" classname="ECP-T3026-User would like to delete private view">
+    </testcase>
+    <testcase name="ECP-T3026 - step 7-8" time="22.201" classname="ECP-T3026-User would like to delete private view">
+    </testcase>
+    <testcase name="step 9-10" time="29.284" classname="ECP-T3026-User would like to delete private view">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.080" classname="ECP-T3026-User would like to delete private view">
+    </testcase>
+  </testsuite>
+</testsuites>

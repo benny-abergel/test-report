@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="364.001" tests="8" failures="1">
+  <testsuite name="" timestamp="2024-12-15T03:56:17" tests="0" file="cypress/e2e/test-suites/ECP-T2787-StudyNotificationAPI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2787 - Study Notification API" timestamp="2024-12-15T03:56:17" tests="8" time="0.000" failures="1">
+    <testcase name="Step 1 to 5" time="81.720" classname="ECP-T2787 - Study Notification API">
+    </testcase>
+    <testcase name="Step 9 and 10" time="91.651" classname="ECP-T2787 - Study Notification API">
+      <failure message="Timed out retrying after 60050ms: `cy.click()` failed because this element is `disabled`:
+
+`&lt;button type=&quot;submit&quot; class=&quot;btn js-edit-save btn-link&quot; disabled=&quot;disabled&quot;&gt;Save&lt;/button&gt;`
+
+Fix this problem, or use `{force: true}` to disable error checking.
+
+https://on.cypress.io/element-cannot-be-interacted-with" type="CypressError"><![CDATA[CypressError: Timed out retrying after 60050ms: `cy.click()` failed because this element is `disabled`:
+
+`<button type="submit" class="btn js-edit-save btn-link" disabled="disabled">Save</button>`
+
+Fix this problem, or use `{force: true}` to disable error checking.
+
+https://on.cypress.io/element-cannot-be-interacted-with
+    at Object.isNotDisabled (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:151869:66)
+    at runAllChecks (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130534:26)
+    at retryActionability (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130623:16)
+    at tryCatcher (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8914:23)
+    at Promise.attempt.Promise.try (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6188:29)
+    at whenStable (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:146724:65)
+    at <unknown> (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:146165:14)
+    at tryCatcher (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8914:23)
+    at Promise._settlePromiseFromHandler (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6849:31)
+    at Promise._settlePromise (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6906:18)
+    at Promise._settlePromise0 (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6951:10)
+    at Promise._settlePromises (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:7031:18)
+    at Promise._fulfill (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6975:18)
+    at <unknown> (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8589:46)
+From Your Spec Code:
+    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2787-StudyNotificationAPI.spec.ts:187:32)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

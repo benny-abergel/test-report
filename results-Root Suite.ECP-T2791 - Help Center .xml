@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="351.179" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T04:18:04" tests="0" file="cypress/e2e/test-suites/ECP-T2791-HelpCenter.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2791 - Help Center " timestamp="2024-12-15T04:18:04" tests="3" time="351.158" failures="0">
+    <testcase name="Step 1 to 8- select Show Help center" time="294.642" classname="ECP-T2791 - Help Center ">
+    </testcase>
+    <testcase name="De-select Show Help center" time="40.793" classname="ECP-T2791 - Help Center ">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.481" classname="ECP-T2791 - Help Center ">
+    </testcase>
+  </testsuite>
+</testsuites>

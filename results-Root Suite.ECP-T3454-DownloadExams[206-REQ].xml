@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="637.341" tests="6" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:24:22" tests="0" file="cypress/e2e/test-suites/ECP-T3454-DownloadExam.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3454-DownloadExams[206-REQ]" timestamp="2024-12-15T02:24:22" tests="6" time="637.317" failures="0">
+    <testcase name="ECP-T3454 - data prep" time="47.665" classname="ECP-T3454-DownloadExams[206-REQ]">
+    </testcase>
+    <testcase name="Step 1-2" time="54.932" classname="ECP-T3454-DownloadExams[206-REQ]">
+    </testcase>
+    <testcase name="Step 3 - 4" time="47.939" classname="ECP-T3454-DownloadExams[206-REQ]">
+    </testcase>
+    <testcase name="Step 5" time="37.602" classname="ECP-T3454-DownloadExams[206-REQ]">
+    </testcase>
+    <testcase name="Delete view" time="33.428" classname="ECP-T3454-DownloadExams[206-REQ]">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="10.004" classname="ECP-T3454-DownloadExams[206-REQ]">
+    </testcase>
+  </testsuite>
+</testsuites>

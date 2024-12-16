@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="208.420" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:04:11" tests="0" file="cypress/e2e/test-suites/ECP-T2680-FeatureSwitch-WorkStationViewer.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2680 - Feature Switch - WorkStation Viewer" timestamp="2024-12-15T02:04:11" tests="3" time="208.381" failures="0">
+    <testcase name="Starting Feature Switch - WorkStation Viewer Test - All 10 Steps in one" time="172.231" classname="ECP-T2680 - Feature Switch - WorkStation Viewer">
+    </testcase>
+    <testcase name="Change System default back" time="14.551" classname="ECP-T2680 - Feature Switch - WorkStation Viewer">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.753" classname="ECP-T2680 - Feature Switch - WorkStation Viewer">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="367.679" tests="6" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:33:30" tests="0" file="cypress/e2e/test-suites/ECP-T3557-Worklist-Contextual-Menu.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3557-Worklist Contextual Menu" timestamp="2024-12-15T02:33:31" tests="6" time="367.565" failures="0">
+    <testcase name="ECP-T3557 - data prep" time="87.443" classname="ECP-T3557-Worklist Contextual Menu">
+    </testcase>
+    <testcase name="Check unlock for Study" time="42.733" classname="ECP-T3557-Worklist Contextual Menu">
+    </testcase>
+    <testcase name="Run steps for study" time="22.237" classname="ECP-T3557-Worklist Contextual Menu">
+    </testcase>
+    <testcase name="Run steps for procedure" time="45.971" classname="ECP-T3557-Worklist Contextual Menu">
+    </testcase>
+    <testcase name="Test click with keyboard" time="43.675" classname="ECP-T3557-Worklist Contextual Menu">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.005" classname="ECP-T3557-Worklist Contextual Menu">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,173 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:01:57.730Z",
+    "end": "2024-12-15T03:08:24.111Z",
+    "duration": 386381,
+    "testsRegistered": 4,
+    "passPercent": 75,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "47f2dd17-a16c-4956-b644-3c870d09b481",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3430-ColumnSettings.spec.ts",
+      "file": "cypress/test-suites/ECP-T3430-ColumnSettings.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "741f6650-36b6-44c7-95a6-c02f65546e43",
+          "title": "ECP-T3430-Column Settings [REQ-194]",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3430 - data prep",
+              "fullTitle": "ECP-T3430-Column Settings [REQ-194] ECP-T3430 - data prep",
+              "timedOut": null,
+              "duration": 73793,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    header.Authorization = \"Bearer \".concat(token);\n    //Upload a-01 study from resources folder\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    //Upload a-02 study from resources folder\n    examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-02\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    //Upload PT study from resources folder\n    examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/PT\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n    var procedureBodyPT = getProcedureBody('PT');\n    var procedureBodyCT = getProcedureBody('CT');\n    var procedureBodyDX = getProcedureBody('DX');\n    var procedureBodyPTCT = getProcedureBody(['PT', 'CT']);\n    return cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: __assign(__assign({}, procedureBodyPT), { procedureInfo: __assign(__assign({}, procedureBodyPT.procedureInfo), { \"priority\": \"R\", accessionNumber: \"11\" }), \"patientInfo\": __assign(__assign({}, procedureBodyPT.patientInfo), { \"mrn\": \"11\" }) }),\n        headers: header\n    }).then(function () { return cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: __assign(__assign({}, procedureBodyCT), { procedureInfo: __assign(__assign({}, procedureBodyCT.procedureInfo), { \"priority\": \"S\", accessionNumber: \"22\" }), \"patientInfo\": __assign(__assign({}, procedureBodyCT.patientInfo), { \"mrn\": \"22\" }) }),\n        headers: header\n    }); }).then(function () { return cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: __assign(__assign({}, procedureBodyDX), { procedureInfo: __assign(__assign({}, procedureBodyDX.procedureInfo), { \"priority\": \"OP Urgent\", accessionNumber: \"33\" }), \"patientInfo\": __assign(__assign({}, procedureBodyDX.patientInfo), { \"mrn\": \"33\" }) }),\n        headers: header\n    }); }).then(function () { return cy.request({\n        url: procedureUrl,\n        method: 'POST',\n        body: __assign(__assign({}, procedureBodyPTCT), { procedureInfo: __assign(__assign({}, procedureBodyPTCT.procedureInfo), { \"priority\": \"OP Urgent\", accessionNumber: \"33\" }), \"patientInfo\": __assign(__assign({}, procedureBodyPTCT.patientInfo), { \"mrn\": \"44\" }) }),\n        headers: header\n    }); });\n}).catch(function (err) {\n    console.log(err);\n});",
+              "err": {},
+              "uuid": "b242714c-c3f7-44e3-82f0-7ca787622a7c",
+              "parentUUID": "741f6650-36b6-44c7-95a6-c02f65546e43",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 1-8",
+              "fullTitle": "ECP-T3430-Column Settings [REQ-194] Step 1-8",
+              "timedOut": null,
+              "duration": 75871,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.navigateTo('Worklist');\ncy.wait(configFile.smallTimeout);\nworklist_common_1.Worklist.deleteViewIfExists('Columns Test');\nworklist_common_1.Worklist.addColumnToWorklist('patientMrn');\ncommon_1.Common.getByDataCy('worklistTableBody').find('[data-cy=\"mRNColumn\"]').scrollIntoView();\nworklist_common_1.Worklist.createNewView('Columns Test');\nworklist_common_1.Worklist.selectView('Columns Test');\nworklist_common_1.Worklist.filterByFacility(facilityName);\nworklist_common_1.Worklist.saveCurrentView();\nworklist_common_1.Worklist.matchProcToStudy('22', '12/1205', facilityName, orgId);\ncommon_1.Common.getByDataCy('actionsColumn').should('exist');\n// Jacob Comment Start\n// TODO: Add common columns enum and place it in worklist-common\nworklist_common_1.Worklist.addColumnToWorklist('acquisitionStatus');\ncommon_1.Common.getByDataCy('acquisitionStatusColumn').should('exist');\nworklist_common_1.Worklist.rearrangeWorklistColumns();\nworklist_common_1.Worklist.resizeWorklistColumns();\n// Add and Remove column\nworklist_common_1.Worklist.addColumnToWorklist('patientMrn');\nworklist_common_1.Worklist.removeColumnFromWorklist('patientMrn');\nworklist_common_1.Worklist.addColumnToWorklist('patientMrn');\n// Select / Unselect exams via checkboxes\nworklist_common_1.Worklist.toggleExamsSelectionViaCheckbox();\ncy.get('.selected-row').should('have.length.greaterThan', 0);\nworklist_common_1.Worklist.toggleExamsSelectionViaCheckbox();\ncy.get('.selected-row').should('have.length', 0);\n// Select / Unselect exams via header\nworklist_common_1.Worklist.toggleAllExamsSelectionViaHeader();\ncy.get('.selected-row').should('have.length.greaterThan', 0);\nworklist_common_1.Worklist.toggleAllExamsSelectionViaHeader();\ncy.get('.selected-row').should('have.length', 0);\n// Jacob Comment End\n// Verify 'Eye' Icon for all exam types\nworklist_common_1.Worklist.getRowInGridByMatchStatus('Unmatched Order').find(\"[data-cy=\\\"gridRowEyeIcon\\\"][title=\\\"No images available.\\\"]\").should('exist');\nworklist_common_1.Worklist.getRowInGridByMatchStatus('Unmatched Study').find(\"[data-cy=\\\"gridRowEyeIcon\\\"][title=\\\"View Exam\\\"]\").should('exist');\nworklist_common_1.Worklist.getRowInGridByMatchStatus('Unmatched Study').find(\"[data-cy=\\\"gridRowEyeIcon\\\"][title=\\\"View Exam\\\"]\").first().click(); // Add test for exam locked eye icon afterwards\nworklist_common_1.Worklist.getRowInGridByMatchStatus('Unmatched Study').find(\"[data-cy=\\\"gridRowEyeIcon\\\"]\").find('.icon__examLockedByUser').should('exist');\n// Verifying locked by user\nvar getEntityBody = {\n    filterBy: {\n        AND: [{\n                field: \"lockStatus\",\n                equal: 'Locked',\n            }]\n    }\n};\ncy.request({\n    url: \"\".concat(organizationUrl, \"/\").concat(orgId, \"/worklistEntities\"),\n    method: 'POST',\n    body: getEntityBody,\n    headers: header,\n}).then(function (res) {\n    expect(res.body.data[0].lockedBy).to.be.contain('ECP-T3430');\n});",
+              "err": {},
+              "uuid": "d395bceb-63d9-40b2-9d69-a9305052e805",
+              "parentUUID": "741f6650-36b6-44c7-95a6-c02f65546e43",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 9-10",
+              "fullTitle": "ECP-T3430-Column Settings [REQ-194] Step 9-10",
+              "timedOut": null,
+              "duration": 23081,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.navigateTo('Worklist');\nvar columnsBefore = {};\nvar scrollDistance = null;\nvar redingQueColumnsHeadersSelector = '[data-cy=\"worklistTableBody\"] .rt-thead.-header .rt-th.rt-resizable-header.dragging';\ncy.get(redingQueColumnsHeadersSelector).each(function ($el, index, $list) {\n    columnsBefore[$el.attr('id')] = $list[index].getBoundingClientRect().x;\n});\n// Scroll table horizontally\ncy.get('.scrollbarTrackHorizontal').children().first().move({ deltaX: 200, deltaY: 0 });\ncy.get(redingQueColumnsHeadersSelector).each(function ($el, index, $list) {\n    var newX = $list[index].getBoundingClientRect().x;\n    expect(newX).to.be.lessThan(columnsBefore[$el.attr('id')]);\n    if (scrollDistance === null) {\n        scrollDistance = columnsBefore[$el.attr('id')] - newX;\n    }\n    else {\n        var nextScrollDistance = columnsBefore[$el.attr('id')] - newX;\n        expect(nextScrollDistance).to.equal(scrollDistance);\n    }\n});\ncommon_1.Common.getByDataCy('modalitiesString-cell').each(function ($el, index, $list) {\n    if ($el.is(':visible')) {\n        worklist_common_1.Worklist.validateModalitiesOrder($el.html());\n    }\n});",
+              "err": {},
+              "uuid": "e5be878c-9602-4a56-bd4e-6994a2bf1e8d",
+              "parentUUID": "741f6650-36b6-44c7-95a6-c02f65546e43",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3430-Column Settings [REQ-194] Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 67611,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncy.get('#selectCustomerBtn').click();\ncommon_1.Common.navigateTo('Worklist');\nworklist_common_1.Worklist.deleteView('Columns Test');\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 60000ms: Expected to find element: `[data-cy=\"worklistTableBody\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 60000ms: Expected to find element: `[data-cy=\"worklistTableBody\"]`, but never found it.\n    at cy.waitUntil.timeout (webpack:///./cypress/page-objects/pages/common.ts:67:101)\n    at resolveValue (webpack:///./node_modules/cypress-wait-until/src/index.js:71:0)\n    at Context.waitUntil (webpack:///./node_modules/cypress-wait-until/src/index.js:81:0)",
+                "diff": null
+              },
+              "uuid": "c0e761b0-f632-498c-92d4-1f205d1622c3",
+              "parentUUID": "741f6650-36b6-44c7-95a6-c02f65546e43",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b242714c-c3f7-44e3-82f0-7ca787622a7c",
+            "d395bceb-63d9-40b2-9d69-a9305052e805",
+            "e5be878c-9602-4a56-bd4e-6994a2bf1e8d"
+          ],
+          "failures": [
+            "c0e761b0-f632-498c-92d4-1f205d1622c3"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 240356,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

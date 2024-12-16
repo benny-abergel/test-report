@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="484.560" tests="6" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:28:14" tests="0" file="cypress/e2e/test-suites/ECP-T2728-MyFacilitySharingsettings.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2728 - My Facility - Sharing settings" timestamp="2024-12-15T03:28:14" tests="6" time="484.539" failures="0">
+    <testcase name="Step 1 to 30" time="156.476" classname="ECP-T2728 - My Facility - Sharing settings">
+    </testcase>
+    <testcase name="Step 30 to 61" time="114.072" classname="ECP-T2728 - My Facility - Sharing settings">
+    </testcase>
+    <testcase name="Statshare should not be viewable " time="32.844" classname="ECP-T2728 - My Facility - Sharing settings">
+    </testcase>
+    <testcase name="Inactiving Statshare setting " time="136.822" classname="ECP-T2728 - My Facility - Sharing settings">
+    </testcase>
+    <testcase name="Viewing the Statshare with 000000 passcode" time="34.020" classname="ECP-T2728 - My Facility - Sharing settings">
+    </testcase>
+    <testcase name="disable facilities" time="7.246" classname="ECP-T2728 - My Facility - Sharing settings">
+    </testcase>
+  </testsuite>
+</testsuites>

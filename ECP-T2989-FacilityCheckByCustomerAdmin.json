@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:16:01.062Z",
+    "end": "2024-12-15T02:19:44.278Z",
+    "duration": 223216,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f1fec5c7-620c-4135-b226-f2d22c9d4afe",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2989-FacilityCheckByCustomerAdmin.spec.js",
+      "file": "cypress/test-suites/ECP-T2989-FacilityCheckByCustomerAdmin.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "dcb79360-ffad-4103-9ec3-b49eb4619273",
+          "title": "ECP-T2989 - Facility check by customer admin",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Pre condition ",
+              "fullTitle": "ECP-T2989 - Facility check by customer admin Pre condition ",
+              "timedOut": null,
+              "duration": 83930,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_common.Common.login(customerName, userName, userpassword);\ncy.wrap(_meteor.Meteor.addUser(user1, password, customerName, 'Customer Administrators'), {\n  timeout: configFile.hugeTimeout\n});\ncy.wrap(_meteor.Meteor.addUser(user2, password, customer, 'Customer Administrators'), {\n  timeout: configFile.hugeTimeout\n});",
+              "err": {},
+              "uuid": "9be154e4-4690-435a-96a3-5d5c0dcc7485",
+              "parentUUID": "dcb79360-ffad-4103-9ec3-b49eb4619273",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 01 to 04 - Customer details",
+              "fullTitle": "ECP-T2989 - Facility check by customer admin Step 01 to 04 - Customer details",
+              "timedOut": null,
+              "duration": 65884,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_common.Common.login(customerName, user1, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(elx => {\n  if (elx.find('.agreement').length > 0) {\n    cy.wrap(_meteor.Meteor.acceptTermWS(user1, password), {\n      timeout: configFile.hugeTimeout\n    });\n    cy.reload();\n  }\n});\n// c.createCustomerIfNotExists(customer);\n// Step 02 -  Go to My Facility -> Facility Details\n_common.Common.switchToFacility(facilityName);\n_common.Common.navigateTo('My Facility');\n_common.Common.navigateTo('Facility Details');\n//  cy.wrap(m.addUser(user2,password,customer,'Customer Administrators'));\ncy.get('h2.pageTitle').contains('Facility Details');\ncy.get('form.organizationDetails').should('be.visible');\ncy.wrap(_meteor.Meteor.addFacilty(customerName, facility2Name), {\n  timeout: configFile.hugeTimeout\n});\n_common.Common.logout();",
+              "err": {},
+              "uuid": "5ff0e6b3-b6b9-4361-a5b9-af3cadfd57ea",
+              "parentUUID": "dcb79360-ffad-4103-9ec3-b49eb4619273",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 05 to 08 - Logout and Login by the other Customer A Admin account",
+              "fullTitle": "ECP-T2989 - Facility check by customer admin Step 05 to 08 - Logout and Login by the other Customer A Admin account",
+              "timedOut": null,
+              "duration": 54645,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 05 - Logout and Login by the other Customer A Admin account\n// Step 06 - Go to My Facility -> Facility Details\n// Step 07 - Select the newly created facility in the facility selector in top panel\n_common.Common.login(customer, user2, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(elx => {\n  if (elx.find('.agreement').length > 0) {\n    cy.wrap(_meteor.Meteor.acceptTermWS(user2, password), {\n      timeout: configFile.hugeTimeout\n    });\n    cy.reload();\n  }\n});\ncy.waitUntil(() => cy.get('#customerSelector').contains(customer), {\n  timeout: configFile.longTimeout\n});\n_common.Common.switchToFacility(facility3Name);\n_common.Common.navigateTo('My Facility');\n_common.Common.navigateTo('Facility Details');\ncy.get('h2.pageTitle').contains('Facility Details');\ncy.get('form.organizationDetails').should('be.visible');\ncy.get('.Select-value').first().should('have.text', facility3Name);\n// Step 08 - Go to user groups tab in My Facility -> Users and Groups -> Users tab\n_common.Common.navigateTo('My Facility');\n_common.Common.navigateTo('Users & Groups');\ncy.get('#users').should('be.visible').click({\n  force: true\n});\ncy.get('#tableUsers_wrapper tbody').should('have.length', 0);\n_common.Common.logout();",
+              "err": {},
+              "uuid": "2307c66e-9119-45d1-a6f2-9beb43ca7e8b",
+              "parentUUID": "dcb79360-ffad-4103-9ec3-b49eb4619273",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Post step - Cleanup",
+              "fullTitle": "ECP-T2989 - Facility check by customer admin Post step - Cleanup",
+              "timedOut": null,
+              "duration": 8736,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_common.Common.login(customerName, userName, userpassword);\n_meteor.Meteor.changeFacilityStatus(facilityName, false);\n_meteor.Meteor.changeFacilityStatus(facility2Name, false);\n_meteor.Meteor.changeFacilityStatus(facility3Name, false);",
+              "err": {},
+              "uuid": "a99d185a-183c-4cfe-9d4e-0b60ded84599",
+              "parentUUID": "dcb79360-ffad-4103-9ec3-b49eb4619273",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9be154e4-4690-435a-96a3-5d5c0dcc7485",
+            "5ff0e6b3-b6b9-4361-a5b9-af3cadfd57ea",
+            "2307c66e-9119-45d1-a6f2-9beb43ca7e8b",
+            "a99d185a-183c-4cfe-9d4e-0b60ded84599"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 213195,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

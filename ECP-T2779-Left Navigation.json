@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:24:37.743Z",
+    "end": "2024-12-15T03:30:52.141Z",
+    "duration": 374398,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "9487229e-fb7a-4121-b726-cb16c48cf3b2",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2779-Left Navigation.spec.ts",
+      "file": "cypress/test-suites/ECP-T2779-Left Navigation.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ed6a8cba-bb1f-423d-8a3b-434cf9f722aa",
+          "title": "ECP-T2779 - Left Navigation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 - 14 ",
+              "fullTitle": "ECP-T2779 - Left Navigation Step 1 - 14 ",
+              "timedOut": null,
+              "duration": 353956,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Step 1\n//cy.get('[data-cy=\"mainMenu\"]').trigger('mouseover');\ncy.get('[title=\"Show Menu\"]').should('exist');\n//Step 2 and 3 can't be automated Step 4 and 8\n// cy.get('[data-cy=\"mainMenu\"]').click()\ncy.get('[title=\"System Admin\"]').should('exist');\ncommon_1.Common.navigateTo('System Admin');\ncy.get('.dropdownOpened').should('exist');\ncy.get('[title=\"Admin Settings\"]').should('be.visible');\ncy.get('[title=\"Customers\"]').should('be.visible');\ncy.get('[title=\"Edge Servers\"]').should('be.visible');\ncy.get('[title=\"General Settings\"]').should('be.visible');\ncy.get('[title=\"Help Center\"]').should('be.visible');\ncy.get('[title=\"Notifications\"]').should('be.visible');\ncy.get('[title=\"Problem Uploads\"]').should('be.visible');\ncy.get('[title=\"System Settings\"]').should('be.visible');\ncy.get('[title=\"System Tools\"]').should('be.visible');\ncy.get('[title=\"System Users & Groups\"]').should('be.visible');\ncy.get('[title=\"Terms of Service\"]').should('be.visible');\ncy.get('[title=\"User Management\"]').should('be.visible');\ncommon_1.Common.navigateTo('User Management');\ncy.get('.active').should('exist');\ncy.get('.dropdownOpened').should('not.exist');\ncommon_1.Common.navigateTo('System Admin');\ncy.get('div:contains(\"ACTIONS\")').should('exist');\n// Step 9\ncy.get('[title=\"User Management\"]').should('have.css', 'color', 'rgb(201, 205, 217)');\ncy.get('[title=\"Terms of Service\"]').should('have.css', 'color', 'rgb(171, 178, 196)');\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Admin Settings');\ncy.wait(configFile.smallTimeout);\nmeteor_1.Meteor.changeFeatures({\n    allowAutomaticActions: true,\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorkstationViewer: true,\n    allowWorklist: true,\n    allowEdgeServer: true,\n    allowCdUploader: true,\n    allowAD: true,\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n// Step 6 and 10, 12\ncommon_1.Common.login(customerName, Orgadmin, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(Orgadmin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('#worklist-tabs-tab-WL').should('exist');\ncy.get('[title=\"Worklist\"]').should('exist');\ncy.get('[title=\"Dashboard\"]').should('exist');\ncy.get('[title=\"Sharing List\"]').should('exist');\ncy.get('[title=\"Reports\"]').should('exist');\ncy.get('[title=\"My Facility\"]').should('exist');\ncommon_1.Common.navigateTo('My Facility');\ncy.get('.dropdownOpened').should('exist');\n// cy.get('[title=\"Admin Settings\"]').should('be.visible')\ncy.get('[title=\"Automatic Actions\"]').should('be.visible');\ncy.get('[title=\"Facility Details\"]').should('be.visible');\ncy.get('[title=\"General Settings\"]').should('be.visible');\ncy.get('[title=\"Integration\"]').should('be.visible');\ncy.get('[title=\"IOCM History\"]').should('be.visible');\ncy.get('[title=\"Notifications\"]').should('be.visible');\ncy.get('[title=\"Remote Authentication\"]').should('be.visible');\ncy.get('[title=\"Sharing\"]').should('be.visible');\n// cy.get('[title=\"System Tools\"]').should('be.visible')\ncy.get('[title=\"Uploaders\"]').should('be.visible');\ncy.get('[title=\"Users & Groups\"]').should('be.visible');\n// Step 11,14 and 13\ncommon_1.Common.navigateTo('Sharing');\n//  cy.get('[title=\"System Tools\"]').click()\ncy.get('[title=\"Uploaders\"]').should('not.be.visible');\ncy.get('.dropdownOpened').should('not.exist');\ncommon_1.Common.navigateTo('My Facility');\ncy.get('.js-dob-match').should('exist');\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n//Step 7 and 10\ncommon_1.Common.login(customerName, cusadmin, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(cusadmin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.reload();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"My Organization\"]').should('exist');\ncommon_1.Common.navigateTo('My Organization');\ncy.get('.dropdownOpened').should('exist');\ncy.get('[title=\"Facilities\"]').should('be.visible');\ncy.get('[title=\"Integrations\"]').should('be.visible');\ncy.get('[title=\"Organization Details\"]').should('be.visible');\ncy.get('[title=\"Users & Groups\"]').should('be.visible');\ncy.get('[title=\"Workflow Configurations\"]').should('be.visible');\ncommon_1.Common.navigateTo('Workflow Configurations');\ncy.get('.dropdownOpened').should('not.exist');\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Worklist');\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.login(customerName, ipuser, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(ipuser, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Worklist\"]').should('exist');\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.login(customerName, stduser, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(stduser, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Worklist\"]').should('exist');\ncy.get('[title=\"Dashboard\"]').should('exist');\ncy.get('[title=\"Sharing List\"]').should('exist');\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.login(customerName, resuser, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(resuser, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Worklist\"]').should('exist');\ncy.get('[title=\"Sharing List\"]').should('exist');\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "07658573-d6c6-4e63-be30-71f6d980567e",
+              "parentUUID": "ed6a8cba-bb1f-423d-8a3b-434cf9f722aa",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2779 - Left Navigation Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7941,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "ab82a0ac-97cf-47d4-b818-2ba73e2d6f84",
+              "parentUUID": "ed6a8cba-bb1f-423d-8a3b-434cf9f722aa",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "07658573-d6c6-4e63-be30-71f6d980567e",
+            "ab82a0ac-97cf-47d4-b818-2ba73e2d6f84"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 361897,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

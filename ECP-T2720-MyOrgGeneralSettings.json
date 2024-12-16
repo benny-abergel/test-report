@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:07:58.977Z",
+    "end": "2024-12-15T02:13:38.300Z",
+    "duration": 339323,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e959dd7d-567d-4d67-9102-fe192255f065",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2720-MyOrgGeneralSettings.spec.ts",
+      "file": "cypress/test-suites/ECP-T2720-MyOrgGeneralSettings.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f334b616-89de-4ae0-8014-ae455d92eb94",
+          "title": "ECP-T2720 - My Org -general settings",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 to 15",
+              "fullTitle": "ECP-T2720 - My Org -general settings Step 1 to 15",
+              "timedOut": null,
+              "duration": 198130,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 1 and 2\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    cy.wrap(token).as('token');\n    cy.wrap(orgId).as('orgId');\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    common_1.Common.navigateTo('Sharing List');\n    cy.waitUntil(function () { return cy.get('.data-tables__rows', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\n    cy.get('.data-tables__rows').then(function (el) {\n        if (el.find('.study > .hidden-bp').length < 1) {\n            var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-46\", \" -keepAlive=1\");\n            cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n                .then(function (_a) {\n                var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n                console.log(code, stdout, stderr);\n            });\n        }\n    });\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('General Settings');\ncy.get('p:contains(\"Sign in options for Remote Authentication users are\")').should('exist');\ncy.get(\"p:contains(\\\"set through your organization's Remote Authentication policy.\\\")\").should('exist');\ncy.get('label:contains(\"Sign-in Failures Before Lockout\")').should('exist');\ncy.get('label:contains(\"Lockout Period\")').should('exist');\ncy.get('label:contains(\"Failure Window\")').should('exist');\ncy.get('label:contains(\"Default Inactivity Timeout\")').should('exist');\ncy.get('#downloadDxInstaller').should('exist');\n// Step 3\ncy.get('label:contains(\"Sign-in Failures Before Lockout\")').parent('.form-group').find('.Select-value').click();\ncy.get('[aria-label=\"3\"]').should('exist');\ncy.get('[aria-label=\"5\"]').should('exist');\ncy.get('[aria-label=\"7\"]').should('exist');\ncy.get('[aria-label=\"10\"]').should('exist');\n// Step 4\ncy.get('label:contains(\"Lockout Period\")').parent('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"1 min\"]').should('exist');\ncy.get('[aria-label=\"3 min\"]').should('exist');\ncy.get('[aria-label=\"5 min\"]').should('exist');\ncy.get('[aria-label=\"10 min\"]').should('exist');\ncy.get('[aria-label=\"15 min\"]').should('exist');\n// Step 5\ncy.get('label:contains(\"Failure Window\")').parent('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"30 sec\"]').should('exist');\ncy.get('[aria-label=\"1 min\"]').should('exist');\ncy.get('[aria-label=\"3 min\"]').should('exist');\ncy.get('[aria-label=\"5 min\"]').should('exist');\ncy.get('[aria-label=\"10 min\"]').should('exist');\ncy.get('[aria-label=\"15 min\"]').should('exist');\n// Step 6\ncy.get('label:contains(\"Default Inactivity Timeout\")').parent('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"5 min\"]').should('exist');\ncy.get('[aria-label=\"10 min\"]').should('exist');\ncy.get('[aria-label=\"15 min\"]').should('exist');\ncy.get('[aria-label=\"30 min\"]').should('exist');\n// Step 7\ncy.get('label:contains(\"Sign-in Failures Before Lockout\")').parent('.form-group').find('.iconBtn').click();\ncy.get('div:contains(\"The number of consecutive failures before a local user account is locked.\")').should('exist');\ncy.get('label:contains(\"Lockout Period\")').parent('.form-group').find('.iconBtn').click();\ncy.get('div:contains(\"The duration of the lockout period.\")').should('exist');\ncy.get('label:contains(\"Failure Window\")').parent('.form-group').find('.iconBtn').click();\ncy.get('div:contains(\"The period after which the sign in failure count is reset to zero.\")').should('exist');\ncy.get('label:contains(\"Default Inactivity Timeout\")').parent('.form-group').find('.iconBtn').click();\ncy.get('div:contains(\"The period of inactivity after which a user is automatically signed out.\")').should('exist');\n// Step 8 \ncy.get('body').then(function (el) {\n    if (el.find('[title=\"15 min\"]').length > 0) {\n        cy.get('label:contains(\"Failure Window\")').parent('.form-group').find('.Select-value').click({ force: true });\n        cy.get('[aria-label=\"3 min\"]').click();\n        cy.wait(configFile.tinyTimeout);\n        cy.get('#cancel').click();\n        cy.get('p:contains(\"Do you want to Discard Changes?\")').should('exist');\n        cy.get('.popover-btn-group > .btn-default').should('exist');\n        cy.get('#confirm-discardChanges').should('exist');\n        cy.get('.popover-btn-group > .btn-default').click();\n        cy.get('[title=\"3 min\"]').should('exist');\n        cy.get('label:contains(\"Failure Window\")').parent('.form-group').find('.Select-value').click({ force: true });\n        cy.get('[aria-label=\"3 min\"]').click();\n        cy.get('#cancel').click();\n        cy.get('#confirm-discardChanges').click();\n        cy.get('[title=\"3 min\"]').should('not.exist');\n    }\n    else {\n        cy.get('label:contains(\"Failure Window\")').parent('.form-group').find('.Select-value').click({ force: true });\n        cy.get('[aria-label=\"15 min\"]').click();\n        cy.wait(configFile.tinyTimeout);\n        cy.get('#cancel').click();\n        cy.get('p:contains(\"Do you want to Discard Changes?\")').should('exist');\n        cy.get('.popover-btn-group > .btn-default').should('exist');\n        cy.get('#confirm-discardChanges').should('exist');\n        cy.get('.popover-btn-group > .btn-default').click();\n        cy.get('[title=\"15 min\"]').should('exist');\n        cy.get('label:contains(\"Failure Window\")').parent('.form-group').find('.Select-value').click({ force: true });\n        cy.get('[aria-label=\"15 min\"]').click();\n        cy.get('#cancel').click();\n        cy.get('#confirm-discardChanges').click();\n        cy.get('[title=\"15 min\"]').should('not.exist');\n    }\n});\n// Step 9 and 22\ncy.get('label:contains(\"Failure Window\")').parent('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"15 min\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#save').click({ force: true });\ncy.get('label:contains(\"Sign-in Failures Before Lockout\")').parent('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"10\"]').click();\n// Step 10\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('General Settings');\ncy.get('[title=\"15 min\"]').should('not.exist');\n// Step 12 , 13 and 14\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncy.get('.Select-value').click();\ncy.get('[aria-label=\"5 min\"]').click();\ncy.get('#save').click({ force: true });\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('General Settings');\ncy.get('[title=\"5\"]').should('exist');\ncy.get('[title=\"10\"]').should('not.exist');\ncy.get('[title=\"System Default (5 min)\"]').should('exist');\ncy.get('label:contains(\"Default Inactivity Timeout\")').parent('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"10 min\"]').click();\ncy.get('#save').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncy.get('[title=\"System Default (5 min)\"]').should('not.exist');\n//Step 15 ,16 and 18\ncy.get('label:contains(\"Structured Report Visibility\")').should('exist');\ncy.get('[title=\"Completed and Verified\"]').should('exist');\ncy.get('.Select-value').eq(5).click();\ncy.get('[aria-label=\"Never\"]').should('exist');\ncy.get('[aria-label=\"Always\"]').should('exist');\ncy.get('[aria-label=\"Completed\"]').should('exist');\ncy.get('[aria-label=\"Verified\"]').should('exist');\ncy.get('[aria-label=\"Completed and Verified\"]').should('exist');\ncy.get('[aria-label=\"Always\"]').click();\ncy.get('label:contains(\"Structured Report Visibility\")').parent('.form-group').find('.iconBtn').click({ force: true });\ncy.get('p:contains(\"Never show reports as exam attachments.\")').should('exist');\ncy.get('p:contains(\"Show all available reports.\")').should('exist');\ncy.get('p:contains(\"Show reports that have been marked as Completed.\")').should('exist');\ncy.get('p:contains(\"Show reports that have been marked as Verified.\")').should('exist');\ncy.get('p:contains(\"Show reports that have been marked as Completed and Verified.\")').should('exist');\n// Step 19 , 20 and 21\ncy.get('h3:contains(\"Study/Order Matching\")').should('exist');\ncy.get('label:contains(\"Allow multiple studies to be matched to an order in the worklist\")').should('exist');\ncy.get('#allowWorklistMultiAutoMatching').should('not.be.checked');\ncy.get('#allowWorklistMultiAutoMatching').check();\ncy.wait(configFile.tinyTimeout);\ncy.get('#save').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('[data-title=\"This setting will be used to display the studies as one exam in the viewer as well as allow the ability for multiple studies to be matched to an order in the worklist\"]').click({ force: true });\ncy.get('div:contains(\"This setting will be used to display the studies as one exam in the viewer as well as allow the ability for multiple studies to be matched to an order in the worklist\")').should('exist');\ncy.get('label:contains(\"Allow auto matching up to\")').should('exist');\ncy.get('span:contains(\"days after initial match (0 for unlimited)\")').should('exist');\ncy.get('[maxlength=\"3\"]').should('exist');\ncy.get('#autoMatchWindowInDays').clear().type('12');\ncy.get('#save').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('#downloadDxInstaller').should('be.enabled');\ncy.get('label:contains(\"Sign-in Failures Before Lockout\")').parent('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"7\"]').click();\ncy.get('label:contains(\"Lockout Period\")').parent('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"1 min\"]').click();\ncy.get('#save').click({ force: true });\ncy.wrap(meteor_1.Meteor.addUser(facadmin, userpassword, facilityName, 'Organization Administrators'));\ncy.wait(configFile.smallTimeout);\n// Step 17\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.exam-attachments-btn').click();\ncy.get('[title=\"Structured Report 1\"]').should('exist');\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "14f113d6-a420-4b5e-b1c1-2ac109448b32",
+              "parentUUID": "f334b616-89de-4ae0-8014-ae455d92eb94",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login with Invalid password for 7 times",
+              "fullTitle": "ECP-T2720 - My Org -general settings Login with Invalid password for 7 times",
+              "timedOut": null,
+              "duration": 113737,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(configFile.url);\ncy.get('#emailAddress').type(facadmin);\ncy.get('#at-btn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#password').type('Text@123');\ncy.get('#at-btn').click();\ncy.get('p:contains(\"6\")').should('exist');\ncy.get('p:contains(\"attempts remaining.\")').should('exist');\nfor (var i = 1; i <= 6; i++) {\n    cy.get('#at-btn').click();\n}\ncy.get('p:contains(\"This account has been locked due to multiple invalid attempts.\")').should('exist');\ncy.wait(configFile.longTimeout);\ncommon_1.Common.login(customerName, facadmin, userpassword);\n// m.login(customerName,'#headerLogo', configFile.url, false, facadmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facadmin, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('General Settings');\ncy.get('label:contains(\"Sign-in Failures Before Lockout\")').parent('.form-group').find('.Select-value').click();\ncy.get('[aria-label=\"10\"]').click();\ncy.get('#save').click({ force: true });\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "f09f034e-e4b5-467d-aa73-dc54ad6bb734",
+              "parentUUID": "f334b616-89de-4ae0-8014-ae455d92eb94",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login with Invalid password for 10 times ",
+              "fullTitle": "ECP-T2720 - My Org -general settings Login with Invalid password for 10 times ",
+              "timedOut": null,
+              "duration": 6480,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visit(configFile.url);\ncy.get('#emailAddress').type(facadmin);\ncy.get('#at-btn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#password').type('Text@123');\ncy.get('#at-btn').click();\ncy.get('p:contains(\"9\")').should('exist');\ncy.get('p:contains(\"attempts remaining.\")').should('exist');\nfor (var i = 1; i <= 9; i++) {\n    cy.get('#at-btn').click();\n}\ncy.get('p:contains(\"This account has been locked due to multiple invalid attempts.\")').should('exist');",
+              "err": {},
+              "uuid": "345e2fed-890a-46a6-9409-62fa3600b88e",
+              "parentUUID": "f334b616-89de-4ae0-8014-ae455d92eb94",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2720 - My Org -general settings Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6532,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "4550edcb-65db-4149-96a6-97e985da3fb2",
+              "parentUUID": "f334b616-89de-4ae0-8014-ae455d92eb94",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "14f113d6-a420-4b5e-b1c1-2ac109448b32",
+            "f09f034e-e4b5-467d-aa73-dc54ad6bb734",
+            "345e2fed-890a-46a6-9409-62fa3600b88e",
+            "4550edcb-65db-4149-96a6-97e985da3fb2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 324879,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

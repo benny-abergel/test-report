@@ -1,0 +1,193 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:51:22.090Z",
+    "end": "2024-12-15T03:01:13.698Z",
+    "duration": 591608,
+    "testsRegistered": 5,
+    "passPercent": 40,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 2,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "e5793679-8804-4459-ac06-9f70d5985c38",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2510-ViewerSettingKeyboardShortcuts.spec.ts",
+      "file": "cypress/test-suites/ECP-T2510-ViewerSettingKeyboardShortcuts.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "52266ca4-eb2f-4fe5-8877-274a7492285e",
+          "title": "ECP-T2510 - Viewer Settings - Keyboard Shortcuts(bug ECP-19335)",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Before test",
+              "fullTitle": "ECP-T2510 - Viewer Settings - Keyboard Shortcuts(bug ECP-19335) Before test",
+              "timedOut": null,
+              "duration": 96759,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true\n}, facilityName);\ncy.reload();\n// create api token\nvar orgId;\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    orgId = res.orgId;\n    // upload exam\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(res.token, \" -maxParallel=5 -data=resources/a-01 -keepAlive=1\");\n    return cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout * 2 }) // 10 minutes timeout for uploading exam\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        return console.log(code, stdout, stderr);\n    });\n}).catch(function (err) { return console.log(err); });\n// navigate to viewer\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n//  cy.get(obj.headerLogo).click();\ncy.get(iex.firstExamTableCell).first().click();\ncy.get(iex.moreInfo).click();\ncy.wait(configFile.smallTimeout);\nvar examID = '';\ncy.get(iex.examID).then(function (el) {\n    examID = el.text();\n    meteor_1.Meteor.getViewerUrls(configFile.url, configFile.username, configFile.password, examID, orgId, 'ndxWeb')\n        .then(function (viewerUrls) {\n        // @ts-ignore\n        ndxViewerUrl = viewerUrls;\n    });\n    meteor_1.Meteor.getViewerUrls(configFile.url, configFile.username, configFile.password, examID, orgId, 'nix')\n        .then(function (viewerUrls) {\n        // @ts-ignore\n        nixViewerUrl = viewerUrls;\n    });\n});\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "102ad4c0-e140-47bf-830d-667a62385d6f",
+              "parentUUID": "52266ca4-eb2f-4fe5-8877-274a7492285e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "NDXWeb - Viewer Settings - Keyboard Shortcuts",
+              "fullTitle": "ECP-T2510 - Viewer Settings - Keyboard Shortcuts(bug ECP-19335) NDXWeb - Viewer Settings - Keyboard Shortcuts",
+              "timedOut": null,
+              "duration": 90148,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.mediumTimeout, true);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.studiesRowCount > span').should('contain.text', '1'); }, { timeout: configFile.hugeTimeout });\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Acceptance, Set 1').first().parents('tr').find('.iconBtn.viewExam.confirm-popover-btn').click();\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.closeOtherTabs();\ncy.visit(\"\".concat(ndxViewerUrl));\n// m.login(customerName,'#Layer_1', `${configFile.url}/${ndxViewerUrl}`, true, userName,userpassword, configFile.longTimeout);\n//  m.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${ndxViewerUrl}`, false);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\n// Step 1 - Open the viewer settings menu and navigate to the Keyboard Shortcuts tab.\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).should('be.visible').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('.viewer-settings-tabs [role=\"presentation\"]li:contains(Keyboard Shortcuts)').as('keyboardTab');\ncy.get('@keyboardTab')\n    .click()\n    .should('have.class', 'active');\ncy.get('#commandKeyMapTable table tbody tr', { timeout: configFile.waitUntilTimeout }).should('have.length', 51);\nvar shortcutWithIndex = function (num) { return cy.get(\"#commandKeyMapTable table tbody tr:eq(\".concat(num, \")\")); };\n// Step 2 - Replace an existing shortcut key with any unused key, and then click outside the shortcut key field.\nshortcutWithIndex(2).find('input').type('{shift}W');\ncy.get('#imageViewerSettings h4.modal-title').click();\nshortcutWithIndex(2).find('input').should('have.value', 'SHIFT+W');\n// Step 3 - Add a used shortcut to any tool, then click outside the shortcut field.\nshortcutWithIndex(0).find('input').type('a');\n// Step 4 - Verify the warning message indicates what function is already using the shortcut key entered.\ncy.get('.confirmPopover').should('be.visible').and('contain.text', 'Angle Measurement  function is already using A. Do you want to change the function for this key?');\ncy.wait(configFile.smallTimeout);\n// Step 5 - Verify the confirmation message also contains NO and YES buttons, and they function as expected.\ncy.get('.confirmPopover .popoverBtnGroup .btn-close').should('exist');\ncy.get('.confirmPopover .popoverBtnGroup .btn-danger').should('exist');\ncy.get('.confirmPopover .popoverBtnGroup .btn-close').click();\ncy.wait(configFile.tinyTimeout);\nshortcutWithIndex(0).find('input').should('have.value', 'W');\nshortcutWithIndex(0).find('input').clear().type('a');\ncy.get('.confirmPopover button:contains(Yes)').should('be.visible').click();\nshortcutWithIndex(0).find('input').should('have.value', 'A');\n// Step 6 - Revert all keyboard shortcuts to their default values for the following steps.\ncy.get('#resetHotkeys').should('be.visible').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.confirmHotkeyReset button:contains(Yes)').should('be.visible').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n        cy.wait(configFile.smallTimeout);\n    }\n});\nshortcutWithIndex(0).find('input').should('have.value', 'W');\n// Step 7 - 58 - Check each shortcut\n[\n    { label: \"Window Width / Window Level\", shortcut: \"W\" },\n    { label: \"WW/WL by Region\", shortcut: \"R\" },\n    { label: \"Manual Zoom\", shortcut: \"Z\" },\n    { label: \"Zoom to Fit\", shortcut: \"SHIFT+F\" },\n    { label: \"Pan\", shortcut: \"P\" },\n    { label: \"Page/scroll\", shortcut: \"S\" },\n    { label: \"Magnify\", shortcut: \"M\" },\n    { label: \"Localize\", shortcut: \"CTRL+L\" },\n    { label: \"Rotate Inplane\", shortcut: \"SHIFT+R\" },\n    { label: \"3D Rotate\", shortcut: \"D\" },\n    { label: \"Invert\", shortcut: \"I\" },\n    { label: \"Rotate Left\", shortcut: \"-\" },\n    { label: \"Rotate Right\", shortcut: \"=\" },\n    { label: \"Flip Horizontal\", shortcut: \"H\" },\n    { label: \"Flip Vertical\", shortcut: \"V\" },\n    { label: \"Pixel ROI\", shortcut: \"SHIFT+H\" },\n    { label: \"Elliptical ROI\", shortcut: \"E\" },\n    { label: \"Ruler\", shortcut: \"L\" },\n    { label: \"Image Annotations Show/Hide\", shortcut: \"CTRL+A\" },\n    // { label: \"GSPS Enable/Disable\", shortcut: \"G\" },\n    // { label: \"AI Enable/Disable\", shortcut: \"SHIFT+A\" },\n    { label: \"Previous Batch\", shortcut: \"[\" },\n    { label: \"Next Batch\", shortcut: \"]\" },\n    { label: \"Previous Hanging Protocol Stage\", shortcut: \"SHIFT+,\" },\n    { label: \"Next Hanging Protocol Stage\", shortcut: \"SHIFT+.\" },\n    { label: \"Clear Viewport\", shortcut: \"SHIFT+C\" },\n    { label: \"Save Key Images\", shortcut: \"SHIFT+K\" },\n    { label: \"Angle\", shortcut: \"A\" },\n    { label: \"Spine Labels\", shortcut: \"CTRL+C\" },\n    { label: \"Cobb Angle\", shortcut: \"SHIFT+V\" },\n    { label: \"Link Series\", shortcut: \"X\" },\n    { label: \"Cine: Play/Pause\", shortcut: \"SPACE\" },\n    { label: \"Cine: Play/Pause (4D Position)\", shortcut: \"SHIFT+SPACE\" },\n    { label: \"Cine: Loop\", shortcut: \"SHIFT+2\" },\n    { label: \"Cine: Show/Hide\", shortcut: \"C\" },\n    { label: \"Reference Lines Show/Hide\", shortcut: \"/\" },\n    { label: \"Reset Series\", shortcut: \"CTRL+X\" },\n    { label: \"Clear Image Annotations\", shortcut: \"SHIFT+X\" },\n    { label: \"Scroll Up\", shortcut: \"UP\" },\n    { label: \"Scroll Down\", shortcut: \"DOWN\" },\n    { label: \"Scroll Left (4D)\", shortcut: \"SHIFT+LEFT\" },\n    { label: \"Scroll Right (4D)\", shortcut: \"SHIFT+RIGHT\" },\n    { label: \"Scroll to First Image\", shortcut: \"HOME\" },\n    { label: \"Scroll to Last Image\", shortcut: \"END\" },\n    { label: \"Previous Panel\", shortcut: \"LEFT\" },\n    { label: \"Next Panel\", shortcut: \"RIGHT\" },\n    { label: \"Next Series\", shortcut: \"N\" },\n    { label: \"Previous Series\", shortcut: \"B\" },\n    { label: \"Arrow with Text\", shortcut: \"T\" },\n    { label: \"Arrow\", shortcut: \"SHIFT+T\" },\n    { label: \"Text\", shortcut: \"ALT+T\" },\n    { label: \"Toggle Viewport Overlays\", shortcut: \"SHIFT+D\" },\n    { label: 'DICOM Overlay \"Toggle\"', shortcut: \"O\" }\n].forEach(function (_a, index) {\n    var label = _a.label, shortcut = _a.shortcut;\n    shortcutWithIndex(index).find('label').should('have.text', label);\n    shortcutWithIndex(index).find('input').should('have.value', shortcut);\n});\n// Step 59 - Select a tool that is not mapped to mouse buttons by using a keyboard short. (Example - Text).\n// Use the same shortcut once again.\ncy.get('#imageViewerSettings button[class=\"close\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('body').trigger('keydown', { keyCode: 87, which: 87 });\ncy.wait(configFile.tinyTimeout);\ncy.get('#dicomButtons .imageViewerButton.active').should('exist');\ncy.get('#stackScroll.active').should('not.exist');\ncy.get('body').trigger('keydown', { keyCode: 87, which: 87 });\ncy.wait(configFile.tinyTimeout);\ncy.get('#dicomButtons .imageViewerButton.active').should('not.exist');\ncy.get('#stackScroll.active').should('exist');",
+              "err": {},
+              "uuid": "3982dc0e-4408-447d-b509-ccfe6843d546",
+              "parentUUID": "52266ca4-eb2f-4fe5-8877-274a7492285e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "NDXWeb - Viewer Settings - Keyboard Shortcuts- blocked Keys",
+              "fullTitle": "ECP-T2510 - Viewer Settings - Keyboard Shortcuts(bug ECP-19335) NDXWeb - Viewer Settings - Keyboard Shortcuts- blocked Keys",
+              "timedOut": null,
+              "duration": 122877,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.mediumTimeout, true);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.studiesRowCount > span').should('contain.text', '1'); }, { timeout: configFile.hugeTimeout });\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Acceptance, Set 1').first().parents('tr').find('.iconBtn.viewExam.confirm-popover-btn').click();\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.closeOtherTabs();\ncy.visit(\"\".concat(ndxViewerUrl));\n// m.login(customerName,'#Layer_1', `${configFile.url}/${ndxViewerUrl}`, true, userName,userpassword, configFile.longTimeout);\n//  m.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${ndxViewerUrl}`, false);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\n// Step 1 - Open the viewer settings menu and navigate to the Keyboard Shortcuts tab.\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).should('be.visible').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('.viewer-settings-tabs [role=\"presentation\"]li:contains(Keyboard Shortcuts)').as('keyboardTab');\ncy.get('@keyboardTab')\n    .click()\n    .should('have.class', 'active');\ncy.get('#commandKeyMapTable table tbody tr', { timeout: configFile.waitUntilTimeout }).should('have.length', 51);\nvar shortcutWithIndex = function (num) { return cy.get(\"#commandKeyMapTable table tbody tr:eq(\".concat(num, \")\")); };\ncy.wait(configFile.tinyTimeout);\nnew Array(10).fill('').forEach(function (_, i) {\n    shortcutWithIndex(0).find('input').type(\"{ctrl}\".concat(i)).should('have.value', 'W');\n});\n// Step 61 - Verify only approved keys can be assigned as shortcuts.\n// Check for num pad keys - key code 97 - 105\n//[97, 98, 99, 100, 101, 102, 103, 104, 104].forEach((n, i) => {\n['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'].forEach(function (n, i) {\n    cy.wait(configFile.tinyTimeout);\n    shortcutWithIndex(0).find('input').type('{ctrl}' + n);\n    //shortcutWithIndex(0).find('input').trigger('keydown', { keyCode: n, which: n });\n    cy.wait(configFile.tinyTimeout);\n    shortcutWithIndex(0).find('input').should('have.value', 'W');\n});\n// Clean up step - reset to default\ncy.get('#resetHotkeys').should('be.visible').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.confirmHotkeyReset button:contains(Yes)').should('be.visible').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\nshortcutWithIndex(0).find('input').should('have.value', 'W');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 60000ms: expected '<input#wwwcHotKey.key.form-control>' to have value 'W', but the value was 'CTRL+-'",
+                "estack": "AssertionError: Timed out retrying after 60000ms: expected '<input#wwwcHotKey.key.form-control>' to have value 'W', but the value was 'CTRL+-'\n    at eval (webpack:///./cypress/e2e/test-suites/ECP-T2510-ViewerSettingKeyboardShortcuts.spec.ts:292:66)\nat Array.forEach (<anonymous>)\n    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2510-ViewerSettingKeyboardShortcuts.spec.ts:291:31)",
+                "diff": "- 'CTRL+-'\n+ 'W'\n"
+              },
+              "uuid": "cc64fd23-7b06-496b-be45-bcb5c6623b01",
+              "parentUUID": "52266ca4-eb2f-4fe5-8877-274a7492285e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "NIX - Viewer Settings - Keyboard Shortcuts",
+              "fullTitle": "ECP-T2510 - Viewer Settings - Keyboard Shortcuts(bug ECP-19335) NIX - Viewer Settings - Keyboard Shortcuts",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.mediumTimeout, true);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.studiesRowCount > span').should('contain.text', '1'); }, { timeout: configFile.hugeTimeout });\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Acceptance, Set 1').first().parents('tr').find('.iconBtn.viewExam.confirm-popover-btn').click();\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.closeOtherTabs();\ncy.visit(\"\".concat(nixViewerUrl));\n// m.login(customerName,'#Layer_1', `${configFile.url}/${nixViewerUrl}`, true, userName,userpassword, configFile.longTimeout);\n//   m.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${nixViewerUrl}`, false);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\n// Step 1 - Open the viewer settings menu and navigate to the Keyboard Shortcuts tab.\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).should('be.visible').click();\ncy.get('.viewer-settings-tabs [role=\"presentation\"]li:contains(Keyboard Shortcuts)').as('keyboardTab');\ncy.get('@keyboardTab')\n    .click()\n    .should('have.class', 'active');\ncy.get('#commandKeyMapTable table tbody tr', { timeout: configFile.waitUntilTimeout }).should('have.length', 32);\nvar shortcutWithIndex = function (num) { return cy.get(\"#commandKeyMapTable table tbody tr:eq(\".concat(num, \")\")); };\n// Step 2 - Replace an existing shortcut key with any unused key, and then click outside the shortcut key field.\nshortcutWithIndex(2).find('input').type('{shift}W');\ncy.get('#imageViewerSettings h4.modal-title').click();\nshortcutWithIndex(2).find('input').should('have.value', 'SHIFT+W');\n// Step 3 - Add a used shortcut to any tool, then click outside the shortcut field.\nshortcutWithIndex(0).find('input').type('m');\n// Step 4 - Verify the warning message indicates what function is already using the shortcut key entered.\n// cy.get('.confirmReplacement .popover-content p').should('be.visible').and('contain.text', 'Pixel Probe function is already using SHIFT+W. Do you want to change the function for this key?');\ncy.get('.confirmReplacement .popover-content p').should('be.visible').and('contain.text', 'Magnify function is already using M. Do you want to change the function for this key?');\n// Step 5 - Verify the confirmation message also contains NO and YES buttons, and they function as expected.\ncy.get('.confirmReplacement .popoverBtnGroup .cancelKey').should('exist');\ncy.get('.confirmReplacement .popoverBtnGroup #confirmKey').should('exist');\ncy.get('.confirmReplacement .popoverBtnGroup .cancelKey').click();\nshortcutWithIndex(0).find('input').should('have.value', 'W');\nshortcutWithIndex(0).find('input').clear().type('a');\ncy.get('.confirmReplacement .popoverBtnGroup #confirmKey').should('be.visible').click();\nshortcutWithIndex(0).find('input').should('have.value', 'A');\n// Step 6 - Revert all keyboard shortcuts to their default values for the following steps.\ncy.get('#resetHotkeys').should('be.visible').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.confirmHotkeyReset button:contains(Yes)').should('be.visible').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\nshortcutWithIndex(0).find('input').should('have.value', 'W');\n// Step 7 - 58 - Check each shortcut\n[\n    { label: \"Window W/L\", shortcut: \"W\" },\n    { label: \"Angle Measurement\", shortcut: \"A\" },\n    { label: \"Pixel Probe\", shortcut: \"\" },\n    { label: \"Elliptical Probe\", shortcut: \"\" },\n    { label: \"Magnify\", shortcut: \"M\" },\n    { label: \"Scroll Stack\", shortcut: \"S\" },\n    { label: \"Pan\", shortcut: \"P\" },\n    { label: \"Reset Series\", shortcut: \"\" },\n    { label: \"Clear Image Annotations\", shortcut: \"\" },\n    { label: \"Length Measurement\", shortcut: \"L\" },\n    { label: \"Text\", shortcut: \"T\" },\n    { label: \"Spine Labels\", shortcut: \"\" },\n    { label: \"W/L by Region\", shortcut: \"R\" },\n    { label: \"Zoom In\", shortcut: \"\" },\n    { label: \"Zoom Out\", shortcut: \"\" },\n    { label: \"Zoom to Fit\", shortcut: \"\" },\n    { label: \"Invert\", shortcut: \"I\" },\n    { label: \"Flip Horizontal\", shortcut: \"H\" },\n    { label: \"Flip Vertical\", shortcut: \"V\" },\n    { label: \"Rotate Right\", shortcut: \"G\" },\n    { label: \"Rotate Left\", shortcut: \"F\" },\n    { label: \"Next Panel\", shortcut: \"RIGHT\" },\n    { label: \"Previous Panel\", shortcut: \"LEFT\" },\n    { label: \"Next Series\", shortcut: \"X\" },\n    { label: \"Previous Series\", shortcut: \"Z\" },\n    { label: \"Scroll Down\", shortcut: \"DOWN\" },\n    { label: \"Scroll Up\", shortcut: \"UP\" },\n    { label: \"Scroll to First Image\", shortcut: \"HOME\" },\n    { label: \"Scroll to Last Image\", shortcut: \"END\" },\n    { label: \"Show/Hide Cine Controls\", shortcut: \"C\" },\n    { label: \"Play/Pause Cine\", shortcut: \"SPACE\" },\n    { label: \"Reference Lines Show/Hide\", shortcut: \"/\" }\n].forEach(function (_a, index) {\n    var label = _a.label, shortcut = _a.shortcut;\n    shortcutWithIndex(index).find('label').should('have.text', label);\n    shortcutWithIndex(index).find('input').should('have.value', shortcut);\n});\n// Clean up step - reset to default\ncy.get('#resetHotkeys').should('be.visible').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.confirmHotkeyReset button:contains(Yes)').should('be.visible').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\nshortcutWithIndex(0).find('input').should('have.value', 'W');",
+              "err": {},
+              "uuid": "9a9848c2-cb7c-48f2-b68f-2e399671954c",
+              "parentUUID": "52266ca4-eb2f-4fe5-8877-274a7492285e",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Cleanup",
+              "fullTitle": "ECP-T2510 - Viewer Settings - Keyboard Shortcuts(bug ECP-19335) Cleanup",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "f50a3609-b03c-4cc2-a7f8-032643e96fd0",
+              "parentUUID": "52266ca4-eb2f-4fe5-8877-274a7492285e",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "102ad4c0-e140-47bf-830d-667a62385d6f",
+            "3982dc0e-4408-447d-b509-ccfe6843d546"
+          ],
+          "failures": [
+            "cc64fd23-7b06-496b-be45-bcb5c6623b01"
+          ],
+          "pending": [],
+          "skipped": [
+            "9a9848c2-cb7c-48f2-b68f-2e399671954c",
+            "f50a3609-b03c-4cc2-a7f8-032643e96fd0"
+          ],
+          "duration": 309784,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

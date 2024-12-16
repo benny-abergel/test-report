@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:36:41.201Z",
+    "end": "2024-12-15T03:42:19.264Z",
+    "duration": 338063,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "563864c6-9b92-4fcc-931c-b62f4e4cb441",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3055-PageNavigationbasedonFacilityDropdownForMultipleFacility.spec.ts",
+      "file": "cypress/test-suites/ECP-T3055-PageNavigationbasedonFacilityDropdownForMultipleFacility.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a188089c-3fd3-4a76-b2c3-5e128ed7e791",
+          "title": "ECP-T3055 - Page Navigation based on Facility Dropdown for Single Facility",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Login as Facility Admin",
+              "fullTitle": "ECP-T3055 - Page Navigation based on Facility Dropdown for Single Facility Login as Facility Admin",
+              "timedOut": null,
+              "duration": 157862,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, facadmin, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facadmin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Sharing List');\ncommon_1.Common.switchToFacility(facilityName);\ncy.get('.OrganizationSelector div .drop-down').should('exist');\ncy.get(\"[title=\\\"\".concat(facilityName, \"\\\"]\")).should('exist');\ncy.get('#customerName').invoke('text').then(function (cusname) {\n    expect(customerName).to.equal(cusname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncommon_1.Common.navigateTo('Facility Details');\ncy.get(\"[value=\\\"\".concat(facilityName, \"\\\"]\")).should('exist');\ncy.get('.OrganizationSelector .Select-value .Select-value-label .needsclick').invoke('text').then(function (facname) {\n    expect(facilityName).to.equal(facname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('Facility Details');\ncy.wait(configFile.smallTimeout * 2);\ncy.get(\"[value=\\\"\".concat(facility2Name, \"\\\"]\")).should('exist');\ncy.get('.OrganizationSelector .Select-value .Select-value-label .needsclick').invoke('text').then(function (facname) {\n    expect(facility2Name).to.equal(facname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "82f7f509-4f72-49f5-81f4-50c182431084",
+              "parentUUID": "a188089c-3fd3-4a76-b2c3-5e128ed7e791",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login as IP User",
+              "fullTitle": "ECP-T3055 - Page Navigation based on Facility Dropdown for Single Facility Login as IP User",
+              "timedOut": null,
+              "duration": 46842,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, ip, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facadmin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.get('.OrganizationSelector div .drop-down').should('not.exist');\ncy.get('#facilityName').should('not.exist');\ncy.get('#customerName').invoke('text').then(function (cusname) {\n    expect(customerName).to.equal(cusname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncy.get('[data-cy=\"organizationIdDropDown\"]').click();\ncy.get(\"[for=\\\"\".concat(facilityName, \"\\\"]\")).should('exist', { force: true });\ncy.get(\"[for=\\\"\".concat(facility2Name, \"\\\"]\")).should('exist', { force: true });\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "3b33fc46-2a34-4945-ae1b-af738f69c80d",
+              "parentUUID": "a188089c-3fd3-4a76-b2c3-5e128ed7e791",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login as Customer admin",
+              "fullTitle": "ECP-T3055 - Page Navigation based on Facility Dropdown for Single Facility Login as Customer admin",
+              "timedOut": null,
+              "duration": 63312,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, custadmin, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facadmin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Sharing List');\ncommon_1.Common.switchToFacility(facilityName);\ncy.get('.OrganizationSelector div .drop-down').should('exist');\ncy.get(\"[title=\\\"\".concat(facilityName, \"\\\"]\")).should('exist');\ncy.get('#customerName').invoke('text').then(function (cusname) {\n    expect(customerName).to.equal(cusname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncommon_1.Common.navigateTo('Facility Details');\ncy.get(\"[value=\\\"\".concat(facilityName, \"\\\"]\")).should('exist');\ncy.get('.OrganizationSelector .Select-value .Select-value-label .needsclick').invoke('text').then(function (facname) {\n    expect(facilityName).to.equal(facname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('Facility Details');\ncy.get(\"[value=\\\"\".concat(facility2Name, \"\\\"]\")).should('exist');\ncy.get('.OrganizationSelector .Select-value .Select-value-label .needsclick').invoke('text').then(function (facname) {\n    expect(facility2Name).to.equal(facname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});",
+              "err": {},
+              "uuid": "cc4bad7b-540a-4fc6-aa6c-b4986f54687e",
+              "parentUUID": "a188089c-3fd3-4a76-b2c3-5e128ed7e791",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login as System Admin",
+              "fullTitle": "ECP-T3055 - Page Navigation based on Facility Dropdown for Single Facility Login as System Admin",
+              "timedOut": null,
+              "duration": 43239,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, password);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.get('.OrganizationSelector div .drop-down').should('exist');\ncy.get(\"[title=\\\"\".concat(facilityName, \"\\\"]\")).should('exist');\ncy.get('#customerName').invoke('text').then(function (cusname) {\n    expect(customerName).to.equal(cusname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncommon_1.Common.navigateTo('Facility Details');\ncy.get(\"[value=\\\"\".concat(facilityName, \"\\\"]\")).should('exist');\ncy.get('.OrganizationSelector .Select-value .Select-value-label .needsclick').invoke('text').then(function (facname) {\n    expect(facilityName).to.equal(facname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('Facility Details');\ncy.get(\"[value=\\\"\".concat(facility2Name, \"\\\"]\")).should('exist');\ncy.get('.OrganizationSelector .Select-value .Select-value-label .needsclick').invoke('text').then(function (facname) {\n    expect(facility2Name).to.equal(facname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "79265496-0caa-4cbb-9c94-d4d374ae6176",
+              "parentUUID": "a188089c-3fd3-4a76-b2c3-5e128ed7e791",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3055 - Page Navigation based on Facility Dropdown for Single Facility Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8115,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "4f1363ff-2a2a-4e14-adda-dc08365d179b",
+              "parentUUID": "a188089c-3fd3-4a76-b2c3-5e128ed7e791",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "82f7f509-4f72-49f5-81f4-50c182431084",
+            "3b33fc46-2a34-4945-ae1b-af738f69c80d",
+            "cc4bad7b-540a-4fc6-aa6c-b4986f54687e",
+            "79265496-0caa-4cbb-9c94-d4d374ae6176",
+            "4f1363ff-2a2a-4e14-adda-dc08365d179b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 319370,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,206 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:33:30.989Z",
+    "end": "2024-12-15T02:39:38.668Z",
+    "duration": 367679,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "374d719a-0e6f-4710-b865-513c2f4cbf45",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3557-Worklist-Contextual-Menu.spec.ts",
+      "file": "cypress/test-suites/ECP-T3557-Worklist-Contextual-Menu.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7ef487ca-7330-4ec3-8306-f34f4a2d159e",
+          "title": "ECP-T3557-Worklist Contextual Menu",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3557 - data prep",
+              "fullTitle": "ECP-T3557-Worklist Contextual Menu ECP-T3557 - data prep",
+              "timedOut": null,
+              "duration": 87443,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorkstationViewer: true,\n    allowWorklist: true\n}, facilityName);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    common_1.Common.uploadProc({ name: 'Natasha Romanoff', token: token });\n    common_1.Common.uploadProc({ name: 'Natasha Romanoff', token: token });\n    //Upload a-01 study from resources folder\n    common_1.Common.uploadStudy('a-01', token);\n}).catch(function (err) {\n    console.log(err);\n});",
+              "err": {},
+              "uuid": "b42c29a4-6b86-4780-aa37-1b343ca2a488",
+              "parentUUID": "7ef487ca-7330-4ec3-8306-f34f4a2d159e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Check unlock for Study",
+              "fullTitle": "ECP-T3557-Worklist Contextual Menu Check unlock for Study",
+              "timedOut": null,
+              "duration": 42733,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(limitedUser, limitedPassword));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\nworklist_common_1.Worklist.selectView('All Unread');\nworklist_common_1.Worklist.filterByFacility(facilityName);\nworklist_common_1.Worklist.getRowInGridByMatchStatus('Unmatched Study').first().find('[data-cy=\"gridRowEyeIcon\"]').click();\nelement_handler_1.elementHandler.waitforElement('[class=\"pj_tab\"]', { isDataCy: false, timeout: configFile.longTimeout });\ncy.get('#worklist-tabs-tab-WL').click();\nworklist_common_1.Worklist.getRowInGridByMatchStatus('Unmatched Study').first().find('[data-cy=\"gridRowEyeIcon\"]').children('[class=\"icon__examLockedByUser\"]').should('have.length', 1);\nworklist_common_1.Worklist.getRowInGridByMatchStatus('Unmatched Study').first().find('[data-cy=\"patientName-cell\"]').rightclick();\nelement_handler_1.elementHandler.element('unlockExam').children().click();\ncy.contains('button', 'Unlock').click();\nworklist_common_1.Worklist.getRowInGridByMatchStatus('Unmatched Study').first().find('[data-cy=\"gridRowEyeIcon\"]').children('[class=\"icon__examLockedByUser\"]').should('have.length', 0);\n//Worklist.getRowInGridByMatchStatus('Unmatched Study').first().should('not.contain','[class=\"icon__examLockedByUser\"]',{timeout:configFile.longTimeout})\n//elementHandler.waitforElementToNotExist('[class=\"icon__examLockedByUser\"]', { isDataCy: false,timeout:configFile.longTimeout })",
+              "err": {},
+              "uuid": "1b94e594-3e99-43ed-a0f9-d968c3e0414c",
+              "parentUUID": "7ef487ca-7330-4ec3-8306-f34f4a2d159e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Run steps for study",
+              "fullTitle": "ECP-T3557-Worklist Contextual Menu Run steps for study",
+              "timedOut": null,
+              "duration": 22237,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(limitedUser, limitedPassword));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\nworklist_common_1.Worklist.selectView('All Unread');\nworklist_common_1.Worklist.filterByFacility(facilityName);\nworklist_common_1.Worklist.getRowInGridByMatchStatus('Unmatched Study').first().find('[data-cy=\"patientName-cell\"]').rightclick({ force: true });\nelement_handler_1.elementHandler.element('assignTo').should('be.visible');\nelement_handler_1.elementHandler.element('changeStatuses').children().first().trigger('mouseover', { force: true });\nelement_handler_1.elementHandler.element('performed').should('be.visible');\nelement_handler_1.elementHandler.element('dictated').should('be.visible');\nelement_handler_1.elementHandler.element('needsOverRead').should('be.visible');\nelement_handler_1.elementHandler.element('nonReportable').should('be.visible');\nelement_handler_1.elementHandler.element('changeStatuses').children().first().trigger('mouseout', { force: true });\nelement_handler_1.elementHandler.element('workflowAdministration').children().first().trigger('mouseover', { force: true });\nelement_handler_1.elementHandler.element('matchUnmatch').should('be.visible');\nelement_handler_1.elementHandler.element('moveExams').should('be.visible');\nelement_handler_1.elementHandler.element('patientMerge').should('be.visible');\nelement_handler_1.elementHandler.element('editExam').should('be.visible');\nelement_handler_1.elementHandler.element('deleteStudy').should('be.visible');\nelement_handler_1.elementHandler.element('deleteReport').should('be.visible');\nelement_handler_1.elementHandler.element('workflowAdministration').children().first().trigger('mouseout', { force: true });\nelement_handler_1.elementHandler.element('changePriority').should('be.visible');\nelement_handler_1.elementHandler.element('markAsRead').should('be.visible');\nelement_handler_1.elementHandler.element('downloadStudy').should('be.visible');\nelement_handler_1.elementHandler.element('hipaaLog').should('be.visible');",
+              "err": {},
+              "uuid": "71f239fb-5ccf-46b1-b57a-c0beb44507de",
+              "parentUUID": "7ef487ca-7330-4ec3-8306-f34f4a2d159e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Run steps for procedure",
+              "fullTitle": "ECP-T3557-Worklist Contextual Menu Run steps for procedure",
+              "timedOut": null,
+              "duration": 45971,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(limitedUser, limitedPassword));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\nworklist_common_1.Worklist.selectView('All Unread');\nworklist_common_1.Worklist.filterByFacility(facilityName);\nworklist_common_1.Worklist.getRowInGridByMatchStatus('Unmatched Order').first().find('[data-cy=\"patientName-cell\"]').rightclick({ force: true });\nelement_handler_1.elementHandler.element('assignTo').should('be.visible');\nelement_handler_1.elementHandler.element('changeStatuses').children().first().trigger('mouseover', { force: true });\nelement_handler_1.elementHandler.element('performed').should('be.visible');\nelement_handler_1.elementHandler.element('dictated').should('be.visible');\nelement_handler_1.elementHandler.element('needsOverRead').should('be.visible');\nelement_handler_1.elementHandler.element('nonReportable').should('be.visible');\nelement_handler_1.elementHandler.element('workflowAdministration').children().first().trigger('mouseover', { force: true });\nelement_handler_1.elementHandler.element('matchUnmatch').should('be.visible');\nelement_handler_1.elementHandler.element('moveExams').should('be.visible');\nelement_handler_1.elementHandler.element('patientMerge').should('be.visible');\nelement_handler_1.elementHandler.element('editExam').should('be.visible');\nelement_handler_1.elementHandler.element('deleteStudy').should('be.visible');\nelement_handler_1.elementHandler.element('deleteReport').should('be.visible');\nelement_handler_1.elementHandler.element('workflowAdministration').children().first().trigger('mouseout', { force: true });\nelement_handler_1.elementHandler.element('changePriority').should('be.visible');\nelement_handler_1.elementHandler.element('markAsRead').should('be.visible');\nelement_handler_1.elementHandler.element('hipaaLog').should('be.visible');",
+              "err": {},
+              "uuid": "3672d1d6-5e7a-4564-9991-ba21c5db8491",
+              "parentUUID": "7ef487ca-7330-4ec3-8306-f34f4a2d159e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Test click with keyboard",
+              "fullTitle": "ECP-T3557-Worklist Contextual Menu Test click with keyboard",
+              "timedOut": null,
+              "duration": 43675,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(limitedUser, limitedPassword));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\nworklist_common_1.Worklist.filterByFacility(facilityName);\nworklist_common_1.Worklist.selectView('All Unread');\nworklist_common_1.Worklist.getRowsinGrid().first().click({ force: true });\nworklist_common_1.Worklist.getRowsinGrid().first().find('[class=\"nui-checkbox selected \"]').should('be.visible');\nworklist_common_1.Worklist.getRowsinGrid().eq(1).find('[class=\"nui-checkbox  \"]').should('be.visible');\nworklist_common_1.Worklist.getRowsinGrid().eq(2).click({ shiftKey: true, force: true });\nworklist_common_1.Worklist.getRowsinGrid().filter(':lt(3)').find('[class=\"nui-checkbox selected \"]').should('be.visible');\nworklist_common_1.Worklist.getRowsinGrid().first().click({ force: true });\nworklist_common_1.Worklist.getRowsinGrid().eq(2).click({ force: true, ctrlKey: true });\nworklist_common_1.Worklist.getRowsinGrid().eq(1).find('[class=\"nui-checkbox  \"]').should('be.visible');",
+              "err": {},
+              "uuid": "502c9843-ac03-4039-8386-a1eea1f36bf9",
+              "parentUUID": "7ef487ca-7330-4ec3-8306-f34f4a2d159e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3557-Worklist Contextual Menu Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8005,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "5d0453e9-42b1-4738-b523-0bb3a6a45bcb",
+              "parentUUID": "7ef487ca-7330-4ec3-8306-f34f4a2d159e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b42c29a4-6b86-4780-aa37-1b343ca2a488",
+            "1b94e594-3e99-43ed-a0f9-d968c3e0414c",
+            "71f239fb-5ccf-46b1-b57a-c0beb44507de",
+            "3672d1d6-5e7a-4564-9991-ba21c5db8491",
+            "502c9843-ac03-4039-8386-a1eea1f36bf9",
+            "5d0453e9-42b1-4738-b523-0bb3a6a45bcb"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 250064,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

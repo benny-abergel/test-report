@@ -1,0 +1,206 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:21:07.733Z",
+    "end": "2024-12-15T02:29:37.817Z",
+    "duration": 510084,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "88c3b7ed-baf4-4bd8-8c4f-1a6ef4ba2c2d",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2515-ViewerSettingSeriesParsing.spec.ts",
+      "file": "cypress/test-suites/ECP-T2515-ViewerSettingSeriesParsing.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "055fe85c-c20b-4b7c-99eb-183c6ed3e081",
+          "title": "ECP-T2515 - Viewer Settings - Series Parsing",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step - Upload exam and get viewer URL",
+              "fullTitle": "ECP-T2515 - Viewer Settings - Series Parsing Test Preparation - Before Step - Upload exam and get viewer URL",
+              "timedOut": null,
+              "duration": 163155,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.visit(configFile.url + '/organization/integration');\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/Hoffman_Terrance -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    var examUploadCmd1 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/Bren_Christopher_CT_Maxillofacial_WO -keepAlive=1\");\n    cy.exec(examUploadCmd1, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    var examUploadCmd2 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c-01 -keepAlive=1\");\n    cy.exec(examUploadCmd2, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    //   c.uploadExamFromGCS(token, 'ECP-T2515/Hoffman_Terrance', configFile.url);\n    //   c.uploadExamFromGCS(token, 'ECP-T2515/Bren_Christopher_CT_Maxillofacial_WO', configFile.url);\n    //  c.uploadExamFromGCS(token, 'ECP-T2515/c-01', configFile.url);\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.smallTimeout);\ncy.get('#orgId').then(function (el) {\n    orgId = el.text();\n});\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.studiesRowCount > span').should('contain.text', '3'); }, { timeout: configFile.hugeTimeout });\n// Get the Viewer URL of ClinicalSet 01\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Clinical Set 1').first().parents('tr').find('.expanderCell').click();\ncy.get(iex.moreInfo).click();\ncy.wait(configFile.smallTimeout);\nvar examID = '';\ncy.get(iex.examID).then(function (el) {\n    examID = el.text();\n    meteor_1.Meteor.getViewerUrls(configFile.url, userName, userpassword, examID, orgId, 'ndxWeb')\n        .then(function (viewerUrls) {\n        // @ts-ignore\n        clinicalSet01 = viewerUrls;\n    });\n});\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Clinical Set 1').first().parents('tr').find('.expanderCell').click();\ncy.wait(configFile.smallTimeout);\n// Get the Viewer URL of Bren Christopher\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Bren, Christopher R.').first().parents('tr').find('.expanderCell').click();\ncy.get(iex.moreInfo).click();\ncy.wait(configFile.smallTimeout);\nexamID = '';\ncy.get(iex.examID).then(function (el) {\n    examID = el.text();\n    meteor_1.Meteor.getViewerUrls(configFile.url, userName, userpassword, examID, orgId, 'ndxWeb')\n        .then(function (viewerUrls) {\n        // @ts-ignore\n        brenChristopher = viewerUrls;\n    });\n});\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Bren, Christopher R.').first().parents('tr').find('.expanderCell').click();\ncy.wait(configFile.smallTimeout);\n// Get the Viewer URL of Terrance Hoffman\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Hoffman, Terrance N').first().parents('tr').find('.expanderCell').click();\ncy.get(iex.moreInfo).click();\ncy.wait(configFile.smallTimeout);\nexamID = '';\ncy.get(iex.examID).then(function (el) {\n    examID = el.text();\n    meteor_1.Meteor.getViewerUrls(configFile.url, userName, userpassword, examID, orgId, 'ndxWeb')\n        .then(function (viewerUrls) {\n        // @ts-ignore\n        terranceHoffman = viewerUrls;\n    });\n});\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Hoffman, Terrance N').first().parents('tr').find('.expanderCell').click();\ncy.wait(configFile.timeout);\nconsole.log('clinicalSet01: ', clinicalSet01);\nconsole.log('brenChristopher: ', brenChristopher);\nconsole.log('terranceHoffman: ', terranceHoffman);",
+              "err": {},
+              "uuid": "3d52fc34-44da-4216-9f8e-d494f4d57a83",
+              "parentUUID": "055fe85c-c20b-4b7c-99eb-183c6ed3e081",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T2515 - Step 1 to 11",
+              "fullTitle": "ECP-T2515 - Viewer Settings - Series Parsing ECP-T2515 - Step 1 to 11",
+              "timedOut": null,
+              "duration": 90688,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 1 - Login and check default - Clinical Set 1\n// 1.1 Login to Nucleus as a new user. Launch a the sample data set.\n// 1.2. Open the Viewer settings, navigate to the Series Parsing tab\n// 1.3. Verify default values are correct.\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.mediumTimeout, true);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.studiesRowCount > span').should('contain.text', '3'); }, { timeout: configFile.hugeTimeout });\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Clinical Set 1').first().parents('tr').find('.iconBtn.viewExam.confirm-popover-btn').click();\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.closeOtherTabs();\ncy.visit(\"\".concat(clinicalSet01));\n// c.meteorLogin(`${clinicalSet01}`,userName,userpassword);\n// m.login(customerName,'#Layer_1', `${configFile.url}/${clinicalSet01}`, true, userName,userpassword, configFile.longTimeout);\n//  m.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${clinicalSet01}`, false);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).click();\ncy.get('.viewer-settings-tabs li:nth-child(7) a').click();\ncy.get('#resetSeriesParsingSettings').click();\ncy.get('#confirm').click();\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).click();\ncy.get('.viewer-settings-tabs li:nth-child(7) a').click();\ncy.get('#imageViewerSeriesParsingSettings .toggleSeriesSplitting button.active[data-value=\"true\"]').should('exist');\ncy.get('#imageViewerSeriesParsingSettings .toggleSplitLocalizersOnly button.active[data-value=\"true\"]').should('exist');\ncy.get('#imageViewerSeriesParsingSettings .toggleSplitLocalizersByImageType button.active[data-value=\"false\"]').should('exist');\ncy.get('#imageViewerSeriesParsingSettings .toggleSplitLocalizersLastSeries button.active[data-value=\"false\"]').should('exist');\ncy.get('#imageViewerSeriesParsingSettings #splitLocalizersKeywordsContainer').should('contain.text', 'localizer');\ncy.get('#imageViewerSeriesParsingSettings #series4DTagsList').should('contain.text', '(0018,1060)');\ncy.get('#imageViewerSeriesParsingSettings #series4DTagsList').should('contain.text', '(2001,1008)');\ncy.get('#imageViewerSeriesParsingSettings #series4DTagsList').should('contain.text', '(0018,0086)');\ncy.get('#imageViewerSeriesParsingSettings #series4DTagsList').should('contain.text', '(0018,0081)');\ncy.get('#imageViewerSeriesParsingSettings #series4DTagsList').should('contain.text', '(0020,0100)');\n// Step 2 - Helper text / Tool tips\n// Click on the '?' icons on each of the options available.\ncy.get('#imageViewerSeriesParsingSettings .toggleSeriesSplitting .iconWithTooltip .iconBtn').click({ force: true }); // TODO remove force\ncy.get('.tooltip .tooltip-inner').should('contain.text', 'Enable splitting series into multiple display sets');\ncy.get('#imageViewerSeriesParsingSettings .toggleSplitLocalizersOnly .iconWithTooltip .iconBtn').click({ force: true });\ncy.get('.tooltip .tooltip-inner').should('contain.text', 'Only split series which contain a single localizer');\ncy.get('#imageViewerSeriesParsingSettings .toggleSplitLocalizersLastSeries .iconWithTooltip .iconBtn').click({ force: true });\ncy.get('.tooltip .tooltip-inner').should('contain.text', 'Move localizer series to the end of the series list');\ncy.get('#imageViewerSeriesParsingSettings .toggleSplitLocalizersByImageType .iconWithTooltip .iconBtn').click({ force: true });\ncy.get('.tooltip .tooltip-inner').should('contain.text', 'Collect all series with ‘LOCALIZER’ in the Image Type (0008,0008) tag');\ncy.get('#imageViewerSeriesParsingSettings #splitLocalizersKeywordsContainer .iconWithTooltip .iconBtn').click({ force: true });\ncy.get('.tooltip .tooltip-inner').should('contain.text', 'List of keywords used to filter localizer images');\ncy.get('#imageViewerSeriesParsingSettings #series4DTagsList .iconWithTooltip .iconBtn').click({ force: true });\ncy.get('.tooltip .tooltip-inner').should('contain.text', 'List of tags used to identify 4D series');\n// Step 3 - Set Series Splitting - OFF\n// 3.1. Set Series splitting to OFF.\n// 3.2. Click \"Yes\" on the confirmation pop-up.\ncy.get('#imageViewerSeriesParsingSettings .toggleSeriesSplitting button[data-value=\"false\"]').click({ force: true });\ncy.get('#confirm').click();\ncy.wait(configFile.smallTimeout);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('#imageViewerThumbnails .seriesInfo[data-original-title=\"Localizers\"]').should('not.exist');\n// Step 4 - Reset to Default settings\n// 4.1. Open the Viewer settings, navigate to the Series Parsing tab. Click on \"Reset to Defaults\"\n// 4.2. Click \"Yes\" on the confirmation pop-up.\n// 4.3. Click on 'i' icon on the newly created localizer series\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).click();\ncy.get('.viewer-settings-tabs li:nth-child(7) a').click();\ncy.get('#resetSeriesParsingSettings').click();\ncy.get('#confirm').click();\ncy.wait(configFile.smallTimeout);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.get('#imageViewerThumbnails .seriesInfo[data-original-title=\"Localizers\"]').should('exist', { timeout: configFile.longTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).click();\ncy.get('.viewer-settings-tabs li:nth-child(7) a').click();\ncy.get('#imageViewerSeriesParsingSettings .toggleSeriesSplitting button.active[data-value=\"true\"]').should('exist');\ncy.get('#imageViewerSeriesParsingSettings .toggleSplitLocalizersOnly button.active[data-value=\"true\"]').should('exist');\ncy.get('#imageViewerSeriesParsingSettings .toggleSplitLocalizersByImageType button.active[data-value=\"false\"]').should('exist');\ncy.get('#imageViewerSeriesParsingSettings .toggleSplitLocalizersLastSeries button.active[data-value=\"false\"]').should('exist');\ncy.get('#imageViewerSeriesParsingSettings #splitLocalizersKeywordsContainer').should('contain.text', 'localizer');",
+              "err": {},
+              "uuid": "ff515996-5d9a-4618-8416-5233e4985980",
+              "parentUUID": "055fe85c-c20b-4b7c-99eb-183c6ed3e081",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 5 and 6",
+              "fullTitle": "ECP-T2515 - Viewer Settings - Series Parsing Step 5 and 6",
+              "timedOut": null,
+              "duration": 74387,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 5 - Launch exams with - perpendicular images and time phase series - TODO need to understand\n// 5.1. Launch sample data set - Terrance Hoffman, MR Head\n// 5.2. Note that series 1 has sagittal and coronal images. And Series 3 and Series 4 are time-phased/time-split series.\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.mediumTimeout, true);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.studiesRowCount > span').should('contain.text', '3'); }, { timeout: configFile.hugeTimeout });\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Hoffman, Terrance N').first().parents('tr').find('.iconBtn.viewExam.confirm-popover-btn').click();\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.closeOtherTabs();\ncy.visit(\"\".concat(terranceHoffman));\n// m.login(customerName,'#Layer_1', `${configFile.url}/${terranceHoffman}`, true, userName,userpassword, configFile.longTimeout);\n// m.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${terranceHoffman}`, false);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).click();\ncy.get('.viewer-settings-tabs li:nth-child(7) a').click();\n// Step 6 - Split Localizers Only - OFF - TODO understand more\n// 6.1. Click Viewer settings > Series parsing tab, Set Split Localizers Only to OFF. Click \"Yes\" on the confirmation pop-up.\ncy.get('#imageViewerSeriesParsingSettings .toggleSplitLocalizersOnly button[data-value=\"false\"]').click();\ncy.get('#confirm').click();\ncy.wait(configFile.smallTimeout);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');",
+              "err": {},
+              "uuid": "36ee581b-2c49-4e89-936c-ed478636074f",
+              "parentUUID": "055fe85c-c20b-4b7c-99eb-183c6ed3e081",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 7 - 11",
+              "fullTitle": "ECP-T2515 - Viewer Settings - Series Parsing Step 7 - 11",
+              "timedOut": null,
+              "duration": 80126,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 7 - Move localizer to the end - ON\n// 7.1. Launch the sample data set, open viewer setting and set Move localizers based on series description to ON. Click \"Yes\" on the confirmation pop-up.\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.mediumTimeout, true);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.studiesRowCount > span').should('contain.text', '3'); }, { timeout: configFile.hugeTimeout });\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Clinical Set 1').first().parents('tr').find('.iconBtn.viewExam.confirm-popover-btn').click();\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.closeOtherTabs();\ncy.visit(\"\".concat(clinicalSet01));\n// m.login(customerName,'#Layer_1', `${configFile.url}/${clinicalSet01}`, true, userName,userpassword, configFile.longTimeout);\n//  m.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${clinicalSet01}`, false);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).click();\ncy.get('.viewer-settings-tabs li:nth-child(7) a').click();\ncy.get('#imageViewerSeriesParsingSettings .toggleSplitLocalizersLastSeries button[data-value=\"true\"]').click();\ncy.get('#confirm').click();\ncy.wait(configFile.smallTimeout);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.get('#imageViewerThumbnails .seriesInfo[data-original-title=\"Localizers\"]').should('exist', { timeout: configFile.longTimeout });\ncy.get('.seriesInfo[data-original-title=\"Localizers\"]').should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\n// Step 8 - Collect localizers based on Image type - ON\n// 8.1. Open viewer setting and set Collect localizers based on Image type to ON, click \"Yes\" on the confirmation pop-up.\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).click();\ncy.get('.viewer-settings-tabs li:nth-child(7) a').click();\ncy.get('#imageViewerSeriesParsingSettings .toggleSplitLocalizersByImageType button[data-value=\"true\"]').click();\ncy.get('#confirm').click();\ncy.wait(configFile.smallTimeout);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('.seriesInfo[data-original-title=\"Localizers\"]').should('exist');\ncy.get('.numFrames').last().should('contain.text', '1');",
+              "err": {},
+              "uuid": "9e8f5d74-6de9-4ec6-951a-fa710c6cda87",
+              "parentUUID": "055fe85c-c20b-4b7c-99eb-183c6ed3e081",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 9, 10 and 11",
+              "fullTitle": "ECP-T2515 - Viewer Settings - Series Parsing Step 9, 10 and 11",
+              "timedOut": null,
+              "duration": 70685,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 9 - Collect localizers based on series description - Remove sample text\n// 9.1. Launch sample data set\n// 9.2. Open Viewer settings > Series parsing and remove the sample text present in Collect localizers based on series description field\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.mediumTimeout, true);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.studiesRowCount > span').should('contain.text', '3'); }, { timeout: configFile.hugeTimeout });\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Bren, Christopher R.').first().parents('tr').find('.iconBtn.viewExam.confirm-popover-btn').click();\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.closeOtherTabs();\ncy.visit(\"\".concat(brenChristopher));\n// m.login(customerName,'#Layer_1', `${configFile.url}/${brenChristopher}`, true, userName,userpassword, configFile.longTimeout);\n//   m.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${brenChristopher}`, false);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).click();\ncy.get('.viewer-settings-tabs li:nth-child(7) a').click();\ncy.get('#splitLocalizersKeywordsContainer .splitLocalizerKeyword .input-item-remove-icon').first().click();\ncy.get('.restartViewerMessage').should('contain.text', 'Your recent settings change requires the viewer to be restarted for the change to take effect. ');\ncy.get('.restartViewerMessage .restartViewer').click();\ncy.wait(configFile.smallTimeout);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\n// Step 10 - Collect localizers based on series description - Add sample text\n// 10.1. Add text \"reformatted\" to the text field and press enter.\n// 10.2. Click on \"Restart it now\" link present in the message below.\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).click();\ncy.get('.viewer-settings-tabs li:nth-child(7) a').click();\ncy.get('#splitLocalizersNewKeyword').type('reformatted{enter}');\ncy.get('.restartViewerMessage').should('contain.text', 'Your recent settings change requires the viewer to be restarted for the change to take effect. ');\ncy.get('.restartViewerMessage .restartViewer').click();\ncy.wait(configFile.smallTimeout);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\n// Step 11 - Split series into multiple thumbnails when multiple SOP classes are in a single series\n// Load the referenced sample exam in the dxviewer and verify there are 2 separate series. - TODO - understand",
+              "err": {},
+              "uuid": "25068680-1d53-4f7d-8d51-7f939a5407bc",
+              "parentUUID": "055fe85c-c20b-4b7c-99eb-183c6ed3e081",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T2515-cleanup",
+              "fullTitle": "ECP-T2515 - Viewer Settings - Series Parsing ECP-T2515-cleanup",
+              "timedOut": null,
+              "duration": 6692,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "49ebcc40-bf8c-4a99-b649-b328c9c33c6f",
+              "parentUUID": "055fe85c-c20b-4b7c-99eb-183c6ed3e081",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3d52fc34-44da-4216-9f8e-d494f4d57a83",
+            "ff515996-5d9a-4618-8416-5233e4985980",
+            "36ee581b-2c49-4e89-936c-ed478636074f",
+            "9e8f5d74-6de9-4ec6-951a-fa710c6cda87",
+            "25068680-1d53-4f7d-8d51-7f939a5407bc",
+            "49ebcc40-bf8c-4a99-b649-b328c9c33c6f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 485733,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

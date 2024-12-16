@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:29:08.197Z",
+    "end": "2024-12-15T03:32:43.651Z",
+    "duration": 215454,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b4f8125f-451d-4ed9-abc4-a2ddb2974c3f",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2656-ExamAttachmentsonexamlist.spec.ts",
+      "file": "cypress/test-suites/ECP-T2656-ExamAttachmentsonexamlist.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1de66564-2fb1-47d3-919d-efb9446d7e4e",
+          "title": "ECP-T2656 - Exam Attachments on exam list ",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1-21",
+              "fullTitle": "ECP-T2656 - Exam Attachments on exam list  Step 1-21",
+              "timedOut": null,
+              "duration": 198356,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowAutomaticActions: true,\n    allowPushEvidenceToPACS: true,\n    allowEdgeServer: true,\n    allowInboundSharing: true,\n    allowAPIs: true,\n    allowOutboundSharing: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd_01 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd_01, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n}).catch(function (err) {\n    console.log(err);\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"a-01\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\nvar pdf = 'sample.pdf';\ncy.get('.exam-attachments-btn').last().click();\ncy.get('#fakeSelectAttachment').should('exist');\ncy.get('#selectAttachment', { timeout: configFile.hugeTimeout }).attachFile(pdf);\n//Step 1 ,2 and 7\ncy.get('h3:contains(Attachments)').should('exist');\ncy.get('.attachments__scroll').should('exist');\ncy.get('.attachment__info').then(function (elx) {\n    if (elx.find('i:contains(2.8 kB)').length == 0 && elx.find('i:contains(3.0 kB)').length == 0) {\n        // file size calculated diffrently in the local and on DevCD.\n        expect('Filesize to be accurate').to.be.eql('Filesize is wrong');\n    }\n});\ncy.get('.js-view-attachment').should('exist');\ncy.get('[title=\"sample.pdf\"]').should('exist');\ncy.get('.attachment__controls > .open-dot-menu').click();\ncy.get('.js-download-attachment').should('exist');\ncy.get('.js-delete-attachment').should('exist');\ncy.get('.js-edit-attachment').should('exist');\ncy.get('.attachments__bottom > .btn-link').click();\ncy.get('h3:contains(Supported File Formats)').should('exist');\ncy.get('p:contains(: aif, cda, ds2, dss, mid, mp3, mpa, wav, wma)').should('exist');\ncy.get('p:contains(: csv, dat, log, xml, html)').should('exist');\ncy.get('p:contains(: bmp, dcm, gif, jpg, jpeg, png, tif, tiff)').should('exist');\ncy.get('p:contains(: doc, docx, key, pdf, pps, ppt, pptx, rtf, txt, xls, xlsx)').should('exist');\ncy.get('p:contains(: avi, h264, m4a, m4v, mov, mp4, mpg, mpeg, wmv)').should('exist');\n//Step 3 and 4\nvar notsupport = 'sq.sql';\ncy.get('#selectAttachment', { timeout: configFile.hugeTimeout }).attachFile(notsupport);\ncy.get('.js-close-warning').should('exist');\ncy.get('b:contains(File could not be attached)').should('exist');\ncy.get('p:contains(Unsupported file type)').should('exist');\ncy.get('.attachments__warning__box > .btn').click({ force: true });\ncy.get('h3:contains(Supported File Formats)').should('exist');\ncy.get('p:contains(: aif, cda, ds2, dss, mid, mp3, mpa, wav, wma)').should('exist');\ncy.get('p:contains(: csv, dat, log, xml, html)').should('exist');\ncy.get('p:contains(: bmp, dcm, gif, jpg, jpeg, png, tif, tiff)').should('exist');\ncy.get('p:contains(: doc, docx, key, pdf, pps, ppt, pptx, rtf, txt, xls, xlsx)').should('exist');\ncy.get('p:contains(: avi, h264, m4a, m4v, mov, mp4, mpg, mpeg, wmv)').should('exist');\ncy.get('.attachments__warning__box > .iconBtn').click({ force: true });\n//Step 5\ncy.get('.js-view-attachment').click();\ncy.get('.attachmentViewer > .modal-dialog > .modal-content > .modal-body').should('exist');\ncy.get('.modal-header > .close > span').click();\n//Step 8 and 9\ncy.get('.exam-attachments-btn').last().click();\ncy.get('.open-dot-menu').click();\ncy.get('.js-download-attachment').click();\ncy.get('[title=\"sample.pdf\"]').click({ force: true });\ncy.get('.js-download-attachment').should('not.exist');\n//Step 10 skipped\n//Step 11\ncy.get('.open-dot-menu').click();\ncy.get('.js-edit-attachment').click();\ncy.get('#attachment-name').clear().type('test');\ncy.get('.js-cancel-edit-attachment').click();\ncy.get('[title=\"sample.pdf\"]').should('exist');\ncy.get('[title=\"test.pdf\"]').should('not.exist');\n//Step 12 and 19\ncy.get('.open-dot-menu').click();\ncy.get('.js-edit-attachment').click();\ncy.get('#attachment-name').clear().type('test');\ncy.get('.js-confirm-edit-attachment').click();\ncy.get('[title=\"sample.pdf\"]').should('not.exist');\ncy.get('[title=\"test.pdf\"]').should('exist');\nvar bigfile = '9mbfile.pdf';\ncy.get('#fakeSelectAttachment').click();\ncy.get('#selectAttachment', { timeout: configFile.hugeTimeout }).attachFile(bigfile);\ncy.get('.attachments__warning__box').should('exist');\ncy.get('p:contains(File size is too large. Maximum allowed file size is 10 MB.)').should('exist');\ncy.get('.attachments__warning__box > .iconBtn').click();\n//Step 13\ncy.get('#selectAttachment', { timeout: configFile.hugeTimeout }).attachFile(pdf);\ncy.wait(configFile.mediumTimeout);\ncy.get('.open-dot-menu').first().click();\ncy.get('.js-edit-attachment').click();\ncy.get('#attachment-name').clear().type('test');\ncy.get('div:contains(File name already exist.)').should('exist');\n//Step 14\ncy.get('#attachment-name').clear().type('test test test test test test test test testtest test test test test test test test test test test test test test test test test test');\ncy.get('.js-confirm-edit-attachment').click();\ncy.get('[title=\"test test test test test test test test testtest test test test test test test test test test test test test test test test test test.pdf\"]').should('exist');\n//Step 15\ncy.get('.open-dot-menu').first().click();\ncy.get('.js-delete-attachment').click();\ncy.get('.btn-danger').click();\ncy.get('[title=\"test test test test test test test test testtest test test test test test test test test test test test test test test test test test.pdf\"]').should('not.exist');\ncy.get('[title=\"test.pdf\"]').should('exist');\n//Step 16 and 17\nvar pdf3 = 'mediumsizefile.pdf';\ncy.get('#selectAttachment', { timeout: configFile.hugeTimeout }).attachFile(pdf3);\ncy.get('.js-cancel-upload-attachment').should('exist');\ncy.get('.attachments-close-btn').click();\ncy.get('p:contains(Closing this window will cancel all in-progress uploads.)').should('exist');\ncy.get('p:contains(Do you want to close?)').should('exist');\ncy.get('.js-close-popover').click();\ncy.get('#selectAttachment', { timeout: configFile.hugeTimeout }).attachFile(pdf3);\ncy.get('.js-cancel-upload-attachment').should('exist');\ncy.get('.attachments-close-btn').click();\ncy.get('#confirm-closeAttachmentPopoverOnTop').click();\n//Step 18\ncy.get('.exam-attachments-btn').last().click();\ncy.get('.js-cancel-upload-attachment').should('not.exist');\ncy.get('[title=\"mediumsizefile.pdf 1.txt\"]').should('not.exist');\ncy.get('[title=\"test.pdf\"]').should('exist');\n//Step 20 and 21\nvar img = 'Product Requirements, Nucleus Image Management System, Version 8.0.pdf';\ncy.get('#selectAttachment', { timeout: configFile.hugeTimeout }).attachFile(img);\ncy.wait(configFile.mediumTimeout);\ncy.get('.attachment__name').first().should('have.text', 'Product Requirements, Nucleus Image Management System, Version 8.0.pdf');\ncy.wait(configFile.smallTimeout);\ncy.get('.js-view-attachment').first().click();\ncy.get('.attachmentViewer > .modal-dialog > .modal-content > .modal-body').should('exist');\ncy.get('.modal-header > .close > span').click();\n//Step 6\ncy.get('.slimScrollBar').should('exist');",
+              "err": {},
+              "uuid": "94cd5447-3fc3-4683-b87d-56bf19e1b4b6",
+              "parentUUID": "1de66564-2fb1-47d3-919d-efb9446d7e4e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2656 - Exam Attachments on exam list  Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8751,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "0661e0aa-0933-4195-b9e7-6f60d4f0d275",
+              "parentUUID": "1de66564-2fb1-47d3-919d-efb9446d7e4e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "94cd5447-3fc3-4683-b87d-56bf19e1b4b6",
+            "0661e0aa-0933-4195-b9e7-6f60d4f0d275"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 207107,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

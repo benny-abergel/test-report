@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:26:46.608Z",
+    "end": "2024-12-15T03:35:45.037Z",
+    "duration": 538429,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "cdad0be3-db86-42a1-b060-a813e72cd16c",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2631-DICOMSystemsmodalwindow.spec.ts",
+      "file": "cypress/test-suites/ECP-T2631-DICOMSystemsmodalwindow.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8b9e6385-9639-4e0b-a5dc-728094d1d492",
+          "title": "ECP-T2631 -Dicom System modal window",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 -16",
+              "fullTitle": "ECP-T2631 -Dicom System modal window Step 1 -16",
+              "timedOut": null,
+              "duration": 156414,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 1 \ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: false\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Integration');\ncy.wait(configFile.tinyTimeout);\ncy.get('#DICOM').should('not.exist');\n// Step 2\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowDICOMReceive: false,\n    allowQueryRetrieve: false,\n    allowNucleusIoQueryRetrieve: false,\n    allowModalityWorklist: false,\n    allowReportQuerySources: false,\n    allowPushToPACS: false\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Integration');\ncy.wait(configFile.tinyTimeout);\ncy.get('#DICOM').should('not.exist');\n// Step 3\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowDICOMReceive: true,\n    allowQueryRetrieve: true,\n    allowNucleusIoQueryRetrieve: true,\n    allowModalityWorklist: true,\n    allowReportQuerySources: true,\n    allowPushToPACS: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Integration');\ncy.wait(configFile.tinyTimeout);\ncy.get('#DICOM').should('exist');\ncy.get('#DICOM').click();\n//Step 4 and 5\ncy.get('#add').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[role=\"presentation\"] a:contains(\"General Settings\")').should('exist');\n//Step 6\ncy.get('#pacsNameField').should('exist');\ncy.get('.required [for=\"pacsNameField\"]').should('exist');\ncy.get('.required [for=\"supportedServices\"]').should('exist');\ncy.get('.required [for=\"aeTitle\"]').should('exist');\ncy.get('.required [for=\"titleReceiverField\"]').should('exist');\ncy.get('.required [for=\"hostNameField\"]').should('exist');\ncy.get('.required [for=\"portField\"]').should('exist');\ncy.get('.required [for=\"dimseTimeoutField\"]').should('exist');\ncy.get('.required [for=\"acseTimeoutField\"]').should('exist');\ncy.get('#supportsP2P').should('exist');\ncy.get('#supportsQueryRetrieve').should('exist');\ncy.get('#supportsMWL').should('exist');\ncy.get('#qrSCU').should('exist');\ncy.get('#aeTitle').should('exist');\ncy.get('#aeTitle').invoke('val').then(function (text) {\n    expect(text).to.equal('NHSTORESCP');\n});\ncy.get('#titleReceiverField').should('exist');\ncy.get('#hostNameField').should('exist');\ncy.get('#portField').should('exist');\ncy.get('#portField').invoke('val').then(function (text) {\n    expect(text).to.equal('104');\n});\ncy.get('#portField').clear().type('99999');\ncy.get('.validationError div:contains(\"Value must be between 1 and 65535.\")').should('exist');\ncy.get('#dimseTimeoutField').should('exist');\ncy.get('#dimseTimeoutField').invoke('val').then(function (text) {\n    expect(text).to.equal('480');\n});\ncy.get('#acseTimeoutField').should('exist');\ncy.get('#acseTimeoutField').invoke('val').then(function (text) {\n    expect(text).to.equal('30');\n});\ncy.get('#acseTimeoutField').clear().type('700');\ncy.get('.validationError div:contains(\"Timeout is typically between 1 and 600.\")').should('exist');\ncy.get('.Select-value').should('exist');\ncy.get('[title=\"65536\"]').should('exist');\ncy.get('[title=\"65536\"]').click({ force: true });\nvar val = [\"4096\", \"8192\", \"16384\", \"32768\", \"65536\", \"131072\"];\nval.forEach(function (values) {\n    cy.get('span:contains(\"' + values + '\")').should('exist');\n});\ncy.get('.js-echo-test').should('exist');\ncy.get('#enabledCheckbox').should('exist');\ncy.get('.js-cancel-destinationModal').should('exist');\ncy.get('#confirmDeleteDestinationYes').should('exist');\n//Step 7\n//   cy.get('.js-confirm-destinationModal').should('not.be.enabled')\n//Step 8\ncy.get('#supportsP2P').check();\ncy.get('#dicomPACS').should('exist');\n// Step 9\ncy.get('#dicomPACS').click();\ncy.get('.Select-placeholder').click();\nvar pac = [\"None\", \"JPEG 2000 Image Compression (Lossless Only)\", \"JPEG Lossless, Nonhierarchical (Processes 14)\", \"JPEG Lossless, Nonhierarchical, First-Order Prediction (Processes 14 [Selection Value 1])\", \"JPEG-LS Lossless Image Compression\"];\npac.forEach(function (values) {\n    cy.get('span:contains(\"' + values + '\")').should('exist');\n});\ncy.get('[data-title=\"When pushing to DICOM systems, Stratus Imaging PACS will propose: the native transfer syntax of the stored images, Implicit Little Endian and Explicit Little Endian.<br><br>Optionally, you can select an additional transfer syntax to propose to this DICOM system.\"]').click();\ncy.get('div:contains(\"When pushing to DICOM systems, Stratus Imaging PACS will propose: the native transfer syntax of the stored images, Implicit Little Endian and Explicit Little Endian.\")').should('exist');\ncy.get('div:contains(\"Optionally, you can select an additional transfer syntax to propose to this DICOM system.\")').should('exist');\ncy.get('.Select-placeholder').click({ force: true });\ncy.get('#inclAttachmentsCheckbox').should('exist').should('be.checked');\ncy.get('[data-title=\"Check this box if you want all attachments to be selected by default when pushing to this PACS destination. Attachment selection can be changed prior to each push. Note: Refer to the user manual for supported attachment types.\"]').click({ force: true });\ncy.get('div:contains(\"Check this box if you want all attachments to be selected by default when pushing to this PACS destination. Attachment selection can be changed prior to each push. Note: Refer to the user manual for supported attachment types.\")').should('exist');\ncy.get('#convertAttachmentsToSecondaryCapture').should('exist').should('not.be.checked');\ncy.get('[data-title=\"PDFs are converted from a non-DICOM format to a modality independent DICOM format series upon send.\"]').click({ force: true });\ncy.get('div:contains(\"PDFs are converted from a non-DICOM format to a modality independent DICOM format series upon send.\")').should('exist');\n//Step 10\ncy.get('[data-id=\"destinationDialog\"]').click();\ncy.get('#supportsQueryRetrieve').check();\ncy.get('#dicomQR').should('exist');\n// Step 11\ncy.get('#dicomQR').click();\ncy.get('.js-cancel-destinationModal').should('exist');\ncy.get('#confirmDeleteDestinationYes').should('exist');\ncy.get('.js-echo-test').should('exist');\ncy.get('#rdAET').should('exist');\ncy.get('.Select-value-label [title=\"Unlimited\"]').eq(0).click({ force: true });\ncy.get('[title=\"Unlimited\"]').eq(0).should('exist');\nvar val1 = [\"1 Month\", \"3 Months\", \"6 Months\", \"1 Year\", \"2 Years\", \"5 Years\", \"Unlimited\"];\nval1.forEach(function (values) {\n    cy.get('span:contains(\"' + values + '\")').should('exist');\n});\ncy.get('.Select-value-label [title=\"Unlimited\"]').eq(1).click({ force: true });\ncy.get('[title=\"Unlimited\"]').eq(1).should('exist');\nvar val2 = [\"1 Month\", \"3 Months\", \"6 Months\", \"1 Year\", \"2 Years\", \"5 Years\", \"Unlimited\"];\nval2.forEach(function (values) {\n    cy.get('span:contains(\"' + values + '\")').should('exist');\n});\ncy.get('.Select-value').last().click({ force: true });\ncy.get('[title=\"Contains\"]').should('exist');\nvar val3 = [\"Contains\", \"Exact\"];\nval3.forEach(function (values) {\n    cy.get('span:contains(\"' + values + '\")').should('exist');\n});\n// Step 12\ncy.get('[data-id=\"destinationDialog\"]').click();\ncy.get('#supportsMWL').check();\ncy.get('#dicomMWL').should('exist');\n//Step 13\ncy.get('#dicomMWL').click();\ncy.get('#mwlMatchOrderStatus').should('exist');\ncy.get('[title=\"Contains\"]').should('exist');\ncy.get('[title=\"Contains\"]').click();\nvar mw = [\"Contains\", \"Exact\"];\nmw.forEach(function (values) {\n    cy.get('span:contains(\"' + values + '\")').should('exist');\n});\ncy.get('[title=\"Unlimited\"]').should('exist');\ncy.get('.form-group > label:contains(\"Max Order Age\")').parent('.form-group').find('.Select-arrow-zone').click({ force: true });\n// cy.get('.Select-value').eq(8).click()\nvar mw1 = [\"1 Month\", \"3 Months\", \"6 Months\", \"1 Year\", \"2 Years\", \"5 Years\", \"Unlimited\"];\nmw1.forEach(function (values) {\n    cy.get('span:contains(\"' + values + '\")').should('exist');\n});\ncy.get('#mwlMaxQueryResults').should('exist');\ncy.get('#mwlMaxQueryResults').invoke('val').then(function (text) {\n    expect(text).to.equal('25');\n});\ncy.get('#mwlAutoQuery').should('exist').should('not.be.checked');\ncy.get('[data-title=\"Check this option if you want the source to be queried automatically during push to PACS.\"]').click({ force: true });\ncy.get('div:contains(\"Check this option if you want the source to be queried automatically during push to PACS.\")').should('exist');\ncy.get('.js-cancel-destinationModal').should('exist');\ncy.get('#confirmDeleteDestinationYes').should('exist');\ncy.get('.js-echo-test').should('exist');\ncy.get('p:contains(\"Use the fields below to configure mapping of order fields to push values.\")').should('exist');\ncy.get('label:contains(\"MRN\")').should('exist');\ncy.get('label:contains(\"Patient Name\")').should('exist');\ncy.get('label:contains(\"Date of Birth\")').should('exist');\ncy.get('label:contains(\"Exam Description\")').should('exist');\ncy.get('label:contains(\"Accession #\")').should('exist');\ncy.get('label:contains(\"Date\")').should('exist');\ncy.get('label:contains(\"Time\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"MRN\")').parent('.c-mw__map-box').find('button:contains(\"Edit\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"Patient Name\")').parent('.c-mw__map-box').find('button:contains(\"Edit\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"Date of Birth\")').parent('.c-mw__map-box').find('button:contains(\"Edit\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"Exam Description\")').parent('.c-mw__map-box').find('button:contains(\"Edit\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"Accession #\")').parent('.c-mw__map-box').find('button:contains(\"Edit\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"Date\")').parent('.c-mw__map-box').find('button:contains(\"Edit\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"Time\")').parent('.c-mw__map-box').find('button:contains(\"Edit\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"MRN\")').parent('.c-mw__map-box').find('button:contains(\"Reset\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"Patient Name\")').parent('.c-mw__map-box').find('button:contains(\"Reset\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"Date of Birth\")').parent('.c-mw__map-box').find('button:contains(\"Reset\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"Exam Description\")').parent('.c-mw__map-box').find('button:contains(\"Reset\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"Accession #\")').parent('.c-mw__map-box').find('button:contains(\"Reset\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"Date\")').parent('.c-mw__map-box').find('button:contains(\"Reset\")').should('exist');\ncy.get('.c-mw__map-box > label:contains(\"Time\")').parent('.c-mw__map-box').find('button:contains(\"Reset\")').should('exist');\nvar name = \"Patient's Name\";\nvar dob = \"Patient's Birth Date\";\ncy.get('span:contains(\"(0010,0020)\")').should('exist');\ncy.get('span:contains(\"Patient ID\")').should('exist');\ncy.get('span:contains(\"(0010,0010)\")').should('exist');\ncy.get('span:contains(\"' + name + '\")').should('exist');\ncy.get('span:contains(\"(0010,0030)\")').should('exist');\ncy.get('span:contains(\"' + dob + '\")').should('exist');\ncy.get('span:contains(\"(0040,0100/0040,0007)\")').should('exist');\ncy.get('span:contains(\"Scheduled Procedure Step Sequence/Scheduled Procedure Step Description\")').should('exist');\ncy.get('span:contains(\"(0008,0050)\")').should('exist');\ncy.get('span:contains(\"Accession Number\")').should('exist');\ncy.get('span:contains(\"(0040,0100/0040,0002)\")').should('exist');\ncy.get('span:contains(\"Scheduled Procedure Step Sequence/Scheduled Procedure Step Start Date\")').should('exist');\ncy.get('span:contains(\"(0040,0100/0040,0003)\")').should('exist');\ncy.get('span:contains(\"Scheduled Procedure Step Sequence/Scheduled Procedure Step Start Time\")').should('exist');\n// Step 14 and 15\ncy.get('#confirmDeleteDestinationYes').click({ force: true });\ncy.get('[data-title=\"Address errors on this tab before saving.\"]').should('exist');\ncy.get('.js-cancel-destinationModal').click();\ncy.get('.cancelEditDialog > .modal-dialog > .modal-content > .modal-footer > .row > .col-md-12 > .btn-primary').click();\n// Step 16\ncy.get('#add').click();\ncy.get('#pacsNameField').type('test');\ncy.get('#supportsP2P').check();\ncy.get('#supportsQueryRetrieve').check();\ncy.get('#supportsMWL').check();\ncy.get('#qrSCU').check();\ncy.get('#titleReceiverField').type('CONQUESTSRV1');\ncy.get('#hostNameField').type('127.0.0.1');\ncy.get('#confirmDeleteDestinationYes').click();\ncy.get('.pacsName').should('exist');",
+              "err": {},
+              "uuid": "64ca2b9d-9b82-44d1-bb88-055f3ce1d8ee",
+              "parentUUID": "8b9e6385-9639-4e0b-a5dc-728094d1d492",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2631 -Dicom System modal window Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7691,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "2ae8347a-e661-4c50-9123-f27eacd3dae8",
+              "parentUUID": "8b9e6385-9639-4e0b-a5dc-728094d1d492",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "64ca2b9d-9b82-44d1-bb88-055f3ce1d8ee",
+            "2ae8347a-e661-4c50-9123-f27eacd3dae8"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 164105,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

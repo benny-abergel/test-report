@@ -1,0 +1,206 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:29:43.189Z",
+    "end": "2024-12-15T02:35:59.503Z",
+    "duration": 376314,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d68ed915-cda4-4ddb-8dce-f17332064191",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2542-PacsWorkflow-OpsCheck.spec.ts",
+      "file": "cypress/test-suites/ECP-T2542-PacsWorkflow-OpsCheck.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6881c8c8-ce4d-4c3e-8c59-3b36435c6b76",
+          "title": "ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702)",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting ECP-T2542 - Feature Switch - Edge Server Test - all 7 steps in one",
+              "fullTitle": "ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702) Starting ECP-T2542 - Feature Switch - Edge Server Test - all 7 steps in one",
+              "timedOut": null,
+              "duration": 82391,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\n// Step 1 - Log into Nucleus, create an org, and select it in the org selector.\n//  cy.wrap(m.addUser('test13@tnt.com','test12','cypress_1659957072011','Interpreting Provider'));\n// cy.reload();\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true\n});\n//     c.createCustomerIfNotExists(customerName);\n// c.createFacilityIfNotExists(facilityName);v\n// Step 2 - Verify the Worklist, Patient, Procedure, and IOCM History (My Org menu) tabs are not visible by default.\n// TODO - not available in the system\n// Step 3 - Navigate to My Org > Admin Settings > Features tab. Enable features switches for APIs > HL7, Worklist, and PACS Workflow. Verify Worklist, Patient, Procedure, and My Org > IOCM History tabs only become available once all 3 features have been enabled.\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true\n}, facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    // Step 6 - Send patient (ADT), procedure (ORM), and report (ORU) messages using either Mirth or Postman. Send procedures and reports that will attach to a patient record\n    // create Patient\n    return cy.request({\n        url: patientUrl,\n        method: 'POST',\n        body: {\n            dataSourceSystemName: 'cypress-e2e-test',\n            patientInfo: {\n                mrn: mrn,\n                name: patientName,\n                birthDate: patientDOB,\n                patientSex: 'M'\n            },\n            patientVisit: {\n                admitDateTime: '20190101201212',\n                dischargeDateTime: ''\n            }\n        },\n        headers: header\n    }).then(function (res) { return console.log; });\n})\n    // Create procedure\n    .then(function () { return cy.request({\n    url: procedureUrl,\n    method: 'POST',\n    body: {\n        dataSourceSystemName: 'cypress-e2e-test',\n        patientInfo: {\n            mrn: mrn,\n            name: patientName,\n            birthDate: patientDOB,\n            patientSex: 'M'\n        },\n        patientVisit: {\n            admitDateTime: '20190101201212',\n            dischargeDateTime: ''\n        },\n        procedureInfo: {\n            \"accessionNumber\": accession,\n            \"procedureCode\": \"CAPC\",\n            \"procedureDescription\": \"CTA CHEST\",\n            \"procedureStatus\": 'Ordered',\n            \"reasonForExam\": \"\",\n            \"relevantClinicalInfo\": \"<NTE.3.1>CREATED BY LOAD SCRIPT - Clinical Indications for requested exam: patient developed foul tasting drainage after dental surgery eval for infection or other abnormality .</NTE.3.1><NTE.3.1>Information desired from requested exam: DX .</NTE.3.1>\",\n            \"orderingDepartment\": \"\",\n            modality: modality,\n            \"bodyPart\": \"\",\n            \"priority\": \"R\",\n            \"scheduledDateTime\": \"\",\n            \"startedDateTime\": '20190504201212',\n            \"completedDateTime\": \"\",\n            \"cancelledDateTime\": \"\",\n            \"requestingPhysicianName\": \"Bruce^Banner^^MD^\",\n            \"referringPhysicianName\": \"ASDF^ASDF^ASDFE^^\",\n            \"attendingPhysicianName\": \"\",\n            \"technologist\": \"\",\n            \"visitClass\": \"\",\n            \"visitNumber\": \"\",\n            \"visitPrimaryLocation\": \"RAD\",\n            \"visitCurrentLocation\": \"\"\n        }\n    },\n    headers: header\n}).then(function (res) { return console.log; }); })\n    // Create Report ORU\n    .then(function () { return cy.request({\n    url: oruUrl,\n    method: 'POST',\n    body: {\n        dataSourceSystemName: 'cypress-e2e-test',\n        patientInfo: {\n            mrn: mrn,\n            name: patientName,\n            birthDate: patientDOB,\n            patientSex: 'M'\n        },\n        patientVisit: {\n            admitDateTime: '20190101201212',\n            dischargeDateTime: ''\n        },\n        diagnosticReportInfo: {\n            \"contentType\": \"Text\",\n            \"status\": 'Preliminary',\n            \"content\": \"Testing THIS IS A REPORT!<br><br><br>Report text goes here....<br><br><br><br>CREATED BY LOAD TEST SCRIPT\",\n            \"reportDateTime\": '20190504201220',\n            \"principalInterpretingPhysicianName\": \"ID3^PrincipalInterpreter^Given^Middle^Suffix^Prefix\",\n            \"assistantInterpretingPhysicianName\": \"ID4^AssistantInterpreter^Given^Middle^Suffix^Prefix\",\n            \"customReportInfo\": {\n                \"custom01\": \"Sample report from test-e2e cypress script\"\n            }\n        },\n        procedureInfo: {\n            \"accessionNumber\": accession,\n            \"procedureCode\": \"CAPC\",\n            \"procedureDescription\": \"CTA CHEST\",\n            \"procedureStatus\": 'Ordered',\n            \"reasonForExam\": \"\",\n            \"relevantClinicalInfo\": \"<NTE.3.1>CREATED BY LOAD SCRIPT - Clinical Indications for requested exam: patient developed foul tasting drainage after dental surgery eval for infection or other abnormality .</NTE.3.1><NTE.3.1>Information desired from requested exam: DX .</NTE.3.1>\",\n            \"orderingDepartment\": \"\",\n            modality: modality,\n            \"bodyPart\": \"\",\n            \"priority\": \"R\",\n            \"scheduledDateTime\": \"\",\n            \"startedDateTime\": '20190504201212',\n            \"completedDateTime\": \"\",\n            \"cancelledDateTime\": \"\",\n            \"requestingPhysicianName\": \"Bruce^Banner^^MD^\",\n            \"referringPhysicianName\": \"ASDF^ASDF^ASDFE^^\",\n            \"attendingPhysicianName\": \"\",\n            \"technologist\": \"\",\n            \"visitClass\": \"\",\n            \"visitNumber\": \"\",\n            \"visitPrimaryLocation\": \"RAD\",\n            \"visitCurrentLocation\": \"\"\n        }\n    },\n    headers: header\n}).then(function (res) { return console.log; }); })\n    // Create Report ORU\n    .then(function () { return cy.request({\n    url: oruUrl,\n    method: 'POST',\n    body: {\n        dataSourceSystemName: 'cypress-e2e-test',\n        patientInfo: {\n            mrn: mrn,\n            name: patientName,\n            birthDate: patientDOB,\n            patientSex: 'M'\n        },\n        patientVisit: {\n            admitDateTime: '20190101201212',\n            dischargeDateTime: ''\n        },\n        diagnosticReportInfo: {\n            \"contentType\": \"Text\",\n            \"status\": 'Final',\n            \"content\": \"Testing THIS IS A REPORT!<br><br><br>Report text goes here....<br><br><br><br>CREATED BY LOAD TEST SCRIPT\",\n            \"reportDateTime\": '20190504201220',\n            \"principalInterpretingPhysicianName\": \"ID3^PrincipalInterpreter^Given^Middle^Suffix^Prefix\",\n            \"assistantInterpretingPhysicianName\": \"ID4^AssistantInterpreter^Given^Middle^Suffix^Prefix\",\n            \"customReportInfo\": {\n                \"custom01\": \"Sample report from test-e2e cypress script\"\n            }\n        },\n        procedureInfo: {\n            \"accessionNumber\": accession,\n            \"procedureCode\": \"CAPC\",\n            \"procedureDescription\": \"CTA CHEST\",\n            \"procedureStatus\": 'Ordered',\n            \"reasonForExam\": \"\",\n            \"relevantClinicalInfo\": \"<NTE.3.1>CREATED BY LOAD SCRIPT - Clinical Indications for requested exam: patient developed foul tasting drainage after dental surgery eval for infection or other abnormality .</NTE.3.1><NTE.3.1>Information desired from requested exam: DX .</NTE.3.1>\",\n            \"orderingDepartment\": \"\",\n            modality: modality,\n            \"bodyPart\": \"\",\n            \"priority\": \"R\",\n            \"scheduledDateTime\": \"\",\n            \"startedDateTime\": '20190504201212',\n            \"completedDateTime\": \"\",\n            \"cancelledDateTime\": \"\",\n            \"requestingPhysicianName\": \"Bruce^Banner^^MD^\",\n            \"referringPhysicianName\": \"ASDF^ASDF^ASDFE^^\",\n            \"attendingPhysicianName\": \"\",\n            \"technologist\": \"\",\n            \"visitClass\": \"\",\n            \"visitNumber\": \"\",\n            \"visitPrimaryLocation\": \"RAD\",\n            \"visitCurrentLocation\": \"\"\n        }\n    },\n    headers: header\n}).then(function (res) { return console.log; }); });\n//   c.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n// Step 5 - Use the created API token to configure Mirth or Postman to send messages to Nucleus.\n// TODO - external tool\n// Step 6 - Send patient (ADT), procedure (ORM), and report (ORU) messages using either\n// Mirth or Postman. Send procedures and reports that will attach to a patient record\n// TODO - external tool",
+              "err": {},
+              "uuid": "be4d54bc-3223-4b63-8b43-bc4fa2153366",
+              "parentUUID": "6881c8c8-ce4d-4c3e-8c59-3b36435c6b76",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 7 & 8 - verify information and edit",
+              "fullTitle": "ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702) Step 7 & 8 - verify information and edit",
+              "timedOut": null,
+              "duration": 49056,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\n//  c.createFacilityIfNotExists(facilityName,customerName);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 7 - Navigate to the Worklist tab. Verify the procedure(s) is displayed accurately when viewing All Exams.\ncommon_1.Common.navigateTo('Worklist');\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(':nth-child(2)').then(function (el) {\n    if (el.find('> .chips-layout > button').length > 0) {\n        cy.get(':nth-child(2) > .chips-layout > button').first().click();\n        //  cy.contains('Loading...',{ timeout: configFile.longTimeout }).should('not.exist', { timeout: configFile.longTimeout });\n        cy.get('[data-cy=updateViewBtn]').click({ force: true });\n    }\n});\nfilterByFacility(facilityName);\ncy.get('[data-cy=patientNameFilter]').type(patientName + '{enter}', { force: true });\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.hugeTimeout }).should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).should('be.visible', { timeout: configFile.hugeTimeout });\n// cy.contains('Loading...',{ timeout: configFile.longTimeout }).should('not.exist', { timeout: configFile.longTimeout });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).click({ force: true });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).rightclick({ force: true });\ncy.get('#grid-context-menu [data-cy=\"workflowAdministration\"]').click();\ncy.get('[data-cy=editExam]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.patient-procedure-study-modal .modal-footer button.btn-primary-white').click();\ncy.get('.patient-procedure-study-modal input[name=\"mrn\"]').type(\"{selectall}edited-\".concat(mrn));\ncy.get('.patient-procedure-study-modal input[name=\"mrn\"]').should('contain.value', \"edited-\".concat(mrn));\ncy.get('.patient-procedure-study-modal #patient-procedure-study-tabs #patient-procedure-study-tabs-tab-Procedure').click();\ncy.get('.patient-procedure-study-modal input[name=\"accessionNumber\"]').type(\"{selectall}edited-\".concat(accession));\ncy.get('.patient-procedure-study-modal input[name=\"accessionNumber\"]').should('contain.value', \"edited-\".concat(accession));\ncy.get('.patient-procedure-study-modal .modal-footer button.btn-primary').contains('Save').click();\ncy.get('.multiStateButtonWrapper button').contains('Confirm').click();\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "9120c8d5-6f62-48b6-87e4-b2127595b222",
+              "parentUUID": "6881c8c8-ce4d-4c3e-8c59-3b36435c6b76",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 9 - 13",
+              "fullTitle": "ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702) Step 9 - 13",
+              "timedOut": null,
+              "duration": 64559,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\n//c.createFacilityIfNotExists(facilityName,customerName);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 9 - Verify patients can be searched, selected, and viewed within the Patient tab.\ncommon_1.Common.navigateTo('Worklist');\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(':nth-child(2)').then(function (el) {\n    if (el.find('> .chips-layout > button').length > 0) {\n        cy.get(':nth-child(2) > .chips-layout > button').first().click();\n        //   cy.contains('Loading...',{ timeout: configFile.longTimeout }).should('not.exist', { timeout: configFile.longTimeout });\n        cy.get('[data-cy=updateViewBtn]').click({ force: true });\n    }\n});\nfilterByFacility(facilityName);\ncy.get('[data-cy=patientNameFilter]').type(patientName + '{enter}', { force: true });\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.hugeTimeout }).should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).should('be.visible', { timeout: configFile.hugeTimeout });\n// cy.contains('Loading...',{ timeout: configFile.longTimeout }).should('not.exist', { timeout: configFile.longTimeout });\n// Step 8 - In the Worklist, expand the procedure, click the Edit Patient button, and verify the patient and procedure information can be successfully edited in the popup modal.\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).first().click({ force: true });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).first().rightclick({ force: true });\ncy.get('#grid-context-menu [data-cy=\"workflowAdministration\"]').click();\ncy.get('[data-cy=editExam]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.patient-procedure-study-modal h4.modal-title').should('contain.text', \"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date));\ncy.get('#patient-procedure-study-tabs ul li[role=\"presentation\"]').should('have.class', 'active');\ncy.get('.patient-form div input').should('have.value', \"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date));\ncy.get('.patient-form div input[name=\"birthDateStr\"]').should('have.value', patientDOBFormated);\ncy.get('.modal-footer button.btn-primary-white').click();\ncy.get('.patient-form div input[name=\"race\"]').type(\"{selectall}test\");\ncy.get('.patient-form div input[name=\"race\"]').should('have.value', 'test');\ncy.wait(configFile.tinyTimeout);\ncy.get('.modal-footer .btn-primary').click();\ncy.get('.modal-footer .multiStateButtonWrapper button').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout); //wait for adminlock to get release.\ncommon_1.Common.navigateTo('Worklist');\ncy.get('.-loading.-active', { timeout: 60000 }).should('not.exist');\ncy.get('[data-cy=patientNameFilter]').type(patientName + '{enter}{enter}', { force: true });\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.hugeTimeout }).should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).should('be.visible', { timeout: configFile.hugeTimeout });\n// cy.contains('Loading...',{ timeout: configFile.longTimeout }).should('not.exist', { timeout: configFile.longTimeout });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\")).parent('div.rt-td').first().click({ force: true });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\")).parent('div.rt-td').first().rightclick({ force: true });\ncy.get('#grid-context-menu [data-cy=\"workflowAdministration\"]').click();\ncy.get('[data-cy=editExam]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.patient-form div input[name=\"race\"]').should('have.value', 'test');\ncy.get('.modal-footer button.btn-default').click();\ncy.wait(configFile.tinyTimeout);\n// Step 11 - Locate a procedure that has attached reports. Click the \">\" next to a\n// procedure and verify the report details and preview are properly displayed\n// in the Reports tab.\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\")).parent('div.rt-td').first().click({ force: true });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\")).parent('div.rt-td').first().rightclick({ force: true });\ncy.get('#grid-context-menu [data-cy=\"viewReport\"]').click();\ncy.get('div.report-pdf-preview-modal .modal-header h4.modal-title').should('contain.text', 'Report Preview');\ncy.get('.modal-body .canvas-wrapper').should('exist');\n// Step 12 - Verify the html report preview can be scrolled and expanded using the tools available.\ncy.get('.report-pdf-preview-modal .modal-body').scrollTo('bottom');\ncy.get('.report-pdf-preview-modal .modal-footer button.btn-default').not('.pull-left').click();\n// Step 13 - Verify the View Report History modal correctly displays and previews the  available reports when selected. Verify user can Promote reports to the current version(only if multiple\n// reports exist).The \"current\" report will have the Promote button disabled.\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\")).parent('div.rt-td').first().click({ force: true });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\")).parent('div.rt-td').first().rightclick({ force: true });\ncy.get('#grid-context-menu [data-cy=\"viewReportHistory\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.report-history-modal .-report-report-table .rt-tbody .rt-tr-group').eq(1).find('.rt-td button.btn.btn-sm.btn-link').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.promoteConfirmation .popover-btn-group button.btn-primary').click();\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "5bd1ae54-acc5-4305-8b9a-190f613bd8a5",
+              "parentUUID": "6881c8c8-ce4d-4c3e-8c59-3b36435c6b76",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 14 - 17",
+              "fullTitle": "ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702) Step 14 - 17",
+              "timedOut": null,
+              "duration": 104435,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\n//c.createFacilityIfNotExists(facilityName,customerName);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 14 - DICOM Send or Upload a study that shares the same Acc # and patient MRN (and last name if data source configured) as an existing procedure.\ncommon_1.Common.navigateTo('Worklist');\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(':nth-child(2)').then(function (el) {\n    if (el.find('> .chips-layout > button').length > 0) {\n        cy.get(':nth-child(2) > .chips-layout > button').first().click();\n        //    cy.contains('Loading...',{ timeout: configFile.longTimeout }).should('not.exist', { timeout: configFile.longTimeout });\n        cy.get('[data-cy=updateViewBtn]').click({ force: true });\n    }\n});\nfilterByFacility(facilityName);\nvar accValue = '0000000002';\nvar modValue = 'KO/MR';\nvar mrnValue = '832040';\ncy.request({\n    url: procedureUrl,\n    method: 'POST',\n    body: {\n        dataSourceSystemName: 'cypress-e2e-test',\n        patientInfo: {\n            mrn: mrnValue,\n            name: patientName,\n            birthDate: patientDOB,\n            patientSex: 'M'\n        },\n        patientVisit: {\n            admitDateTime: '20190101201212',\n            dischargeDateTime: ''\n        },\n        procedureInfo: {\n            \"accessionNumber\": accValue,\n            \"procedureCode\": \"CAPC\",\n            \"procedureDescription\": \"CTA CHEST\",\n            \"procedureStatus\": 'Ordered',\n            \"reasonForExam\": \"\",\n            \"relevantClinicalInfo\": \"<NTE.3.1>CREATED BY LOAD SCRIPT - Clinical Indications for requested exam: patient developed foul tasting drainage after dental surgery eval for infection or other abnormality .</NTE.3.1><NTE.3.1>Information desired from requested exam: DX .</NTE.3.1>\",\n            \"orderingDepartment\": \"\",\n            \"modality\": modValue,\n            \"bodyPart\": \"\",\n            \"priority\": \"R\",\n            \"scheduledDateTime\": \"\",\n            \"startedDateTime\": '20190504201212',\n            \"completedDateTime\": \"\",\n            \"cancelledDateTime\": \"\",\n            \"requestingPhysicianName\": \"Bruce^Banner^^MD^\",\n            \"referringPhysicianName\": \"ASDF^ASDF^ASDFE^^\",\n            \"attendingPhysicianName\": \"\",\n            \"technologist\": \"\",\n            \"visitClass\": \"\",\n            \"visitNumber\": \"\",\n            \"visitPrimaryLocation\": \"RAD\",\n            \"visitCurrentLocation\": \"\"\n        }\n    },\n    headers: header\n}).then(function (res) { return console.log; });\nvar examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/mister_mr\", \" -keepAlive=1\");\ncy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n    .then(function (_a) {\n    var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n    console.log(code, stdout, stderr);\n});\ncy.wait(configFile.smallTimeout);\ncy.get('[data-cy=patientNameFilter]').type(patientName + '{enter}', { force: true });\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.wait(configFile.smallTimeout);\n// cy.get('[data-cy=\"patientMrn-cell\"]:contains(' + mrnValue + ')').dblclick();\n// cy.get('button[data-cy=\"gridRowEyeIcon\"]').first().click();\n// Step 16 - Send an updated ADT message for a patient with a linked procedure and exam (EX: update DOB, Gender, Address, etc).Verify the patient details are updated throughout Nucleus.\nvar editedPatientName = patientName + '_edited';\ncy.request({\n    url: oruUrl,\n    method: 'POST',\n    body: {\n        dataSourceSystemName: 'cypress-e2e-test',\n        patientInfo: {\n            mrn: mrnValue,\n            name: editedPatientName,\n            birthDate: patientDOB,\n            patientSex: 'M'\n        },\n        patientVisit: {\n            admitDateTime: '20190101201212',\n            dischargeDateTime: ''\n        },\n        diagnosticReportInfo: {\n            \"contentType\": \"Text\",\n            \"status\": 'Preliminary',\n            \"content\": \"Testing THIS IS A REPORT!<br><br><br>Report text goes here....<br><br><br><br>CREATED BY LOAD TEST SCRIPT\",\n            \"reportDateTime\": '20190504201220',\n            \"principalInterpretingPhysicianName\": \"ID3^PrincipalInterpreter^Given^Middle^Suffix^Prefix\",\n            \"assistantInterpretingPhysicianName\": \"ID4^AssistantInterpreter^Given^Middle^Suffix^Prefix\",\n            \"customReportInfo\": {\n                \"custom01\": \"Sample report from test-e2e cypress script\"\n            }\n        },\n        procedureInfo: {\n            \"accessionNumber\": accValue,\n            \"procedureCode\": \"CAPC\",\n            \"procedureDescription\": \"CTA CHEST\",\n            \"procedureStatus\": 'Ordered',\n            \"reasonForExam\": \"\",\n            \"relevantClinicalInfo\": \"<NTE.3.1>CREATED BY LOAD SCRIPT - Clinical Indications for requested exam: patient developed foul tasting drainage after dental surgery eval for infection or other abnormality .</NTE.3.1><NTE.3.1>Information desired from requested exam: DX .</NTE.3.1>\",\n            \"orderingDepartment\": \"\",\n            \"modality\": modValue,\n            \"bodyPart\": \"\",\n            \"priority\": \"R\",\n            \"scheduledDateTime\": \"\",\n            \"startedDateTime\": '20190504201212',\n            \"completedDateTime\": \"\",\n            \"cancelledDateTime\": \"\",\n            \"requestingPhysicianName\": \"Bruce^Banner^^MD^\",\n            \"referringPhysicianName\": \"ASDF^ASDF^ASDFE^^\",\n            \"attendingPhysicianName\": \"\",\n            \"technologist\": \"\",\n            \"visitClass\": \"\",\n            \"visitNumber\": \"\",\n            \"visitPrimaryLocation\": \"RAD\",\n            \"visitCurrentLocation\": \"\"\n        }\n    },\n    headers: header\n}).then(function (res) { return console.log; });\ncy.wait(configFile.smallTimeout);\ncy.log('editedPatientName:', editedPatientName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('body').then(function (el) {\n    if (el.find('.btn-group-actions > .btn-default').length > 0) {\n        cy.get('.btn-group-actions > .btn-default').click();\n        cy.get('.btn-group-actions', { timeout: configFile.longTimeout }).should('not.exist', { timeout: configFile.longTimeout });\n    }\n});\ncy.waitUntil(function () { return cy.get('button.viewExam').should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(\"#tableStudies_wrapper .patientName span[title=\\\"Mr_edited p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\")).should('exist');\ncommon_1.Common.logout();\ncommon_1.Common.login(customerName, userName, userpassword);\n//  c.createFacilityIfNotExists(facilityName,customerName);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Worklist');\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr_edited p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).first().rightclick({ force: true });\ncy.get('#grid-context-menu [data-cy=\"workflowAdministration\"]').click();\ncy.get('[data-cy=\"editExam\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#patient-procedure-study-tabs-tab-Study').first().click();\ncy.get(\".form-control[value=\\\"Mr_edited p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\")).last().should('exist');\ncy.get('button:contains(\"Close\")').click();\n// Step 17 - Verify HIPAA logging for all PACS Workflow events.\ncy.get(':nth-child(2)').then(function (el) {\n    if (el.find('> .chips-layout > button').length > 0) {\n        cy.get(':nth-child(2) > .chips-layout > button').first().click();\n        //  cy.contains('Loading...',{ timeout: configFile.longTimeout }).should('not.exist', { timeout: configFile.longTimeout });\n        cy.get('[data-cy=updateViewBtn]').click({ force: true });\n    }\n});\nfilterByFacility(facilityName);\ncy.get('[data-cy=patientNameFilter]').type(patientName + '{enter}', { force: true });\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.hugeTimeout }).should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).should('be.visible', { timeout: configFile.hugeTimeout });\n// cy.contains('Loading...',{ timeout: configFile.longTimeout }).should('not.exist', { timeout: configFile.longTimeout });\n// Step 8 - In the Worklist, expand the procedure, click the Edit Patient button, and verify the patient and procedure information can be successfully edited in the popup modal.\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr_edited p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).first().click({ force: true });\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"Mr_edited p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).first().rightclick({ force: true });\ncy.get('#grid-context-menu [data-cy=\"hipaaLog\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.hipaa-logs-modal .modal-title').should('contain.text', 'Audit Log');\nvar hippaSelector = '.hipaa-logs-modal .modal-body .tbodyScroll .rt-body-hipaa-logs-list .rt-tr-group .rt-tr .rt-td.ellipsis button.hipaa-event-detail-button';\ncy.get(hippaSelector).should('contain.text', 'Order Added');\ncy.get(hippaSelector).should('contain.text', 'Order Updated');\ncy.get(hippaSelector).should('contain.text', 'Study Matched to Order');\ncy.get(hippaSelector).should('contain.text', 'Diagnostic Report Added');\ncy.wait(configFile.smallTimeout);\ncheckReport(\"Mr_edited p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date), \"Testing THIS IS A REPORT!\");",
+              "err": {},
+              "uuid": "ac9b0513-3c39-4c30-896d-c73bf07a03f1",
+              "parentUUID": "6881c8c8-ce4d-4c3e-8c59-3b36435c6b76",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deleting Order",
+              "fullTitle": "ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702) Deleting Order",
+              "timedOut": null,
+              "duration": 46637,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\n//c.createFacilityIfNotExists(facilityName,customerName);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 9 - Verify patients can be searched, selected, and viewed within the Patient tab.\ncommon_1.Common.navigateTo('Worklist');\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(':nth-child(2)').then(function (el) {\n    if (el.find('> .chips-layout > button').length > 0) {\n        cy.get(':nth-child(2) > .chips-layout > button').first().click();\n        //  cy.contains('Loading...',{ timeout: configFile.longTimeout }).should('not.exist', { timeout: configFile.longTimeout });\n        cy.get('[data-cy=updateViewBtn]').click({ force: true });\n    }\n});\nfilterByFacility(facilityName);\ncy.get('[data-cy=patientNameFilter]').click();\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.hugeTimeout }).should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get(\"span[data-cy=patientName-cell][title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).should('be.visible', { timeout: configFile.hugeTimeout });\n// cy.contains('Loading...',{ timeout: configFile.longTimeout }).should('not.exist', { timeout: configFile.longTimeout });\ncy.get(\"span[data-cy=patientName-cell][title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).last().click({ force: true });\ncy.get(\"span[data-cy=patientName-cell][title=\\\"Mr p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).last().rightclick({ force: true });\ncy.get('#grid-context-menu [data-cy=\"workflowAdministration\"]').click();\ncy.get('#grid-context-menu [data-cy=\"deleteReport\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('button:contains(\"Yes, Delete\")').click();\ncy.wait(configFile.smallTimeout);\ncy.get(\"span[data-cy=patientName-cell][title=\\\"Mr_edited p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).last().click({ force: true });\ncy.get('body').then(function (el) {\n    if (el.find('[data-cy=unlockExam]').length > 0) {\n        cy.get('[data-cy=unlockExam]').click();\n        cy.wait(configFile.tinyTimeout);\n        cy.get('.popover-btn-group > .btn-primary').click();\n        cy.get(\"span[data-cy=patientName-cell][title=\\\"Mr_edited p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).last().rightclick({ force: true });\n    }\n});\ncy.get(\"span[data-cy=patientName-cell][title=\\\"Mr_edited p-\".concat(date, \", mrn_cypress_\").concat(date, \" \").concat(date, \"\\\"]\"), { timeout: configFile.hugeTimeout }).last().rightclick({ force: true });\ncy.get('#grid-context-menu [data-cy=\"workflowAdministration\"]').click();\ncy.get('[data-cy=\"deleteStudy\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('button:contains(\"Yes, Delete\")').click();\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "4a5dd9ef-0ab7-48e3-9951-70d5a3e9eaae",
+              "parentUUID": "6881c8c8-ce4d-4c3e-8c59-3b36435c6b76",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702) Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7075,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "58b33485-f78d-4777-9cc4-aff64afea53e",
+              "parentUUID": "6881c8c8-ce4d-4c3e-8c59-3b36435c6b76",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "be4d54bc-3223-4b63-8b43-bc4fa2153366",
+            "9120c8d5-6f62-48b6-87e4-b2127595b222",
+            "5bd1ae54-acc5-4305-8b9a-190f613bd8a5",
+            "ac9b0513-3c39-4c30-896d-c73bf07a03f1",
+            "4a5dd9ef-0ab7-48e3-9951-70d5a3e9eaae",
+            "58b33485-f78d-4777-9cc4-aff64afea53e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 354153,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

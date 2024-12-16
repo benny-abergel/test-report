@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="173.625" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:19:20" tests="0" file="cypress/e2e/test-suites/ECP-T2722-MyOrgDICOMTab.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2722 - My Org DICOM Tab" timestamp="2024-12-15T03:19:20" tests="3" time="173.598" failures="0">
+    <testcase name="Test Preparation - Before Step" time="75.542" classname="ECP-T2722 - My Org DICOM Tab">
+    </testcase>
+    <testcase name="ECP-T2722 - My Org DICOM Tab - Steps 1 - 12" time="79.183" classname="ECP-T2722 - My Org DICOM Tab">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.647" classname="ECP-T2722 - My Org DICOM Tab">
+    </testcase>
+  </testsuite>
+</testsuites>

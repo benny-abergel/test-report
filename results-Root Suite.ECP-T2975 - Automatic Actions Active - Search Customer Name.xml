@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="137.916" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:26:49" tests="0" file="cypress/e2e/test-suites/ECP-T2975-AutomaticActionSearchCustomer Share with Facility.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2975 - Automatic Actions Active - Search Customer Name" timestamp="2024-12-15T03:26:49" tests="2" time="137.886" failures="0">
+    <testcase name="Test Preparation - Data Prep" time="121.257" classname="ECP-T2975 - Automatic Actions Active - Search Customer Name">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.611" classname="ECP-T2975 - Automatic Actions Active - Search Customer Name">
+    </testcase>
+  </testsuite>
+</testsuites>

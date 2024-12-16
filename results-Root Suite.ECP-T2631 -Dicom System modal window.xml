@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="538.429" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:26:46" tests="0" file="cypress/e2e/test-suites/ECP-T2631-DICOMSystemsmodalwindow.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2631 -Dicom System modal window" timestamp="2024-12-15T03:26:46" tests="2" time="538.409" failures="0">
+    <testcase name="Step 1 -16" time="156.414" classname="ECP-T2631 -Dicom System modal window">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.691" classname="ECP-T2631 -Dicom System modal window">
+    </testcase>
+  </testsuite>
+</testsuites>

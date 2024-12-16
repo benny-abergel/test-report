@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="315.094" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:15:50" tests="0" file="cypress/e2e/test-suites/ECP-T2759-Professionalsharingfunctionality.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2759 - Professional Sharing Functionality" timestamp="2024-12-15T02:15:50" tests="3" time="315.066" failures="0">
+    <testcase name="Precondition" time="103.357" classname="ECP-T2759 - Professional Sharing Functionality">
+    </testcase>
+    <testcase name="All the steps of Professional Share Functionality Test case " time="191.093" classname="ECP-T2759 - Professional Sharing Functionality">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.976" classname="ECP-T2759 - Professional Sharing Functionality">
+    </testcase>
+  </testsuite>
+</testsuites>

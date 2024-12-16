@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:07:18.899Z",
+    "end": "2024-12-15T02:10:32.669Z",
+    "duration": 193770,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "129970c2-6cb3-4340-842c-784f49e41894",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2628-DICOMModaityWorklistUI.spec.ts",
+      "file": "cypress/test-suites/ECP-T2628-DICOMModaityWorklistUI.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c10e6dee-a29d-48f3-877c-c25dfe8d3779",
+          "title": "ECP-T2628 DICOM Modality Worklist UI",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step",
+              "fullTitle": "ECP-T2628 DICOM Modality Worklist UI Test Preparation - Before Step",
+              "timedOut": null,
+              "duration": 71819,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowModalityWorklist: true,\n    allowWorkstationViewer: true\n}, facilityName);",
+              "err": {},
+              "uuid": "6f8642cd-118d-4093-98d2-99712dc59299",
+              "parentUUID": "c10e6dee-a29d-48f3-877c-c25dfe8d3779",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T2628 DICOM Modality Worklist UI - Steps 1 - 12",
+              "fullTitle": "ECP-T2628 DICOM Modality Worklist UI ECP-T2628 DICOM Modality Worklist UI - Steps 1 - 12",
+              "timedOut": null,
+              "duration": 102727,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 1 - Navigate to the My Org > Integration > DICOM tab and click the Add DICOM system button. Verify the DICOM system modal pop-over opens.\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Integration');\ncy.get('#DICOM').should('exist');\ncommon_1.Common.switchTab('DICOM');\ncy.get('#add').click();\ncy.waitUntil(function () { return cy.get('.destinationModal .modal-title').contains('Add DICOM System'); }, { timeout: configFile.waitUntilTimeout });\n// Step 2 - Enable the Modality Worklist check box and verify the Modality Worklist Tab is added to the modal window.\ncy.get('#supportsMWL').check();\ncy.get('#dicomMWL').should('exist');\n// Step 3 - Verify the Modality Worklist Tab is displayed correctly.\ncy.get('#dicomMWL').click();\ncy.get('#mwlMatchOrderStatus').should('exist');\ncy.get('#mwlMatchOrderStatus').should('have.value', '');\ncy.get('.destinationDialog form div:nth-child(2) .Select-control').should('exist');\ncy.get('.destinationDialog form div:nth-child(2) .Select-control .needsclick').should('contain.text', 'Contains');\ncy.get('.destinationDialog form div:nth-child(3) .Select-control').should('exist');\ncy.get('.destinationDialog form div:nth-child(3) .Select-control .needsclick').should('contain.text', 'Unlimited');\ncy.get('#mwlMaxQueryResults').should('exist');\ncy.get('#mwlMaxQueryResults').should('have.value', '25');\ncy.get('#mwlAutoQuery').should('exist');\ncy.get('#mwlAutoQuery').should('not.be.checked');\ncy.get('.c-mw__label:contains(\"MRN\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"MRN\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0010,0020)');\ncy.get('.c-mw__label:contains(\"MRN\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', 'Patient ID');\ncy.get('.c-mw__label:contains(\"MRN\")').parent('div').find('button:contains(\"Edit\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"MRN\")').parent('div').find('button:contains(\"Reset\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Patient Name\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Patient Name\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0010,0010)');\ncy.get('.c-mw__label:contains(\"Patient Name\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', 'Patient\\'s Name');\ncy.get('.c-mw__label:contains(\"Patient Name\")').parent('div').find('button:contains(\"Edit\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Patient Name\")').parent('div').find('button:contains(\"Reset\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Date of Birth\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Date of Birth\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0010,0030)');\ncy.get('.c-mw__label:contains(\"Date of Birth\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', 'Patient\\'s Birth Date');\ncy.get('.c-mw__label:contains(\"Date of Birth\")').parent('div').find('button:contains(\"Edit\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Date of Birth\")').parent('div').find('button:contains(\"Reset\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Exam Description\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Exam Description\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0040,0100/0040,0007)');\ncy.get('.c-mw__label:contains(\"Exam Description\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', 'Scheduled Procedure Step Sequence/Scheduled Procedure Step Description');\ncy.get('.c-mw__label:contains(\"Exam Description\")').parent('div').find('button:contains(\"Edit\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Exam Description\")').parent('div').find('button:contains(\"Reset\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Accession #\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Accession #\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0008,0050)');\ncy.get('.c-mw__label:contains(\"Accession #\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', 'Accession Number');\ncy.get('.c-mw__label:contains(\"Accession #\")').parent('div').find('button:contains(\"Edit\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Accession #\")').parent('div').find('button:contains(\"Reset\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Date\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Date\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0040,0100/0040,0002)');\ncy.get('.c-mw__label:contains(\"Date\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', 'Scheduled Procedure Step Sequence/Scheduled Procedure Step Start Date');\ncy.get('.c-mw__label:contains(\"Date\")').parent('div').find('button:contains(\"Edit\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Date\")').parent('div').find('button:contains(\"Reset\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Time\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Time\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0040,0100/0040,0003)');\ncy.get('.c-mw__label:contains(\"Time\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', 'Scheduled Procedure Step Sequence/Scheduled Procedure Step Start Time');\ncy.get('.c-mw__label:contains(\"Time\")').parent('div').find('button:contains(\"Edit\")').should('be.visible');\ncy.get('.c-mw__label:contains(\"Time\")').parent('div').find('button:contains(\"Reset\")').should('be.visible');\ncy.get('.js-echo-test').should('exist');\ncy.get('.js-cancel-destinationModal').should('exist');\ncy.get('#confirmDeleteDestinationYes').should('exist');\n// Step 4 - Verify whether User is able to enable Auto Query checkbox and click on ? button.\ncy.get('#mwlAutoQuery').check();\ncy.get('.iconWithTooltip .iconBtn[data-title=\"Check this option if you want the source to be queried automatically during push to PACS.\"]').should('exist');\n// Step 5 - Verify whether user is also allowed to edit and Reset below fields from, Modality worklist tab -\n// 5.1. MRN\ncy.get('.c-mw__label:contains(\"MRN\")').parent('div').find('button:contains(\"Edit\")').click();\ncy.get('.editModalityWorklistMapping-popover .js-close-edit-mapping-popover').should('exist');\ncy.get('.editModalityWorklistMapping-popover .js-save-mapping').should('exist');\ncy.get('span:contains(\"(0010,0020) Patient ID\")').should('be.visible');\ncy.get('label:contains(\"Dicom Tag\")').parent('div').find('[class=\"Select-value needsclick\"]').click();\ncy.get('span:contains(\"(0010,1000) Other Patient IDs\")').last().click();\ncy.get('label:contains(\"Dicom Tag\")').parents('.popover-content').find('button:contains(\"Save\")').click();\ncy.get('.c-mw__label:contains(\"MRN\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0010,1000)');\ncy.get('.c-mw__label:contains(\"MRN\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', 'Other Patient IDs');\n// 5.2. Patient\ncy.get('.c-mw__label:contains(\"Patient Name\")').parent('div').find('button:contains(\"Edit\")').click();\ncy.get('.editModalityWorklistMapping-popover .js-close-edit-mapping-popover').should('exist');\ncy.get('.editModalityWorklistMapping-popover .js-save-mapping').should('exist');\ncy.get(\"span:contains(\\\"(0010,0010) Patient's Name\\\")\").should('be.visible');\ncy.get('label:contains(\"Dicom Tag\")').parent('div').find('[class=\"Select-value needsclick\"]').click();\ncy.get(\"span:contains(\\\"(0010,1005) Patient's Birth Name\\\")\").last().click();\ncy.get('label:contains(\"Dicom Tag\")').parents('.popover-content').find('button:contains(\"Save\")').click();\ncy.get('.c-mw__label:contains(\"Patient Name\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0010,1005)');\ncy.get('.c-mw__label:contains(\"Patient Name\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', \"Patient's Birth Name\");\n// 5.3. DOB\ncy.get('.c-mw__label:contains(\"Date of Birth\")').parent('div').find('button:contains(\"Edit\")').click();\ncy.get('.editModalityWorklistMapping-popover .js-close-edit-mapping-popover').should('exist');\ncy.get('.editModalityWorklistMapping-popover .js-save-mapping').should('exist');\ncy.get(\"span:contains(\\\"(0010,0030) Patient's Birth Date\\\")\").should('be.visible');\ncy.get('label:contains(\"Dicom Tag\")').parent('div').find('[class=\"Select-value needsclick\"]').click();\ncy.get(\"span:contains(\\\"(0010,0033) Patient's Birth Date in Alternative Calendar\\\")\").last().click();\ncy.get('label:contains(\"Dicom Tag\")').parents('.popover-content').find('button:contains(\"Save\")').click();\ncy.get('.c-mw__label:contains(\"Date of Birth\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0010,0033)');\ncy.get('.c-mw__label:contains(\"Date of Birth\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', \"Patient's Birth Date in Alternative Calendar\");\n// 5.4. Exam Description\ncy.get('.c-mw__label:contains(\"Exam Description\")').parent('div').find('button:contains(\"Edit\")').click();\ncy.get('.editModalityWorklistMapping-popover .js-close-edit-mapping-popover').should('exist');\ncy.get('.editModalityWorklistMapping-popover .js-save-mapping').should('exist');\ncy.get(\"span:contains(\\\"(0040,0100/0040,0007) Scheduled Procedure Step Sequence/Scheduled Procedure Step Description\\\")\").should('be.visible');\ncy.get('label:contains(\"Dicom Tag\")').parent('div').find('[class=\"Select-value needsclick\"]').click();\ncy.get(\"span:contains(\\\"(0032,1060) Requested Procedure Description\\\")\").last().click();\ncy.get('label:contains(\"Dicom Tag\")').parents('.popover-content').find('button:contains(\"Save\")').click();\ncy.get('.c-mw__label:contains(\"Exam Description\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0032,1060)');\ncy.get('.c-mw__label:contains(\"Exam Description\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', \"Requested Procedure Description\");\n// 5.5. Accession\ncy.get('.c-mw__label:contains(\"Accession #\")').parent('div').find('button:contains(\"Edit\")').click();\ncy.get('.editModalityWorklistMapping-popover .js-close-edit-mapping-popover').should('exist');\ncy.get('.editModalityWorklistMapping-popover .js-save-mapping').should('exist');\ncy.get(\"span:contains(\\\"(0008,0050) Accession Number\\\")\").should('be.visible');\ncy.get('label:contains(\"Dicom Tag\")').parent('div').find('[class=\"Select-value needsclick\"]').click();\ncy.get(\"span:contains(\\\"(0008,0050) Accession Number\\\")\").last().click();\ncy.get('label:contains(\"Dicom Tag\")').parents('.popover-content').find('button:contains(\"Cancel\")').click();\ncy.get('.c-mw__label:contains(\"Accession #\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0008,0050)');\ncy.get('.c-mw__label:contains(\"Accession #\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', \"Accession Number\");\n// 5.6. Order Date\ncy.get('.c-mw__label:contains(\"Date\")').last().parent('div').find('button:contains(\"Edit\")').click();\ncy.get('.editModalityWorklistMapping-popover .js-close-edit-mapping-popover').should('exist');\ncy.get('.editModalityWorklistMapping-popover .js-save-mapping').should('exist');\ncy.get(\"span:contains(\\\"(0040,0100/0040,0002) Scheduled Procedure Step Sequence/Scheduled Procedure Step Start Date\\\")\").should('be.visible');\ncy.get('label:contains(\"Dicom Tag\")').parent('div').find('[class=\"Select-value needsclick\"]').click();\ncy.get(\"span:contains(\\\"(0008,0020) Study Date\\\")\").last().click();\ncy.get('label:contains(\"Dicom Tag\")').parents('.popover-content').find('button:contains(\"Save\")').click();\ncy.get('.c-mw__label:contains(\"Date\")').last().parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0008,0020)');\ncy.get('.c-mw__label:contains(\"Date\")').last().parent('div').find('[class=\"c-mw__name\"]').should('contain.text', \"Study Date\");\n// 5.7. Order Time\ncy.get('.c-mw__label:contains(\"Time\")').parent('div').find('button:contains(\"Edit\")').click();\ncy.get('.editModalityWorklistMapping-popover .js-close-edit-mapping-popover').should('exist');\ncy.get('.editModalityWorklistMapping-popover .js-save-mapping').should('exist');\ncy.get(\"span:contains(\\\"(0040,0100/0040,0003) Scheduled Procedure Step Sequence/Scheduled Procedure Step Start Time\\\")\").should('be.visible');\ncy.get('label:contains(\"Dicom Tag\")').parent('div').find('[class=\"Select-value needsclick\"]').click();\ncy.get(\"span:contains(\\\"(0008,0030) Study Time\\\")\").last().click();\ncy.get('label:contains(\"Dicom Tag\")').parents('.popover-content').find('button:contains(\"Save\")').click();\ncy.get('.c-mw__label:contains(\"Time\")').parent('div').find('[class=\"c-mw__value\"]').should('contain.text', '(0008,0030)');\ncy.get('.c-mw__label:contains(\"Time\")').parent('div').find('[class=\"c-mw__name\"]').should('contain.text', \"Study Time\");\n// Step 6 - A message is displayed to user when reset option is clicked.\ncy.get('.destinationDialog form:nth-child(2) div div.c-mw__map-box:nth-child(2) .js-reset-mapping-omni').click();\ncy.get('.ResetMapping-popover .popover-content p').should('exist');\ncy.get('.ResetMapping-popover .popover-content p').should('contain.text', 'Do you want to reset to the default mapping?');\ncy.get('.ResetMapping-popover #confirm-ResetMapping').should('exist');\ncy.get('.ResetMapping-popover .js-close-popover').should('exist');\ncy.get('.ResetMapping-popover #confirm-ResetMapping').click();\n// Step 7 - 7.1 - Verify if User can map the MRN field values to Patient field values and Patient filed values can be mapped to DOB or Accession field values\n// TODO - half of this step is covered in above step\n// Step 7.2 - and are reflected in the Push to PACS prep window while pushing to PACS\n// Step 8 - Verify on the Push to PACS prep window the data and fields are displayed correctly, with nothing cut-off.\n// TODO - cannot test\n// Step 9 - Verify whether user is able to click on Edit link on Modality Worklist Page and the pop up window displays with following options-\n// 1. Standard Radio button, 2. Custom Radio button, 3. TAG ID - required, 4. TAG Name - required, 5. Cancel and Save button\ncy.get('.destinationDialog form:nth-child(2) div div.c-mw__map-box:nth-child(2) .js-edit-mapping-omni').click();\ncy.get('input[data-id=\"standard\"]').should('exist');\ncy.get('input[data-id=\"custom\"]').should('exist');\ncy.get('input[data-id=\"custom\"]').click();\ncy.get('#customTagId').should('exist');\ncy.get('#customTagName').should('exist');\ncy.get('.js-close-edit-mapping-popover').should('exist');\ncy.get('.js-save-mapping').should('exist');\n// Step 10 - 1. Select Custon radio Button while editing MRN or Patient - covered in above step\n// 2. Edit the MRN TAG ID with invalid format (3333, 44\n// 3. Edit the Patient TAG ID with invalid format and verify on all other fields\ncy.get('#customTagId').type('333344');\ncy.get('#customTagName').click();\ncy.get('.validationError .popover-content').should('contain.text', 'Invalid Tag ID format');\ncy.get('.js-save-mapping').should('be.disabled');\ncy.get('.js-close-edit-mapping-popover').click();\ncy.get('.destinationDialog form:nth-child(2) div div.c-mw__map-box:nth-child(3) .js-edit-mapping-omni').click();\ncy.get('input[data-id=\"custom\"]').click();\ncy.get('#customTagId').type('333344');\ncy.get('#customTagName').click();\ncy.get('.validationError .popover-content').should('contain.text', 'Invalid Tag ID format');\ncy.get('.js-save-mapping').should('be.disabled');\ncy.get('.js-close-edit-mapping-popover').click();\ncy.get('.destinationDialog form:nth-child(2) div div.c-mw__map-box:nth-child(4) .js-edit-mapping-omni').click();\ncy.get('input[data-id=\"custom\"]').click();\ncy.get('#customTagId').type('333344');\ncy.get('#customTagName').click();\ncy.get('.validationError .popover-content').should('contain.text', 'Invalid Tag ID format');\ncy.get('.js-save-mapping').should('be.disabled');\ncy.get('.js-close-edit-mapping-popover').click();\ncy.get('.destinationDialog form:nth-child(2) div div.c-mw__map-box:nth-child(5) .js-edit-mapping-omni').click();\ncy.get('input[data-id=\"custom\"]').click();\ncy.get('#customTagId').type('333344');\ncy.get('#customTagName').click();\ncy.get('.validationError .popover-content').should('contain.text', 'Invalid Tag ID format');\ncy.get('.js-save-mapping').should('be.disabled');\ncy.get('.js-close-edit-mapping-popover').click();\ncy.get('.destinationDialog form:nth-child(2) div div.c-mw__map-box:nth-child(6) .js-edit-mapping-omni').click();\ncy.get('input[data-id=\"custom\"]').click();\ncy.get('#customTagId').type('333344');\ncy.get('#customTagName').click();\ncy.get('.validationError .popover-content').should('contain.text', 'Invalid Tag ID format');\ncy.get('.js-save-mapping').should('be.disabled');\ncy.get('.js-close-edit-mapping-popover').click();\ncy.get('.destinationDialog form:nth-child(2) div div.c-mw__map-box:nth-child(7) .js-edit-mapping-omni').click();\ncy.get('input[data-id=\"custom\"]').click();\ncy.get('#customTagId').type('333344');\ncy.get('#customTagName').click();\ncy.get('.validationError .popover-content').should('contain.text', 'Invalid Tag ID format');\ncy.get('.js-save-mapping').should('be.disabled');\ncy.get('.js-close-edit-mapping-popover').click();\ncy.get('.destinationDialog form:nth-child(2) div div.c-mw__map-box:nth-child(8) .js-edit-mapping-omni').click();\ncy.get('input[data-id=\"custom\"]').click();\ncy.get('#customTagId').type('333344');\ncy.get('#customTagName').click();\ncy.get('.validationError .popover-content').should('contain.text', 'Invalid Tag ID format');\ncy.get('.js-save-mapping').should('be.disabled');\ncy.get('.js-close-edit-mapping-popover').click();\n// Step 11 - Verify that the Save button is disabled when TAG ID or TAG Name is missing and the format is invalid\n// Covered in above step\n// Step 12 - Verify that the user can select multiple TAG IDs when Custom Dicom Tags is selected\ncy.get('.destinationDialog form:nth-child(2) div div.c-mw__map-box:nth-child(2) .js-edit-mapping-omni').click();\ncy.get('input[data-id=\"custom\"]').click();\ncy.get('#customTagId').type('004001000040000200400003');\ncy.get('.Select__custom .Select-value #x00400100').should('exist');\ncy.get('.Select__custom .Select-value #x00400002').should('exist');\ncy.get('.Select__custom .Select-value #x00400003').should('exist');\ncy.get('.js-close-edit-mapping-popover').click();\n// extra step\ncy.wait(configFile.tinyTimeout);\ncy.get('.js-cancel-destinationModal').click();\ncy.get('.js-edit-confirm-discard').click();",
+              "err": {},
+              "uuid": "d1d4c1e0-703c-4bc7-ab56-c442e56bd95f",
+              "parentUUID": "c10e6dee-a29d-48f3-877c-c25dfe8d3779",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2628 DICOM Modality Worklist UI Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8362,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "dbd5ba7f-e8df-47ca-93cc-95df59c13440",
+              "parentUUID": "c10e6dee-a29d-48f3-877c-c25dfe8d3779",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6f8642cd-118d-4093-98d2-99712dc59299",
+            "d1d4c1e0-703c-4bc7-ab56-c442e56bd95f",
+            "dbd5ba7f-e8df-47ca-93cc-95df59c13440"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 182908,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

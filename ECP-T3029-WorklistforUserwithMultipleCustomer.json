@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:39:31.702Z",
+    "end": "2024-12-15T02:47:37.338Z",
+    "duration": 485636,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "59dda954-164f-4d4b-b030-6e60828d4fc1",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3029-WorklistforUserwithMultipleCustomer.spec.ts",
+      "file": "cypress/test-suites/ECP-T3029-WorklistforUserwithMultipleCustomer.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "01107e0a-8b96-45b2-8470-0150be020598",
+          "title": "ECP-T3029 - Worklist for User with Multiple Customer",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Precondition ",
+              "fullTitle": "ECP-T3029 - Worklist for User with Multiple Customer Precondition ",
+              "timedOut": null,
+              "duration": 257568,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c5_-Palette_Color_secondary_capture -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"c-05\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncommon_1.Common.switchToFacility(facility1Name);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-17\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"a-17\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncommon_1.Common.switchToCustomer(customer2Name);\ncommon_1.Common.switchToFacility(facility2Name);\n// Upload a Study\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"a-01\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncommon_1.Common.switchToFacility(facility2Name1);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-02\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.wrap(meteor_1.Meteor.addUser(Ipuser, userpassword, facility1Name, 'Interpreting Provider'), { timeout: configFile.hugeTimeout });\ncy.wrap(meteor_1.Meteor.addUser(Ipuser, userpassword, facility2Name1, 'Interpreting Provider'), { timeout: configFile.hugeTimeout });\ncy.waitUntil(function () { return cy.get('[title=\"a-02\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "02285b14-3dd9-4ed1-b5b0-12422d366ae5",
+              "parentUUID": "01107e0a-8b96-45b2-8470-0150be020598",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login with Ip User ",
+              "fullTitle": "ECP-T3029 - Worklist for User with Multiple Customer Login with Ip User ",
+              "timedOut": null,
+              "duration": 69971,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 2\ncommon_1.Common.login(customerName, Ipuser, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(Ipuser, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\n// Step 3 and 4\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.navigateTo('Worklist');\ncy.get('button:contains(\"Clear All\")').first().click();\ncy.get('span:contains(\"' + customerName + '\")').should('exist');\ncy.get('[title=\"' + facilityName + '\"]').should('exist');\ncy.get('[title=\"' + facility1Name + '\"]').should('exist');\ncy.get('[title=\"' + facility2Name + '\"]').should('not.exist');\ncy.get('[title=\"' + facility2Name1 + '\"]').should('not.exist');\ncy.get('[title=\"a-17\"]').should('exist');\ncy.get('[title=\"c-05\"]').should('exist');\ncommon_1.Common.switchToCustomer(customer2Name);\ncommon_1.Common.navigateTo('Worklist');\ncy.get('span:contains(\"' + customer2Name + '\")').should('exist');\ncy.get('button:contains(\"Clear All\")').first().click();\ncy.get('[title=\"' + facilityName + '\"]').should('not.exist');\ncy.get('[title=\"' + facility1Name + '\"]').should('not.exist');\ncy.get('[title=\"' + facility2Name + '\"]').should('exist');\ncy.get('[title=\"' + facility2Name1 + '\"]').should('exist');\ncy.get('[title=\"a-02\"]').should('exist');\ncy.get('[title=\"a-02\"]').should('exist');",
+              "err": {},
+              "uuid": "0d161688-c512-4f9b-92cb-04b15cc7e1a4",
+              "parentUUID": "01107e0a-8b96-45b2-8470-0150be020598",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login with CustomerAdmin and Facility Admin ",
+              "fullTitle": "ECP-T3029 - Worklist for User with Multiple Customer Login with CustomerAdmin and Facility Admin ",
+              "timedOut": null,
+              "duration": 147589,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, cusadmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(cusadmin, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\n// Step 3 and 4\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.navigateTo('Worklist');\ncy.get('button:contains(\"Clear All\")').first().click();\ncy.get('span:contains(\"' + customerName + '\")').should('exist');\ncy.get('[title=\"' + facilityName + '\"]').should('exist');\ncy.get('[title=\"' + facility1Name + '\"]').should('exist');\ncy.get('[title=\"' + facility2Name + '\"]').should('not.exist');\ncy.get('[title=\"' + facility2Name1 + '\"]').should('not.exist');\ncy.get('[title=\"a-17\"]').should('exist');\ncy.get('[title=\"c-05\"]').should('exist');\ncommon_1.Common.switchToCustomer(customer2Name);\ncommon_1.Common.navigateTo('Worklist');\ncy.get('span:contains(\"' + customer2Name + '\")').should('exist');\ncy.get('button:contains(\"Clear All\")').first().click();\ncy.get('[title=\"' + facilityName + '\"]').should('not.exist');\ncy.get('[title=\"' + facility1Name + '\"]').should('not.exist');\ncy.get('[title=\"' + facility2Name + '\"]').should('exist');\ncy.get('[title=\"' + facility2Name1 + '\"]').should('exist');\ncy.get('[title=\"a-02\"]').should('exist');\ncy.get('[title=\"a-02\"]').should('exist');\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.login(customerName, facuser, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facuser, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\n// Step 3 and 4\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.navigateTo('Worklist');\ncy.get('button:contains(\"Clear All\")').first().click();\ncy.get('span:contains(\"' + customerName + '\")').should('exist');\ncy.get('[title=\"' + facilityName + '\"]').should('exist');\ncy.get('[title=\"' + facility1Name + '\"]').should('exist');\ncy.get('[title=\"' + facility2Name + '\"]').should('not.exist');\ncy.get('[title=\"' + facility2Name1 + '\"]').should('not.exist');\ncy.get('[title=\"a-17\"]').should('exist');\ncy.get('[title=\"c-05\"]').should('exist');\ncommon_1.Common.switchToCustomer(customer2Name);\ncommon_1.Common.navigateTo('Worklist');\ncy.get('span:contains(\"' + customer2Name + '\")').should('exist');\ncy.get('button:contains(\"Clear All\")').first().click();\ncy.get('[title=\"' + facilityName + '\"]').should('not.exist');\ncy.get('[title=\"' + facility1Name + '\"]').should('not.exist');\ncy.get('[title=\"' + facility2Name + '\"]').should('exist');\ncy.get('[title=\"' + facility2Name1 + '\"]').should('exist');\ncy.get('[title=\"a-02\"]').should('exist');\ncy.get('[title=\"a-02\"]').should('exist');",
+              "err": {},
+              "uuid": "ba372030-a2a3-4d70-a291-7627fddb8cd7",
+              "parentUUID": "01107e0a-8b96-45b2-8470-0150be020598",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3029 - Worklist for User with Multiple Customer Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7276,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);\nmeteor_1.Meteor.changeFacilityStatus(facility1Name, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name1, false);",
+              "err": {},
+              "uuid": "8d1d6db5-19ea-469c-bd80-e0686ac067d3",
+              "parentUUID": "01107e0a-8b96-45b2-8470-0150be020598",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "02285b14-3dd9-4ed1-b5b0-12422d366ae5",
+            "0d161688-c512-4f9b-92cb-04b15cc7e1a4",
+            "ba372030-a2a3-4d70-a291-7627fddb8cd7",
+            "8d1d6db5-19ea-469c-bd80-e0686ac067d3"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 482404,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

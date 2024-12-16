@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="375.192" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T04:24:58" tests="0" file="cypress/e2e/test-suites/ECP-T2792-SystemAdminNotificationEmailTemplates.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2792 - System Admin - Notifications - Email Templates" timestamp="2024-12-15T04:24:58" tests="2" time="375.175" failures="0">
+    <testcase name="Before Step - restore system defaults" time="289.839" classname="ECP-T2792 - System Admin - Notifications - Email Templates">
+    </testcase>
+    <testcase name="Starting System Admin - Notifications - Email Templates Test - Step 1 to 23" time="78.337" classname="ECP-T2792 - System Admin - Notifications - Email Templates">
+    </testcase>
+  </testsuite>
+</testsuites>

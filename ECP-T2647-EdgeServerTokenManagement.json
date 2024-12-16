@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:26:42.838Z",
+    "end": "2024-12-15T03:29:02.201Z",
+    "duration": 139363,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a86959dc-ece0-4f94-a616-0755141ccf53",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2647-EdgeServerTokenManagement.spec.ts",
+      "file": "cypress/test-suites/ECP-T2647-EdgeServerTokenManagement.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "10f8646b-3f89-4a06-a6c7-84b2b5a497a0",
+          "title": "ECP-T2647 - Edge Server Token Management",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step",
+              "fullTitle": "ECP-T2647 - Edge Server Token Management Test Preparation - Before Step",
+              "timedOut": null,
+              "duration": 76296,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowPushToPACS: true,\n    allowAD: true,\n    allowEdgeServer: true,\n    allowTagEditing: true,\n    allowDICOMReceive: true,\n    allowQueryRetrieve: true,\n    allowNucleusIoQueryRetrieve: true,\n    allowModalityWorklist: true,\n    allowReportQuerySources: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true\n}, facilityName);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Integration');\ncy.get(es.edgeServerTab).should('exist');",
+              "err": {},
+              "uuid": "9f201c0c-4fad-4440-a19f-e28bd1754b40",
+              "parentUUID": "10f8646b-3f89-4a06-a6c7-84b2b5a497a0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Starting Edge Server Token Management Test - All 16 steps in one",
+              "fullTitle": "ECP-T2647 - Edge Server Token Management Starting Edge Server Token Management Test - All 16 steps in one",
+              "timedOut": null,
+              "duration": 45739,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 1 - Using an org. admin account, navigate to My Org > Integration > Edge Servers tab and verify the tab is displayed.\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Integration');\ncy.get(es.edgeServerTab).should('exist');\n// Step 2 - Verify the edge server tab contains the listed columns.\ncy.get(es.descriptionColumn).should('exist');\ncy.get(es.statusColumn).should('exist');\ncy.get(es.createdByColumn).should('exist');\ncy.get(es.createdAtColumn).should('exist');\ncy.get(es.actionsColumn).should('exist');\n// Step 3 - Verify the \"display inactive tokens\" check box is checked by default.\ncy.get(es.displayInactiveTokenCheckbox).should('be.checked');\n// Step 4 - Click on CREATE EDGE SERVER TOKEN and verify the pop-over opens.\ncy.get(es.addESToken).click();\ncy.waitUntil(function () { return cy.get(es.tokenDescription).should('exist'); }, { timeout: configFile.waitUntilTimeout });\n// Step 5 - Verify the Create API token popover contains the listed items. - Token description field (required),\n// Token status check box for active tokens, CANCEL button, CREATE button\ncy.get(es.tokenDescription).should('exist');\ncy.get(es.tokenStatus).should('exist');\ncy.get(es.closePopup).should('exist');\ncy.get(es.createToken).should('exist');\n// Step 6 - Click Cancel.  Verify the pop-over is closes and no token is created.\ncy.get(es.closePopup).click();\ncy.wait(configFile.tinyTimeout);\ncy.get(es.tokenRow).should('not.exist');\n// Step 7 - CREATE EDGE SERVER TOKEN, input a token description, click CREATE and verify the pop-over contains the listed contents.\ncy.get(es.addESToken).click();\ncy.waitUntil(function () { return cy.get(es.tokenDescription).should('exist'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.tokenDescription).type(\"\".concat(tokenName).concat(facilityName, \"_\"));\ncy.get(es.createToken).click();\ncy.waitUntil(function () { return cy.get(es.tokenContent).should('exist'); }, { timeout: configFile.longTimeout });\ncy.get(es.tokenContent).then(function (el) {\n    token = el.text();\n});\ncy.get(es.tokenCreateMsg).should('contain.text', 'Token Created');\ncy.get(es.activeTokenCheckBox).should('exist');\ncy.get(es.copyToClipboard).should('exist');\ncy.get(es.copyTokenValidation).should('contain.text', \"For security purposes, the token will not be available\\n                again after closing this dialog. Be sure to securely\\n                manage the token outside of application to prevent unauthorized access to your account.\");\ncy.get(es.saveToken).should('have.text', 'OK');\n// Step 8 - Click OK or outside the pop-over and verify the pop-over now contains the correct text.\ncy.get(es.saveToken).click();\ncy.wait(configFile.tinyTimeout);\ncy.get(es.reminderBox).should('have.text', 'Did you copy the token value?');\ncy.get(es.saveToken).click();\ncy.wait(configFile.tinyTimeout);\n// Step 9 - Verify after the pop-over is closed the edge server token is no longer displayed.\n// con not verify using cypress\n// Step 10 - Verify the listed fields are recorded properly for the created edge server token.\ncy.get(es.rowAction).first().find('td:nth-child(1)').should('have.text', \"\".concat(tokenName).concat(facilityName, \"_\"));\ncy.get(es.rowAction).first().find('td:nth-child(2)').should('have.text', 'Active');\n// Step 11 - Click the edit button for the newly created edge server token and verify the description can be edited.\ncy.get(es.editToken).first().click();\ncy.waitUntil(function () { return cy.get(es.tokenDescription); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.tokenDescription).type(\"edited\");\ncy.get(es.saveEditToken).click();\ncy.wait(configFile.tinyTimeout);\ncy.get(es.rowAction).first().find('td:nth-child(1)').should('have.text', \"\".concat(tokenName).concat(facilityName, \"_edited\"));\n// Step 12 - Verify an edge server token can be made inactive.\ncy.get(es.editToken).first().click();\ncy.waitUntil(function () { return cy.get(es.tokenStatus); }, { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.tinyTimeout);\ncy.get(es.tokenStatus).uncheck();\ncy.get(es.saveEditToken).click();\ncy.wait(configFile.tinyTimeout);\ncy.get(es.tokenStatusCell).should('have.text', 'Inactive');\n// Step 13 - Click the edit button again, update the token description and click the <ENTER> key\ncy.get(es.editToken).first().click();\ncy.waitUntil(function () { return cy.get(es.tokenDescription); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.tokenDescription).type(\"_edited_again{enter}\");\ncy.get(es.saveEditToken).should('exist');\ncy.get(es.closePopup).click();\ncy.wait(configFile.tinyTimeout);\n// Step 14 - Uncheck and check the \"display inactive tokens\" check box and verify the inactivated token displays as expected\ncy.get(es.displayInactiveTokenCheckbox).uncheck();\ncy.wait(configFile.tinyTimeout);\ncy.get(es.tokenRow).should('not.exist');\n// Step 15 - Click the edit button again, set the status to active and click SAVE.\ncy.get(es.displayInactiveTokenCheckbox).check();\ncy.wait(configFile.tinyTimeout);\ncy.get(es.editToken).first().click();\ncy.waitUntil(function () { return cy.get(es.tokenStatus); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.tokenStatus).check();\ncy.get(es.saveEditToken).click();\ncy.wait(configFile.tinyTimeout);\ncy.get(es.displayInactiveTokenCheckbox).uncheck();\ncy.wait(configFile.tinyTimeout);\ncy.get(es.rowAction).first().find('td:nth-child(1)').should('have.text', \"\".concat(tokenName).concat(facilityName, \"_edited\"));\n// Step 16 - Click the delete button and verify an edge server token can be deleted after confirmation.\ncy.get(es.deleteTokenAction).first().click();\ncy.wait(configFile.tinyTimeout);\ncy.waitUntil(function () { return cy.get(es.deleteTokenPopup).should('have.text', 'Do you want to delete this token? A deleted token cannot be recreated.NoYes, Delete'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.deleteTokenClosePopup).should('exist');\ncy.get(es.confirmDeleteToken).should('exist');\ncy.get(es.confirmDeleteToken).click();\ncy.wait(configFile.tinyTimeout);\ncy.get(es.tokenRow).should('not.exist');",
+              "err": {},
+              "uuid": "1f2b2947-8afe-4e27-b5c0-16bb40dfa599",
+              "parentUUID": "10f8646b-3f89-4a06-a6c7-84b2b5a497a0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2647 - Edge Server Token Management Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7418,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "68ea80c1-f24e-4fb9-b249-44811bc26680",
+              "parentUUID": "10f8646b-3f89-4a06-a6c7-84b2b5a497a0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9f201c0c-4fad-4440-a19f-e28bd1754b40",
+            "1f2b2947-8afe-4e27-b5c0-16bb40dfa599",
+            "68ea80c1-f24e-4fb9-b249-44811bc26680"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 129453,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

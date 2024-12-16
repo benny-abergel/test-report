@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="333.975" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T04:11:35" tests="0" file="cypress/e2e/test-suites/ECP-T2794-SystemAdminNotificationPage.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2794 - System Admin - Notification Page" timestamp="2024-12-15T04:11:35" tests="3" time="333.955" failures="0">
+    <testcase name="Reset to default" time="286.062" classname="ECP-T2794 - System Admin - Notification Page">
+    </testcase>
+    <testcase name="Starting test ECP-T2794 - System Admin - Notification Page - Step 1 - 12 - Email Templates Tab" time="31.140" classname="ECP-T2794 - System Admin - Notification Page">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.563" classname="ECP-T2794 - System Admin - Notification Page">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:13:04.150Z",
+    "end": "2024-12-15T02:18:13.244Z",
+    "duration": 309094,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "6f7fa9f5-e00c-4064-b969-db01194bbac6",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2638-ExamDeleteUndelete.spec.ts",
+      "file": "cypress/test-suites/ECP-T2638-ExamDeleteUndelete.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ef41f245-0916-4644-bb8b-4ba4a8216726",
+          "title": "ECP-T2638 - Exam Delete & Undelete",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step",
+              "fullTitle": "ECP-T2638 - Exam Delete & Undelete Test Preparation - Before Step",
+              "timedOut": null,
+              "duration": 116112,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facility2Name);\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowPatientSharing: true,\n    allowStatShares: true\n}, facility2Name);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowPatientSharing: true,\n    allowStatShares: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // Step 1 - Study Upload:  Login to the test environment with a restricted user account and upload the 1st 3 studies from the acceptance set.\n    // upload exam now\n    var examUploadCmd_01 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd_01, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n    var examUploadCmd_02 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-02\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd_02, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n    var examUploadCmd_03 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-03\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd_03, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n}).catch(function (err) {\n    console.log(err);\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"a-03\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('System Tools');\ncy.wait(configFile.tinyTimeout);\ncy.get('#container .adminHeader a[href=\"/authTokens\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.table  tr td.viewSuper .superUserCheckbox').eq(0).check();",
+              "err": {},
+              "uuid": "c5380bfd-e752-4bed-9974-34bc563a4291",
+              "parentUUID": "ef41f245-0916-4644-bb8b-4ba4a8216726",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T2638 Exam Delete & Undelete step 1 -13",
+              "fullTitle": "ECP-T2638 - Exam Delete & Undelete ECP-T2638 Exam Delete & Undelete step 1 -13",
+              "timedOut": null,
+              "duration": 174656,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, restrictedUserName, restrictedUserPassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(restrictedUserName, restrictedUserPassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 2 - Confirmation Message for Undelete and its functionality. Delete all 3 studies.Click the undelete button for acceptance set 1.\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('button.viewExam').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('#tableStudies_wrapper .table--fixed-header .studyTableHeader #js-checkbox').check({ force: true });\ncy.get('#tableStudies_wrapper .table--fixed-header .studyMultiSelectActions .multi-action-wrapper .bulkDeletePopoverContainer').click();\ncy.get('.confirmDelete-popover .popover-content .popover-btn-group #confirm-confirmDelete').click();\ncy.get('[data-cy=\"restoreNavLink\"]').click();\ncy.get('button:contains(\"Study Deleted\")').first().should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('span:contains(\"Acceptance, Set 1\")').last().rightclick();\ncy.get('[data-cy=\"restore\"]').click();\ncy.get('[data-cy=\"actionYesButton\"]').click();\n//Step 3 - Delete Acceptance Set 1 Again.\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('button.viewExam').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"Acceptance, Set 1\"]').parents('tr[data-cy=\"examListStudy\"]').find('.expanderCell').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.examInfoRow button[data-cy=\"deleteExamBtn\"]').click();\ncy.get('.confirmDelete .popover-content .popoverBtnGroup #confirmDeleteYes').click();\ncy.get('.expanderCell').should('have.length', 0);\ncy.get('[data-cy=\"restoreNavLink\"]').click();\ncy.get('span:contains(\"Acceptance, Set 1\")').first().should('be.visible', { timeout: configFile.mediumTimeout });\ncommon_1.Common.logout();\n// Step 4 - HIPAA log: Login as org admin and Verify the delete and undelete actions are recorded in the HIPAA audit log.\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.get('[data-cy=\"restoreNavLink\"]').click();\ncy.get('button:contains(\"Study Deleted\")').first().should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('span:contains(\"Acceptance, Set 1\")').last().rightclick();\ncy.get('[data-cy=\"log\"]').click();\ncy.get('button:contains(\"Exam Deleted\")').first().should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('button:contains(\"Exam Undeleted\")').first().should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('button:contains(\"Exam Received\")').first().should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('span:contains(\"x\")').click({ force: true });\n// Step 5 - Group Admin Deleted Tab: Verify the group admin's deleted exams tab contains exams that have been deleted by all users,\n//while the user and restricted user can only see exams they have personally deleted.\n// TODO\n// Step 6 - Undelete Exam: Using the group admin account, undelete an exam deleted by the restricted user and 1 deleted by themselves.\n// TODO\n// Step 7 - Delete Acceptance Set 2: Using any account, delete acceptance set 2 and Upload the same exam again\n//TODO - Acceptance Set 2 is already deleted in Step 2, and remaining step are bellow:\nvar examUploadCmd4 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-02\", \" -keepAlive=1\");\ncy.exec(examUploadCmd4, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED } })\n    .then(function (_a) {\n    var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n    console.log(code, stdout, stderr);\n});\n// Step 8 - Undelete Acceptance Set 2: Navigate to the deleted exams tab and click on the undelete button\n//for the previously deleted acceptance set 2 exams and verify the warning message:\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('[data-cy=\"restoreNavLink\"]').click();\ncy.get('button:contains(\"Study Deleted\")').first().should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('span:contains(\"Acceptance, Set 2\")').last().rightclick();\ncy.get('[data-cy=\"restore\"]').click();\ncy.get('[data-cy=\"actionYesButton\"]').click();\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.tinyTimeout);\ncy.get('.expanderCell').should('have.length', 2);\n// Step 9 -Delete Shared Exam: Create an org. share for any exam to any organization\n// and delete the same exam from the Image Exchange Page.\ncy.get('button[title=\"More Actions\"]').first().click({ force: true });\ncy.get('button.shareExam').eq(0).click({ force: true });\ncy.get('.popover-content #organization').type(facility2Name);\ncy.get('.popover-content .multiStateButtonWrapper').contains('button', 'Search').click();\ncy.get('.selectableRecipientRow').first().find('.iconCircleCheck').click({ force: true });\ncy.get('.popover-content #shareExam').should('be.enabled').click({ force: true });\n//cy.get('.popover-content #shareExam').should('not.be.visible',{timeout:configFile.hugeTimeout});\ncy.wait(configFile.smallTimeout);\ncy.get('button.shareExam').first().find('title').should('exist');\ncy.get('.expanderCell').eq(0).click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.examInfoRow button[data-cy=\"deleteExamBtn\"]').click();\ncy.get('.confirmDelete .popover-content .deleteExamPopover').should('contain.text', 'This exam has active shares.');\ncy.get('.confirmDelete .popover-content .deleteExamPopover').should('contain.text', 'Deleting the exam will revoke the shares.');\ncy.get('.confirmDelete .popover-content .popoverBtnGroup .js-close-popover').click();\ncy.get('.examInfoRow button[data-cy=\"deleteExamBtn\"]').click();\ncy.get('.confirmDelete .popover-content .popoverBtnGroup #confirmDeleteYes').click();\ncy.get('.expanderCell').should('have.length', 1);\n// Step 10 - Delete & Purge while Upload is in Progress. Using the org admin account,\n//begin an upload of a larger exam.While the exam is uploading, delete and purge the exam.\n// TODO - can't do with cypress\n// Step 11 - Delete and Purge Exam with missing Patient Name: Verify the Exam can be deleted and Purged.\nvar examUploadCmd5 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/c-38-6\", \" -keepAlive=1\");\ncy.exec(examUploadCmd5, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED } })\n    .then(function (_a) {\n    var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n    console.log(code, stdout, stderr);\n});\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"c-38-6\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('#div-header-studies #orgExams').click();\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span').contains('c-38-6').parents('tr[data-cy=\"examListStudy\"]').find('.expanderCell').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.examInfoRow button[data-cy=\"deleteExamBtn\"]').click();\ncy.get('.confirmDelete .popover-content .popoverBtnGroup #confirmDeleteYes').click();\ncy.get('[data-cy=\"restoreNavLink\"]').click();\ncy.get('button:contains(\"Study Deleted\")').first().should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('span:contains(\"C-38-6\")').last().rightclick();\ncy.get('[data-cy=\"purge\"]').click();\ncy.get('[data-cy=\"actionYesButton\"]').click();\ncy.get('span:contains(\"C-38-6\")').should('have.length', 0, { timeout: configFile.mediumTimeout });\n// Step 12 - No Delete option in Deleted Tab: Navigate to the deleted exams tab,\n//expand the exam info for a deleted exam and verify there is no option to delete.\n/*  cy.get('#div-header-studies #deletedExams').click()\n cy.get('.expanderCell').eq(0).click()\n cy.wait(configFile.tinyTimeout)\n cy.get('.examInfoRow button[data-cy=\"deleteExamBtn\"]').should('not.exist') */\n// Step 13 - Delete and Purged Patient Shared Exam: Create a patient share, login as the patient and accept ownership of the share,\n//then verify the share creator can delete and purge the exam from their list without affecting\n//the patient's ability to view their exam.\n// TODO",
+              "err": {},
+              "uuid": "a2d33521-c023-4ab6-8f6a-7ad15c8c33dc",
+              "parentUUID": "ef41f245-0916-4644-bb8b-4ba4a8216726",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2638 - Exam Delete & Undelete Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6738,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "d584bc92-3a55-45f6-99c0-e5ead9b80516",
+              "parentUUID": "ef41f245-0916-4644-bb8b-4ba4a8216726",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c5380bfd-e752-4bed-9974-34bc563a4291",
+            "a2d33521-c023-4ab6-8f6a-7ad15c8c33dc",
+            "d584bc92-3a55-45f6-99c0-e5ead9b80516"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 297506,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

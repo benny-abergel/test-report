@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="215.612" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:52:32" tests="0" file="cypress/e2e/test-suites/ECP-T3451-ExamPriorityMapping.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3451- Exam priority mapping" timestamp="2024-12-15T03:52:32" tests="4" time="215.594" failures="0">
+    <testcase name="ECP-T3451 - data preperation" time="82.844" classname="ECP-T3451- Exam priority mapping">
+    </testcase>
+    <testcase name="steps 1 - 10" time="57.668" classname="ECP-T3451- Exam priority mapping">
+    </testcase>
+    <testcase name="steps 11-18" time="65.950" classname="ECP-T3451- Exam priority mapping">
+    </testcase>
+    <testcase name="clear data" time="6.396" classname="ECP-T3451- Exam priority mapping">
+    </testcase>
+  </testsuite>
+</testsuites>

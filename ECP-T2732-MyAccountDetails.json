@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:36:24.519Z",
+    "end": "2024-12-15T03:39:11.608Z",
+    "duration": 167089,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "95007159-ff3f-4f9c-9803-98b8989123fe",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2732-MyAccountDetails.spec.ts",
+      "file": "cypress/test-suites/ECP-T2732-MyAccountDetails.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "fc685aee-24a6-4a6a-a449-0369cd83d24e",
+          "title": "ECP-T2732 - My Accunt Details",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 - 17",
+              "fullTitle": "ECP-T2732 - My Accunt Details Step 1 - 17",
+              "timedOut": null,
+              "duration": 148108,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//Step 1\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n//Step 2\ncy.get('[data-cy=\"usernameLabel\"]').click();\ncy.get('.js-my-account').click();\n// Step 3\ncy.get('h4:contains(\"My Account\")').should('exist');\ncy.get('a:contains(\"Account Info\")').should('exist');\n//Step 4\ncy.get('.nav > :nth-child(2) > a').click();\ncy.get('.nav > :nth-child(1) > a').click();\n//Step 5\ncy.get('#firstName').should('exist');\ncy.get('#lastName').should('exist');\ncy.get('.account-details > .form-vertical > .row > :nth-child(4) > .form-control').should('exist');\ncy.get('h3:contains(\"Multi-Factor Authentication\")').should('exist');\ncy.get('.iconWithTooltip > .btn').click();\ncy.get('.tooltip-inner:contains(\"Multi-factor authentication is controlled by your administrator.\")').should('be.visible');\ncy.get('#mfaAccountSetup').click();\ncy.get('h3:contains(\"Set up multi-factor authentication\")').should('exist');\ncy.get('#googleAuthBtn').should('be.visible');\ncy.get('#msAuthBtn').should('be.visible');\ncy.get('.modal-content > .close > span').click();\ncy.get('#firstName').should('not.be.enabled');\ncy.get('#lastName').should('not.be.enabled');\ncy.get('label:contains(\"Profession Type\")').siblings('input').should('have.attr', 'disabled');\ncy.get('#editPersonal').click();\n//Step 6\ncy.get('#firstName').should('be.enabled');\ncy.get('#lastName').should('be.enabled');\ncy.get('.Select-placeholder:contains(\"Select...\")').should('exist');\n//Step 7\ncy.get('.cancel').should('exist');\ncy.get('#savePersonal').should('exist');\n//Step 8\ncy.get('.Select-placeholder').eq(0).click();\nvar prof = [\"Healthcare Provider\", \"PACS/RIS Administrator\", \"Imaging Manager/Director\", \"IT Manager/Director\", \"Radiology Technologist\", \"Other Director-Level Administrator\", \"C-Level Administrator\", \"Healthcare staff/support\", \"Attorney/Paralegal\", \"Other\"];\nprof.forEach(function (sp) {\n    cy.get('[aria-label=\"' + sp + '\"').should('exist');\n});\ncy.get('[aria-label=\"Healthcare Provider\"]').click();\ncy.get('.Select-placeholder').eq(0).click();\nvar sub = [\"MD\", \"DO\", \"DC\", \"Registered Nurse\", \"Nurse Practitioner\", \"Physicians Assistant\", \"Resident/Fellow/Doctoral Student\", \"Other\"];\nsub.forEach(function (sp1) {\n    cy.get('[aria-label=\"' + sp1 + '\"').should('exist');\n});\ncy.get('.Select-placeholder').eq(0).click();\ncy.get('.Select-placeholder').eq(1).click({ force: true });\nvar sub1 = [\"Radiology\", \"Orthopedic\", \"Neurology\", \"Cardiology\", \"Oncology\", \"Surgery\", \"Other\"];\nsub1.forEach(function (sp2) {\n    cy.get('[aria-label=\"' + sp2 + '\"').should('exist');\n});\ncy.get('[aria-label=\"Other\"]').click();\ncy.get('#otherSpecialtyField').type('Test@123');\n//Step 9\ncy.get('#firstName').clear();\ncy.get('#lastName').clear();\ncy.wait(configFile.tinyTimeout);\ncy.get('#savePersonal').click({ force: true });\ncy.get('p:contains(\"Please correct all error\")').should('exist');\ncy.get('p:contains(\"highlighted in red\")').should('exist');\ncy.get('p:contains(\"in order to change your profile.\")').should('exist');\n//Step 10\ncy.get('#firstName').type('test');\ncy.get('#lastName').type('test');\ncy.get('#savePersonal').click();\ncy.get('#editPersonal').click();\ncy.get('#firstName').invoke('val').then(function (text) {\n    expect(text).to.equal(\"test\");\n});\ncy.get('#lastName').invoke('val').then(function (text) {\n    expect(text).to.equal(\"test\");\n});\ncy.get('#otherSpecialtyField').invoke('val').then(function (text) {\n    expect(text).to.equal(\"Test@123\");\n});\n//Step 11\ncy.get('#firstName').clear().type(\"{selectall}firstname\");\ncy.wait(configFile.tinyTimeout);\ncy.get('.cancel').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('#firstName').invoke('val').then(function (text) {\n    expect(text).to.equal(\"test\");\n});\n//Step 12\ncy.get('.modal-header > .close > span').click();\n//Step 13\ncy.get('[data-cy=\"usernameLabel\"]').click();\ncy.get('.js-my-account').click();\ncy.get('#editPassword').click();\ncy.get('#currentPassword').type('Test@1234');\ncy.get('#newPassword').type(updatepass);\ncy.get('#confirmPassword').type(updatepass);\ncy.get('#savePassword').click({ force: true });\ncy.get('p:contains(\"Current password is not correct.\")').should('exist');\n//Step 14\ncy.get('#currentPassword').clear().type(userpassword);\ncy.get('#newPassword').clear().type(updatepass);\ncy.get('#confirmPassword').clear().type('Test@1234567');\ncy.get('#savePassword').click({ force: true });\ncy.get('p:contains(\"Does not match New Password\")').should('exist');\n//Step 15 and 16\ncy.get('#confirmPassword').clear().type(updatepass);\ncy.get('[type=\"password\"]').should('exist');\ncy.get('.iconShow').eq(0).click();\ncy.get('[type=\"password\"]').should('not.exist');\ncy.get('#savePassword').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.modal-header > .close > span').click();\ncy.wait(configFile.smallTimeout);\n// cy.get('button:contains(\"Yes, Discard Changes\")').click();\n//Step 17\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.login(customerName, userName, updatepass);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);",
+              "err": {},
+              "uuid": "504b6a06-0a78-4aee-b480-351abce0bb63",
+              "parentUUID": "fc685aee-24a6-4a6a-a449-0369cd83d24e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2732 - My Accunt Details Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7992,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, updatepass);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "086f1dc8-b638-4184-bee3-9d6c0deac7c2",
+              "parentUUID": "fc685aee-24a6-4a6a-a449-0369cd83d24e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "504b6a06-0a78-4aee-b480-351abce0bb63",
+            "086f1dc8-b638-4184-bee3-9d6c0deac7c2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 156100,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

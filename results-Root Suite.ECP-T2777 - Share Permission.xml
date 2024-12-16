@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="482.549" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:13:40" tests="0" file="cypress/e2e/test-suites/ECP-T2777-SharePermission.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2777 - Share Permission" timestamp="2024-12-15T02:13:40" tests="3" time="482.531" failures="0">
+    <testcase name="Before test - Test preparation and upload exam and Starting test ECP-T2777 - Share Permission" time="139.887" classname="ECP-T2777 - Share Permission">
+    </testcase>
+    <testcase name="Starting test ECP-T2777 - Share Permission - Step 1 - 19" time="320.295" classname="ECP-T2777 - Share Permission">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.433" classname="ECP-T2777 - Share Permission">
+    </testcase>
+  </testsuite>
+</testsuites>

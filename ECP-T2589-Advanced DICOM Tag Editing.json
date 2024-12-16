@@ -1,0 +1,135 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 0,
+    "passes": 0,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:44:13.979Z",
+    "end": "2024-12-15T03:50:20.911Z",
+    "duration": 366932,
+    "testsRegistered": 2,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 1,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "4df0e682-84c4-4e98-b5dd-9994b5b2194c",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2589-Advanced DICOM Tag Editing.spec.ts",
+      "file": "cypress/test-suites/ECP-T2589-Advanced DICOM Tag Editing.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "698259fa-5489-4e9b-ab15-6370106659f1",
+          "title": "ECP-T2589 - Advanced DICOM Tag Editing",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "All the Steps ",
+              "fullTitle": "ECP-T2589 - Advanced DICOM Tag Editing All the Steps ",
+              "timedOut": null,
+              "duration": 99460,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Integration');\ncy.get('#DICOM').click();\nif (Cypress.currentRetry == 0)\n    cy.get('button:contains(\"Delete\")').should('not.exist');\ncy.get('.sectionHeader #add').click();\ncy.get('#pacsNameField').type('test123');\ncy.get('#supportsP2P').check();\ncy.get('#titleReceiverField').type('test');\ncy.get('#hostNameField').type('127.0.0.1');\ncy.get('#confirmDeleteDestinationYes').click();\ncy.get('#edgeServers').click();\ncy.get('.add-edge-server-token').click();\ncy.get('#tokenDescription').type('test');\ncy.get('.create-token').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // Step 1 - Study Upload:  Login to the test environment with a restricted user account and upload the 1st 3 studies from the acceptance set.\n    // upload exam now\n    var examUploadCmd_01 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd_01, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"a-01\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.iconPush').click();\ncy.get('.TagEditor__Button').should('not.exist');\ncy.get('.p2pPowerUser > .modal-dialog > .modal-content > .modal-header > .close > span').click();\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Integration');\ncy.get('#DICOM').click();\ncy.get('.OrganizationDicomTags__Page .sectionHeader .btn-link').click();\n//Step 5\ncy.get('.required [for=\"dicomTag\"]').should('exist');\ncy.get('.Select-multi-value-wrapper div:contains(\"Select the Tag\")').should('exist');\ncy.get('[placeholder=\"Original value if empty\"]').should('exist');\ncy.get('#shouldClearTagValue').should('exist').should('not.be.checked');\ncy.get('#isTagEditingEnabled').should('exist').should('not.be.checked');\ncy.get('.TagPopover__Actions button:contains(Cancel)').should('exist');\ncy.get('.TagPopover__Actions button:contains(Save)').should('exist');\n//Step 6 and 7\ncy.get('.Select-multi-value-wrapper div:contains(\"Select the Tag\")').click();\ncy.get('[aria-label=\"(0008,0050) Accession Number\"]').click();\ncy.get('.TagPopover__Actions button:contains(Save)').click();\ncy.wait(configFile.smallTimeout);\ncy.get('td:contains(Accession Number)').should('exist');\n// Step 8 is a bug , commented that step\n//  cy.get('.OrganizationDicomTags__Page .sectionHeader .btn-link').click()\n// cy.get('div:contains(\"Select the Tag\")').click()\n// cy.get('[aria-label=\"(0008,0050) Accession Number\"]').should('not.exist')\n//Step 9\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.iconPush').click();\ncy.get('.TagEditor__Button').should('exist');\ncy.get('.TagEditor .TagEditor__Button').click();\ncy.get('td:contains(Accession Number)').should('exist');\ncy.get('.p2pPowerUser > .modal-dialog > .modal-content > .modal-header > .close > span').click();\n//Step 10,11 and 12\ncommon_1.Common.navigateTo('Integration');\ncy.get('#DICOM').click();\ncy.get('.OrganizationDicomTags__Table__Actions button:contains(Edit)').click();\ncy.get('[placeholder=\"Original value if empty\"]').clear().type('updated values');\ncy.get('.multiStateButtonWrapper .btn-primary').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.iconPush').click();\ncy.get('.TagEditor__Button').should('exist');\ncy.get('[value=\"updated values\"]').should('exist');\ncy.get('.p2pPowerUser > .modal-dialog > .modal-content > .modal-header > .close > span').click();\n//Step 13 unable to automate\n//Step 14\ncommon_1.Common.navigateTo('Integration');\ncy.get('#DICOM').click();\ncy.get('.OrganizationDicomTags__Table__Actions button:contains(Edit)').click();\ncy.get('#shouldClearTagValue').check();\ncy.get('[placeholder=\"Original value if empty\"]').should('be.disabled');\ncy.get('[value=\"updated values\"]').should('not.exist');\ncy.get('.multiStateButtonWrapper .btn-primary').click({ force: true });\ncy.wait(configFile.smallTimeout);\n//Step 15\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.iconPush').click();\ncy.get('[value=\"updated values\"]').should('not.exist');\ncy.get('.table-cell-pushValue').type('edit-test');\ncy.get('.p2pPowerUser > .modal-dialog > .modal-content > .modal-header > .close > span').click();\n//Step 16 unable to automate\n//Step 17\ncommon_1.Common.navigateTo('Integration');\ncy.get('#DICOM').click();\ncy.get('.OrganizationDicomTags__Table__Actions button:contains(Edit)').click();\ncy.get('#isTagEditingEnabled').check();\ncy.get('[placeholder=\"Original value if empty\"]').should('be.disabled');\ncy.get('.multiStateButtonWrapper .btn-primary').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.iconPush').click();\ncy.get('.TagEditor .TagEditor__Button').click();\ncy.get('.TagEditor__PushValue__Group .TagEditor__PushValue__Input').should('not.exist');\ncy.get('.p2pPowerUser > .modal-dialog > .modal-content > .modal-header > .close > span').click();\n//Step 18 unable to automate\n//Step 19\ncommon_1.Common.navigateTo('Integration');\ncy.get('#DICOM').click();\ncy.get('.OrganizationDicomTags__Table__Actions button:contains(Edit)').click();\ncy.get('#shouldClearTagValue').uncheck();\ncy.get('[placeholder=\"Original value if empty\"]').clear().type('new values');\ncy.get('.multiStateButtonWrapper .btn-primary').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.iconPush').click();\ncy.get('.TagEditor .TagEditor__Button').click();\ncy.get('.table-cell-pushValue').should('exist');\ncy.get('td:contains(new values)').should('exist');\ncy.get('.p2pPowerUser > .modal-dialog > .modal-content > .modal-header > .close > span').click();\n//Step 20 and 23 unable to automate\n//Step 22 \ncommon_1.Common.navigateTo('Integration');\ncy.get('#DICOM').click();\ncy.get('.OrganizationDicomTags__Table__Actions button:contains(Edit)').click();\ncy.get('[placeholder=\"Original value if empty\"]').clear().type('testing');\ncy.get('.multiStateButtonWrapper .btn-primary').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('button:contains(Delete)').first().click();\ncy.get('p:contains(Do you want to delete this DICOM Tag?)').should('exist');\ncy.get('button:contains(No)').click();\ncy.get('button:contains(Delete)').first().click();\ncy.get('button:contains(Yes, Delete)').click();\n//Step 24\ncy.get('#showPushType').check();\nfor (var i_1 = 1; i_1 < 5; i_1++) {\n    cy.get(':nth-child(1) > .Select-value-icon').click();\n    cy.wait(configFile.smallTimeout);\n}\ncy.get('#saveBtn').click();\ncy.get('.OrganizationDicomTags__Page .btn-link').click();\ncy.get('.Select-multi-value-wrapper div:contains(\"Select the Tag\")').click();\ncy.get('[aria-label=\"(0008,0050) Accession Number\"]').click();\ncy.get('#shouldClearTagValue').check();\ncy.get('.TagPopover__Actions button:contains(Save)').click();\ncy.wait(configFile.smallTimeout);\ncy.get('td:contains(Accession Number)').should('exist');\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.iconPush').click();\ncy.get('.TagEditor .TagEditor__Button').click();\ncy.get('[class=\"form-group required TagEditor__PushValue__Group has-error\"]').should('exist');\ncy.get('.p2pPowerUser > .modal-dialog > .modal-content > .modal-header > .close > span').click();\n//Step 21 \ncommon_1.Common.navigateTo('Integration');\ncy.get('#DICOM').click();\nvar list = [\"(0010,0021) Issuer of Patient ID\", \"(0010,0040) Patient's Sex\", \"(0028,0008) Number of Frames\"];\nvar i = 1;\nlist.forEach(function (options) {\n    cy.get('.OrganizationDicomTags__Page .sectionHeader .btn-link').click();\n    cy.get('.Select-multi-value-wrapper div:contains(\"Select the Tag\")').click();\n    cy.get(\"[aria-label=\\\"\".concat(options, \"\\\"]\")).click();\n    cy.get('[placeholder=\"Original value if empty\"]').clear().type(\"test\".concat(i));\n    cy.get('.multiStateButtonWrapper .btn-primary').click({ force: true });\n    cy.wait(configFile.smallTimeout);\n    i++;\n});\nvar pp = \"Patient's Sex\";\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.iconPush').click();\ncy.get('.TagEditor .TagEditor__Button').click();\ncy.get('.slimScrollBar').should('exist');\ncy.get('td:contains(Accession Number)').should('exist');\ncy.get('td:contains(Issuer of Patient ID)').should('exist');\ncy.get('td:contains(Number of Frames)').should('exist');\ncy.get(\"td:contains(\".concat(pp, \")\")).should('exist');\ncy.get('.p2pPowerUser > .modal-dialog > .modal-content > .modal-header > .close > span').click();\n//Step 25\nmeteor_1.Meteor.changeFeatures({\n    allowTagEditing: false\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.iconPush').click();\ncy.get('.TagEditor .TagEditor__Button').should('not.exist');\ncy.get('[title=\"1000-1\"] .table-item .required').should('exist');",
+              "err": {
+                "message": "CypressError: Timed out retrying after 60050ms: `cy.click()` failed because this element:\n\n`<label id=\"edgeServers\" for=\"edgeServersTab\" title=\"Edge Servers\" data-value=\"2\" class=\"tab-label\" role=\"button\">...</label>`\n\nis being covered by another element:\n\n`<div class=\"destinationModal modal fade js-confirm-delete-destination-dialog in\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"modal-title\" style=\"display: block;\">...</div>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
+                "estack": "CypressError: Timed out retrying after 60050ms: `cy.click()` failed because this element:\n\n`<label id=\"edgeServers\" for=\"edgeServersTab\" title=\"Edge Servers\" data-value=\"2\" class=\"tab-label\" role=\"button\">...</label>`\n\nis being covered by another element:\n\n`<div class=\"destinationModal modal fade js-confirm-delete-destination-dialog in\" data-backdrop=\"static\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"modal-title\" style=\"display: block;\">...</div>`\n\nFix this problem, or use {force: true} to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at ensureIsDescendent (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130218:76)\n    at ensureDescendents (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130269:5)\n    at ensureDescendentsAndScroll (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130275:14)\n    at ensureElIsNotCovered (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130406:5)\n    at runAllChecks (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130586:52)\n    at retryActionability (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130623:16)\n    at tryCatcher (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8914:23)\n    at Promise.attempt.Promise.try (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6188:29)\n    at whenStable (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:146724:65)\n    at <unknown> (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:146165:14)\n    at tryCatcher (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8914:23)\n    at Promise._settlePromiseFromHandler (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6849:31)\n    at Promise._settlePromise (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6906:18)\n    at Promise._settlePromise0 (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6951:10)\n    at Promise._settlePromises (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:7031:18)\n    at Promise._fulfill (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6975:18)\n    at <unknown> (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8589:46)\nFrom Your Spec Code:\n    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2589-Advanced DICOM Tag Editing.spec.ts:68:31)",
+                "diff": null
+              },
+              "uuid": "2e982f53-0945-4752-ad68-43087670bdc4",
+              "parentUUID": "698259fa-5489-4e9b-ab15-6370106659f1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2589 - Advanced DICOM Tag Editing Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "4d1a49d1-ce6e-4827-870e-f97767d06658",
+              "parentUUID": "698259fa-5489-4e9b-ab15-6370106659f1",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "2e982f53-0945-4752-ad68-43087670bdc4"
+          ],
+          "pending": [],
+          "skipped": [
+            "4d1a49d1-ce6e-4827-870e-f97767d06658"
+          ],
+          "duration": 99460,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

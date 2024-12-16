@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="860.259" tests="20" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:39:36" tests="0" file="cypress/e2e/test-suites/ECP-T3553-Change-examStatus.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3553-Change Exam Status" timestamp="2024-12-15T02:39:36" tests="20" time="860.223" failures="0">
+    <testcase name="ECP-T3553 - data prep" time="151.255" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 1-2 - Load Worklist, Upload Study With Many Images" time="183.109" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 3 - ​​​​Send Procedure with API - Scheduled" time="4.586" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 4 - Send Procedure with API - Transcribed" time="3.018" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 5 - Send Procedure with API - Preliminary" time="3.211" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 6 - Send Procedure with API - Final" time="3.045" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 7 - Send Procedure with API - Addended" time="3.218" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 8 - Send Procedure with API - In Error" time="3.228" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 9 - Send Procedure with API - Cancelled" time="3.019" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 10 - Change Exam Status To - Unmatched Study" time="48.822" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 11 - Change Exam Status To - Unmatched Procedure" time="23.186" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 12 - Change Exam Status To - Unmatched Procedure with Report" time="13.735" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 13 - Scheduled Report Status - Unmatched Procedure" time="32.041" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 14-19 - change exam status" time="131.548" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 20 - ​Audit log" time="11.504" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 21 - Matched Exam with Report - 1st Study" time="71.476" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 22 - Matched Exam with Report - 2nd Study" time="70.546" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 23 - Exam Status Permissions - Technologist" time="45.770" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Step 24 - Exam Status Permissions - Interpreting Provider" time="42.337" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.045" classname="ECP-T3553-Change Exam Status">
+    </testcase>
+  </testsuite>
+</testsuites>

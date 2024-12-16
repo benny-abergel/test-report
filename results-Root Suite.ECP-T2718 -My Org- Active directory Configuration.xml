@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="332.219" tests="3" failures="1">
+  <testsuite name="" timestamp="2024-12-15T03:46:46" tests="0" file="cypress/e2e/test-suites/ECP-T2718-ActiveDirectoryConfiguration.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2718 -My Org- Active directory Configuration" timestamp="2024-12-15T03:46:46" tests="3" time="0.000" failures="1">
+    <testcase name="Precondition to active AD domain" time="119.912" classname="ECP-T2718 -My Org- Active directory Configuration">
+    </testcase>
+    <testcase name="AD configuration page should failed due to ECP-19942" time="65.073" classname="ECP-T2718 -My Org- Active directory Configuration">
+      <failure message="`cy.click()` can only be called on a single element. Your subject contained 2 elements. Pass `{ multiple: true }` if you want to serially click each element.
+
+https://on.cypress.io/click" type="CypressError"><![CDATA[CypressError: `cy.click()` can only be called on a single element. Your subject contained 2 elements. Pass `{ multiple: true }` if you want to serially click each element.
+
+https://on.cypress.io/click
+    at mouseAction (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:132310:76)
+    at Context.click (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:132474:14)
+    at wrapped (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:151126:19)
+From Your Spec Code:
+    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2718-ActiveDirectoryConfiguration.spec.ts:231:41)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

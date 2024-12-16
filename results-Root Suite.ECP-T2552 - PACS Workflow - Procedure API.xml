@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="182.547" tests="15" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:04:11" tests="0" file="cypress/e2e/test-suites/ECP-T2552-PACSWorkflowProcedureAPI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2552 - PACS Workflow - Procedure API" timestamp="2024-12-15T02:04:11" tests="15" time="182.501" failures="0">
+    <testcase name="Creating Procedure -1" time="121.910" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Creating multiple records for performance testing" time="24.680" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Creating Procedure -2" time="0.719" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Creating Procedure -3" time="0.740" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Request body to query as per LastName" time="0.594" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Request body to query as per Performing Department" time="0.643" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Request body to query as per First Name" time="0.722" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Request body to query as per MRN" time="0.684" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Request body to query as per mrnUpperStripped" time="1.137" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Request body to query as per Accession Number" time="1.067" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Request body to query as per Procedure Status" time="0.839" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Request body to query as per Modality" time="0.840" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Request body to query to fetch only ids" time="0.801" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Request body with multiple queries " time="0.739" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.577" classname="ECP-T2552 - PACS Workflow - Procedure API">
+    </testcase>
+  </testsuite>
+</testsuites>

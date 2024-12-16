@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:10:40.219Z",
+    "end": "2024-12-15T02:13:34.658Z",
+    "duration": 174439,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b8282040-e9d8-4ae4-8d69-5edac0f6ae06",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2688-HL7DataSource.spec.ts",
+      "file": "cypress/test-suites/ECP-T2688-HL7DataSource.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "48586356-ee50-454b-a8cb-d0361035812f",
+          "title": "ECP-T2688 -HL7 Data source",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 -15",
+              "fullTitle": "ECP-T2688 -HL7 Data source Step 1 -15",
+              "timedOut": null,
+              "duration": 160186,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var attempt = Cypress.currentRetry;\nvar dsName = 'Test_' + attempt;\n// Step 1 \ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Integration');\ncommon_1.Common.switchTab('HL7');\n// Step 1\ncy.get('th:contains(\"Name\")').should('exist');\ncy.get('th:contains(\"Description\")').should('exist');\ncy.get('th:contains(\"Match From Source Types\")').should('exist');\ncy.get('th:contains(\"Exam Match Criteria\")').should('exist');\ncy.get('th:contains(\"actions\")').should('exist');\ncy.get('[data-cy=\"addHL7\"]').should('exist');\n//Step 2\ncy.get('[data-cy=\"addHL7\"]').click();\ncy.get('#name').should('exist');\ncy.get('.required > label:contains(\"Name\")').should('exist');\ncy.get('#description').should('exist');\ncy.get('[title=\"MRN and Accession Number\"]').should('exist');\ncy.get('label:contains(\"Match Exams From Source Type\")').should('exist');\ncy.get('button:contains(\"Cancel\")').should('exist');\ncy.get('.js-save').should('exist');\n//Step 3\ncy.get('.js-save').should('be.disabled');\n// Step 12\ncy.get('.Select-value-icon').click();\ncy.get('.Select-control').eq(1).click();\ncy.get('[aria-label=\"DICOM Receive\"]').should('exist');\ncy.get('[aria-label=\"Uploader\"]').should('exist');\n//Step 13\ncy.get('.Select-control').eq(2).click({ force: true });\ncy.get('[aria-label=\"MRN and Accession Number\"]').should('exist');\ncy.get('[aria-label=\"MRN, Accession Number and Last Name\"]').should('exist');\ncy.get('button:contains(\"Cancel\")').click({ force: true });\n// Step 14\ncy.get('[data-cy=\"addHL7\"]').click();\ncy.get('#name').type(dsName);\ncy.get('#description').type(dsName);\ncy.get('.js-save').click();\ncy.wait(configFile.smallTimeout);\ncy.get('td:contains(\"' + dsName + '\")').parent().find('.js-edit').click();\n//cy.get('.js-edit').click()\ncy.wait(configFile.smallTimeout);\ncy.get('#description').clear().type('Edited -Description');\ncy.get('.Select-control').eq(1).click();\ncy.get('[aria-label=\"Uploader\"]').click();\ncy.get('.Select-control').eq(2).click();\ncy.get('[aria-label=\"MRN, Accession Number and Last Name\"]').click();\ncy.get('.js-save').click();\ncy.wait(configFile.smallTimeout);\ncy.get('td:contains(\"' + dsName + '\")').should('exist');\ncy.get('td:contains(\"Edited -Description\")').should('exist');\ncy.get('td:contains(\"DICOM Receive, Uploader\")').should('exist');\ncy.get('td:contains(\"MRN, Accession Number and Last Name\")').should('exist');\ncy.get('td:contains(\"' + dsName + '\")').parent().find('.js-delete').click();\n//  cy.get('.js-delete').click()\ncy.get('#confirm-deleteDataSource').click();\ncy.get('td:contains(\"' + dsName + '\")').should('not.exist');\n// Step 4 .5 , 6 and 7\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    // Send patient (ADT), procedure (ORM), and report (ORU) messages using either Mirth or Postman. Send procedures and reports that will attach to a patient record\n    // create Patient\n    return cy.request({\n        url: patientUrl,\n        method: 'POST',\n        body: {\n            dataSourceSystemName: \"\".concat(dsName),\n            patientInfo: {\n                mrn: mrn,\n                name: patientName,\n                birthDate: patientDOB,\n                patientSex: 'M'\n            },\n            patientVisit: {\n                admitDateTime: '20190101201212',\n                dischargeDateTime: ''\n            }\n        },\n        headers: header\n    }).then(function (res) { return console.log; });\n})\n    // Create procedure\n    .then(function () { return cy.request({\n    url: procedureUrl,\n    method: 'POST',\n    body: {\n        dataSourceSystemName: \"\".concat(dsName),\n        patientInfo: {\n            mrn: mrn,\n            name: patientName,\n            birthDate: patientDOB,\n            patientSex: 'M'\n        },\n        patientVisit: {\n            admitDateTime: '20190101201212',\n            dischargeDateTime: ''\n        },\n        procedureInfo: {\n            \"accessionNumber\": accession,\n            \"procedureCode\": \"CAPC\",\n            \"procedureDescription\": \"CTA CHEST\",\n            \"procedureStatus\": 'Ordered',\n            \"reasonForExam\": \"\",\n            \"relevantClinicalInfo\": \"<NTE.3.1>CREATED BY LOAD SCRIPT - Clinical Indications for requested exam: patient developed foul tasting drainage after dental surgery eval for infection or other abnormality .</NTE.3.1><NTE.3.1>Information desired from requested exam: DX .</NTE.3.1>\",\n            \"orderingDepartment\": \"\",\n            modality: modality,\n            \"bodyPart\": \"\",\n            \"priority\": \"R\",\n            \"scheduledDateTime\": \"\",\n            \"startedDateTime\": '20190504201212',\n            \"completedDateTime\": \"\",\n            \"cancelledDateTime\": \"\",\n            \"requestingPhysicianName\": \"Bruce^Banner^^MD^\",\n            \"referringPhysicianName\": \"ASDF^ASDF^ASDFE^^\",\n            \"attendingPhysicianName\": \"\",\n            \"technologist\": \"\",\n            \"visitClass\": \"\",\n            \"visitNumber\": \"\",\n            \"visitPrimaryLocation\": \"RAD\",\n            \"visitCurrentLocation\": \"\"\n        }\n    },\n    headers: header\n}).then(function (res) { return console.log; }); })\n    // Create Report ORU\n    .then(function () { return cy.request({\n    url: oruUrl,\n    method: 'POST',\n    body: {\n        dataSourceSystemName: \"\".concat(dsName),\n        patientInfo: {\n            mrn: mrn,\n            name: patientName,\n            birthDate: patientDOB,\n            patientSex: 'M'\n        },\n        patientVisit: {\n            admitDateTime: '20190101201212',\n            dischargeDateTime: ''\n        },\n        diagnosticReportInfo: {\n            \"contentType\": \"Text\",\n            \"status\": 'Preliminary',\n            \"content\": \"Testing THIS IS A REPORT!<br><br><br>Report text goes here....<br><br><br><br>CREATED BY LOAD TEST SCRIPT\",\n            \"reportDateTime\": '20190504201220',\n            \"principalInterpretingPhysicianName\": \"ID3^PrincipalInterpreter^Given^Middle^Suffix^Prefix\",\n            \"assistantInterpretingPhysicianName\": \"ID4^AssistantInterpreter^Given^Middle^Suffix^Prefix\",\n            \"customReportInfo\": {\n                \"custom01\": \"Sample report from test-e2e cypress script\"\n            }\n        },\n        procedureInfo: {\n            \"accessionNumber\": accession,\n            \"procedureCode\": \"CAPC\",\n            \"procedureDescription\": \"CTA CHEST\",\n            \"procedureStatus\": 'Ordered',\n            \"reasonForExam\": \"\",\n            \"relevantClinicalInfo\": \"<NTE.3.1>CREATED BY LOAD SCRIPT - Clinical Indications for requested exam: patient developed foul tasting drainage after dental surgery eval for infection or other abnormality .</NTE.3.1><NTE.3.1>Information desired from requested exam: DX .</NTE.3.1>\",\n            \"orderingDepartment\": \"\",\n            modality: modality,\n            \"bodyPart\": \"\",\n            \"priority\": \"R\",\n            \"scheduledDateTime\": \"\",\n            \"startedDateTime\": '20190504201212',\n            \"completedDateTime\": \"\",\n            \"cancelledDateTime\": \"\",\n            \"requestingPhysicianName\": \"Bruce^Banner^^MD^\",\n            \"referringPhysicianName\": \"ASDF^ASDF^ASDFE^^\",\n            \"attendingPhysicianName\": \"\",\n            \"technologist\": \"\",\n            \"visitClass\": \"\",\n            \"visitNumber\": \"\",\n            \"visitPrimaryLocation\": \"RAD\",\n            \"visitCurrentLocation\": \"\"\n        }\n    },\n    headers: header\n}).then(function (res) { return console.log; }); })\n    // Create Report ORU\n    .then(function () { return cy.request({\n    url: oruUrl,\n    method: 'POST',\n    body: {\n        dataSourceSystemName: \"\".concat(dsName),\n        patientInfo: {\n            mrn: mrn,\n            name: patientName,\n            birthDate: patientDOB,\n            patientSex: 'M'\n        },\n        patientVisit: {\n            admitDateTime: '20190101201212',\n            dischargeDateTime: ''\n        },\n        diagnosticReportInfo: {\n            \"contentType\": \"Text\",\n            \"status\": 'Final',\n            \"content\": \"Testing THIS IS A REPORT!<br><br><br>Report text goes here....<br><br><br><br>CREATED BY LOAD TEST SCRIPT\",\n            \"reportDateTime\": '20190504201220',\n            \"principalInterpretingPhysicianName\": \"ID3^PrincipalInterpreter^Given^Middle^Suffix^Prefix\",\n            \"assistantInterpretingPhysicianName\": \"ID4^AssistantInterpreter^Given^Middle^Suffix^Prefix\",\n            \"customReportInfo\": {\n                \"custom01\": \"Sample report from test-e2e cypress script\"\n            }\n        },\n        procedureInfo: {\n            \"accessionNumber\": accession,\n            \"procedureCode\": \"CAPC\",\n            \"procedureDescription\": \"CTA CHEST\",\n            \"procedureStatus\": 'Ordered',\n            \"reasonForExam\": \"\",\n            \"relevantClinicalInfo\": \"<NTE.3.1>CREATED BY LOAD SCRIPT - Clinical Indications for requested exam: patient developed foul tasting drainage after dental surgery eval for infection or other abnormality .</NTE.3.1><NTE.3.1>Information desired from requested exam: DX .</NTE.3.1>\",\n            \"orderingDepartment\": \"\",\n            modality: modality,\n            \"bodyPart\": \"\",\n            \"priority\": \"R\",\n            \"scheduledDateTime\": \"\",\n            \"startedDateTime\": '20190504201212',\n            \"completedDateTime\": \"\",\n            \"cancelledDateTime\": \"\",\n            \"requestingPhysicianName\": \"Bruce^Banner^^MD^\",\n            \"referringPhysicianName\": \"ASDF^ASDF^ASDFE^^\",\n            \"attendingPhysicianName\": \"\",\n            \"technologist\": \"\",\n            \"visitClass\": \"\",\n            \"visitNumber\": \"\",\n            \"visitPrimaryLocation\": \"RAD\",\n            \"visitCurrentLocation\": \"\"\n        }\n    },\n    headers: header\n}).then(function (res) { return console.log; }); });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c5_-Palette_Color_secondary_capture -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\n// Step 8        \ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('System Tools');\ncy.get('[href=\"/patientList\"]').click();\ncy.get('.Select-value').eq(0).click();\ncy.get('[aria-label=\"MRN\"]').click();\ncy.get('#search-value').clear().type(mrn);\ncy.get('#search').click();\ncy.get('.openExtra > .fa').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.openExtra > .fa').eq(1).click();\ncy.get('.js-download-report').eq(0).click();\n// Step 9\ncommon_1.Common.navigateTo('Worklist');\ncy.get('button:contains(\"Clear All\")').first().click();\nfilterByFacility(facilityName);\ncy.wait(configFile.mediumTimeout);\n// Step 10\ncy.get('.-rowCount').then(function (element) {\n    expect(element).contain(2);\n});\n// Step 11\ncommon_1.Common.navigateTo('Integration');\ncommon_1.Common.switchTab('HL7');\ncy.get('td:contains(\"' + dsName + '\")').should('exist');\ncy.get('td:contains(\"' + dsName + '\")').should('exist');\ncy.get('td:contains(\"DICOM Receive\")').should('exist');\ncy.get('td:contains(\"MRN and Accession Number\")').should('exist');",
+              "err": {},
+              "uuid": "c796db33-3ed1-43ab-bfba-284ab36c6456",
+              "parentUUID": "48586356-ee50-454b-a8cb-d0361035812f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2688 -HL7 Data source Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7730,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "edf9b47b-b3e1-47f8-8c34-ef03b884321d",
+              "parentUUID": "48586356-ee50-454b-a8cb-d0361035812f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c796db33-3ed1-43ab-bfba-284ab36c6456",
+            "edf9b47b-b3e1-47f8-8c34-ef03b884321d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 167916,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

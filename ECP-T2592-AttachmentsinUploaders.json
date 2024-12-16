@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:16:33.075Z",
+    "end": "2024-12-15T03:23:15.410Z",
+    "duration": 402335,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "5f86a9ee-373c-452b-b916-e8b74507fff8",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2592-AttachmentsinUploaders.spec.ts",
+      "file": "cypress/test-suites/ECP-T2592-AttachmentsinUploaders.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e4d21a4c-16f6-469e-9f6d-a85cf39ebd1f",
+          "title": "ECP-T2592-Attachments in the Uploaders",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "All Steps in one",
+              "fullTitle": "ECP-T2592-Attachments in the Uploaders All Steps in one",
+              "timedOut": null,
+              "duration": 332145,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowPatientSharing: true,\n    allowStatShares: true,\n    allowCdUploader: true,\n    allowGuestUploader: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.window().then(function (win) {\n    // @ts-ignore - removing Cypress error for missing chrome browser\n    window.top.chrome = true;\n});\n// Step 1\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Uploaders');\ncy.get('#showAttachmentsStage').should('be.enabled');\ncy.get('.btn-tooltip').last().click();\ncy.get('div:contains(Allow attachments to be added to exams in the uploader workflow.)').should('exist');\ncy.wait(configFile.smallTimeout);\n//Step 2\ncy.get('#showAttachmentsStage').uncheck();\ncy.get('#save').click();\ncy.wait(configFile.smallTimeout * 2);\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.dob });\ncy.wait(configFile.smallTimeout);\ncy.get('span:contains(Add Attachments)').should('not.exist');\n//Step 3 without attachment\ncy.visit(configFile.url);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Uploaders');\ncy.get('#showAttachmentsStage').check();\ncy.get('#save').click();\ncy.wait(configFile.smallTimeout * 2);\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.dob });\ncy.wait(configFile.mediumTimeout);\ncy.get('span:contains(Add Attachments)').should('exist');\ncy.waitUntil(function () { return cy.get('[data-cy=\"uploaderNextButton\"]').should('be.visible'); }, {\n    timeout: configFile.testExecutionTimeOut,\n});\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"returnToExamList\"]').should('be.visible'); }, {\n    timeout: configFile.testExecutionTimeOut,\n});\n// Step 3 with attachment ,4 and 5 \ncy.visit(\"\".concat(configFile.url));\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Settings');\ncy.get('#maximumExamAttachmentUploads').clear().type('25');\ncy.get('#save').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.Rom });\ncy.wait(configFile.mediumTimeout);\ncy.get('span:contains(Add Attachments)').should('exist');\ncy.waitUntil(function () { return cy.get('[data-cy=\"uploaderNextButton\"]').should('be.visible'); }, {\n    timeout: configFile.testExecutionTimeOut,\n});\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.js-close').click();\ncy.get('p:contains(Do you want to )').should('exist');\ncy.get('p:contains(Exit Uploader)').should('exist');\ncy.get('.decline').click();\ncy.get('.js-close').click();\n// cy.get('#confirmCancel').click()\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.Rom });\ncy.wait(configFile.mediumTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"uploaderNextButton\"]').should('be.visible'); }, {\n    timeout: configFile.testExecutionTimeOut,\n});\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.wait(configFile.smallTimeout);\nvar img = 'download.jpg';\ncy.get('.js-addAttachmentsInput', { timeout: configFile.hugeTimeout }).attachFile(img);\ncy.wait(configFile.smallTimeout);\ncy.get('.iconDelete').should('exist');\ncy.get('.js-edit-attachment').should('exist');\ncy.get('.iconView').should('exist');\nvar pdf = 'sample.pdf';\ncy.get('.js-addAttachmentsInput', { timeout: configFile.hugeTimeout }).attachFile(pdf);\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"sample.pdf\"]').should('exist');\ncy.get('[title=\"download.jpg\"]').should('exist');\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('[data-cy=\"returnToExamList\"]').should('be.visible'); }, {\n    timeout: configFile.testExecutionTimeOut,\n});\n// Step 6,7 and 8\ncy.wait(configFile.smallTimeout);\ncy.visit(\"\".concat(configFile.url));\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"2345687\"]').should('be.visible'); }, {\n    timeout: configFile.testExecutionTimeOut,\n});\ncy.get('.exam-attachments-btn').first().click();\ncy.get('[title=\"sample.pdf\"]').should('exist');\ncy.get('[title=\"download.jpg\"]').should('exist');\ncy.get(':nth-child(2) > .attachment__controls > .open-dot-menu').click();\ncy.get('.js-download-attachment').should('exist');\ncy.get('.js-delete-attachment').should('exist');\ncy.get('.js-edit-attachment').should('exist');\ncy.get('.attachments__bottom > .btn-link').click();\ncy.get('h3:contains(Supported File Formats)').should('exist');\ncy.get('p:contains(: aif, cda, ds2, dss, mid, mp3, mpa, wav, wma)').should('exist');\ncy.get('p:contains(: csv, dat, log, xml, html)').should('exist');\ncy.get('p:contains(: bmp, dcm, gif, jpg, jpeg, png, tif, tiff)').should('exist');\ncy.get('p:contains(: doc, docx, key, pdf, pps, ppt, pptx, rtf, txt, xls, xlsx)').should('exist');\ncy.get('p:contains(: avi, h264, m4a, m4v, mov, mp4, mpg, mpeg, wmv)').should('exist');\n//Step 9\ncommon_1.Common.navigateTo('Uploaders');\ncy.get('#guest').click();\ncy.get('.createGuestUploader').click();\ncy.get('#sourceNameField').type(\"test\".concat(date));\ncy.get('.js-confirm').click();\ncy.get('.modal-header > .close > span').click();\ncy.get('.url-link').invoke('text').then(function (text2) {\n    var guesturl = text2;\n    cy.visit(guesturl);\n    cy.wait(configFile.smallTimeout);\n    cy.get('span:contains(Intake Form)').should('exist');\n    cy.get('span:contains(Select Folder)').should('exist');\n    cy.get('span:contains(Select Exams)').should('exist');\n    cy.get('span:contains(Add Attachments)').should('exist');\n    cy.get('span:contains(Upload)').should('exist');\n});",
+              "err": {},
+              "uuid": "6ec2b84f-3259-4eba-b835-971c71640229",
+              "parentUUID": "e4d21a4c-16f6-469e-9f6d-a85cf39ebd1f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Verfiying guest uploader Screen without attachment",
+              "fullTitle": "ECP-T2592-Attachments in the Uploaders Verfiying guest uploader Screen without attachment",
+              "timedOut": null,
+              "duration": 45954,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//Step 11\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Uploaders');\ncy.get('#guest').click();\ncy.get('.deleteGuestUploaderBtn').click();\ncy.get('#confirm-RemoveGuestUploader').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.createGuestUploader').click();\ncy.get('#sourceNameField').type(\"test2\".concat(date));\ncy.get('#showAttachmentsStage').uncheck();\ncy.get('.js-confirm').click();\ncy.get('.modal-header > .close > span').click();\ncy.get('.url-link').invoke('text').then(function (text) {\n    var guesturl2 = text;\n    cy.visit(guesturl2);\n    cy.get('span:contains(Intake Form)').should('exist');\n    cy.get('span:contains(Select Folder)').should('exist');\n    cy.get('span:contains(Select Exams)').should('exist');\n    cy.get('span:contains(Add Attachments)').should('not.exist');\n    cy.get('span:contains(Upload)').should('exist');\n});",
+              "err": {},
+              "uuid": "b3cb3222-e15e-4a20-addb-ab140f97a687",
+              "parentUUID": "e4d21a4c-16f6-469e-9f6d-a85cf39ebd1f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2592-Attachments in the Uploaders Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7140,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "0be1810f-15ec-49b8-9043-e59ca042c3b1",
+              "parentUUID": "e4d21a4c-16f6-469e-9f6d-a85cf39ebd1f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6ec2b84f-3259-4eba-b835-971c71640229",
+            "b3cb3222-e15e-4a20-addb-ab140f97a687",
+            "0be1810f-15ec-49b8-9043-e59ca042c3b1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 385239,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

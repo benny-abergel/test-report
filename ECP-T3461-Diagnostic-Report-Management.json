@@ -1,0 +1,206 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:38:07.262Z",
+    "end": "2024-12-15T03:42:16.348Z",
+    "duration": 249086,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8cb5ecec-7513-4692-8603-72d029205685",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3461-Diagnostic-Report-Management.spec.ts",
+      "file": "cypress/test-suites/ECP-T3461-Diagnostic-Report-Management.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a00ad43a-2311-40c1-88b5-349fc742cbb7",
+          "title": "ECP-T3461- Diagnostic-Report-Management",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3451 - data preperation",
+              "fullTitle": "ECP-T3461- Diagnostic-Report-Management ECP-T3451 - data preperation",
+              "timedOut": null,
+              "duration": 98173,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorkstationViewer: true,\n    allowWorklist: true\n}, facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n//create procrdures\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    cy.request({\n        url: \"\".concat(baseUrl, \"/workflow/diagnostic-report\"),\n        method: 'POST',\n        body: diagnosticReportObject,\n        headers: header\n    }).then(function () {\n        cy.request({\n            url: \"\".concat(baseUrl, \"/workflow/diagnostic-report\"),\n            method: 'POST',\n            body: __assign(__assign({}, diagnosticReportObject), { diagnosticReportInfo: __assign(__assign({}, diagnosticReportObject.diagnosticReportInfo), { reportDateTime: \"20180320091819\", \"content\": \"<br>Old Exam<br>\" }) }),\n            headers: header\n        }).then(function () {\n            cy.request({\n                url: \"\".concat(baseUrl, \"/workflow/diagnostic-report\"),\n                method: 'POST',\n                body: __assign(__assign({}, diagnosticReportObject), { diagnosticReportInfo: __assign(__assign({}, diagnosticReportObject.diagnosticReportInfo), { reportDateTime: \"20000320091619\", \"content\": \"<br>inserted first into db<br>\" }), patientInfo: __assign(__assign({}, diagnosticReportObject.patientInfo), { name: \"test2\", \"mrn\": \"2\", \"birthDate\": \"19580305154638\" }), procudureInfo: __assign(__assign({}, diagnosticReportObject.procedureInfo), { \"accessionNumber\": \"1\" }) }),\n                headers: header\n            }).then(function () {\n                cy.wait(configFile.smallTimeout);\n                cy.request({\n                    url: \"\".concat(baseUrl, \"/workflow/diagnostic-report\"),\n                    method: 'POST',\n                    body: __assign(__assign({}, diagnosticReportObject), { diagnosticReportInfo: __assign(__assign({}, diagnosticReportObject.diagnosticReportInfo), { reportDateTime: \"20000320091819\", \"content\": \"<br>inserted second into db<br>\" }), patientInfo: __assign(__assign({}, diagnosticReportObject.patientInfo), { name: \"test2\", \"mrn\": \"2\", \"birthDate\": \"19580305154638\" }), procudureInfo: __assign(__assign({}, diagnosticReportObject.procedureInfo), { \"accessionNumber\": \"1\" }) }),\n                    headers: header\n                });\n            });\n        });\n    });\n});",
+              "err": {},
+              "uuid": "a003532f-27c8-41ab-b750-9469b91c1e18",
+              "parentUUID": "a00ad43a-2311-40c1-88b5-349fc742cbb7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "steps 1-2 - Diagnostic Report version history - different Date/Time values",
+              "fullTitle": "ECP-T3461- Diagnostic-Report-Management steps 1-2 - Diagnostic Report version history - different Date/Time values",
+              "timedOut": null,
+              "duration": 51264,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(limitedUser, limitedPassword));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\ncy.waitUntil(function () { return cy.contains(\"Clear All\", { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.contains(\"Clear All\").first().click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"1\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(\"[data-cy='organizationIdDropDown']\").click();\ncy.get(\".checkbox-tooltip-content\").children().contains(facilityName).click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"1\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncheckHistoryReport(\"test1\", 4, \"Most Recent Exam\");\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"1\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.contains(\"test1\").first().rightclick();\ncheckOpeningModalTime();",
+              "err": {},
+              "uuid": "4c250787-14ac-4efc-aed4-0234a6bfd8ff",
+              "parentUUID": "a00ad43a-2311-40c1-88b5-349fc742cbb7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "steps 3 - Diagnostic Report version history - same Date/Time values ",
+              "fullTitle": "ECP-T3461- Diagnostic-Report-Management steps 3 - Diagnostic Report version history - same Date/Time values ",
+              "timedOut": null,
+              "duration": 15266,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncommon_1.Common.navigateTo('Worklist');\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.contains(\"Clear All\").first().click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"1\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(\"[data-cy='organizationIdDropDown']\").click();\ncy.get(\".checkbox-tooltip-content\").children().contains(facilityName).click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"1\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncheckHistoryReport(\"test2\", 3, \"<br>inserted second into db<br>\");\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"1\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.contains(\"test2\").first().rightclick();\ncheckOpeningModalTime();",
+              "err": {},
+              "uuid": "f3b54862-96ad-40f4-906f-f2ab1879df09",
+              "parentUUID": "a00ad43a-2311-40c1-88b5-349fc742cbb7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "step 4 - Diagnostic Report version history after sending an HL7 with Report",
+              "fullTitle": "ECP-T3461- Diagnostic-Report-Management step 4 - Diagnostic Report version history after sending an HL7 with Report",
+              "timedOut": null,
+              "duration": 16222,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncommon_1.Common.navigateTo('Worklist');\ncy.waitUntil(function () { return cy.contains(\"Clear All\", { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.contains(\"Clear All\").first().click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"1\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(\"[data-cy='organizationIdDropDown']\").click();\ncy.get(\".checkbox-tooltip-content\").children().contains(facilityName).click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"1\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.contains(\"test1\").first().rightclick();\ncy.get('[data-cy=\"viewReportHistory\"]').click();\ncy.waitUntil(function () { return cy.contains(\"Close\", { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.contains(\"Close\").click();\nvar header = {\n    Authorization: \"Bearer \".concat(token),\n    Accept: 'application/json; charset=utf-8',\n    'Content-Type': 'application/json; charset=utf-8'\n};\ncy.request({\n    url: \"\".concat(baseUrl, \"/workflow/diagnostic-report\"),\n    method: 'POST',\n    body: __assign(__assign({}, diagnosticReportObject), { diagnosticReportInfo: __assign(__assign({}, diagnosticReportObject.diagnosticReportInfo), { reportDateTime: \"20200320091819\", \"content\": \"<br>new exam<br>\" }) }),\n    headers: header\n}).then(function () {\n    checkHistoryReport(\"test1\", 4, \"<br>new exam<br>\");\n});",
+              "err": {},
+              "uuid": "76bda41f-faa5-4afe-b1a3-f068ec6b7f7a",
+              "parentUUID": "a00ad43a-2311-40c1-88b5-349fc742cbb7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "steps 5 - Diagnostic Report version history - promote",
+              "fullTitle": "ECP-T3461- Diagnostic-Report-Management steps 5 - Diagnostic Report version history - promote",
+              "timedOut": null,
+              "duration": 43049,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Worklist');\ncy.waitUntil(function () { return cy.contains(\"Clear All\", { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.contains(\"Clear All\").first().click();\ncy.waitUntil(function () { return cy.contains(\"test1\", { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(\"[data-cy='organizationIdDropDown']\").click();\ncy.get(\".checkbox-tooltip-content\").children().contains(facilityName).click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"1\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.contains(\"test1\").first().rightclick();\ncy.wait(configFile.smallTimeout);\ncheckOpeningModalTime();\ncy.waitUntil(function () { return cy.contains(\"Promote\", { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(\":nth-child(3) > .rt-tr > .rt-td--actions > .btn\").click();\ncy.contains(\"Yes, Promote\").click();\ncheckHistoryReport(\"test1\", 5, \"<br>Old Exam<br>\");",
+              "err": {},
+              "uuid": "a0dac27b-bbcf-40c7-bf07-33193387777d",
+              "parentUUID": "a00ad43a-2311-40c1-88b5-349fc742cbb7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "clear data",
+              "fullTitle": "ECP-T3461- Diagnostic-Report-Management clear data",
+              "timedOut": null,
+              "duration": 7330,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "5b923651-ecb1-4e1b-a6b8-96741365f538",
+              "parentUUID": "a00ad43a-2311-40c1-88b5-349fc742cbb7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a003532f-27c8-41ab-b750-9469b91c1e18",
+            "4c250787-14ac-4efc-aed4-0234a6bfd8ff",
+            "f3b54862-96ad-40f4-906f-f2ab1879df09",
+            "76bda41f-faa5-4afe-b1a3-f068ec6b7f7a",
+            "a0dac27b-bbcf-40c7-bf07-33193387777d",
+            "5b923651-ecb1-4e1b-a6b8-96741365f538"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 231304,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

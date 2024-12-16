@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:36:05.559Z",
+    "end": "2024-12-15T02:39:25.099Z",
+    "duration": 199540,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "694e22df-0f97-4619-9774-867ad9b045ad",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2726-MyOrgNotifications.spec.ts",
+      "file": "cypress/test-suites/ECP-T2726-MyOrgNotifications.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d9bc0e16-4174-4338-ac66-624d58827691",
+          "title": "ECP-T2726 - My Org - Notifications",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting test ECP-T2726 - My Org - Notifications - All Steps",
+              "fullTitle": "ECP-T2726 - My Org - Notifications Starting test ECP-T2726 - My Org - Notifications - All Steps",
+              "timedOut": null,
+              "duration": 182549,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Step 1 - Login with a system admin account, click on the system admin section of the\n// side navigation menu, click on the notifications section, then open the email templates tab.\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateByProperty('data-template=\"notificationManagementPage\"');\ncy.wait(configFile.smallTimeout);\nvar q = [2, 3, 4, 5, 18, 20, 21, 22];\nfor (var i = 2; i < 23; i++) {\n    cy.get('#notificationManagement table tbody:nth-child(' + i + ') tr td.action-cell .edit-email-template').click({ force: true });\n    if (q.includes(i)) {\n        cy.get('#allowGroupCustomization').check({ force: true });\n    }\n    else {\n        cy.get('#allowGroupCustomization').uncheck({ force: true });\n    }\n    cy.get('.save-auto-text-info').click({ force: true });\n    cy.wait(oneSecondWait);\n    cy.get('#cancel_btn').click();\n}\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 1 - Login as an org admin, navigate to My Org > Notifications and verify the notifications page is displayed.\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateByProperty('data-template=\"orgNotificationManagementPage\"');\ncy.get('h2.pageTitle').should('contain.text', 'Notifications');\n// Step 2 - Verify the following tabs are available on the notifications page: 1. Email templates, 2. Terms of Use\ncy.get('#emailTemplates').should('exist');\ncy.get('#orgTerms').should('exist');\n// Step 3 - Verify the email templates tab contains a table with the following columns: 1. Email name, 2. Email subject, 3. Status, 4. Actions\ncy.get('.table__email-templates .table-col-emailName').should('contain.text', 'Email Name');\ncy.get('.table__email-templates .table-col-emailSubject').should('contain.text', 'Email Subject');\ncy.get('.table__email-templates .table-col-status').should('contain.text', 'Status');\ncy.get('.table__email-templates .table-col-actions').should('contain.text', 'Actions');\n// Step 4 - Verify the table contains a functional in-line filter for the following columns: 1. Email Name, 2. Email Subject, 3. Status\ncy.waitUntil(function () { return cy.get('.react-table-row', { timeout: configFile.hugeTimeout }).should('include.text', 'Account Cancelled'); }, { timeout: configFile.hugeTimeout });\ncy.get('input[name=emailName]').type('Account Cancelled');\ncy.get('.table__email-templates tr').should('include.text', 'Account Cancelled');\ncy.get('.table__email-templates tr').should('not.include.text', 'Admin Welcome');\ncy.get('input[name=emailName]').type('{selectall}{backspace}');\ncy.get('input[name=emailSubject]').type('Account Cancelled');\ncy.get('.table__email-templates tr').should('include.text', 'Account Cancelled');\n// cy.get('.table__email-templates tr').should('not.include.text', 'Welcome to Nucleus.io!');\ncy.get('input[name=emailSubject]').type('{selectall}{backspace}');\ncy.get('input[name=status]').type('sss');\ncy.get('.table__email-templates tr').should('not.include.text', 'Original');\n//  cy.get('input[name=status]').type('{selectall}{backspace}');\ncy.get('.filter-clear > a').click({ force: true });\n// Step 5 - Verify the table is populated with the email templates made available to organizations for customization by the system admin.\ncy.get('.table__email-templates tr').should('include.text', 'Account Cancelled');\ncy.get('.table__email-templates tr').should('include.text', 'Add User To Organization');\ncy.get('.table__email-templates tr').should('include.text', 'Admin Welcome');\ncy.get('.table__email-templates tr').should('include.text', 'Approve New Email Address');\ncy.get('.table__email-templates tr').should('include.text', 'StatShare Support Email');\ncy.get('.table__email-templates tr').should('include.text', 'Welcome');\ncy.get('.table__email-templates tr').should('include.text', 'Verify New Email Address');\ncy.get('.table__email-templates tr').should('include.text', 'Send Patient Share');\n// Step 6 - Click the edit action button for any available email template where the status column = original and verify the edit pop-over for the selected email is opened.\ncy.get('.edit-email-template').first().click({ force: true });\ncy.waitUntil(function () { return cy.get('.editEmailTemplateDialog h4.modal-title').should('include.text', 'Edit -'); });\n// Step 7 - Verify the edit email template modal original version contains the following items:\n// 1. Title = \"Edit - \"\n// 2. Drop down menu for version - 1. Original (default), 2. Custom, 3. Disabled\n// 3. Explanation icon for email version drop down menu\n// 4. Subject field (read only)\n// 5. Body field (read only)\n// 6. CANCEL button\n// 7. SAVE button\ncy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick').should('exist');\ncy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick').first().click({ force: true });\ncy.get('.editEmailTemplateDialog .Select-menu-outer > .Select-menu .Select-option .needsclick').should('include.text', 'Original');\ncy.get('.editEmailTemplateDialog .Select-menu-outer > .Select-menu .Select-option .needsclick').should('include.text', 'Custom');\ncy.get('.editEmailTemplateDialog .Select-menu-outer > .Select-menu .Select-option .needsclick').should('include.text', 'Disabled');\ncy.get('.editEmailTemplateDialog .iconWithTooltip.input-info .iconBtn').should('exist');\ncy.get('#emailSubject').should('exist');\ncy.get('.editEmailTemplateDialog #cancel_btn').should('exist');\ncy.get('.editEmailTemplateDialog .save-auto-text-info').should('exist');\n// Step 8 - Click the explanation icon next to the drop down menu and verify the text is correct.\ncy.get('.editEmailTemplateDialog .iconWithTooltip.input-info .iconBtn').click();\ncy.get('.iconTooltip .tooltip-inner').should('include.text', 'Custom');\ncy.get('.iconTooltip .tooltip-inner').should('include.text', ' - Use a custom template.');\ncy.get('.iconTooltip .tooltip-inner').should('include.text', 'Original');\ncy.get('.iconTooltip .tooltip-inner').should('include.text', ' - Use the default system template.');\ncy.get('.iconTooltip .tooltip-inner').should('include.text', 'Disable');\ncy.get('.iconTooltip .tooltip-inner').should('include.text', ' - Prevent this notification from being sent.');\n// Step 9 - Verify the SAVE button is disabled on the edit email template pop-over b/c no changes have been made.\ncy.get('.editEmailTemplateDialog .save-auto-text-info').should('be.disabled');\n// Step 10 - Using the drop down menu at the top of the modal window, select \"Custom\" and verify the modal window changes to allow for user customization.\ncy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick').should('exist');\ncy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick').first().click({ force: true });\ncy.get('.editEmailTemplateDialog .Select-menu-outer > .Select-menu .Select-option .needsclick').contains('Custom').click();\ncy.get('.editEmailTemplateDialog #reset_btn').should('exist');\ncy.get('.editEmailTemplateDialog #copy_btn').should('exist');\ncy.get('.editEmailTemplateDialog .auto-text-selector').should('exist');\ncy.get('.editEmailTemplateDialog #original').should('exist');\ncy.get('.editEmailTemplateDialog #customEmail').should('exist');\n// Step 11 - Verify the custom version of the edit email modal window contains the following\ncy.get('#emailSubject').should('exist');\ncy.get('.editEmailTemplateDialog #cancel_btn').should('exist');\ncy.get('.editEmailTemplateDialog .save-auto-text-info').should('exist');\ncy.get('.item-list__text[data-replace-id=\"orgLogo\"]').should('exist');\n// Step 12 -\ncy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick').should('exist');\ncy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick').first().click({ force: true });\ncy.get('.editEmailTemplateDialog .Select-menu-outer > .Select-menu .Select-option .needsclick').contains('Disabled').click();\ncy.get('.editEmailTemplateDialog #cancel_btn').should('exist');\ncy.get('.editEmailTemplateDialog .save-auto-text-info').should('exist');\n// Step 13 - Select custom on the modal window, make changes to the subject and body, click SAVE and verify those changes are retained.\ncy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick').first().click({ force: true });\ncy.get('.editEmailTemplateDialog .Select-menu-outer > .Select-menu .Select-option .needsclick').contains('Custom').click();\ncy.get('#emailSubject').type(' - Edit');\ncy.get('#emailSubject').should('include.text', ' - Edit');\ncy.get('.save-auto-text-info').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('#editAutoText .modal-header .close').click();\n// Step 14 - Select custom on the modal window. Make various changes to any editable fields, click RESET\n// and verify the modal window changes back to the last saved version of the email template being edited.\ncy.get('.edit-email-template').first().click({ force: true });\ncy.waitUntil(function () { return cy.get('.editEmailTemplateDialog h4.modal-title').should('include.text', 'Edit -'); });\ncy.get('#emailSubject').type('{selectall}Nucleus.io Account Cancelled - Edit2');\ncy.get('#emailSubject').should('include.text', ' - Edit2');\n//cy.get('.editEmailTemplateDialog #copy_btn').click(); // commented by mahipal\ncy.get('.editEmailTemplateDialog #reset_btn').click(); // added by mahipal\ncy.wait(configFile.tinyTimeout);\ncy.get('#emailSubject').should('not.include.text', ' - Edit2');\n// cy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick .Select-value-label .needsclick[title=\"Original\"]').should('include.text', 'Original');\n// Step 15 - Select custom on the modal window, make various changes to the editable fields and click SAVE. After the SAVE is complete, click REVERT to\n// ORIGINAL. Verify all changes have been discarded, all values in the subject and body fields are returned to the original system defaults, and\n// the modal window remains in custom mode.\n//    TODO - already performed in step 13 & 14\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateByProperty('data-template=\"orgNotificationManagementPage\"');\ncy.get('h2.pageTitle').should('contain.text', 'Notifications');\ncy.wait(configFile.smallTimeout);\n// Step 16 - Make various changes, click CANCEL, confirm and verify the unsaved changes are discarded.\ncy.get('.edit-email-template').first().click();\ncy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick').first().click();\ncy.get('.editEmailTemplateDialog .Select-menu-outer > .Select-menu .Select-option .needsclick').contains('Custom').click();\ncy.get('#emailSubject').type(' - Edit3');\ncy.get('#emailSubject').should('include.text', ' - Edit3');\ncy.get('.editEmailTemplateDialog #cancel_btn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#cancelConfirm .btn.btn-danger').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-email-template').first().click({ force: true });\ncy.waitUntil(function () { return cy.get('.editEmailTemplateDialog h4.modal-title').should('include.text', 'Edit -'); });\ncy.get('#emailSubject').should('not.include.text', ' - Edit3');\n// Step 17 - With the edit email template modal in custom mode, click an auto text\n// placeholder and verify the description of the selected auto text item is displayed for the user.\ncy.wait(configFile.smallTimeout);\ncy.get('.item-list__text[data-replace-id=\"orgLogo\"]').click();\ncy.get('.auto-text-selector__description-row .auto-text-selector__text').should('contain.text', 'Your organization header logo');\n// Step 21 - Verify the org admin can customize a notification for their organization.\n// TODO - Performed in all the above steps\n// Step 23 - Verify the org admin can disable a notification for their organization.\ncy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick').first().click({ force: true });\ncy.get('.editEmailTemplateDialog .Select-menu-outer > .Select-menu .Select-option .needsclick').contains('Disabled').click();\ncy.get('#cancel_btn').click();\ncy.get('.btn-danger').click();\ncy.get('.edit-email-template').first().click({ force: true });\ncy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick').first().click({ force: true });\ncy.get('.editEmailTemplateDialog .Select-menu-outer > .Select-menu .Select-option .needsclick').contains('Original').click({ force: true });\ncy.get('#cancel_btn').click();\ncy.get('.btn-danger').click();\ncy.get('.edit-email-template').first().click({ force: true });\ncy.waitUntil(function () { return cy.get('.editEmailTemplateDialog h4.modal-title').should('include.text', 'Edit -'); });\ncy.get('.editEmailTemplateDialog .Select-multi-value-wrapper .needsclick').first().click({ force: true });\ncy.get('.editEmailTemplateDialog .Select-menu-outer > .Select-menu .Select-option .needsclick').contains('Custom').click();\n// TODO - can not test drag and drop\n// Step 18 - Verify the auto text can be dragged into the subject and body fields of the email template.\ncy.get('.auto-text-selector__item-list > ul > :nth-child(1)').drag('#emailSubject');\n// cy.get('.auto-text-selector__item-list ul li.clearfix:nth-child(1) .item-list__text').first().drag('#emailSubject');\n// Step 19 - Verify once auto text has been added it appears as a blue tile, with the placeholder name displayed and an 'x' on the tile to remove it.\n// Step 20 - Click the \"x\" on an auto-text tile and verify it can be removed.\n// Step 22 - Trigger the custom notification and verify the custom notification is received.\n// TODO - con not check trigger as email is external service - need to work on this\n// Step 24 - Trigger the disabled notification and verify it is not received.\n// TODO - con not check trigger as email is external service - need to work on this",
+              "err": {},
+              "uuid": "c1b528ed-faf0-432a-8f1c-2dc0992e83a4",
+              "parentUUID": "d9bc0e16-4174-4338-ac66-624d58827691",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2726 - My Org - Notifications Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7640,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "a4a8759d-1ede-4c6e-9e6d-a808fe24fd4a",
+              "parentUUID": "d9bc0e16-4174-4338-ac66-624d58827691",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c1b528ed-faf0-432a-8f1c-2dc0992e83a4",
+            "a4a8759d-1ede-4c6e-9e6d-a808fe24fd4a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 190189,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

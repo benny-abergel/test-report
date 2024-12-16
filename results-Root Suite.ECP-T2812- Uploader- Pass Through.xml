@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="160.073" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:25:22" tests="0" file="cypress/e2e/test-suites/ECP-T2812-UploaderPassthrough.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2812- Uploader- Pass Through" timestamp="2024-12-15T02:25:22" tests="2" time="160.050" failures="0">
+    <testcase name="Step 1- 11" time="144.020" classname="ECP-T2812- Uploader- Pass Through">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.033" classname="ECP-T2812- Uploader- Pass Through">
+    </testcase>
+  </testsuite>
+</testsuites>

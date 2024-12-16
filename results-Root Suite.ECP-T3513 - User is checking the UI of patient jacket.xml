@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="1592.397" tests="7" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:26:19" tests="0" file="cypress/e2e/test-suites/ECP-T3513-Patient-Jacket.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3513 - User is checking the UI of patient jacket" timestamp="2024-12-15T02:26:19" tests="7" time="1592.377" failures="0">
+    <testcase name="ECP-T3513 - data prep" time="54.755" classname="ECP-T3513 - User is checking the UI of patient jacket">
+    </testcase>
+    <testcase name="Step 1 - 3 Unmatched Study" time="609.069" classname="ECP-T3513 - User is checking the UI of patient jacket">
+    </testcase>
+    <testcase name="Add Orders And matched" time="39.638" classname="ECP-T3513 - User is checking the UI of patient jacket">
+    </testcase>
+    <testcase name="Step 4 - 5 Matched Exams" time="251.440" classname="ECP-T3513 - User is checking the UI of patient jacket">
+    </testcase>
+    <testcase name="Add attached Report to every Order Matched Exam" time="3.209" classname="ECP-T3513 - User is checking the UI of patient jacket">
+    </testcase>
+    <testcase name="Step 6 - 8, Matched Exam with an attached Report" time="234.662" classname="ECP-T3513 - User is checking the UI of patient jacket">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.106" classname="ECP-T3513 - User is checking the UI of patient jacket">
+    </testcase>
+  </testsuite>
+</testsuites>

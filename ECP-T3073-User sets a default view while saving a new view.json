@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:29:57.073Z",
+    "end": "2024-12-15T03:32:45.396Z",
+    "duration": 168323,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c1ffb7cd-da36-4fd6-aa6e-ca92525b0648",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3073-User sets a default view while saving a new view.ts",
+      "file": "cypress/test-suites/ECP-T3073-User sets a default view while saving a new view.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "085784a2-ec68-42ec-8483-e3152733494a",
+          "title": "ECP-T3073-User sets a default view while saving a new view",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3073 - data prep",
+              "fullTitle": "ECP-T3073-User sets a default view while saving a new view ECP-T3073 - data prep",
+              "timedOut": null,
+              "duration": 87223,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true\n}, facilityName);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    var token = res.token;\n    var orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    //Upload a-01 study from resources folder\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n});",
+              "err": {},
+              "uuid": "9c0f9bd3-0ccb-4112-9793-69413d153172",
+              "parentUUID": "085784a2-ec68-42ec-8483-e3152733494a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T3073 - step 1-9",
+              "fullTitle": "ECP-T3073-User sets a default view while saving a new view ECP-T3073 - step 1-9",
+              "timedOut": null,
+              "duration": 43737,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, accAdmUser, accAdmPass);\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(accAdmUser, accAdmPass));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\ndeleteAllViews();\n// Step 2 - Create view1 without any sort\ncy.get('#mappedPriority div[data-cy=\"priorityColumn\"]').first().click();\ncy.get('button:contains(\"Clear All\")').last().click();\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName);\ncy.get('button[data-cy=\"cancelNewViewBtn\"').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName, \"\\\"]\")).should('not.exist');\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName);\ncy.get('[data-cy=\"newViewSetAsPublicView\"]').click();\ncy.get('button[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName, \"\\\"]\")).should('exist');\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName, \"\\\"]\")).should('contain.text', viewName);\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName, \"\\\"] span > .fa.fa-star\")).should('not.exist');\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName2);\ncy.get('[data-cy=\"newViewSetAsPublicView\"]').click();\ncy.get('[data-cy=\"newViewSetAsDefaultView\"]').check();\ncy.get('button[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName2, \"\\\"]\")).should('exist');\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName2, \"\\\"]\")).should('contain.text', viewName2);\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName2, \"\\\"] span > .fa.fa-star\")).should('exist');\ncommon_1.Common.logout();\ncommon_1.Common.login(customerName, accAdmUser, accAdmPass);\ncommon_1.Common.navigateTo('Worklist');\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName2, \"\\\"]\")).should('exist');",
+              "err": {},
+              "uuid": "dede78d8-230b-4ebb-9022-869cbb4a4984",
+              "parentUUID": "085784a2-ec68-42ec-8483-e3152733494a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "step10",
+              "fullTitle": "ECP-T3073-User sets a default view while saving a new view step10",
+              "timedOut": null,
+              "duration": 17739,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, facAdmUser, facAdmPass);\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facAdmUser, facAdmPass));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\ncy.get('button[data-cy=\"saveNewViewBtn\"]').click();\ncy.get('#view-name').should('exist');\ncy.get('#view-name').type(viewName3);\ncy.get('[data-cy=\"newViewSetAsPublicView\"]').should('not.exist');\ncy.get('[data-cy=\"newViewSetAsDefaultView\"]').should('exist');\ncy.get('button[data-cy=\"confirmNewViewBtn\"]').click();\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName3, \"\\\"]\")).should('exist');\ncy.get(\"[data-cy=\\\"filterViewItem-\".concat(viewName3, \"\\\"]\")).should('contain.text', viewName3);",
+              "err": {},
+              "uuid": "0e364538-9947-44a3-95a1-a94136e65102",
+              "parentUUID": "085784a2-ec68-42ec-8483-e3152733494a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3073-User sets a default view while saving a new view Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6935,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "c6bb7305-3b50-4fd3-9b1c-546cec749a4a",
+              "parentUUID": "085784a2-ec68-42ec-8483-e3152733494a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9c0f9bd3-0ccb-4112-9793-69413d153172",
+            "dede78d8-230b-4ebb-9022-869cbb4a4984",
+            "0e364538-9947-44a3-95a1-a94136e65102",
+            "c6bb7305-3b50-4fd3-9b1c-546cec749a4a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 155634,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

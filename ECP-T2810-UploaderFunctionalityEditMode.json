@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:13:51.413Z",
+    "end": "2024-12-15T02:19:16.641Z",
+    "duration": 325228,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "78d36f25-0dab-4f0e-b390-29400505be7b",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2810-UploaderFunctionalityEditMode.spec.ts",
+      "file": "cypress/test-suites/ECP-T2810-UploaderFunctionalityEditMode.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9326c2c4-0e71-4c80-ad47-ff52b6196a62",
+          "title": "ECP-T2810-Uploader- Edit Mode",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1- 29",
+              "fullTitle": "ECP-T2810-Uploader- Edit Mode Step 1- 29",
+              "timedOut": null,
+              "duration": 307432,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowPatientSharing: true,\n    allowStatShares: true,\n    allowCdUploader: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.window().then(function (win) {\n    // @ts-ignore - removing Cypress error for missing chrome browser\n    window.top.chrome = true;\n});\n// Step 1\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Uploaders');\ncy.get('[title=\"Pass-through\"]').click();\ncy.get('[aria-label=\"Edit Exam\"]').click();\ncy.get('#save').click();\ncy.wait(configFile.mediumTimeout);\ncy.get('#showAttachmentsStage').should('be.checked');\n//Step 4,5 and 6\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.nodob });\ncy.wait(configFile.mediumTimeout);\ncy.get('.prevButton').click();\ncy.get('[data-cy=\"selectFolderButton\"]').should('exist');\n//Step 7,8 and 9\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.nodob });\ncy.wait(configFile.smallTimeout);\ncy.get('.iconCheckboxUnchecked').first().click();\ncy.get('.editUploadedExamBtn').should('exist');\ncy.get('.editUploadedExamBtn').click();\ncy.get('#studyDescription').should('exist');\ncy.get('#examDate').should('exist');\ncy.get('#accessionNumber').should('exist');\ncy.get('button:contains(Cancel)').should('exist');\ncy.get('button:contains(Save)').should('exist');\n//Step 10\ncy.get('#studyDescription').clear().type('Test Description');\ncy.get('button:contains(Cancel)').click();\ncy.get('span:contains(Test Description)').should('not.exist');\n//Step 11\ncy.get('.editUploadedExamBtn').click();\ncy.get('#studyDescription').clear().type('Test Description');\ncy.get('#accessionNumber').clear().type('55555');\ncy.get('button:contains(Save)').click();\ncy.get('span:contains(Test Description)').should('exist');\n//Step 18 and 19\ncy.wait(configFile.smallTimeout);\ncy.get('.editPatientBtn').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('#title').should('exist');\ncy.get('#firstName').should('exist');\ncy.get('#middleName').should('exist');\ncy.get('#lastName').should('exist');\ncy.get('#suffix').should('exist');\ncy.get('#dateOfBirth').should('exist');\ncy.get('#mrno').should('exist');\ncy.get('body').then(function (el) {\n    if (el.find('#nationalIdentifier').length > 0) {\n        cy.get('#nationalIdentifier').should('exist');\n    }\n    else {\n    }\n});\ncy.get('.js-close-patient-popover').should('exist');\ncy.get('.js-push').should('exist');\n//Step 20\ncy.get('#title').clear().type('MR');\ncy.get('#firstName').clear().type('Clinical');\ncy.get('#middleName').clear().type('opcheck');\ncy.get('.js-close-patient-popover').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.editPatientBtn').click({ force: true });\ncy.get('#firstName').invoke('val').then(function (text) {\n    var zp = text;\n    expect(zp).to.equal('');\n});\ncy.get('#middleName').invoke('val').then(function (text) {\n    var zp = text;\n    expect(zp).to.equal('');\n});\n//Step 21, 22 and 23\ncy.wait(configFile.smallTimeout);\ncy.get('#title').clear().type('MR');\ncy.get('#firstName').clear().type('Edited Patient');\ncy.get('#middleName').clear().type('Name');\ncy.get('#mrno').clear().type('12345');\ncy.get('body').then(function (el) {\n    if (el.find('#nationalIdentifier').length > 0) {\n        cy.get('#nationalIdentifier').clear().type('878787');\n    }\n    else {\n    }\n});\ncy.get('.js-push').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('[title=\"MR , Edited Patient Name (MRN: 12345, NHS #: 878 787)\"]').length > 0) {\n        cy.get('[title=\"MR , Edited Patient Name (MRN: 12345, NHS #: 878 787)\"]').should('exist');\n    }\n    else {\n        cy.get('[title=\"MR , Edited Patient Name (MRN: 12345)\"]').should('exist');\n    }\n});\n//Step 12\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"returnToExamList\"]').should('be.visible'); }, {\n    timeout: configFile.testExecutionTimeOut,\n});\ncy.visit(configFile.url);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('[title=\"Test Description\"]').should('exist');\ncy.get('[title=\"MR , Edited Patient Name\"]').should('exist');\ncy.get('[title=\"12345\"]').should('exist');\ncy.get('.expanderCell').click();\ncy.get('[title=\"55555\"]').should('exist');\n//Step 13\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.datasetsArray });\ncy.wait(configFile.mediumTimeout);\n//Step 14\ncy.get('.iconCheckboxUnchecked').first().click();\ncy.get('.iconCheckboxChecked').first().click();\n//Step 15 and 16\ncy.get('.iconCheckboxUnchecked').last().click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.editUploadedExamBtn').last().click();\ncy.get('#studyDescription').clear().type('Edited Description');\ncy.get('#accessionNumber').clear().type('11111');\ncy.get('button:contains(Save)').click();\ncy.get('span:contains(Edited Description)').should('exist');\n//Step 17\ncy.get('.iconCheckboxUnchecked').first().click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.Select-value').click();\ncy.get('body').then(function (el) {\n    if (el.find('[aria-label=\"Acceptance, Set 2 (DOB: 24-SEP-1978, MRN: a-02, NHS ID: )\"]').length > 0) {\n        cy.get('[aria-label=\"Acceptance, Set 2 (DOB: 24-SEP-1978, MRN: a-02, NHS ID: )\"]').should('exist');\n        cy.get('[aria-label=\"Acceptance, Set 1 (MRN: a-01, NHS ID: OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6_529l+9Ua0vFImLlb)\"]').should('exist');\n        cy.get('[aria-label=\"Acceptance, Set 2 (DOB: 24-SEP-1978, MRN: a-02, NHS ID: )\"]').click();\n    }\n    if (el.find('[aria-label=\"Acceptance, Set 2 (DOB: 09-24-1978, MRN: a-02, NHS ID: )\"]').length > 0) {\n        cy.get('[aria-label=\"Acceptance, Set 2 (DOB: 09-24-1978, MRN: a-02, NHS ID: )\"]').should('exist');\n        cy.get('[aria-label=\"Acceptance, Set 1 (MRN: a-01)\"]').should('exist');\n        cy.get('[aria-label=\"Acceptance, Set 2 (DOB: 09-24-1978, MRN: a-02, NHS ID: )\"]').click();\n    }\n    if (el.find('[aria-label=\"Acceptance, Set 2 (DOB: 09-24-1978, MRN: a-02)\"]').length > 0) {\n        cy.get('[aria-label=\"Acceptance, Set 2 (DOB: 09-24-1978, MRN: a-02)\"]').should('exist');\n        cy.get('[aria-label=\"Acceptance, Set 1 (MRN: a-01)\"]').should('exist');\n        cy.get('[aria-label=\"Acceptance, Set 2 (DOB: 09-24-1978, MRN: a-02)\"]').click();\n    }\n    if (el.find('[aria-label=\"Acceptance, Set 2 (DOB: 24-SEP-1978, MRN: a-02)\"]').length > 0) {\n        cy.get('[aria-label=\"Acceptance, Set 2 (DOB: 24-SEP-1978, MRN: a-02)\"]').should('exist');\n        cy.get('[aria-label=\"Acceptance, Set 1 (MRN: a-01)\"]').should('exist');\n        cy.get('[aria-label=\"Acceptance, Set 2 (DOB: 24-SEP-1978, MRN: a-02)\"]').click();\n    }\n});\n//Step 24 ,26 and 27\ncy.wait(configFile.smallTimeout);\ncy.get('.editPatientBtn').click({ force: true });\ncy.get('#firstName').clear().type('Test');\ncy.get('#middleName').clear().type('Test');\ncy.get('#lastName').clear().type('Name');\ncy.get('#mrno').clear().type('6789');\ncy.get('body').then(function (el) {\n    if (el.find('#nationalIdentifier').length > 0) {\n        cy.get('#nationalIdentifier').clear().type('99999');\n    }\n    else {\n    }\n});\ncy.get('.js-push').click();\ncy.wait(configFile.smallTimeout);\ncy.get('span:contains(Acceptance, Set 2) .nameToolTip').should('exist');\ncy.get('.mrnToolTip').first().trigger('mouseover');\ncy.get('span:contains(a-02) [data-original-title=\"Patient MRN does not match! Selecting this study will cause the MRN to be updated. Only select this study if you are sure it is for this patient.\"]').should('exist');\n//  cy.get('.mrnToolTip').eq(1).trigger('mouseover',{force:true});\n//  cy.get('span:contains() [data-original-title=\"Patient NHS ID does not match! Selecting this study will cause the NHS ID to be updated. Only select this study if you are sure it is for this patient.\"]').should('exist')\n//Step 25\ncy.wait(configFile.tinyTimeout);\ncy.get('.editPatientBtn').click({ force: true });\ncy.get('#firstName').clear().type('Set');\ncy.get('#middleName').clear().type('2');\ncy.get('#lastName').clear().type('Acceptance');\ncy.get('#mrno').clear().type('a-02');\ncy.get('body').then(function (el) {\n    if (el.find('#nationalIdentifier').length > 0) {\n        cy.get('#nationalIdentifier').clear().type('2345');\n    }\n    else {\n    }\n});\ncy.wait(configFile.tinyTimeout);\ncy.get('.js-push').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.mrnToolTip').first().trigger('mouseover', { force: true });\ncy.get('span:contains(a-02) [data-original-title=\"Patient MRN does not match! Selecting this study will cause the MRN to be updated. Only select this study if you are sure it is for this patient.\"]').should('not.exist');\n// cy.get('.mrnToolTip').last().trigger('mouseover',{force:true}); \n// cy.get('span:contains(OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6_529l+9Ua0vFImLlb) [data-original-title=\"Patient NHS ID does not match! Selecting this study will cause the NHS ID to be updated. Only select this study if you are sure it is for this patient.\"]').should('exist')\ncy.get('span:contains(Acceptance, Set 1) .nameToolTip').should('exist');\ncy.get('span:contains(Acceptance, Set 2) .nameToolTip').should('not.exist');\n//Step 28 and 29\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.samepatient });\ncy.wait(configFile.mediumTimeout);\ncy.get('.Select-value').click();\ncy.get('#react-select-2--option-0').should('exist');\ncy.get('#react-select-2--option-1').should('not.exist');\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"returnToExamList\"]').should('be.visible'); }, {\n    timeout: configFile.testExecutionTimeOut,\n});\ncy.visit(configFile.url);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('[title=\"Noise 1K\"]').should('exist');\ncy.get('[title=\"Multi Purpose 1K\"]').should('exist');",
+              "err": {},
+              "uuid": "22e3fba1-8236-4968-9280-640548c10a70",
+              "parentUUID": "9326c2c4-0e71-4c80-ad47-ff52b6196a62",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2810-Uploader- Edit Mode Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7930,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "d23d2774-fad1-4997-841b-cb870fb07c55",
+              "parentUUID": "9326c2c4-0e71-4c80-ad47-ff52b6196a62",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "22e3fba1-8236-4968-9280-640548c10a70",
+            "d23d2774-fad1-4997-841b-cb870fb07c55"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 315362,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

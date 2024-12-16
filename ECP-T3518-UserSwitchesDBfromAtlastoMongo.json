@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:52:39.923Z",
+    "end": "2024-12-15T03:54:20.044Z",
+    "duration": 100121,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a7c23a0e-5e19-4c74-b5f0-523b7460a47f",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3518-UserSwitchesDBfromAtlastoMongo.spec.ts",
+      "file": "cypress/test-suites/ECP-T3518-UserSwitchesDBfromAtlastoMongo.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2425edf0-e881-4873-a66a-c8d97d850c81",
+          "title": "ECP-T3518-User switches DB from Atlas to Mongo",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3518",
+              "fullTitle": "ECP-T3518-User switches DB from Atlas to Mongo ECP-T3518",
+              "timedOut": null,
+              "duration": 87925,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Admin Settings', 1);\ncy.get('[data-key=\"useAtlasSearchInWorklist\"]').check({ force: true });\ncy.get('.btn-primary').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('[data-key=\"useAtlasSearchInWorklist\"]').should('be.checked');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Worklist');\ncy.get('[data-cy=\"filterChip_matchStatus\"] > .close').click();\ncy.get('[data-cy=\"filterChip_examDateTime\"] > .close').click();\ncy.get('[data-cy=\"filterChip_readStatus\"] > .close').click();\ncy.get('.colomn-selector-btn').click();\ncy.get('[data-cy=\"columnSelectHiddenItem-visitCurrentLocation\"]').click();\ncy.get('[data-cy=\"columnSettingsAddToDisplayList\"]').click();\ncy.get('[title=\"Apply\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[data-cy=\"visitCurrentLocationFilter\"]').type('Wa');\ncy.get('[data-cy=\"FilterApplyAll\"]').click();\ncy.get('div:contains(Visit Current Loc.:)').should('exist');\ncy.get('.value-text').should('contain.text', \"Wa\");\ncy.get('.filter-icon-container').should('exist');\ncy.get('.filter-icon-container').click();\ncy.get('.false').click();\ncy.get('div:contains(Does not contain)').should('exist');\ncy.get('.value-text').should('contain.text', \"Wa\");\ncy.get('.-rowInfo').should('not.exist');\ncy.get('[data-cy=\"filterChip_visitCurrentLocation\"] > .close').click();\ncommon_1.Common.navigateTo('Admin Settings', 1);\ncy.get('[data-key=\"useAtlasSearchInWorklist\"]').uncheck();\ncy.get('span:contains(Note: Disabling this feature will result in limited filtering and sorting)').should('exist');\ncy.get('span:contains(in the worklist)').should('exist');\ncy.get('span:contains(Warnings will be shown in the worklist until this feature is enabled again.)').should('exist');\ncy.get('#enable').click();\ncy.get('.btn-primary').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Worklist');\ncy.wait(configFile.smallTimeout);\ncy.get('span:contains(Filtering functionality is currently restricted due to a system issue. Existing Views may be affected.)').should('exist');\ncy.get('.more-info-tooltip').should('exist');\ncy.get('.more-info-tooltip').trigger('mouseover');\ncy.get('div:contains(Change Healthcare Support has restricted filtering due to a system issue. Currently, text field filters use the \"Starts With\" operator instead of \"Contains\". For example, applying an MRN filter of \"123\" will display items with MRNs starting with \"123\".)').should('exist');\ncy.get('[data-cy=\"visitCurrentLocationFilter\"]').should('not.exist');",
+              "err": {},
+              "uuid": "2594fd26-8976-40c4-accd-1d375a10ee28",
+              "parentUUID": "2425edf0-e881-4873-a66a-c8d97d850c81",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3518-User switches DB from Atlas to Mongo Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6517,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "3af7a357-c9ed-4c37-9d85-fd305afa27d5",
+              "parentUUID": "2425edf0-e881-4873-a66a-c8d97d850c81",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2594fd26-8976-40c4-accd-1d375a10ee28",
+            "3af7a357-c9ed-4c37-9d85-fd305afa27d5"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 94442,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

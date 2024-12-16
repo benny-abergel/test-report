@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:21:02.794Z",
+    "end": "2024-12-15T03:26:09.236Z",
+    "duration": 306442,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "3fa2020c-adf6-4957-8d73-ecac9a3dc65a",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2593-AutomaticActions-ActiveInActive.spec.ts",
+      "file": "cypress/test-suites/ECP-T2593-AutomaticActions-ActiveInActive.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b25fd348-45e6-4a44-b9e6-805750cc17d5",
+          "title": "ECP-T2593 - Automatic Actions Active - Inactive",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Data Prep",
+              "fullTitle": "ECP-T2593 - Automatic Actions Active - Inactive Test Preparation - Data Prep",
+              "timedOut": null,
+              "duration": 84576,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName[0]);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowEdgeServer: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowAutomaticActions: true,\n    allowWorkstationViewer: true\n}, facilityName[0]);\n// c.createFacilityIfNotExists(facilityName[1]);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowEdgeServer: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowAutomaticActions: true,\n    allowWorkstationViewer: true\n}, facilityName[1]);",
+              "err": {},
+              "uuid": "1b7f14af-59f7-45a2-b640-1797070a3f9a",
+              "parentUUID": "b25fd348-45e6-4a44-b9e6-805750cc17d5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Starting Automatic Actions Acive - Inactive Test - all 6 in one",
+              "fullTitle": "ECP-T2593 - Automatic Actions Active - Inactive Starting Automatic Actions Acive - Inactive Test - all 6 in one",
+              "timedOut": null,
+              "duration": 200549,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var secondsSinceEpoch = Math.round(Date.now() / 1000);\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName[0]);\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Automatic Actions');\n// Step 1 - As an org Admin, create an Automatic Action. Verify the new automatic action is displayed as active after saving.\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elm) {\n    var NumOfRows = elm.find('.react-table-row').length;\n    for (var i = 0; i < NumOfRows; i++) {\n        cy.wait(configFile.tinyTimeout);\n        cy.get(':nth-child(2) > .react-table-row > .table-col-_id > div > .delete').first().click();\n        cy.get('.btn-danger').click();\n        cy.wait(configFile.tinyTimeout);\n    }\n});\ncy.get('.add_auto_action_btn', { timeout: configFile.hugeTimeout }).click();\ncy.wait(configFile.smallTimeout);\ncy.get('#aaEditorPopover input[name=aaName]').type(actionName + '_' + secondsSinceEpoch);\ncy.get('#aaEditorPopover div span:nth-child(2) div .Select-value').click();\ncy.get('[aria-label=\"An exam is received...\"]').click();\ncy.get('#aaEditorPopover div span:nth-child(1) div .Select-value').click();\ncy.get('[aria-label=\"Share exam with facility\"]').click();\ncy.get('#aaEditorPopover div.action div div:nth-child(2) div .Select-control .Select-input input.Select-input').type(facilityName[1], { force: true });\ncy.get('#aaEditorPopover div.action div div:nth-child(2) div .Select-menu-outer .Select-option.needsclick').first().click();\ncy.get('#save_btn').click();\ncy.get('td.table-col-name', { timeout: configFile.hugeTimeout }).should('contain.text', actionName + '_' + secondsSinceEpoch, { timeout: configFile.hugeTimeout });\ncy.get('td.table-col-actionStatus').should('contain.text', 'Active');\n// Step 2 - Test your newly created automatic action and verify it works as expected.\\\\\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName[0])).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c5_-Palette_Color_secondary_capture -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.timeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.get('table tbody tr td.patientName.td-popup span.cell-text.avoid-overflow', { timeout: configFile.hugeTimeout }).should('contain.text', 'Clinical, Set 5', { timeout: configFile.hugeTimeout });\ncommon_1.Common.switchToFacility(facilityName[1]);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.get('table tbody tr td.patientName.td-popup span.cell-text.avoid-overflow', { timeout: configFile.hugeTimeout }).should('contain.text', 'Clinical, Set 5', { timeout: configFile.hugeTimeout });\ncommon_1.Common.switchToFacility(facilityName[0]);\ncy.reload();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('button.viewExam', { timeout: configFile.hugeTimeout }).should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('body').then(function (elm) {\n    var NumOfRows = elm.find('.data-tables__rows > .table').length;\n    for (var i = 0; i < NumOfRows; i++) {\n        cy.get('.plus', { timeout: configFile.hugeTimeout }).first().click();\n        cy.get('[data-cy=deleteExamBtn]', { timeout: configFile.hugeTimeout }).click();\n        cy.get('[data-cy=confirmDeleteYes]', { timeout: configFile.hugeTimeout }).click();\n        cy.get('[data-cy=deleteExamBtn]', { timeout: configFile.hugeTimeout }).should('not.exist', { timeout: configFile.hugeTimeout });\n        cy.wait(configFile.tinyTimeout);\n    }\n});\ncy.get('.data-table__no-results', { timeout: configFile.hugeTimeout }).should('be.visible', { timeout: configFile.hugeTimeout });\n// Step 3 - Now edit the automatic action you just created by \"unchecking\" the active check box and save it.\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Automatic Actions');\ncy.get('.edit', { timeout: configFile.hugeTimeout }).first().click();\ncy.wait(configFile.smallTimeout);\ncy.get('#actionStatus').uncheck();\n//cy.get('#aaEditorPopover div.action div div:nth-child(2) div .Select-control .Select-input input.Select-input').type(facilityName[2], { force: true });\n//cy.get('#aaEditorPopover div.action div div:nth-child(2) div .Select-menu-outer .Select-option.needsclick').first().click();\ncy.get('#save_btn').click();\ncy.get('td.table-col-actionStatus', { timeout: configFile.hugeTimeout }).should('contain.text', 'Inactive', { timeout: configFile.hugeTimeout });\n// Step 4 - Now, test your inactive automatic action again, and verify it no longers works as expected.\n// upload exam now\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName[0])).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c5_-Palette_Color_secondary_capture -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.timeout);\ncy.get('#headerLogo').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facilityName[1]);\ncy.reload();\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.get('table tbody tr td.patientName.td-popup span.cell-text.avoid-overflow[title=\"Clinical, Set 5\"]', { timeout: configFile.hugeTimeout }).should('not.exist', { timeout: configFile.hugeTimeout });\ncommon_1.Common.switchToFacility(facilityName[0]);\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('button.viewExam', { timeout: configFile.hugeTimeout }).should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('body').then(function (elm) {\n    var NumOfRows = elm.find('.data-tables__rows > .table').length;\n    for (var i = 0; i < NumOfRows; i++) {\n        cy.wait(configFile.tinyTimeout);\n        cy.get('.plus').first().click();\n        cy.get('[data-cy=deleteExamBtn]', { timeout: configFile.hugeTimeout }).click();\n        cy.get('[data-cy=confirmDeleteYes]', { timeout: configFile.hugeTimeout }).click();\n        cy.get('[data-cy=deleteExamBtn]', { timeout: configFile.hugeTimeout }).should('not.exist', { timeout: configFile.hugeTimeout });\n    }\n});\ncy.get('.data-table__no-results', { timeout: configFile.hugeTimeout }).should('be.visible', { timeout: configFile.hugeTimeout });\n// Step 5 - Now edit the automatic action you just created by \"checking\" the active check box and save it.\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Automatic Actions');\ncy.get('.edit', { timeout: configFile.hugeTimeout }).first().click();\ncy.get('#actionStatus').check();\n// cy.get('#aaEditorPopover div.action div div:nth-child(2) div .Select-control .Select-input input.Select-input').type(facilityName[3], { force: true });\n//  cy.get('#aaEditorPopover div.action div div:nth-child(2) div .Select-menu-outer .Select-option.needsclick').first().click();\ncy.get('#save_btn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('td.table-col-actionStatus').should('contain.text', 'Active');\n// Step 6 - Now, test your active automatic action again, and verify now works as expected.\n// upload exam now\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName[0])).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c5_-Palette_Color_secondary_capture -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.timeout);\ncy.get('#headerLogo').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facilityName[1]);\ncy.reload();\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.timeout);\ncy.get('table tbody tr td.patientName.td-popup span.cell-text.avoid-overflow', { timeout: configFile.hugeTimeout }).should('contain.text', 'Clinical, Set 5', { timeout: configFile.hugeTimeout });",
+              "err": {},
+              "uuid": "c7ac0ad9-32dc-4dd5-b9e1-f8d87f59bf3d",
+              "parentUUID": "b25fd348-45e6-4a44-b9e6-805750cc17d5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2593 - Automatic Actions Active - Inactive Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7716,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName[0], false);\nmeteor_1.Meteor.changeFacilityStatus(facilityName[1], false);",
+              "err": {},
+              "uuid": "64861712-491b-4853-ab2c-c15aa6b99c0f",
+              "parentUUID": "b25fd348-45e6-4a44-b9e6-805750cc17d5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1b7f14af-59f7-45a2-b640-1797070a3f9a",
+            "c7ac0ad9-32dc-4dd5-b9e1-f8d87f59bf3d",
+            "64861712-491b-4853-ab2c-c15aa6b99c0f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 292841,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="310.427" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:04:12" tests="0" file="cypress/e2e/test-suites/ECP-T2673-FeatureSwitch-HL7.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2673 - Feature Switch HL7" timestamp="2024-12-15T02:04:12" tests="4" time="310.385" failures="0">
+    <testcase name="Starting Feature Switch HL7 Test - all 7 Steps in one" time="127.276" classname="ECP-T2673 - Feature Switch HL7">
+    </testcase>
+    <testcase name="Starting Feature Switch HL7 Test - 3-6" time="53.474" classname="ECP-T2673 - Feature Switch HL7">
+    </testcase>
+    <testcase name="Starting Feature Switch HL7 Test - Step 7" time="96.477" classname="ECP-T2673 - Feature Switch HL7">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.493" classname="ECP-T2673 - Feature Switch HL7">
+    </testcase>
+  </testsuite>
+</testsuites>

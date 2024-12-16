@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:13:43.587Z",
+    "end": "2024-12-15T02:15:55.914Z",
+    "duration": 132327,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2e3aa24e-8a46-4f6d-b753-70e347139595",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2800-SystemAdminSystemTools.spec.ts",
+      "file": "cypress/test-suites/ECP-T2800-SystemAdminSystemTools.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "52791cfb-e693-4d29-b5ee-bb7f6def0bbc",
+          "title": "ECP-T2800 - System Admin - System Tools",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "All Steps. Login in as System Admin, navigate to the System Tools page, verify all tools exist and launch",
+              "fullTitle": "ECP-T2800 - System Admin - System Tools All Steps. Login in as System Admin, navigate to the System Tools page, verify all tools exist and launch",
+              "timedOut": null,
+              "duration": 112810,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin'); // Navigate to System Admin / System Tools.\ncommon_1.Common.navigateTo('System Tools');\ncy.url().should('include', '/systemTools'); //We are on the right page\ncy.waitUntil(function () { return cy.get(st.firstJob).should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\n//Expect all tool links to be visible on the System Tools page\ncy.get(st.toolsLinks).each(function ($el) {\n    expect($el).to.be.visible;\n});\n//Access Processing Jobs\ncy.get('#container .adminHeader a[href=\"/processingJobs\"').click();\ncy.url().should('include', '/processingJobs'); //We are on the right page\ncy.get(st.headerOne).should('exist').should('contain.text', 'Upload Processing Jobs');\n//Processing Jobs - Fetch Study section and elements exist\ncy.get(st.headerThree).eq(0).should('contain.text', 'Fetch Study Information');\ncy.get(st.enterFetchExamId).should('be.visible');\ncy.get(st.fetchStudyInfoButton).should('be.visible');\n//Processing Jobs - In Progress / Incomplete Study Rollups and Request Rollup sections and elements exist\ncy.get(st.headerThree).eq(1).should('contain.text', 'In Progress / Incomplete Study Rollups');\ncy.get(st.headerThree).eq(2).should('contain.text', 'Request Rollup');\ncy.get(st.enterRollupExamId).should('be.visible');\ncy.get(st.forceReScanCheckbox).should('be.visible');\ncy.get(st.requestRollupButton).should('be.visible');\n//Processing Jobs - Rollup section and table exist\ncy.get(st.headerThree).eq(3).should('contain.text', 'Rollups');\ncy.get(st.headerColumnOne).eq(0).should('exist').should('contain.text', 'Study ID');\ncy.get(st.headerColumnTwo).eq(0).should('exist').should('contain.text', 'PriorityQueue');\ncy.get(st.headerColumnThree).eq(0).should('exist').should('contain.text', 'Study Upload ID');\ncy.get(st.headerColumnFour).eq(0).should('exist').should('contain.text', 'Unprocessed Chunks Flag');\ncy.get(st.headerColumnFive).eq(0).should('exist').should('contain.text', 'Rollup Request Flag');\ncy.get(st.headerColumnSix).eq(0).should('exist').should('contain.text', 'Sources Complete');\ncy.get(st.headerColumnSeven).eq(0).should('exist').should('contain.text', 'Chunks Processed');\n//Processing Jobs - Chunk Jobs section and table exist\ncy.get(st.headerThree).eq(4).should('contain.text', 'Chunk Jobs');\ncy.get(st.headerColumnOne).eq(1).should('exist').should('contain.text', 'Study ID');\ncy.get(st.headerColumnTwo).eq(1).should('exist').should('contain.text', 'Status');\ncy.get(st.headerColumnThree).eq(1).should('exist').should('contain.text', 'Last Updated');\ncy.get(st.headerColumnFour).eq(1).should('exist').should('contain.text', 'user');\ncy.get(st.headerColumnFive).eq(1).should('exist').should('contain.text', 'P10 Items');\ncy.get(st.headerColumnSix).eq(1).should('exist').should('contain.text', 'failures');\n//Processing Jobs - Frame Extraction Jobs section and table exist\ncy.get(st.headerThree).eq(5).should('contain.text', 'Frame Extraction Jobs');\ncy.get(st.extractJobHeaderColumnOne).should('exist').should('contain.text', 'STUDY ID');\ncy.get(st.extractJobHeaderColumnTwo).should('exist').should('contain.text', 'status');\ncy.get(st.extractJobHeaderColumnThree).should('exist').should('contain.text', 'LAST UPDATED');\ncy.get(st.extractJobHeaderColumnFour).should('exist').should('contain.text', 'USER');\ncy.get(st.extractJobHeaderColumnFive).should('exist').should('contain.text', 'P10 ITEMS');\ncy.get(st.extractJobHeaderColumnSix).should('exist').should('contain.text', 'FAILURES');\n//Access Instance Availability Notification\ncy.get('#container .adminHeader a[href=\"/availabilityNotification\"').click();\ncy.url().should('include', '/availabilityNotification'); //We are on the right page\ncy.get(st.centeredJobName).should('contain.text', 'INSTANCE AVAILABILITY NOTIFICATION');\ncy.get(st.titleBar).eq(0).should('contain.text', 'Instance Availability Notification Service Configuration');\ncy.get(st.titleBar).eq(1).should('contain.text', 'Instance Availability Notification Jobs');\n//Access DICOM Echo\ncy.get('#container .adminHeader a[href=\"/dicomEcho\"').click();\ncy.url().should('include', '/dicomEcho'); //We are on the right page\ncy.get(st.centeredJobName).should('contain.text', 'DICOM ECHO');\nif (cy.get(st.edgeServiceMessage).contains('This service is not configured.')) {\n    cy.log('Edge Server not set up.');\n}\n//Access DICOM Ingestion\ncy.get('#container .adminHeader a[href=\"/dicomIngestion\"').click();\ncy.url().should('include', '/dicomIngestion'); //We are on the right page\ncy.get(st.centeredJobName).should('contain.text', 'DICOM INGESTION');\ncy.get(st.titleBar).eq(0).should('contain.text', 'DICOM Ingestion Service Configuration');\n//Access DICOM QRSCP\ncy.get('#container .adminHeader a[href=\"/dicomQrscp\"').click();\ncy.url().should('include', '/dicomQrscp'); //We are on the right page\ncy.get(st.centeredJobName).should('contain.text', 'DICOM QRSCP');\ncy.get(st.titleBar).eq(0).should('contain.text', 'DICOM QRSCP Service Configuration');\n//Access DICOM Find\ncy.get('#container .adminHeader a[href=\"/dicomFind\"').click();\ncy.url().should('include', '/dicomFind'); //We are on the right page\ncy.get(st.centeredJobName).should('contain.text', 'DICOM FIND');\n//Access DICOM Move\ncy.get('#container .adminHeader a[href=\"/dicomMove\"').click();\ncy.url().should('include', '/dicomMove'); //We are on the right page\ncy.get(st.centeredJobName).should('contain.text', 'DICOM MOVE');\ncy.get(st.titleBar).eq(0).should('contain.text', 'DICOM Move Service Configuration');\ncy.get(st.titleBar).eq(1).should('contain.text', 'Dicom Move Jobs');\n//Access DICOM Store\ncy.get('#container .adminHeader a[href=\"/dicomStore\"').click();\ncy.url().should('include', '/dicomStore'); //We are on the right page\ncy.get(st.centeredJobName).should('contain.text', 'DICOM STORE');\n//Access QIDO Cache Regen Jobs\ncy.get('#container .adminHeader a[href=\"/qidoCacheJobs\"').click();\ncy.url().should('include', '/qidoCacheJobs'); //We are on the right page\ncy.get(st.kickOffCacheRegenButton).should('be.visible');\ncy.get(st.rtColumnHeaderId).should('contain.text', 'Job Id');\ncy.get(st.rtColumnHeaderStatus).should('contain.text', 'Status');\ncy.get(st.rtColumnHeaderCreated).should('contain.text', 'Created');\ncy.get(st.rtColumnHeaderDuration).should('contain.text', 'Duration');\ncy.get(st.rtColumnHeaderActions).should('contain.text', 'Actions');\n//Access Edge Server Management\ncy.get('#container .adminHeader a[href=\"/edgeServerManagement\"').click();\ncy.url().should('include', '/edgeServerManagement'); //We are on the right page\ncy.get(st.centeredJobName).should('contain.text', 'EDGE SERVER MANAGEMENT');\n//Access Test Data\ncy.get('#container .adminHeader a[href=\"/testData\"').click();\ncy.url().should('include', '/testData'); //We are on the right page\ncy.get(st.loadTestOrgButton).should('be.visible');\n//Access Permissions\ncy.get('#container .adminHeader a[href=\"/permissions\"').click();\ncy.url().should('include', '/permissions'); //We are on the right page\ncy.get(st.currentUserGroup).should('exist').should('be.checked');\ncy.get(st.allAvailableGroups).should('exist').should('not.be.checked');\ncy.get(st.userGroupColumnHeader).should('contain.text', 'User Groups');\ncy.get(st.userRoleColumnHeader).should('contain.text', 'Roles');\ncy.get(st.roleColumnHeaader).should('contain.text', 'Roles');\ncy.get(st.permissionColumnHeader).should('contain.text', 'Permissions');\n//Access Uploader Status\ncy.get('#container .adminHeader a[href=\"/uploaderStatus\"').click();\ncy.url().should('include', '/uploaderStatus'); //We are on the right page\ncy.get(st.centeredJobName).should('contain.text', 'UPLOADER STATUS');\ncy.get(st.uploadHistoryTab).should('exist').should('have.value', '1');\ncy.get(st.uploadSummaryTab).should('exist').should('have.value', '0');\n/*         //Access Customer Storage\n        cy.get('#container .adminHeader a[href=\"/organizationStorage\"').click();\n        cy.url().should('include', '/organizationStorage'); //We are on the right page\n        cy.get(st.headerThree).eq(0).should('contain.text', 'Global Storage Processor Configuration');\n        cy.get(st.headerThree).eq(1).should('contain.text', 'Customer Storage Results');\n        cy.get(st.headerThree).eq(2).should('contain.text', 'Customer Storage Jobs');\n */\n//Access Study Copy\ncy.get('#container .adminHeader a[href=\"/studyCopy\"').click();\ncy.url().should('include', '/studyCopy'); //We are on the right page\ncy.get(st.centeredJobName).should('contain.text', 'Study Copy');\ncy.get(st.headerTwo).eq(0).should('contain.text', 'Copy a Study');\ncy.get(st.studyId).should('exist');\ncy.get(st.headerTwo).eq(1).should('contain.text', 'Study Copy Jobs');\ncy.get(st.rtColumnHeaderId).should('contain.text', 'Job Id');\ncy.get(st.rtColumnHeaderSourceOrg).should('contain.text', 'Source Org');\ncy.get(st.rtColumnHeaderSourceStudyId).should('contain.text', 'Source StudyId');\ncy.get(st.rtColumnHeaderTargetOrg).should('contain.text', 'Target Org');\ncy.get(st.rtColumnHeaderTargetStudyId).should('contain.text', 'New StudyId');\ncy.get(st.rtColumnHeaderStatus).should('contain.text', 'status');\ncy.get(st.rtColumnHeaderCreated).should('contain.text', 'created');\ncy.get(st.rtColumnHeaderDuration2).should('contain.text', 'Duration');\ncy.get(st.rtColumnHeaderJob).should('contain.text', 'Log Job');\ncy.get(st.rtColumnHeaderAbort).should('contain.text', 'Abort Job');\ncy.get(st.rtColumnHeaderFail).should('contain.text', 'Fail Job');\ncy.get(st.rtColumnHeaderActions).should('contain.text', 'Cleanup');\n//Access Study Errors\ncy.get('#container .adminHeader a[href=\"/studyErrors\"').click();\ncy.url().should('include', '/studyErrors'); //We are on the right page\ncy.get(st.centeredJobName).should('contain.text', 'STUDY ERRORS');\ncy.get(st.rtColumnUpdated).should('contain.text', 'Time');\ncy.get(st.rtColumnHeaderCreatedBy).should('contain.text', 'Created by UserID');\ncy.get(st.rtColumnHeaderStudyId).should('contain.text', 'Study ID');\ncy.get(st.rtColumnHeaderPatientName).should('contain.text', 'Patient');\ncy.get(st.rtColumnHeaderPatientDOB).should('contain.text', 'DOB');\ncy.get(st.rtColumnHeaderStudyDate).should('contain.text', 'EXAM DATE');\ncy.get(st.rtColumnHeaderAccession).should('contain.text', 'ACCESSION#');\ncy.get(st.rtColumnHeaderStudyDesc).should('contain.text', 'DESCRIPTION');\ncy.get(st.rtColumnHeaderPreview).should('contain.text', 'PREVIEW METADATA');\ncy.get(st.rtColumnHeaderMediaId).should('contain.text', 'Media/CdRom ID/Source');\ncy.get(st.rtColumnHeaderErrors).should('contain.text', 'Errors');\ncy.get(st.previousPageButton).should('exist').should('be.disabled');\ncy.get(st.nextPageButton).should('exist').should('be.disabled');\n//Access Exam Purging\ncy.get('#container .adminHeader a[href=\"/examPurging\"').click();\ncy.url().should('include', '/examPurging'); //We are on the right page\ncy.get(st.headerTwo).should('contain.text', 'Exam Purging: ');\ncy.get(st.runPurgeDeleteButton).should('exist').should('contain.text', 'Run Delete/Purge');\n//Access Outgoing Connections\ncy.get('#container .adminHeader a[href=\"/outgoingConnections\"').click();\ncy.url().should('include', '/outgoingConnections'); //We are on the right page\ncy.get(st.headerOne).should('exist').should('contain.text', 'Outgoing Connection Status');\n//Access Authentication Tokens\ncy.get('#container .adminHeader a[href=\"/authTokens\"').click();\ncy.url().should('include', '/authTokens'); //We are on the right page\ncy.get(st.headerColumnOne).should('exist').should('contain.text', 'organization');\ncy.get(st.headerColumnTwo).should('exist').should('contain.text', 'tokenType');\ncy.get(st.headerColumnThree).should('exist').should('contain.text', 'status');\ncy.get(st.headerColumnFour).should('exist').should('contain.text', 'description');\ncy.get(st.headerColumnFive).should('exist').should('contain.text', 'created At');\ncy.get(st.headerColumnSix).should('exist').should('contain.text', 'Is Super User');\n//Access Edge Servers\ncy.get('#container .adminHeader a[href=\"/edgeServerList\"').click();\ncy.url().should('include', '/edgeServerList'); //We are on the right page\ncy.get(st.centeredJobName).eq(0).should('exist').should('contain.text', 'EDGE SERVERS');\ncy.get(st.rtColumnHeaderOrgRef).should('exist').should('contain.text', 'Organization');\ncy.get(st.rtColumnHeaderId).should('exist').should('contain.text', 'EdgeServer._id');\ncy.get(st.rtColumnHeaderGroupId).should('exist').should('contain.text', 'EdgeServerGroupId');\ncy.get(st.rtColumnHeaderOwnerOrg).should('exist').should('contain.text', 'Owner Organization');\ncy.get(st.centeredJobName).eq(1).should('exist').should('contain.text', 'EDGE SERVER SHARING');\ncy.get(st.addShareButton).should('exist');\ncy.get(st.addShareButton).click();\ncy.get(st.owningOrg).should('exist');\ncy.get(st.recipientOrg).should('exist');\ncy.get(st.addShareConfirmButton).should('exist');\ncy.get(st.addShareCancelButton).should('exist');\ncy.get(st.addShareCancelButton).click();\ncy.get(st.rtColumnHeaderOwnerOrg).should('exist').should('contain.text', 'Owner Organization');\ncy.get(st.rtColumnHeaderRecipientOrg).should('exist').should('contain.text', 'Recipient Organization');\ncy.get(st.rtColumnHeaderActions2).should('exist').should('contain.text', 'Actions');\n//Access Unsent Emails\ncy.get('#container .adminHeader a[href=\"/emailJobs\"').click();\ncy.url().should('include', '/emailJobs'); //We are on the right page\ncy.get(st.centeredJobName).should('exist').should('contain.text', 'UNSENT EMAILS');\ncy.get(st.rtColumnHeaderCreated).should('exist').should('contain.text', 'Created Date');\ncy.get(st.rtColumnHeaderData).eq(0).should('exist').should('contain.text', 'Recipient');\ncy.get(st.rtColumnHeaderData).eq(1).should('exist').should('contain.text', 'Subject');\ncy.get(st.rtColumnHeaderStatus).should('exist').should('contain.text', 'Email Job Status');\ncy.get(st.rtColumnHeaderRetries).should('exist').should('contain.text', 'Retries Left');\ncy.get(st.rtColumnHeaderNextRetry).should('exist').should('contain.text', 'Next Retry');\ncy.get(st.rtColumnHeaderId).should('exist').should('contain.text', 'actions');\n//Access Patient List\ncy.get('#container .adminHeader a[href=\"/patientList\"').click();\ncy.url().should('include', '/patientList'); //We are on the right page\ncy.get(st.searchByDropDown).should('exist');\ncy.get(st.searchValue).should('exist');\ncy.get(st.searchButton).should('exist');\ncy.get(st.rtColumnHeaderCreated2).should('contain.text', 'Created Date');\ncy.get(st.rtColumnHeaderId).eq(0).should('contain.text', 'PatientId');\ncy.get(st.rtColumnHeaderMrns).should('contain.text', 'MRNS');\ncy.get(st.rtColumnHeaderName).should('contain.text', 'Name');\ncy.get(st.rtColumnHeaderPatientDOB2).should('contain.text', 'Birth Date');\ncy.get(st.rtColumnHeaderPatientSex).should('contain.text', 'Sex');\ncy.get(st.rtColumnHeaderId).eq(1).should('contain.text', 'actions');\n//Access Ops Monitor\ncy.get('#container .adminHeader a[href=\"/mrmagoo\"').click();\ncy.url().should('include', '/mrmagoo'); //We are on the right page\ncy.get(st.centeredJobName).eq(0).should('exist').should('contain.text', 'System Operational Status');\ncy.get(st.rtColumnHeaderId).eq(0).should('contain.text', 'Process ID');\ncy.get(st.rtColumnHeaderState).eq(0).should('contain.text', 'State');\ncy.get(st.rtColumnHeaderMemoryUsage).eq(0).should('contain.text', 'Memory Used');\ncy.get(st.rtColumnHeaderTimestamp).eq(0).should('contain.text', 'Last Update');\ncy.get(st.rtColumnHeaderActions2).eq(0).should('contain.text', 'Actions');\ncy.get(st.centeredJobName).eq(1).should('exist').should('contain.text', 'EdgeServer Operational Status');\ncy.get(st.rtColumnHeaderId).eq(1).should('contain.text', 'EdgeServer Service');\ncy.get(st.rtColumnHeaderOrg).should('contain.text', 'Organization');\ncy.get(st.rtColumnHeaderState).eq(1).should('contain.text', 'State');\ncy.get(st.rtColumnHeaderMemoryUsage).eq(1).should('contain.text', 'Memory Used');\ncy.get(st.rtColumnHeaderTimestamp).eq(1).should('contain.text', 'Last Update');\ncy.get(st.rtColumnHeaderActions2).eq(1).should('contain.text', 'Actions');\n//Access Expire JWT\ncy.get('#container .adminHeader a[href=\"/expireJWT\"').click();\ncy.url().should('include', '/expireJWT'); //We are on the right page\ncy.get(st.headerTwo).should('exist').should('contain.text', 'Expire JWT');\ncy.get(st.tokenValue).should('exist');\ncy.get(st.genExpiredTokenButton).should('exist');\n//Access Central Registration\ncy.get('#container .adminHeader a[href=\"/centralRegistration\"').click();\ncy.url().should('include', '/centralRegistration'); //We are on the right page\ncy.get(st.headerOne).should('exist').should('contain.text', 'Register with Central');\ncy.get(st.allowProfAccountsCheckbox).should('exist').should('not.be.checked');\ncy.get(st.userEmailName).should('exist');\ncy.get(st.password).should('exist');\ncy.get(st.registerButton).should('exist');\n//Access Outgoing Remote Shares\ncy.get('#container .adminHeader a[href=\"/outgoingRemoteShares\"').click();\ncy.url().should('include', '/outgoingRemoteShares'); //We are on the right page\ncy.get(st.headerOne).should('exist').should('contain.text', 'Outgoing Remote Shares');\ncy.get(st.rtColumnHeaderActions3).should('exist').should('contain.text', 'Actions');\ncy.get(st.rtColumnHeaderType).should('exist').should('contain.text', 'Type');\ncy.get(st.rtColumnHeaderCreated2).should('exist').should('contain.text', 'Shared At');\ncy.get(st.rtColumnHeaderRecipient).should('exist').should('contain.text', 'Recipient Organization');\ncy.get(st.rtColumnHeaderDeployOrg).should('exist').should('contain.text', 'Recipient Deployment');\ncy.get(st.rtColumnHeaderSendStatus).should('exist').should('contain.text', 'Status');\n//Access Import/Export Hanging Protocols\ncy.get('#container .adminHeader a[href=\"/importExportHP\"').click();\ncy.url().should('include', '/importExportHP'); //We are on the right page\ncy.get(st.centeredJobName).eq(0).should('exist').should('contain.text', 'Import/Export Hanging Protocols');\ncy.get(st.centeredJobName).eq(1).should('exist').should('contain.text', 'Export Hanging Protocols Trained Models');\n//Access Download Queue\ncy.get('#container .adminHeader a[href=\"/downloadQueue\"').click();\ncy.url().should('include', '/downloadQueue'); //We are on the right page\ncy.get(st.headerTwo).should('exist').should('contain.text', 'Download Queue');\ncy.get(st.yesDeleteButton).should('exist').should('contain.text', 'Yes, Delete');\n//Access Bulk Add Users\ncy.get('#container .adminHeader a[href=\"/bulkAddUsers\"').click();\ncy.url().should('include', '/bulkAddUsers'); //We are on the right page\ncy.get(st.headerTwo).should('exist').should('contain.text', 'Bulk Add Users');\ncy.get(st.inputUser).should('exist');\ncy.get(st.genUsersButton).should('exist');\n//Access Worklist Jobs\ncy.get('#container .adminHeader a[href=\"/worklistJobs\"').click();\ncy.url().should('include', '/worklistJobs'); //We are on the right page\ncy.get(st.centeredJobName).should('exist').should('contain.text', 'Worklist Jobs');\ncy.get(st.selectOrgDropDown).should('exist');\ncy.get(st.applyMigrationCheckbox).should('not.be.checked');\ncy.get(st.dateRange).should('exist').should('be.disabled');\ncy.get(st.createJobButton).should('exist').should('be.disabled');\ncy.get(st.batchSizeInput).should('exist').should('have.value', '200');\ncy.get(st.saveSettingsButton).should('exist').should('be.not.disabled');\ncy.get(st.rtColumnHeaderTwo).should('exist').should('contain.text', 'Organization ID');\ncy.get(st.rtColumnHeaderThree).should('exist').should('contain.text', 'Status');\ncy.get(st.rtColumnHeaderFour).should('exist').should('contain.text', 'Handled procedures');\ncy.get(st.rtColumnHeaderFive).should('exist').should('contain.text', 'Handled studies');\n//Access HIPAA Log Report\ncy.get('[href=\"/auditLogReport\"]').click();\ncy.url().should('include', '/auditLogReport'); //We are on the right page\ncy.get(st.headerTwo).should('exist').should('contain.text', 'Audit Reports');\ncy.get(st.hipaaJobSchedule).should('exist');\ncy.get(st.rtColumnHeaderOne).should('exist').should('contain.text', 'Generated Date/Time');\ncy.get(st.rtColumnHeaderTwo).should('exist').should('contain.text', 'Status');\ncy.get(st.rtColumnHeaderThree).should('exist').should('contain.text', 'From/To Date');\ncy.get(st.rtColumnHeaderFour).should('exist').should('contain.text', 'Actions');\n//Access Hanging Protocols ML\ncy.get('#container .adminHeader a[href=\"/hangingProtocolsMl\"').click();\ncy.url().should('include', '/hangingProtocolsMl'); //We are on the right page\ncy.get(st.centeredJobName).should('exist').should('contain.text', 'Hanging Protocols ML');\ncy.get(st.rtColumnHeaderId).should('exist').should('contain.text', 'Job id');\ncy.get(st.rtColumnHeaderOrgRefId).should('exist').should('contain.text', 'Organization');\ncy.get(st.rtColumnHeaderCreated).should('exist').should('contain.text', 'Created Date');\ncy.get(st.rtColumnHeaderStatus).should('exist').should('contain.text', 'Status');\ncy.get(st.rtColumnHeaderDuration2).should('exist').should('contain.text', 'Duration');\ncy.get(st.rtColumnHeaderActions2).should('exist').should('contain.text', 'Actions');\n//Access Hanging Protocols ML\ncy.get('#container .adminHeader a[href=\"/hangingProtocolsLearnFeature\"').click();\ncy.get(st.hippaLearnDropDown).should('exist');\ncy.get(st.saveLearnButton).should('exist');",
+              "err": {},
+              "uuid": "23178646-4c83-46f2-8f4a-a66cff0013b2",
+              "parentUUID": "52791cfb-e693-4d29-b5ee-bb7f6def0bbc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2800 - System Admin - System Tools Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 11354,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "1bf7facd-f1b5-453b-835b-fc35e6ab2b8a",
+              "parentUUID": "52791cfb-e693-4d29-b5ee-bb7f6def0bbc",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "23178646-4c83-46f2-8f4a-a66cff0013b2",
+            "1bf7facd-f1b5-453b-835b-fc35e6ab2b8a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 124164,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

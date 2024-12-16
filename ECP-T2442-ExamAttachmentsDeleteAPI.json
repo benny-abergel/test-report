@@ -1,0 +1,226 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 1,
+    "failures": -1,
+    "start": "2024-12-15T03:16:32.550Z",
+    "end": "2024-12-15T03:21:22.512Z",
+    "duration": 289962,
+    "testsRegistered": 7,
+    "passPercent": 100,
+    "pendingPercent": 14.285714285714285,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "43fe98d3-974a-4114-b96e-627f35b2601e",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2442-ExamAttachmentsDeleteAPI.spec.ts",
+      "file": "cypress/test-suites/ECP-T2442-ExamAttachmentsDeleteAPI.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "94075d61-aa46-437f-8042-d7ff52eb8fd8",
+          "title": "ECP-T2442 - Exam Attachment Delete API ",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1-2",
+              "fullTitle": "ECP-T2442 - Exam Attachment Delete API  Step 1-2",
+              "timedOut": null,
+              "duration": 130714,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\n//Step 1\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    //Step 2\n    var examUploadCmd_01 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/Overlay_Test\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd_01, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n    common_1.Common.navigateTo('Sharing List');\n    cy.waitUntil(function () { return cy.get('[title=\"Overlay, Test\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n    cy.wait(configFile.smallTimeout);\n    cy.get('.expanderCell').click();\n    cy.get(iex.moreInfo).click();\n    cy.wait(configFile.smallTimeout);\n    cy.get(iex.examID).then(function (el) {\n        examID = el.text();\n        meteor_1.Meteor.getViewerUrls(configFile.url, configFile.username, configFile.password, examID, orgId, 'ndxWeb')\n            .then(function (viewerUrls) {\n            // @ts-ignore\n            ndxViewerUrl = viewerUrls;\n        });\n    });\n});",
+              "err": {},
+              "uuid": "145b35f6-b191-4bc7-b365-6c8da7879ce2",
+              "parentUUID": "94075d61-aa46-437f-8042-d7ff52eb8fd8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 3",
+              "fullTitle": "ECP-T2442 - Exam Attachment Delete API  Step 3",
+              "timedOut": null,
+              "duration": 100946,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.mediumTimeout, true);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"View Exam Images\"]').last().click();\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.closeOtherTabs();\ncy.visit(\"\".concat(ndxViewerUrl));\n//m.login(customerName,'#Layer_1', `${configFile.url}/${ndxViewerUrl}`, true, userName,userpassword, configFile.longTimeout);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('#panelButton').click();\ncy.get('[data-config]').first().click();\ncy.get('.imageThumbnailOverlay').dblclick();\ncy.wait(configFile.smallTimeout);\ncy.get('#capture').click();\ncy.get('#full').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.imageViewerViewport').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.imageViewerViewport').click();\ncy.wait(configFile.mediumTimeout);\ndeleteurl = \"\".concat(configFile.url, \"/attachment/study/\").concat(examID);\n//API call\nheader = {\n    Authorization: \"Bearer \".concat(token),\n    'Content-Type': 'application/json; charset=utf-8'\n};\nreturn cy.request({\n    url: deleteurl,\n    method: 'GET',\n    headers: header\n}).then(function (response) {\n    expect(response.status).to.equals(200);\n    expect(response.body[0].name).to.equal('viewport-capture');\n    expect(response.body[0].fileExtension).to.equal('jpeg');\n    expect(response.body[0].fileSize);\n    expect(response.body[0].createdAt);\n    expect(response.body[0].updatedAt);\n    expect(response.body[0].updatedByUserId);\n    expect(response.body[0].urls.view);\n    expect(response.body[0].urls.download);\n    expect(response.body[0].urls.delete);\n    capturedurl = response.body[0].urls.delete;\n});",
+              "err": {},
+              "uuid": "94343680-5e36-43e3-80db-cc0103a0aa67",
+              "parentUUID": "94075d61-aa46-437f-8042-d7ff52eb8fd8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deleting the Attachment",
+              "fullTitle": "ECP-T2442 - Exam Attachment Delete API  Deleting the Attachment",
+              "timedOut": null,
+              "duration": 1230,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "header = {\n    Authorization: \"Bearer \".concat(token),\n    'Content-Type': 'application/json; charset=utf-8'\n};\nreturn cy.request({\n    url: capturedurl,\n    method: 'DELETE',\n    headers: header\n}).then(function (response) {\n    expect(response.status).to.equals(200);\n});",
+              "err": {},
+              "uuid": "761a5980-107b-4cc1-aa01-14205641d815",
+              "parentUUID": "94075d61-aa46-437f-8042-d7ff52eb8fd8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Invalid Attachment ID - Skipping this Step because of Bug - ECP-5437",
+              "fullTitle": "ECP-T2442 - Exam Attachment Delete API  Invalid Attachment ID - Skipping this Step because of Bug - ECP-5437",
+              "timedOut": null,
+              "duration": 0,
+              "state": "pending",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": true,
+              "context": null,
+              "code": "header = {\n    Authorization: \"Bearer \".concat(token),\n    'Content-Type': 'application/json; charset=utf-8'\n};\nreturn cy.request({\n    url: \"\".concat(configFile.url, \"/attachment/file/ahggsff\"),\n    failOnStatusCode: false,\n    method: 'DELETE',\n    headers: header\n}).then(function (response) {\n    expect(response.status).to.equals(404);\n});",
+              "err": {},
+              "uuid": "ed45a88b-f23e-4d78-a825-2f7baa8103da",
+              "parentUUID": "94075d61-aa46-437f-8042-d7ff52eb8fd8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Invalid Token ",
+              "fullTitle": "ECP-T2442 - Exam Attachment Delete API  Invalid Token ",
+              "timedOut": null,
+              "duration": 719,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "header = {\n    Authorization: \"Bearer 38839hhhbs778999999bbb\",\n    'Content-Type': 'application/json; charset=utf-8'\n};\nreturn cy.request({\n    url: capturedurl,\n    failOnStatusCode: false,\n    method: 'DELETE',\n    headers: header\n}).then(function (response) {\n    expect(response.status).to.equals(403);\n});",
+              "err": {},
+              "uuid": "66b57020-66b4-4c40-8c62-216af098b760",
+              "parentUUID": "94075d61-aa46-437f-8042-d7ff52eb8fd8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Verifying the attachment is deleted",
+              "fullTitle": "ECP-T2442 - Exam Attachment Delete API  Verifying the attachment is deleted",
+              "timedOut": null,
+              "duration": 32873,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.waitUntil(function () { return cy.get('[title=\"Overlay, Test\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.exam-attachments-btn').click();\ncy.get('[title=\"viewport-capture.jpeg\"]').should('not.exist');",
+              "err": {},
+              "uuid": "fffd7ff3-e851-4431-ade3-1970e1d69550",
+              "parentUUID": "94075d61-aa46-437f-8042-d7ff52eb8fd8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2442 - Exam Attachment Delete API  Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8171,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "80674d22-0f8e-4655-b4ca-3125d5925cb5",
+              "parentUUID": "94075d61-aa46-437f-8042-d7ff52eb8fd8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "145b35f6-b191-4bc7-b365-6c8da7879ce2",
+            "94343680-5e36-43e3-80db-cc0103a0aa67",
+            "761a5980-107b-4cc1-aa01-14205641d815",
+            "66b57020-66b4-4c40-8c62-216af098b760",
+            "fffd7ff3-e851-4431-ade3-1970e1d69550",
+            "80674d22-0f8e-4655-b4ca-3125d5925cb5"
+          ],
+          "failures": [],
+          "pending": [
+            "ed45a88b-f23e-4d78-a825-2f7baa8103da"
+          ],
+          "skipped": [],
+          "duration": 274653,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

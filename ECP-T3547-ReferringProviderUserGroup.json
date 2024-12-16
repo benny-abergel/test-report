@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:35:07.959Z",
+    "end": "2024-12-15T02:40:48.058Z",
+    "duration": 340099,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ef0c0d03-07d2-428d-90a5-96ec176d773a",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3547-ReferringProviderUserGroup.spec.ts",
+      "file": "cypress/test-suites/ECP-T3547-ReferringProviderUserGroup.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "800e6f64-78a8-488b-bbf9-b97d40e91675",
+          "title": "ECP-T3547-ReferringProviderUserGroup [REQ-054]",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3547 - steps 1 to 5",
+              "fullTitle": "ECP-T3547-ReferringProviderUserGroup [REQ-054] ECP-T3547 - steps 1 to 5",
+              "timedOut": null,
+              "duration": 179801,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowEdgeServer: true,\n    allowWorklist: true,\n    allowWorkstationViewer: true\n}, facilityName);\n// Step - 2\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Users & Groups');\ncommon_1.Common.switchTab('User Groups');\ncy.contains('td', 'Referring Provider').parent().contains('a', 'Duplicate').click();\ncy.get('#confirm-SystemAdminUsersAndGroupsWarning').click();\ncy.contains('td', 'Referring Provider').parent().contains('a', 'Duplicate').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[class=\"assignedRolesListTable\"]').children().contains('Attachments - Add').should('exist');\ncy.get('[class=\"assignedRolesListTable\"]').children().contains('Attachments - View').should('exist');\ncy.get('[class=\"assignedRolesListTable\"]').children().contains('Exam Notes User View, Add, Edit, Delete').should('exist');\ncy.get('[class=\"assignedRolesListTable\"]').children().contains('General Access for integrations').should('exist');\ncy.get('[class=\"assignedRolesListTable\"]').children().contains('PACS - User-Level Filter Creation').should('exist');\ncy.get('[class=\"assignedRolesListTable\"]').children().contains('Patient - View Patient Page').should('exist');\ncy.get('[class=\"assignedRolesListTable\"]').children().contains('Procedure - View Procedure Page').should('exist');\ncy.get('[class=\"assignedRolesListTable\"]').children().contains('Report - View').should('exist');\ncy.get('[class=\"assignedRolesListTable\"]').children().contains('Share - View').should('exist');\ncy.get('[class=\"assignedRolesListTable\"]').children().contains('View Sharing List').should('exist');\ncy.get('[class=\"assignedRolesListTable\"]').children().contains('View Studies').should('exist');\ncy.contains('button', 'Cancel').click();\ncy.wait(configFile.smallTimeout);\nvar mrn1 = crypto.randomUUID();\nvar mrn2 = crypto.randomUUID();\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    common_1.Common.uploadProc({ name: 'Natasha Romanoff', mrn: mrn1, token: token });\n    common_1.Common.uploadProc({ name: 'Natasha Romanoff', mrn: mrn2, token: token });\n    //Upload a-01 study from resources folder\n    common_1.Common.uploadStudy('a-01', token);\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Worklist');\nclearAllFilters();\n// Step - 3\nworklist_common_1.Worklist.getRowsByMRN('a-01').first().find('[data-cy=\"examDateTime-cell\"]').rightclick({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('[data-cy=\"workflowAdministration\"]').should('exist');\ncy.get('[data-cy=\"hipaaLog\"]').should('exist');\ncy.get('[class=\"react-contextmenu-item\"]').children().contains('Workflow Administration').click();\ncy.get('[data-cy=\"matchUnmatch\"]').should('exist');\nmatchProcStudy(mrn1, 'a-01');\ncy.wait(configFile.smallTimeout);\ncy.get('.hipaa-log-title.modal-title').find('.close').click();\ncy.wait(configFile.smallTimeout);\nworklist_common_1.Worklist.refreshWL();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncommon_1.Common.login(customerName, limitedUser, limitedPassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(limitedUser, limitedPassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\nclearAllFilters();\n// Step - 4\nworklist_common_1.Worklist.getRowsByMRN(mrn1).first().find('[data-cy=\"examDateTime-cell\"]').rightclick({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('[data-cy=\"workflowAdministration\"]').should('exist');\ncy.get('[data-cy=\"hipaaLog\"]').should('exist');\ncy.get('[data-cy=\"addNote\"]').should('exist');\ncy.get('[class=\"react-contextmenu-item\"]').children().contains('Workflow Administration').click();\ncy.get('[data-cy=\"matchUnmatch\"]').should('exist');\n// Step - 5\nworklist_common_1.Worklist.getRowsByMRN(mrn2).first().find('[data-cy=\"examDateTime-cell\"]').rightclick({ force: true });\ncy.get('[data-cy=\"workflowAdministration\"]').should('exist');\ncy.get('[data-cy=\"hipaaLog\"]').should('exist');\ncy.get('[data-cy=\"addNote\"]').should('exist');\ncy.get('[class=\"react-contextmenu-item\"]').children().contains('Workflow Administration').click();\ncy.get('[data-cy=\"matchUnmatch\"]').should('exist');",
+              "err": {},
+              "uuid": "bba8bc74-d028-4ab0-9aca-9073ffae0ded",
+              "parentUUID": "800e6f64-78a8-488b-bbf9-b97d40e91675",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3547-ReferringProviderUserGroup [REQ-054] Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 9032,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "c8ed5b88-075b-4b23-ac7a-74c113a5f0a2",
+              "parentUUID": "800e6f64-78a8-488b-bbf9-b97d40e91675",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "bba8bc74-d028-4ab0-9aca-9073ffae0ded",
+            "c8ed5b88-075b-4b23-ac7a-74c113a5f0a2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 188833,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

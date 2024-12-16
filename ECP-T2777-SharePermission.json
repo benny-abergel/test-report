@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:13:40.123Z",
+    "end": "2024-12-15T02:21:42.672Z",
+    "duration": 482549,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b771c6a8-32d7-4877-b917-0fb9b50fe1dd",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2777-SharePermission.spec.ts",
+      "file": "cypress/test-suites/ECP-T2777-SharePermission.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0cd8932d-065b-4d65-93a2-f3882f8b9bdc",
+          "title": "ECP-T2777 - Share Permission",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Before test - Test preparation and upload exam and Starting test ECP-T2777 - Share Permission",
+              "fullTitle": "ECP-T2777 - Share Permission Before test - Test preparation and upload exam and Starting test ECP-T2777 - Share Permission",
+              "timedOut": null,
+              "duration": 139887,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n// Verify That All required features are enabled\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowEdgeServer: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true,\n    allowCdUploader: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowPatientSharing: true,\n    allowStatShares: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Sharing');\ncy.get('.statShareSettings .statShareSettings__dropdown .Select-value').first().click();\ncy.get('.Select-menu-outer .Select-menu .Select-option.needsclick[aria-label=\"Owner\"]').click({ force: true });\ncy.get('.js-statShareConfig-save').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/c5_-Palette_Color_secondary_capture\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED } })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n    var examUploadCmd_01 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd_01, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n    var examUploadCmd_02 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-02\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd_02, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n    var examUploadCmd_03 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-03\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd_03, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n    var examUploadCmd_04 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-17\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd_04, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n// Verify That All required features are enabled\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowEdgeServer: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true,\n    allowCdUploader: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowPatientSharing: true,\n    allowStatShares: true,\n    allowDICOMReceive: true\n}, facility2Name);\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "d6fd6047-9def-4ab4-95e5-82ddd511c248",
+              "parentUUID": "0cd8932d-065b-4d65-93a2-f3882f8b9bdc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Starting test ECP-T2777 - Share Permission - Step 1 - 19",
+              "fullTitle": "ECP-T2777 - Share Permission Starting test ECP-T2777 - Share Permission - Step 1 - 19",
+              "timedOut": null,
+              "duration": 320295,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wrap(meteor_1.Meteor.addUser(restrictedUserName, restrictedUserPassword, facility2Name, 'Organization Administrators'), { timeout: configFile.hugeTimeout });\n// Step 1 - Login as an org. admin and click on the sharing icon for any exam owned by their organization\n// and verify the option for share permissions is displayed on the organizational share tab\ncommon_1.Common.navigateTo('Sharing List');\ncommon_1.Common.clickMoreIconOnExam('#tableStudies_wrapper tr[data-cy=\"examListStudy\"]:nth-child(1)');\ncy.get('#tableStudies_wrapper button.shareExam').eq(0).click();\ncy.get('.shareForm .has-info').should('contain.text', 'Permission');\ncy.get('.shareForm .has-info .Select-control span.needsclick').should('contain.text', 'View Only');\n//  cy.wrap(m.addFacilty(customerName,facility3Name),{timeout:configFile.hugeTimeout});\n// Step 2 - Click on the share permission drop down menu and verify it contains the following options:\n// 2.1. View Only\n// 2.2. View and Report\n// 2.3. Export\n// 2.4. Owner\ncy.get('.shareForm .has-info .Select-value').click();\ncy.get('.Select-menu-outer > .Select-menu .Select-option .needsclick').should('include.text', 'View Only');\ncy.get('.Select-menu-outer > .Select-menu .Select-option .needsclick').should('include.text', 'View and Report');\ncy.get('.Select-menu-outer > .Select-menu .Select-option .needsclick').should('include.text', 'Export');\ncy.get('.Select-menu-outer > .Select-menu .Select-option .needsclick').should('include.text', 'Owner');\n// Step 3 - Click on the sharing permissions' explanation icon and verify the explanation text is correct.\ncy.get('.btn-org-share').click({ force: true });\ncy.get('.shareForm .has-info .iconBtn').click();\ncy.get('.permissionInfoContent p').should('contain.text', 'View Only: ');\ncy.get('.permissionInfoContent p').should('contain.text', \"The share recipient will only be able to view the exam, view attachments, and access comments\");\n// Step 4 - Verify the drop down menu defaults to \"View Only\" for any new share created.\ncy.waitUntil(function () { return cy.get('.shareForm .has-info .Select-control span.needsclick').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.shareForm .has-info .Select-control span.needsclick').should('contain.text', 'View Only');\n// Create an organizational share with the \"Export\" permission.\ncy.waitUntil(function () { return cy.get('.shareForm .has-info .Select-value').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.shareForm .has-info .Select-value').click();\ncy.get('.Select-menu-outer .Select-menu .Select-option .needsclick').contains('Export').click();\ncy.get('#organization').type(\"\".concat(facility2Name));\ncy.get('.directory-search-btn button.btn-primary').click();\ncy.get('.orgSearchTableBody .selectableRecipientRow:nth-child(1) .addRecipientBtn', { timeout: configFile.hugeTimeout }).click();\ncy.get('#shareExam').click();\n// Create an organizational share with the \"View\" permission.\ncy.get('#tableStudies_wrapper button.shareExam').eq(1).click();\ncy.waitUntil(function () { return cy.get('.shareForm .has-info .Select-value').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('#organization').type(\"\".concat(facility2Name));\ncy.get('.directory-search-btn button.btn-primary').click();\ncy.get('.orgSearchTableBody .selectableRecipientRow:nth-child(1) .addRecipientBtn', { timeout: configFile.hugeTimeout }).click();\ncy.get('#shareExam').click();\n// Create an organizational share with the \"View and Report\" permission.\ncy.get('#tableStudies_wrapper button.shareExam').eq(2).click();\ncy.waitUntil(function () { return cy.get('.shareForm .has-info .Select-value').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.shareForm .has-info .Select-value').click();\ncy.get('.Select-menu-outer .Select-menu .Select-option .needsclick').contains('View and Report').click();\ncy.get('#organization').type(\"\".concat(facility2Name));\ncy.get('.directory-search-btn button.btn-primary').click();\ncy.get('.orgSearchTableBody .selectableRecipientRow:nth-child(1) .addRecipientBtn', { timeout: configFile.hugeTimeout }).click();\ncy.get('#shareExam').click();\ncy.get('.exam-comments-btn').eq(2).click();\ncy.get('#compose textarea').type(\"Hello\");\ncy.get('.sendComment').click();\ncy.get('#comments').should('include.text', \"Hello\");\ncy.get('.comments-close-btn').click();\ncy.get('.exam-attachments-btn').eq(2).click();\nvar p = 'download.jpg';\ncy.get('#selectAttachment', { timeout: configFile.hugeTimeout }).attachFile(p);\n// Create Oranization Share with Owner Share \ncy.get('#tableStudies_wrapper button.shareExam').eq(3).click();\ncy.get('#organization').type(\"\".concat(facility2Name));\ncy.get('.directory-search-btn button.btn-primary').click();\ncy.get('.orgSearchTableBody .selectableRecipientRow:nth-child(1) .addRecipientBtn').click();\ncy.waitUntil(function () { return cy.get('#statShare .shareForm .Select-value').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('#statShare .shareForm .Select-value').first().click();\ncy.get('.Select-menu-outer .Select-menu .Select-option.needsclick[aria-label=\"Owner\"]').click({ force: true });\ncy.get('#shareExam').click();\ncy.wait(configFile.tinyTimeout);\n// Create a Professional Share with Export Permission\ncy.get('#tableStudies_wrapper button.shareExam').eq(4).click();\ncy.waitUntil(function () { return cy.get('.shareForm .has-info .Select-value').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.btn-pro-share').click();\ncy.get('#statShare #organization').type(\"{selectall}\".concat(facility2Name));\ncy.get('#statShare .directory-search-btn button').click();\ncy.get('.proSearchTableBody .selectableRecipientRow:nth-child(1) .addRecipientBtn', { timeout: configFile.hugeTimeout }).click();\ncy.waitUntil(function () { return cy.get('#statShare .shareForm .Select-value').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('#statShare .shareForm .Select-value').first().click();\ncy.get('.Select-menu-outer .Select-menu .Select-option.needsclick[aria-label=\"Export\"]').click({ force: true });\ncy.get('#shareExam').click();\ncy.wrap(meteor_1.Meteor.addUser(restrictedUserName, restrictedUserPassword, facilityName, 'Organization Administrators'), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n// Verifying all the Shared exam are received with Correct Permission\ncommon_1.Common.login(customerName, restrictedUserName, restrictedUserPassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(restrictedUserName, restrictedUserPassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncommon_1.Common.switchToFacility(facility2Name);\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.navigateTo('Sharing List');\n// Verifying Professional share with Export permission\ncommon_1.Common.switchTab('Shared With Me');\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"Clinical, Set 5\"]').should('exist');\ncommon_1.Common.expandExam();\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('.edit-info_permissionType').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-info_permissionType').should('exist');\ncy.get('.edit-info_permissionType #permissionType').should('have.value', 'Export');\ncy.get('.pushStatusTab .iconDisabled').should('not.exist');\ncy.get('#orgExams').click();\ncy.wait(configFile.smallTimeout);\n// Verifying Owner share\ncy.get('[data-cy=\"expanderCell\"] > .plus > .fa').eq(0).click();\ncy.get('.edit-info_permissionType').should('exist');\ncy.waitUntil(function () { return cy.get('.edit-info_permissionType #permissionType').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-info_permissionType #permissionType').should('have.value', 'Owner');\ncy.get('#tableStudies_wrapper button.shareExam').eq(0).click();\ncy.get('.owner-offer-popover h3.popover-title').should('contain.text', 'Exam Ownership Offered');\ncy.get('.owner-offer-popover .js-accept').click();\n//Verifying Organization share with View and Report permission\ncy.get('[data-cy=\"expanderCell\"] > .plus > .fa').eq(0).click();\ncy.get('.edit-info_permissionType').should('exist');\ncy.waitUntil(function () { return cy.get('.edit-info_permissionType #permissionType').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-info_permissionType #permissionType').should('have.value', 'View and Report');\ncy.get('.viewExam').should('be.enabled');\ncy.get('.exam-comments-btn').eq(1).click();\ncy.get('#comments').should('include.text', \"Hello\");\ncy.get('.comments-close-btn').click();\ncy.get('.exam-attachments-btn').eq(1).click();\ncy.get('.attachment__controls > .iconBtn').should('exist');\nvar p1 = 'download.jpg';\ncy.get('#selectAttachment', { timeout: configFile.hugeTimeout }).attachFile(p1);\ncy.get('.open-dot-menu').click();\ncy.get('.js-edit-attachment').click();\ncy.get('#attachment-name').clear().type('Test-Attachment');\ncy.get('.js-confirm-edit-attachment .iconCircleCheck').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Test-Attachment.jpg\"]').should('exist');\ncy.get('.open-dot-menu').click();\ncy.get('.js-delete-attachment').click();\ncy.get('.btn-danger').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Test-Attachment.jpg\"]').should('not.exist');\n//Verifying Organization share with View Permission\ncy.get('[data-cy=\"expanderCell\"] > .plus > .fa').eq(1).click();\ncy.get('.edit-info_permissionType').should('exist');\ncy.waitUntil(function () { return cy.get('.edit-info_permissionType #permissionType').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-info_permissionType #permissionType').should('have.value', 'View Only');\ncy.get('#downloadExamNow').should('not.exist');\ncy.get('.exam-comments-btn').eq(2).click();\ncy.get('#compose textarea').type(\"Commented by view only user - \".concat(date));\ncy.get('.sendComment').click();\ncy.get('#comments').should('include.text', \"Commented by view only user - \".concat(date));\ncy.get('.comments-close-btn').click();\ncy.get('.historyTab').should('not.exist');\ncy.get('#editExam').should('not.exist');\n//Verifying Organization share with Export Permission\ncy.get('[data-cy=\"expanderCell\"] > .plus > .fa').eq(2).click();\ncy.get('.edit-info_permissionType').should('exist');\ncy.waitUntil(function () { return cy.get('.edit-info_permissionType #permissionType').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-info_permissionType #permissionType').should('have.value', 'Export');\ncy.get('#downloadExamNow').should('exist');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facilityName);\n// Editing From Export to View \ncy.waitUntil(function () { return cy.get('[data-cy=\"expanderCell\"] > .plus > .fa').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('[data-cy=\"expanderCell\"] > .plus > .fa').eq(0).click();\ncy.get('.shareHistoryTab').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.editShareBtn').first().click();\ncy.waitUntil(function () { return cy.get('#editShareDialog .Select-value').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('#editShareDialog .Select-value').first().click({ force: true });\ncy.get('.Select-menu-outer .Select-menu .Select-option.needsclick[aria-label=\"View Only\"]').click({ force: true });\ncy.get('.js-editsharedialog-save').click();\n// Editing from View to Export\ncy.get('[data-cy=\"expanderCell\"] > .plus > .fa').eq(0).click();\ncy.get('.shareHistoryTab').click();\ncy.get('#tabShareHistory').invoke('show');\ncy.wait(configFile.smallTimeout);\ncy.get('.editShareBtn').first().click();\ncy.waitUntil(function () { return cy.get('#editShareDialog .Select-value').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('#editShareDialog .Select-value').first().click({ force: true });\ncy.get('.Select-menu-outer .Select-menu .Select-option.needsclick[aria-label=\"Export\"]').click({ force: true });\ncy.get('.js-editsharedialog-save').click();\n// Verifying Owner share can't be revoked\ncy.get('[data-cy=\"expanderCell\"] > .plus > .fa').eq(2).click();\ncy.get('.shareHistoryTab').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.shareHistoryTableBody .shareHistoryRow .revokeShareBtn').should('be.disabled');\n// Editing Professional Share from Export to View\ncy.get('[data-cy=\"expanderCell\"] > .plus > .fa').eq(3).click();\ncy.get('.shareHistoryTab').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.editShareBtn').first().click();\ncy.waitUntil(function () { return cy.get('#editShareDialog .Select-value').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('#editShareDialog .Select-value').first().click({ force: true });\ncy.get('.Select-menu-outer .Select-menu .Select-option.needsclick[aria-label=\"View Only\"]').click({ force: true });\ncy.get('.js-editsharedialog-save').click();\ncommon_1.Common.switchToFacility(facility2Name);\n// Verifying Professional share with View permission\ncommon_1.Common.switchTab('Shared With Me');\ncy.get('.data-tables__rows tr[data-cy=\"examListStudy\"] td span[title=\"Clinical, Set 5\"]').should('exist');\ncommon_1.Common.expandExam();\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('.edit-info_permissionType').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-info_permissionType').should('exist');\ncy.get('.edit-info_permissionType #permissionType').should('have.value', 'View Only');\ncy.get('.pushStatusTab .iconDisabled').should('exist');\ncy.get('#orgExams').click();\ncy.wait(configFile.smallTimeout);\n//Verifying Edit Organization share to Export Permission\ncy.get('[data-cy=\"expanderCell\"] > .plus > .fa').eq(2).click();\ncy.get('.edit-info_permissionType').should('exist');\ncy.waitUntil(function () { return cy.get('.edit-info_permissionType #permissionType').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-info_permissionType #permissionType').should('have.value', 'Export');\ncy.get('#downloadExamNow').should('exist');\n//Verifying Edited Organization share to View Only Permission\ncy.get('[data-cy=\"expanderCell\"] > .plus > .fa').eq(2).click();\ncy.get('.edit-info_permissionType').should('exist');\ncy.waitUntil(function () { return cy.get('.edit-info_permissionType #permissionType').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-info_permissionType #permissionType').should('have.value', 'View Only');\ncy.get('#downloadExamNow').should('not.exist');\n// Sharing  Org Share and Professioanl share with 1 Exam to 1 Facility\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('#tableStudies_wrapper button.shareExam').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.tinyTimeout);\ncy.get('#tableStudies_wrapper button.shareExam').eq(1).click();\ncy.waitUntil(function () { return cy.get('.shareForm .has-info .Select-value').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.btn-pro-share').click();\ncy.get('#statShare #organization').type(\"{selectall}\".concat(facility2Name));\ncy.get('#statShare .directory-search-btn button').click();\ncy.get('.proSearchTableBody .selectableRecipientRow:nth-child(1) .addRecipientBtn', { timeout: configFile.hugeTimeout }).click();\ncy.waitUntil(function () { return cy.get('#statShare .shareForm .Select-value').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('#statShare .shareForm .Select-value').first().click();\ncy.get('.Select-menu-outer .Select-menu .Select-option.needsclick[aria-label=\"View Only\"]').click({ force: true });\ncy.get('#shareExam').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.switchTab('Shared With Me');\ncy.get('[data-cy=\"expanderCell\"] > .plus > .fa').eq(0).click();\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('.edit-info_permissionType').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.edit-info_permissionType').should('exist');\ncy.get('.edit-info_permissionType #permissionType').should('have.value', 'View Only');",
+              "err": {},
+              "uuid": "01853b0c-b235-4559-b702-1aa6500bebc3",
+              "parentUUID": "0cd8932d-065b-4d65-93a2-f3882f8b9bdc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2777 - Share Permission Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8433,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "d6a40171-0ac9-4239-babb-750e5be3a54b",
+              "parentUUID": "0cd8932d-065b-4d65-93a2-f3882f8b9bdc",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d6fd6047-9def-4ab4-95e5-82ddd511c248",
+            "01853b0c-b235-4559-b702-1aa6500bebc3",
+            "d6a40171-0ac9-4239-babb-750e5be3a54b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 468615,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

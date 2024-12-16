@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="169.964" tests="6" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:22:19" tests="0" file="cypress/e2e/test-suites/ECP-T2785-StudyInformationAPI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2785 - Study Information API" timestamp="2024-12-15T03:22:19" tests="6" time="169.946" failures="0">
+    <testcase name="Verifying the Study Information with Study uid" time="105.470" classname="ECP-T2785 - Study Information API">
+    </testcase>
+    <testcase name="Verifying the Study Information with Studyid" time="0.767" classname="ECP-T2785 - Study Information API">
+    </testcase>
+    <testcase name="With Invalid Token" time="0.850" classname="ECP-T2785 - Study Information API">
+    </testcase>
+    <testcase name="With Invalid Study ID" time="0.966" classname="ECP-T2785 - Study Information API">
+    </testcase>
+    <testcase name="Using Token of different organization" time="36.270" classname="ECP-T2785 - Study Information API">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.856" classname="ECP-T2785 - Study Information API">
+    </testcase>
+  </testsuite>
+</testsuites>

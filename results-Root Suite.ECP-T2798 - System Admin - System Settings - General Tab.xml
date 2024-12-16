@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="168.614" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T04:22:00" tests="0" file="cypress/e2e/test-suites/ECP-T2798-SystemAdminSystemSettingsGeneral Tab.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2798 - System Admin - System Settings - General Tab" timestamp="2024-12-15T04:22:00" tests="4" time="168.584" failures="0">
+    <testcase name="Starting ECP-T2798 - System Admin - System Settings - General Tab" time="123.842" classname="ECP-T2798 - System Admin - System Settings - General Tab">
+    </testcase>
+    <testcase name="Verifying the warning message in StatShare" time="15.193" classname="ECP-T2798 - System Admin - System Settings - General Tab">
+    </testcase>
+    <testcase name="Verifying the warning message in DX Viewer" time="8.768" classname="ECP-T2798 - System Admin - System Settings - General Tab">
+    </testcase>
+    <testcase name="Cleanup the setting and Facility" time="11.322" classname="ECP-T2798 - System Admin - System Settings - General Tab">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="436.429" tests="6" failures="0" skipped="1">
+  <testsuite name="" timestamp="2024-12-15T02:13:15" tests="0" file="cypress/e2e/test-suites/ECP-T2677-FeatureSwitch-Sharing.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2677 - Feature Switch - Sharing" timestamp="2024-12-15T02:13:15" tests="6" time="436.403" failures="0" skipped="1">
+    <testcase name="Before step - change feature switch" time="50.380" classname="ECP-T2677 - Feature Switch - Sharing">
+    </testcase>
+    <testcase name="Starting Feature Switch - Sharing Test - 1 - 7 Steps in one" time="159.815" classname="ECP-T2677 - Feature Switch - Sharing">
+    </testcase>
+    <testcase name="Step 7 - 10" time="187.429" classname="ECP-T2677 - Feature Switch - Sharing">
+    </testcase>
+    <testcase name="Step 11 - Create a patient share, disable the patient sharing feature for the organization, and verify the previously created patient share is still listed." time="0.000" classname="ECP-T2677 - Feature Switch - Sharing">
+      <skipped/>
+    </testcase>
+    <testcase name="Change System default back" time="10.234" classname="ECP-T2677 - Feature Switch - Sharing">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.048" classname="ECP-T2677 - Feature Switch - Sharing">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:20:37.786Z",
+    "end": "2024-12-15T02:24:55.992Z",
+    "duration": 258206,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "cc72fc48-0167-43e4-b7bb-2d37c6250292",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2679-FeatureSwitch-ViewerAPI.spec.ts",
+      "file": "cypress/test-suites/ECP-T2679-FeatureSwitch-ViewerAPI.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b8187ebf-9403-4ed1-b8d1-79133492ee34",
+          "title": "ECP-T2679 - Feature Switch Viewer API",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting Feature Switch Viewer API Test - all 7 Steps in one",
+              "fullTitle": "ECP-T2679 - Feature Switch Viewer API Starting Feature Switch Viewer API Test - all 7 Steps in one",
+              "timedOut": null,
+              "duration": 236213,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "facility3Name = facility3Name + Cypress.currentRetry;\nfacility2Name = facility2Name + Cypress.currentRetry;\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Part of Step 7 - checked before creating org - Verify when a new organization is created the system level feature switch value for Viewer API is inherited by the new organization.\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowNixViewerApi: true\n});\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowNixViewerApi\"]').should('be.checked');\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\ncommon_1.Common.logout();\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowNixViewerApi\"]').should('be.checked');\n// Step 1 - Using a system admin account, navigate to system admin > system  settings > features tab and verify the feature switch for Viewer API is present.\ncommon_1.Common.switchToCustomer('System');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowNixViewerApi: false\n});\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\n// Step 2 - Verify the feature switch can be enabled and disabled at the system level.\ncy.get('.checkboxTree input[data-key=\"allowNixViewerApi\"]').should('not.checked');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowNixViewerApi: true\n});\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowNixViewerApi\"]').should('be.checked');\n// Step 3 -Navigate to the My org > admin settings > features page and verify the Viewer API feature switch is present.\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facility2Name);\nmeteor_1.Meteor.changeFeatures({ allowNixViewerApi: false }, facility2Name);\ncy.reload();\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\n// Step 4 - Verify the feature switch can be enabled and disabled at the organization level.\ncy.get('.checkboxTree input[data-key=\"allowNixViewerApi\"]').should('not.checked');\nmeteor_1.Meteor.changeFeatures({ allowNixViewerApi: true }, facility2Name);\ncy.reload();\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowNixViewerApi\"]').should('be.checked');\n// Step 5 - With the Viewer API feature switch disabled for the organization, verify the Viewer tab is hidden on the My Org > Integration Page.\nmeteor_1.Meteor.changeFeatures({ allowNixViewerApi: false, allowAPIs: true }, facility2Name);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Integration');\ncy.get('#guestViewers').should('not.exist');\n// Step 6 - Enable the Viewer API feature switch at the organization level and verify the NIX Viewer tab is visible on the My Org > Integration Page.\nmeteor_1.Meteor.changeFeatures({ allowNixViewerApi: true }, facility2Name);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Integration');\ncy.get('#guestViewers').should('exist');\n// Step 7 - Verify when a new organization is created the system level feature switch value for Viewer API is inherited by the new organization.\ncommon_1.Common.switchToCustomer('System');\nmeteor_1.Meteor.systemFeatureSwitch({ allowNixViewerApi: false });\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowNixViewerApi\"]').should('not.checked');\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility3Name), { timeout: configFile.hugeTimeout });\ncommon_1.Common.logout();\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facility3Name);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowNixViewerApi\"]').should('not.checked');",
+              "err": {},
+              "uuid": "a21b661e-b324-4c9f-8ce7-e074875271c1",
+              "parentUUID": "b8187ebf-9403-4ed1-b8d1-79133492ee34",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2679 - Feature Switch Viewer API Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7607,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "2308b7b6-c81a-478b-8a69-abc65322b685",
+              "parentUUID": "b8187ebf-9403-4ed1-b8d1-79133492ee34",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a21b661e-b324-4c9f-8ce7-e074875271c1",
+            "2308b7b6-c81a-478b-8a69-abc65322b685"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 243820,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

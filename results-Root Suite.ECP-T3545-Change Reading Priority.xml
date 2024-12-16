@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="210.449" tests="7" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:58:35" tests="0" file="cypress/e2e/test-suites/ECP-T3545-ChangePriority.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3545-Change Reading Priority" timestamp="2024-12-15T03:58:35" tests="7" time="210.431" failures="0">
+    <testcase name="ECP-T3545 - data prep" time="76.282" classname="ECP-T3545-Change Reading Priority">
+    </testcase>
+    <testcase name="Steps 1-3 login, change priority and save" time="22.611" classname="ECP-T3545-Change Reading Priority">
+    </testcase>
+    <testcase name="Step 4 check cancel button functionality" time="14.048" classname="ECP-T3545-Change Reading Priority">
+    </testcase>
+    <testcase name="Steps 6-7 change priority for several items" time="42.836" classname="ECP-T3545-Change Reading Priority">
+    </testcase>
+    <testcase name="Step 8 cancel priority for several items" time="18.907" classname="ECP-T3545-Change Reading Priority">
+    </testcase>
+    <testcase name="Step 10 check the API of change priority" time="11.927" classname="ECP-T3545-Change Reading Priority">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="11.536" classname="ECP-T3545-Change Reading Priority">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:04:11.784Z",
+    "end": "2024-12-15T02:10:18.285Z",
+    "duration": 366501,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "5b2e16c6-fd38-41ff-a025-a3952606be57",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2505-ViewerSettingAppearance.spec.ts",
+      "file": "cypress/test-suites/ECP-T2505-ViewerSettingAppearance.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8c1df4ed-e3ab-4c06-bdc0-4f25989920b5",
+          "title": "ECP-T2505 - Viewer Settings - Appearance",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step - Upload exam and get viewer URL",
+              "fullTitle": "ECP-T2505 - Viewer Settings - Appearance Test Preparation - Before Step - Upload exam and get viewer URL",
+              "timedOut": null,
+              "duration": 157508,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// c.createFacilityIfNotExists(facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.visit(configFile.url + '/organization/integration');\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/chco -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    var examUploadCmd1 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/mister_mr -keepAlive=1\");\n    cy.exec(examUploadCmd1, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    var examUploadCmd2 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c-01 -keepAlive=1\");\n    cy.exec(examUploadCmd2, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    //   c.uploadExamFromGCS(token, 'ECP-T2515/Hoffman_Terrance', configFile.url);\n    //   c.uploadExamFromGCS(token, 'ECP-T2515/Bren_Christopher_CT_Maxillofacial_WO', configFile.url);\n    //  c.uploadExamFromGCS(token, 'ECP-T2515/c-01', configFile.url);\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.smallTimeout);\ncy.get('#orgId').then(function (el) {\n    orgId = el.text();\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.reload();\ncy.waitUntil(function () { return cy.get('.studiesRowCount > span').should('contain.text', '3'); }, { timeout: configFile.hugeTimeout });\n// Get the Viewer URL of ClinicalSet 01\ncy.wait(configFile.timeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Clinical Set 1').first().parents('tr').find('.expanderCell').click();\n//        cy.get(iex.firstExamTableCell).first().click();\ncy.get(iex.moreInfo).click();\ncy.wait(configFile.smallTimeout);\nvar examID = '';\ncy.get(iex.examID).then(function (el) {\n    examID = el.text();\n    meteor_1.Meteor.getViewerUrls(configFile.url, configFile.username, configFile.password, examID, orgId, 'ndxWeb')\n        .then(function (viewerUrls) {\n        // @ts-ignore\n        clinicalSet01 = viewerUrls;\n    });\n});\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('Clinical Set 1').first().parents('tr').find('.expanderCell').click();\ncy.wait(configFile.smallTimeout);\n// Get the Viewer URL of CHCO //CHCO-Anonymous\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('CHCO-Anonymous').first().parents('tr').find('.expanderCell').click();\n//cy.get('tr[data-cy=\"examListStudy\"]:nth-child(2) .expanderCell').click();\ncy.get(iex.moreInfo).click();\ncy.wait(configFile.smallTimeout);\nexamID = '';\ncy.get(iex.examID).then(function (el) {\n    examID = el.text();\n    meteor_1.Meteor.getViewerUrls(configFile.url, configFile.username, configFile.password, examID, orgId, 'ndxWeb')\n        .then(function (viewerUrls) {\n        // @ts-ignore\n        ndxCHCOViewerUrl = viewerUrls;\n    });\n});\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('CHCO-Anonymous').first().parents('tr').find('.expanderCell').click();\ncy.wait(configFile.smallTimeout);\n// Get the Viewer URL of Mister, MR //MISTER, MR\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('MISTER, MR').first().parents('tr').find('.expanderCell').click();\n// cy.get('tr[data-cy=\"examListStudy\"]:nth-child(3) .expanderCell').click();\ncy.get(iex.moreInfo).click();\ncy.wait(configFile.smallTimeout);\nexamID = '';\ncy.get(iex.examID).then(function (el) {\n    examID = el.text();\n    meteor_1.Meteor.getViewerUrls(configFile.url, configFile.username, configFile.password, examID, orgId, 'ndxWeb')\n        .then(function (viewerUrls) {\n        // @ts-ignore\n        ndxMisterMRViewerUrl = viewerUrls;\n    });\n});\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('MISTER, MR').first().parents('tr').find('.expanderCell').click();\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "7f8821c5-4251-4b07-90c6-8a067ae892b8",
+              "parentUUID": "8c1df4ed-e3ab-4c06-bdc0-4f25989920b5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T2505 - Viewer Settings - Appearance - Steps 1 - 6",
+              "fullTitle": "ECP-T2505 - Viewer Settings - Appearance ECP-T2505 - Viewer Settings - Appearance - Steps 1 - 6",
+              "timedOut": null,
+              "duration": 78636,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 1 - Appearance Tab - Launch sample dataset and open Viewer Settings window\n// c.login(customerName,'#Layer_1', `${configFile.url}/${ndxMisterMRViewerUrl}`, true, userName,userpassword, configFile.longTimeout);\n//  c.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${ndxMisterMRViewerUrl}`, false);\n//c.login(customerName,userName,userpassword, `${configFile.url}/${ndxMisterMRViewerUrl}`, configFile.longTimeout);\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.mediumTimeout, true);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.studiesRowCount > span').should('contain.text', '3'); }, { timeout: configFile.hugeTimeout });\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('MISTER, MR').first().parents('tr').find('.iconBtn.viewExam.confirm-popover-btn').click();\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.closeOtherTabs();\ncy.visit(\"\".concat(ndxMisterMRViewerUrl));\n// cy.visit(`${configFile.url}/${ndxMisterMRViewerUrl}`);\n//m.login(customerName,`${configFile.url}/${ndxCHCOViewerUrl}`, userName,userpassword, configFile.longTimeout,true);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).click({ force: true });\n// Step 2 - Click on Appearance tab\ncy.get('.viewer-settings-tabs li:nth-child(2) a').click();\ncy.get('.iconWithTooltip > .btn').first().click({ force: true });\ncy.get('div:contains(\"Changes the series thumbnail size in the viewer.\")').should('exist');\ncy.get('.iconWithTooltip > .btn').last().click();\ncy.get('div:contains(\"Changes how series gets stacked in the series panel.\")').should('exist');\n// Setp 3 - Appearance - Small\n// 3.1. Change the Appearance settings > Thumbnail image size to small.\n// 3.2. Close the viewer settings\ncy.get('#imageViewerAppearanceSettings .appearanceSetting button[value=\"small\"]').click();\ncy.get('#imageViewerSettings button.close').click();\ncy.get('.studyThumbnailsGrid .studyThumbnail .thumbnailImageSizeSmall').should('exist');\n// Step 4 - Thumbnails in Non-Viewport window\n// 4.1. Launch the sample data in browser version NDX Viewer. - Already opened\n// 4.2. Click on non-viewport icon to launch non-viewport window\n// cy.get('#newWindowToggle').click();\n// 4.3. Move (drag+drop) series tab, key images tab and Related exams tab to non-viewport window.\n// TODO Cypress does not support multi tabs or windows\n// Step 5 - Appearance -Large\n// 5.1. Change the Appearance settings > Thumbnail image size to Large.\n// 5.2. Close the viewer settings\ncy.get('#preferencesMenu', { timeout: configFile.longTimeout }).click({ force: true });\ncy.get('.viewer-settings-tabs li:nth-child(2) a').click();\ncy.get('#imageViewerAppearanceSettings .appearanceSetting button[value=\"large\"]').click();\ncy.get('#imageViewerSettings button.close').click();\ncy.get('.studyThumbnailsGrid .studyThumbnail .thumbnailImageSizeLarge').should('exist');\ncy.wait(configFile.timeout);\n// Step 5 - Electron Multi-monitor - Moved tabs\n// 5.1. Move Series/Related/KeyImage to one monitor.\n// TODO - does not support electron app",
+              "err": {},
+              "uuid": "ceae1932-f7eb-45df-908b-d97b91dcc534",
+              "parentUUID": "8c1df4ed-e3ab-4c06-bdc0-4f25989920b5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 6,7, 8 ,9 ,10",
+              "fullTitle": "ECP-T2505 - Viewer Settings - Appearance Step 6,7, 8 ,9 ,10",
+              "timedOut": null,
+              "duration": 103039,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "console.log('clinicalSet01: ', clinicalSet01);\n// Step 7 - Information on thumbnails - Launch sample dataset and verify that the following information/icons are display as expected:\n// 7.1. 4D icon - CHCO Study\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.mediumTimeout, true);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.studiesRowCount > span').should('contain.text', '3'); }, { timeout: configFile.hugeTimeout });\ncy.get('tr[data-cy=\"examListStudy\"] .patientName').contains('CHCO-Anonymous').first().parents('tr').find('.iconBtn.viewExam.confirm-popover-btn').click();\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.closeOtherTabs();\ncy.visit(\"\".concat(ndxCHCOViewerUrl));\n// c.login(customerName,userName,userpassword, `${configFile.url}/${ndxCHCOViewerUrl}`, configFile.longTimeout);\n//  c.login(customerName,'#Layer_1', `${configFile.url}/${ndxCHCOViewerUrl}`, true, userName,userpassword, configFile.longTimeout);\n//   c.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${ndxCHCOViewerUrl}`, false);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('.studyThumbnailsGrid .studyThumbnail:nth-child(2)', { timeout: configFile.waitUntilTimeout }).should('exist');\n// 7.2. Key Image icon - Mister, MR\ncy.wait(configFile.timeout);\ncy.visit(\"\".concat(ndxMisterMRViewerUrl));\n//c.login(customerName,userName,userpassword, `${configFile.url}/${ndxMisterMRViewerUrl}`, configFile.longTimeout);\n// c.login(customerName,'#Layer_1', `${configFile.url}/${ndxMisterMRViewerUrl}`, true, userName,userpassword, configFile.longTimeout);\n//   c.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${ndxMisterMRViewerUrl}`, false);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('#topleft', { timeout: configFile.longTimeout }).should('contain.text', 'MISTER, MR');\n// 7.3. \"i\" icon and helper text\ncy.get('.studyThumbnailsGrid .studyThumbnail:nth-child(1) .infoIcon', { timeout: configFile.waitUntilTimeout }).should('exist');\n// 7.4. Warning icon\n// TODO - cannot upload partial study\n// TODO cannot verify using cypress - step 8\n// Step 8 - Other data types- SR, PDF,Secondary Capture\n// 8.1. Load sample datasets and ensure that the icons for SR, PDF and Secondary capture\n// Step 9 - Series Parsing\n// 9.1. Launch sample dataset and open Viewer Settings > Series Parsing and Turn OFF Series splitting.\n// TODO - Barton clint dataset not available\n// Step 10 - Resume Exams workflow - Clinical Set 1\n// 10.1. Launch Sample test data and turn on Resume Exam switch.\n// 10.2. Close the study and re-open\ncy.wait(configFile.timeout);\ncy.visit(\"\".concat(clinicalSet01));\n//  c.login(customerName,userName,userpassword, `${configFile.url}/${clinicalSet01}`, configFile.longTimeout);\n// c.login(customerName,'#Layer_1', `${configFile.url}/${clinicalSet01}`, true, userName,userpassword, configFile.longTimeout);\n//  c.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${clinicalSet01}`, false);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.popoverBtnGroup > .btn').length > 0) {\n        cy.get('.popoverBtnGroup > .btn').click();\n    }\n});\ncy.get('#preferencesMenu', { timeout: configFile.hugeTimeout }).click({ force: true });\ncy.get('.toggleWrapper .btn-group[data-preference=\"resumeExamEnabled\"] button[data-id=\"on\"]', { timeout: configFile.hugeTimeout }).click();\ncy.get('.viewer-settings-tabs li:nth-child(2) a', { timeout: configFile.hugeTimeout }).click();\ncy.get('#imageViewerAppearanceSettings .appearanceSetting button[value=\"small\"]', { timeout: configFile.hugeTimeout }).click();\ncy.get('#imageViewerSettings button.close').click();\ncy.get('.studyThumbnailsGrid .studyThumbnail .thumbnailImageSizeSmall').should('exist');\ncommon_1.Common.meteorLogin(\"\".concat(clinicalSet01), userName, userpassword);\n//c.login(customerName,userName,userpassword, `${configFile.url}/${clinicalSet01}`, configFile.longTimeout);\n// c.login(customerName,'#Layer_1', `${configFile.url}/${clinicalSet01}`, true, userName,userpassword, configFile.longTimeout);\n//  c.login(customerName,ndxViewer.viewerLogo, `${configFile.url}/${clinicalSet01}`, false);\ncy.get(ndxViewer.viewerLogo, { timeout: configFile.longTimeout }).should('exist');\ncy.get('.studyThumbnailsGrid .studyThumbnail .thumbnailImageSizeSmall').should('exist');\ncy.wait(configFile.timeout);",
+              "err": {},
+              "uuid": "8a9e98ee-80e3-409c-8138-e2dc17be9272",
+              "parentUUID": "8c1df4ed-e3ab-4c06-bdc0-4f25989920b5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2505 - Viewer Settings - Appearance Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6935,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "1e4ad463-32ba-4807-a83b-e70e81cae531",
+              "parentUUID": "8c1df4ed-e3ab-4c06-bdc0-4f25989920b5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7f8821c5-4251-4b07-90c6-8a067ae892b8",
+            "ceae1932-f7eb-45df-908b-d97b91dcc534",
+            "8a9e98ee-80e3-409c-8138-e2dc17be9272",
+            "1e4ad463-32ba-4807-a83b-e70e81cae531"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 346118,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

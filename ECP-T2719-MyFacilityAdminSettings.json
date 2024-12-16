@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:16:32.412Z",
+    "end": "2024-12-15T03:19:14.661Z",
+    "duration": 162249,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8a6ebeb8-7c40-4a78-a037-c0a2d5599582",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2719-MyFacilityAdminSettings.spec.ts",
+      "file": "cypress/test-suites/ECP-T2719-MyFacilityAdminSettings.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7fc87db8-dd32-4968-b1b9-7ef1bc6b309c",
+          "title": "ECP-T2719 -My Facility - Admin Settings",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 - 13",
+              "fullTitle": "ECP-T2719 -My Facility - Admin Settings Step 1 - 13",
+              "timedOut": null,
+              "duration": 145862,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    cy.wrap(token).as('token');\n    //   c.navigateTo('Sharing List')\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout * 2);\n});\n// Step 2\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncy.get('[title=\"General\"]').should('exist');\ncy.get('[title=\"QIDO-RS\"]').should('exist');\ncy.get('[title=\"Remote Authentication\"]').should('exist');\n// cy.get('[title=\"Organization Storage\"]').should('exist') - storge was removed\ncy.get('[title=\"Features\"]').should('exist');\n// Step 3\ncy.get('#general').click();\ncy.get('#allowUnlimitedStatShareDuration').should('exist').should('not.be.checked');\ncy.get('p:contains(\"Their durations must be manually changed or the StatShare revoked.\")').should('exist');\ncy.get('.note').invoke('text').then(function (text) {\n    var info = text.replaceAll('\\n', '').replaceAll('\\r', '').replaceAll('\\s', '');\n    var res = \"                  Note: Exiting StatShare with unlimited duration will NOT be affected by                  thi change.                  Their duration mut be manually changed or the StatShare revoked.                \";\n    expect(info).contains(res.replaceAll('\\n', '').replaceAll('\\r', '').replaceAll('\\s', ''));\n});\n// cy.get('#requireMFA').should('exist').should('not.be.checked')\n//  cy.get('.iconWithTooltip > .btn').click()\n//   cy.get('div:contains(\"Turn on Multi-Factor Authentication for all users in this organization. Multi-Factor Authentication requires each user to have a mobile phone number or secondary e-mail address entered.\")').should('exist')\n//  cy.get('.date-range-picker > .form-control').should('exist')\ncy.get('.js-adminSettings-cancel').should('exist');\ncy.get('.js-adminSettings-save').should('exist');\n// Step 4 and 5\ncy.wait(configFile.smallTimeout);\ncy.get('#allowUnlimitedStatShareDuration').check();\n//   cy.get('#requireMFA').check()\ncy.get('.js-adminSettings-save').click();\n// Step 6\ncy.get('#qidors').click();\ncy.get('#create').should('exist');\ncy.get('.table-col-dicomTag').should('exist');\ncy.get('.table-col-tagName').should('exist');\ncy.get('.table-col-dicomLevel').should('exist');\ncy.get('.table-col-createdAt').should('exist');\ncy.get('.table-col-addedby').should('exist');\ncy.get('.table-col-actions').should('exist');\ncy.get('.filter-clear > a').should('exist');\n// Step 7 and 8\ncy.get('#remoteAuthentication').click();\ncy.get('p:contains(\"This facility is not configured for Remote Authentication. Please add an Edge Server token or enable SAML to configure this page.\")').should('exist');\nmeteor_1.Meteor.changeFeatures({\n    allowSAML: true,\n    allowWorklist: false,\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncy.get('#remoteAuthentication').click();\ncy.get('#domain').should('exist');\n// cy.get('#general').click()\n// cy.get('#allowUnlimitedStatShareDuration').should('be.checked').uncheck()\n// cy.get('#requireMFA').should('be.checked').uncheck()\n//Step 9\ncy.get('#features').click();\ncy.get('[data-key=\"allowCdUploader\"]').should('exist');\ncy.get('[data-key=\"allowGuestUploader\"]').should('exist');\ncy.get('[data-key=\"allowInboundSharing\"]').should('exist');\ncy.get('[data-key=\"allowOutboundSharing\"]').should('exist');\ncy.get('[data-key=\"allowPatientSharing\"]').should('exist');\ncy.get('[data-key=\"allowStatShares\"]').should('exist');\ncy.get('[data-key=\"allowSAML\"]').should('exist');\ncy.get('[data-key=\"allowEdgeServer\"]').should('exist');\ncy.get('[data-key=\"allowAD\"]').should('exist');\ncy.get('[data-key=\"allowPushToPACS\"]').should('exist');\ncy.get('[data-key=\"allowTagEditing\"]').should('exist');\ncy.get('[data-key=\"allowDICOMReceive\"]').should('exist');\ncy.get('[data-key=\"allowQueryRetrieve\"]').should('exist');\ncy.get('[data-key=\"allowNucleusIoQueryRetrieve\"]').should('exist');\ncy.get('[data-key=\"allowModalityWorklist\"]').should('exist');\ncy.get('[data-key=\"allowReportQuerySources\"]').should('exist');\ncy.get('[data-key=\"allowAPIs\"]').should('exist');\ncy.get('[data-key=\"allowHl7\"]').should('exist');\ncy.get('[data-key=\"allowHl7Assignment\"]').should('exist');\ncy.get('[data-key=\"allowNixViewerApi\"]').should('exist');\ncy.get('[data-key=\"allowAutomaticActions\"]').should('exist');\ncy.get('[data-key=\"allowPushEvidenceToPACS\"]').should('exist');\ncy.get('[data-key=\"allowWorkstationViewer\"]').should('exist');\ncy.get('[data-key=\"allowWorklist\"]').should('exist');\ncy.get('[data-key=\"allowPerformanceLog\"]').should('exist');\ncy.get('[data-key=\"isConciseOrg\"]').should('exist');\ncy.get('[data-key=\"allowPerformanceLoggerInfo\"]').should('exist');\n//Step 10\ncy.get('[data-key=\"allowSAML\"]').should('be.checked');\n// Step 11\ncy.get('[data-key=\"allowWorklist\"]').check();\ncy.get('span:contains(Ensure that the customer subscription entitles them to the Worklist feature)').should('exist');\ncy.get('span:contains(before enabling.)').should('exist');\ncy.get('span:contains(Note: Enabling this feature will initiate population of additional procedure and)').should('exist');\ncy.get('span:contains(study metadata. This process may take some time and its progress can be)').should('exist');\ncy.get('span:contains(monitored in System Tools.)').should('exist');\ncy.get('#enable').click();\ncy.get('span:contains(All studies must first be deleted from Imaging Share)').should('exist');\ncy.get('span:contains(in collaboration with the customer.)').should('exist');\ncy.get('span:contains(Enabling the PACS Worklist may result in different patient and study information being)').should('exist');\ncy.get('span:contains(displayed for the same exam in the PACS. See the system administration guide under)').should('exist');\ncy.get('span:contains(Workflow Configurations.)').should('exist');\ncy.get('label:contains(I acknowledge that all studies from Imaging Share have been deleted.)').should('exist');\ncy.get('#confirmCheckbox').check();\ncy.get('#enable').click();\ncy.wait(configFile.smallTimeout);\n//Step 12\ncy.get('[data-key=\"allowAPIs\"]').should('be.disabled');\ncy.get('[data-key=\"allowAPIs\"]').should('be.disabled');\n//Step 13\ncy.get('#organizationStorage').click();\ncy.get('#createJob').should('exist');\ncy.get('label:contains(\"Total Storage:\")').should('exist');\ncy.get('label:contains(\"Last Calculated:\")').should('exist');",
+              "err": {},
+              "uuid": "9f1eda13-c974-4883-b45c-290e531843f2",
+              "parentUUID": "7fc87db8-dd32-4968-b1b9-7ef1bc6b309c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2719 -My Facility - Admin Settings Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7280,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "f496f5e2-edf6-4d0f-864b-a68f7e40ba48",
+              "parentUUID": "7fc87db8-dd32-4968-b1b9-7ef1bc6b309c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9f1eda13-c974-4883-b45c-290e531843f2",
+            "f496f5e2-edf6-4d0f-864b-a68f7e40ba48"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 153142,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

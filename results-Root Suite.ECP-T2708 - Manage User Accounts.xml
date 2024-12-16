@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="222.488" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:04:11" tests="0" file="cypress/e2e/test-suites/ECP-T2708-ManageUserAccounts.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2708 - Manage User Accounts" timestamp="2024-12-15T02:04:11" tests="2" time="222.461" failures="0">
+    <testcase name="Step 1 - 8" time="204.339" classname="ECP-T2708 - Manage User Accounts">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="10.614" classname="ECP-T2708 - Manage User Accounts">
+    </testcase>
+  </testsuite>
+</testsuites>

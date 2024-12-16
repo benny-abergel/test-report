@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="267.702" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:20:31" tests="0" file="cypress/e2e/test-suites/ECP-T2658-ExamDeletePurge.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2658 - Exam Delete Purge" timestamp="2024-12-15T02:20:31" tests="3" time="267.675" failures="0">
+    <testcase name="Test Preparation - Before Step, creating API token and uploading exams" time="132.571" classname="ECP-T2658 - Exam Delete Purge">
+    </testcase>
+    <testcase name="Starting ECP-T2658 - Exam Delete Purge Test - all 22 steps in one" time="114.767" classname="ECP-T2658 - Exam Delete Purge">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.051" classname="ECP-T2658 - Exam Delete Purge">
+    </testcase>
+  </testsuite>
+</testsuites>

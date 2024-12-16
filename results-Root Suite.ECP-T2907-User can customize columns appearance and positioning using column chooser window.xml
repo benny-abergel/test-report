@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="311.358" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:36:24" tests="0" file="cypress/e2e/test-suites/ECP-T2907-User can customize columns appearance and positioning using column chooser window.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2907-User can customize columns appearance and positioning using column chooser window" timestamp="2024-12-15T03:36:24" tests="3" time="311.334" failures="0">
+    <testcase name="All Steps with cancel" time="173.101" classname="ECP-T2907-User can customize columns appearance and positioning using column chooser window">
+    </testcase>
+    <testcase name="All Steps with apply" time="126.852" classname="ECP-T2907-User can customize columns appearance and positioning using column chooser window">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.380" classname="ECP-T2907-User can customize columns appearance and positioning using column chooser window">
+    </testcase>
+  </testsuite>
+</testsuites>

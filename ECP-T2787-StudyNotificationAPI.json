@@ -1,0 +1,250 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:56:17.737Z",
+    "end": "2024-12-15T04:02:21.738Z",
+    "duration": 364001,
+    "testsRegistered": 8,
+    "passPercent": 12.5,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 6,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "42da937d-f21d-4bf7-beab-34ea1d749d30",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2787-StudyNotificationAPI.spec.ts",
+      "file": "cypress/test-suites/ECP-T2787-StudyNotificationAPI.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1c23ea1e-551a-4210-9d78-f5e13b4120b9",
+          "title": "ECP-T2787 - Study Notification API",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 to 5",
+              "fullTitle": "ECP-T2787 - Study Notification API Step 1 to 5",
+              "timedOut": null,
+              "duration": 81720,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var _this = this;\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.window().then(function (win) {\n    // @ts-ignore - removing Cypress error for missing chrome browser\n    window.top.chrome = true;\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n// Step 3 - Navigate to My Org > Admin Settings > Features tab. Enable features switches for APIs > HL7, Worklist, and PACS Workflow. Verify Worklist, Patient, Procedure, and My Org > IOCM History tabs only become available once all 3 features have been enabled.\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    cy.wrap(token).as('token');\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    cy.visit(\"\".concat(configFile.url, \"/uploader\"));\n    cy.get('span:contains(\"Select Folder\")').should('exist');\n    cy.get('[data-cy=\"selectFolderButton\"]').click();\n    selectDicom({ filePaths: _this.datasetsArray });\n    cy.waitUntil(function () { return cy.get('[data-cy=\"uploaderNextButton\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n    cy.get('.iconCheckboxUnchecked').last().click();\n    cy.get('[data-cy=\"uploaderNextButton\"]').click();\n    cy.get('[data-cy=\"uploaderNextButton\"]').click();\n    cy.wait(configFile.tinyTimeout);\n    return cy.request({\n        url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=all\"),\n        method: 'GET',\n        headers: header,\n    }).then(function (res) {\n        expect(res.status).to.eq(200);\n        expect(res.body.organizationId).to.eq(orgId);\n        expect(res.body.nextUpdateHref);\n        expect(res.body.notifications.studyInstanceUid);\n        expect(res.body.notifications[0].studyInfo.nucleusBaseUrl);\n        expect(res.body.notifications[0].studyInfo.nucleusStudyId);\n        expect(res.body.notifications[0].studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n        expect(res.body.notifications[0].studyInfo.info.href);\n        expect(res.body.notifications[0].studyInfo.durableMetadata.contentType);\n        expect(res.body.notifications[0].studyInfo.durableMetadata.href);\n        expect(res.body.notifications[0].studyInfo.versionMetadata.contentType);\n        expect(res.body.notifications[0].studyInfo.versionMetadata.href);\n        expect(res.body.notifications[0].studyInfo.modification.contentType);\n        expect(res.body.notifications[0].studyInfo.modification.href);\n        expect(res.body.notifications.lastUpdateTime);\n        expect(res.body.notifications[0].patientId).to.equal('a-01');\n        expect(res.body.notifications[0].patientName).to.equal('Acceptance^Set^1');\n        expect(res.body.notifications[0].studyDate);\n        expect(res.body.notifications.studyTime);\n        expect(res.body.notifications[0].modality);\n        expect(res.body.notifications[0].images.numberExpected).to.equal(1);\n        expect(res.body.notifications[0].images.numberAvailable).to.equal(0);\n        expect(res.body.notifications[0].notifyTypes.eventTime);\n        expect(res.body.notifications[0].notifyTypes[0].type).to.equal(\"created\");\n    });\n});\ncy.waitUntil(function () { return cy.get('[data-cy=\"returnToExamList\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "2f1e1ac2-15c6-49f3-bc9d-476ee358f026",
+              "parentUUID": "1c23ea1e-551a-4210-9d78-f5e13b4120b9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 9 and 10",
+              "fullTitle": "ECP-T2787 - Study Notification API Step 9 and 10",
+              "timedOut": null,
+              "duration": 91651,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\ncy.get('.openExtra .fa-chevron-right').click();\ncy.get('.js-edit-exam').click();\ncy.get('#studyDescription').clear().type('testtest');\ncy.get('.js-edit-save').click();\ncy.get('.js-edit-confirm-save').click();\ncy.wait(configFile.tinyTimeout);\ncy.request({\n    url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=modified\"),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body.organizationId).to.eq(orgId);\n    expect(res.body.nextUpdateHref);\n    expect(res.body.notifications.studyInstanceUid);\n    expect(res.body.notifications[0].studyInfo.nucleusBaseUrl);\n    expect(res.body.notifications[0].studyInfo.nucleusStudyId);\n    expect(res.body.notifications[0].studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n    expect(res.body.notifications[0].studyInfo.info.href);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.href);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.href);\n    expect(res.body.notifications[0].studyInfo.modification.contentType);\n    expect(res.body.notifications[0].studyInfo.modification.href);\n    expect(res.body.notifications.lastUpdateTime);\n    expect(res.body.notifications[0].patientId).to.equal('a-01');\n    expect(res.body.notifications[0].patientName).to.equal('Acceptance^Set^1^^');\n    expect(res.body.notifications[0].studyDate);\n    expect(res.body.notifications.studyTime);\n    expect(res.body.notifications[0].modality).to.equal('CT');\n    expect(res.body.notifications[0].images.numberExpected).to.equal(1);\n    expect(res.body.notifications[0].images.numberAvailable).to.equal(1);\n    expect(res.body.notifications[0].notifyTypes.eventTime);\n    expect(res.body.notifications[0].notifyTypes[0].type).to.equal(\"modified\");\n});\n//Step 10\ncy.reload();\ncy.get('.openExtra .fa-chevron-right').click();\ncy.get('[data-cy=\"deleteExamBtn\"]').click();\ncy.get('#confirmDeleteYes').click();\ncy.wait(configFile.tinyTimeout);\ncy.request({\n    url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=deleted\"),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body.organizationId).to.eq(orgId);\n    expect(res.body.nextUpdateHref);\n    expect(res.body.notifications.studyInstanceUid);\n    expect(res.body.notifications[0].studyInfo.nucleusBaseUrl);\n    expect(res.body.notifications[0].studyInfo.nucleusStudyId);\n    expect(res.body.notifications[0].studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n    expect(res.body.notifications[0].studyInfo.info.href);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.href);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.href);\n    expect(res.body.notifications[0].studyInfo.modification.contentType);\n    expect(res.body.notifications[0].studyInfo.modification.href);\n    expect(res.body.notifications.lastUpdateTime);\n    expect(res.body.notifications[0].patientId).to.equal('a-01');\n    expect(res.body.notifications[0].patientName).to.equal('Acceptance^Set^1^^');\n    expect(res.body.notifications[0].studyDate);\n    expect(res.body.notifications.studyTime);\n    expect(res.body.notifications[0].modality).to.equal('CT');\n    expect(res.body.notifications[0].images.numberExpected).to.equal(1);\n    expect(res.body.notifications[0].images.numberAvailable).to.equal(1);\n    expect(res.body.notifications[0].notifyTypes.eventTime);\n    expect(res.body.notifications[0].notifyTypes[0].type).to.equal(\"deleted\");\n});\ncy.get('.icon__restoreBin').click();\ncy.get('[title=\"Restore Exam\"]').click();\ncy.get('[data-cy=\"actionYesButton\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.request({\n    url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=restored\"),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body.organizationId).to.eq(orgId);\n    expect(res.body.nextUpdateHref);\n    expect(res.body.notifications.studyInstanceUid);\n    expect(res.body.notifications[0].studyInfo.nucleusBaseUrl);\n    expect(res.body.notifications[0].studyInfo.nucleusStudyId);\n    expect(res.body.notifications[0].studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n    expect(res.body.notifications[0].studyInfo.info.href);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.href);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.href);\n    expect(res.body.notifications[0].studyInfo.modification.contentType);\n    expect(res.body.notifications[0].studyInfo.modification.href);\n    expect(res.body.notifications.lastUpdateTime);\n    expect(res.body.notifications[0].patientId).to.equal('a-01');\n    expect(res.body.notifications[0].patientName).to.equal('Acceptance^Set^1^^');\n    expect(res.body.notifications[0].studyDate);\n    expect(res.body.notifications.studyTime);\n    expect(res.body.notifications[0].modality).to.equal('CT');\n    expect(res.body.notifications[0].images.numberExpected).to.equal(1);\n    expect(res.body.notifications[0].images.numberAvailable).to.equal(1);\n    expect(res.body.notifications[0].notifyTypes.eventTime);\n    expect(res.body.notifications[0].notifyTypes[0].type).to.equal(\"restored\");\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.openExtra .fa-chevron-right').click();\ncy.get('[data-cy=\"deleteExamBtn\"]').click();\ncy.get('#confirmDeleteYes').click();\ncy.wait(configFile.smallTimeout);",
+              "err": {
+                "message": "CypressError: Timed out retrying after 60050ms: `cy.click()` failed because this element is `disabled`:\n\n`<button type=\"submit\" class=\"btn js-edit-save btn-link\" disabled=\"disabled\">Save</button>`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
+                "estack": "CypressError: Timed out retrying after 60050ms: `cy.click()` failed because this element is `disabled`:\n\n`<button type=\"submit\" class=\"btn js-edit-save btn-link\" disabled=\"disabled\">Save</button>`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at Object.isNotDisabled (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:151869:66)\n    at runAllChecks (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130534:26)\n    at retryActionability (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130623:16)\n    at tryCatcher (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8914:23)\n    at Promise.attempt.Promise.try (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6188:29)\n    at whenStable (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:146724:65)\n    at <unknown> (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:146165:14)\n    at tryCatcher (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8914:23)\n    at Promise._settlePromiseFromHandler (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6849:31)\n    at Promise._settlePromise (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6906:18)\n    at Promise._settlePromise0 (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6951:10)\n    at Promise._settlePromises (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:7031:18)\n    at Promise._fulfill (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6975:18)\n    at <unknown> (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8589:46)\nFrom Your Spec Code:\n    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2787-StudyNotificationAPI.spec.ts:187:32)",
+                "diff": null
+              },
+              "uuid": "f2295aa0-b749-4f04-9185-bea51bab023a",
+              "parentUUID": "1c23ea1e-551a-4210-9d78-f5e13b4120b9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 6",
+              "fullTitle": "ECP-T2787 - Study Notification API Step 6",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('span:contains(\"Select Folder\")').should('exist');\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.datasetsArray });\ncy.waitUntil(function () { return cy.get('[data-cy=\"uploaderNextButton\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.iconCheckboxUnchecked').last().click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.request({\n    url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=created\"),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body.organizationId).to.eq(orgId);\n    expect(res.body.nextUpdateHref);\n    expect(res.body.notifications.studyInstanceUid);\n    expect(res.body.notifications[0].studyInfo.nucleusBaseUrl);\n    expect(res.body.notifications[0].studyInfo.nucleusStudyId);\n    expect(res.body.notifications[0].studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n    expect(res.body.notifications[0].studyInfo.info.href);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.href);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.href);\n    expect(res.body.notifications[0].studyInfo.modification.contentType);\n    expect(res.body.notifications[0].studyInfo.modification.href);\n    expect(res.body.notifications.lastUpdateTime);\n    expect(res.body.notifications[0].patientId).to.equal('a-01');\n    expect(res.body.notifications[0].patientName).to.equal('Acceptance^Set^1');\n    expect(res.body.notifications[0].studyDate);\n    expect(res.body.notifications.studyTime);\n    expect(res.body.notifications[0].modality);\n    expect(res.body.notifications[0].images.numberExpected).to.equal(1);\n    expect(res.body.notifications[0].images.numberAvailable).to.equal(0);\n    expect(res.body.notifications[0].notifyTypes.eventTime);\n    expect(res.body.notifications[0].notifyTypes[0].type).to.equal(\"created\");\n});\ncy.waitUntil(function () { return cy.get('[data-cy=\"returnToExamList\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.visit(configFile.url);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.openExtra .fa-chevron-right').click();\ncy.get('[data-cy=\"deleteExamBtn\"]').click();\ncy.get('#confirmDeleteYes').click();\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "effd2ac4-ccaa-4bef-afa0-810abc36df2f",
+              "parentUUID": "1c23ea1e-551a-4210-9d78-f5e13b4120b9",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Step 8",
+              "fullTitle": "ECP-T2787 - Study Notification API Step 8",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('span:contains(\"Select Folder\")').should('exist');\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.datasetsArray });\ncy.waitUntil(function () { return cy.get('[data-cy=\"uploaderNextButton\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.iconCheckboxUnchecked').last().click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.wait(configFile.tinyTimeout * 2);\ncy.request({\n    url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=completed\"),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body.organizationId).to.eq(orgId);\n    expect(res.body.nextUpdateHref);\n    expect(res.body.notifications.studyInstanceUid);\n    expect(res.body.notifications[0].studyInfo.nucleusBaseUrl);\n    expect(res.body.notifications[0].studyInfo.nucleusStudyId);\n    expect(res.body.notifications[0].studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n    expect(res.body.notifications[0].studyInfo.info.href);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.href);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.href);\n    expect(res.body.notifications[0].studyInfo.modification.contentType);\n    expect(res.body.notifications[0].studyInfo.modification.href);\n    expect(res.body.notifications.lastUpdateTime);\n    expect(res.body.notifications[0].patientId).to.equal('a-01');\n    expect(res.body.notifications[0].patientName).to.equal('Acceptance^Set^1');\n    expect(res.body.notifications[0].studyDate);\n    expect(res.body.notifications.studyTime);\n    expect(res.body.notifications[0].modality).to.equal('CT');\n    expect(res.body.notifications[0].images.numberExpected).to.equal(1);\n    expect(res.body.notifications[0].images.numberAvailable).to.equal(1);\n    expect(res.body.notifications[0].notifyTypes.eventTime);\n    expect(res.body.notifications[0].notifyTypes[0].type).to.equal(\"completed\");\n});\ncy.waitUntil(function () { return cy.get('[data-cy=\"returnToExamList\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.visit(configFile.url);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.openExtra .fa-chevron-right').click();\ncy.get('[data-cy=\"deleteExamBtn\"]').click();\ncy.get('#confirmDeleteYes').click();\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "d0348f2e-933e-473a-9b03-4cd58583e57e",
+              "parentUUID": "1c23ea1e-551a-4210-9d78-f5e13b4120b9",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Step 12 to 16",
+              "fullTitle": "ECP-T2787 - Study Notification API Step 12 to 16",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('span:contains(\"Select Folder\")').should('exist');\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.datasetsArray });\ncy.waitUntil(function () { return cy.get('[data-cy=\"uploaderNextButton\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.iconCheckboxUnchecked').last().click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.request({\n    url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=created,modified\"),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body.organizationId).to.eq(orgId);\n    expect(res.body.nextUpdateHref);\n    expect(res.body.notifications.studyInstanceUid);\n    expect(res.body.notifications[0].studyInfo.nucleusBaseUrl);\n    expect(res.body.notifications[0].studyInfo.nucleusStudyId);\n    expect(res.body.notifications[0].studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n    expect(res.body.notifications[0].studyInfo.info.href);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.href);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.href);\n    expect(res.body.notifications[0].studyInfo.modification.contentType);\n    expect(res.body.notifications[0].studyInfo.modification.href);\n    expect(res.body.notifications.lastUpdateTime);\n    expect(res.body.notifications[0].patientId).to.equal('a-01');\n    expect(res.body.notifications[0].patientName).to.equal('Acceptance^Set^1');\n    expect(res.body.notifications[0].studyDate);\n    expect(res.body.notifications.studyTime);\n    expect(res.body.notifications[0].modality);\n    expect(res.body.notifications[0].images.numberExpected).to.equal(1);\n    expect(res.body.notifications[0].images.numberAvailable).to.equal(0);\n    expect(res.body.notifications[0].notifyTypes.eventTime);\n    expect(res.body.notifications[0].notifyTypes[0].type).to.equal(\"created\");\n});\ncy.waitUntil(function () { return cy.get('[data-cy=\"returnToExamList\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.visit(configFile.url);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.openExtra .fa-chevron-right').click();\ncy.get('.js-edit-exam').click();\ncy.get('#studyDescription').clear().type('testtest');\ncy.get('.js-edit-save').click();\ncy.get('.js-edit-confirm-save').click();\ncy.wait(configFile.tinyTimeout);\ncy.request({\n    url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=created,modified\"),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body.organizationId).to.eq(orgId);\n    expect(res.body.nextUpdateHref);\n    expect(res.body.notifications.studyInstanceUid);\n    expect(res.body.notifications[0].studyInfo.nucleusBaseUrl);\n    expect(res.body.notifications[0].studyInfo.nucleusStudyId);\n    expect(res.body.notifications[0].studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n    expect(res.body.notifications[0].studyInfo.info.href);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.href);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.href);\n    expect(res.body.notifications[0].studyInfo.modification.contentType);\n    expect(res.body.notifications[0].studyInfo.modification.href);\n    expect(res.body.notifications.lastUpdateTime);\n    expect(res.body.notifications[0].patientId).to.equal('a-01');\n    expect(res.body.notifications[0].patientName).to.equal('Acceptance^Set^1^^');\n    expect(res.body.notifications[0].studyDate);\n    expect(res.body.notifications.studyTime);\n    expect(res.body.notifications[0].modality);\n    expect(res.body.notifications[0].images.numberExpected).to.equal(1);\n    expect(res.body.notifications[0].images.numberAvailable).to.equal(1);\n    expect(res.body.notifications[0].notifyTypes.eventTime);\n    expect(res.body.notifications[0].notifyTypes[0].type).to.equal(\"modified\");\n});\ncy.wait(configFile.smallTimeout * 5);\ncy.request({\n    url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=all&timeout-ms=10000\"),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body).is.empty;\n});\n// Step 15\nvar timez = (new Date()).toISOString();\n// Step 16  - Edit\ncy.get('#editExam').click();\ncy.get('#studyDescription').clear().type('Edited Test');\ncy.get('.js-edit-save').click();\ncy.get('.js-edit-confirm-save').click();\n// delete\ncy.get('[data-cy=\"deleteExamBtn\"]').click();\ncy.get('#confirmDeleteYes').click();\n// Upload\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('span:contains(\"Select Folder\")').should('exist');\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.datasetsArray });\ncy.waitUntil(function () { return cy.get('[data-cy=\"uploaderNextButton\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.iconCheckboxUnchecked').last().click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.request({\n    url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=created,modified&since=\").concat(timez),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body.organizationId).to.eq(orgId);\n    expect(res.body.nextUpdateHref);\n    expect(res.body.notifications.studyInstanceUid);\n    expect(res.body.notifications[0].studyInfo.nucleusBaseUrl);\n    expect(res.body.notifications[0].studyInfo.nucleusStudyId);\n    expect(res.body.notifications[0].studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n    expect(res.body.notifications[0].studyInfo.info.href);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.href);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.href);\n    expect(res.body.notifications[0].studyInfo.modification.contentType);\n    expect(res.body.notifications[0].studyInfo.modification.href);\n    expect(res.body.notifications.lastUpdateTime);\n    expect(res.body.notifications[0].patientId).to.equal('a-01');\n    expect(res.body.notifications[0].patientName).to.equal('Acceptance^Set^1^^');\n    expect(res.body.notifications[0].studyDate);\n    expect(res.body.notifications.studyTime);\n    expect(res.body.notifications[0].modality).to.equal('CT');\n    expect(res.body.notifications[0].images.numberExpected).to.equal(1);\n    expect(res.body.notifications[0].images.numberAvailable).to.equal(1);\n    expect(res.body.notifications[0].notifyTypes.eventTime);\n    expect(res.body.notifications[0].notifyTypes[0].type).to.equal(\"modified\");\n    expect(res.body.notifications[1].patientId).to.equal('a-01');\n    expect(res.body.notifications[1].patientName).to.equal('Acceptance^Set^1');\n    expect(res.body.notifications[1].studyDate);\n    expect(res.body.notifications.studyTime);\n    expect(res.body.notifications[1].modality);\n    expect(res.body.notifications[1].images.numberExpected).to.equal(1);\n    expect(res.body.notifications[1].images.numberAvailable).to.equal(0);\n    expect(res.body.notifications[1].notifyTypes.eventTime);\n    expect(res.body.notifications[1].notifyTypes[0].type).to.equal(\"created\");\n});\ncy.waitUntil(function () { return cy.get('[data-cy=\"returnToExamList\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.visit(configFile.url);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.openExtra .fa-chevron-right').click();\ncy.get('[data-cy=\"deleteExamBtn\"]').click();\ncy.get('#confirmDeleteYes').click();\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "7a43786e-5bef-443b-afa0-f0ca007456e9",
+              "parentUUID": "1c23ea1e-551a-4210-9d78-f5e13b4120b9",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Step 17 and 18",
+              "fullTitle": "ECP-T2787 - Study Notification API Step 17 and 18",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nvar time2 = (new Date()).toISOString();\n//Upload\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('span:contains(\"Select Folder\")').should('exist');\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.datasetsArray });\ncy.waitUntil(function () { return cy.get('[data-cy=\"uploaderNextButton\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.iconCheckboxUnchecked').last().click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.waitUntil(function () { return cy.get('[data-cy=\"returnToExamList\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.visit(configFile.url);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.openExtra .fa-chevron-right').click();\n// Edit\ncy.get('#editExam').click();\ncy.get('#studyDescription').clear().type('Edited Test');\ncy.get('.js-edit-save').click();\ncy.get('.js-edit-confirm-save').click();\n// delete\ncy.get('[data-cy=\"deleteExamBtn\"]').click();\ncy.get('#confirmDeleteYes').click();\n//undelete\ncy.get('.icon__restoreBin').click();\ncy.get('[title=\"Restore Exam\"]').first().click();\ncy.get('[data-cy=\"actionYesButton\"]').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"a-01\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.request({\n    url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=all&timeout-ms=20000&since=\").concat(time2),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body.organizationId).to.eq(orgId);\n    expect(res.body.nextUpdateHref);\n    expect(res.body.notifications.studyInstanceUid);\n    expect(res.body.notifications[0].studyInfo.nucleusBaseUrl);\n    expect(res.body.notifications[0].studyInfo.nucleusStudyId);\n    expect(res.body.notifications[0].studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n    expect(res.body.notifications[0].studyInfo.info.href);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.href);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.href);\n    expect(res.body.notifications[0].studyInfo.modification.contentType);\n    expect(res.body.notifications[0].studyInfo.modification.href);\n    expect(res.body.notifications.lastUpdateTime);\n    expect(res.body.notifications[0].patientId).to.equal('a-01');\n    expect(res.body.notifications[0].patientName).to.equal('Acceptance^Set^1^^');\n    expect(res.body.notifications[0].studyDate);\n    expect(res.body.notifications.studyTime);\n    expect(res.body.notifications[0].modality).to.equal('CT');\n    expect(res.body.notifications[0].images.numberExpected).to.equal(1);\n    expect(res.body.notifications[0].images.numberAvailable).to.equal(1);\n    expect(res.body.notifications[0].notifyTypes.eventTime);\n    expect(res.body.notifications[0].notifyTypes[0].type).to.equal(\"completed\");\n    expect(res.body.notifications[0].notifyTypes[1].type).to.equal(\"modified\");\n    expect(res.body.notifications[0].notifyTypes[2].type).to.equal(\"deleted\");\n    expect(res.body.notifications[0].notifyTypes[3].type).to.equal(\"restored\");\n});\ncy.request({\n    url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=all&since=\").concat(starttime),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body.notifications[0].notifyTypes[0].type).to.equal(\"completed\");\n    expect(res.body.notifications[0].notifyTypes[1].type).to.equal(\"modified\");\n    expect(res.body.notifications[0].notifyTypes[2].type).to.equal(\"deleted\");\n    expect(res.body.notifications[0].notifyTypes[3].type).to.equal(\"restored\");\n});",
+              "err": {},
+              "uuid": "621b73fb-89af-49f2-90e5-4f6bd5a5fc12",
+              "parentUUID": "1c23ea1e-551a-4210-9d78-f5e13b4120b9",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Step 7",
+              "fullTitle": "ECP-T2787 - Study Notification API Step 7",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('span:contains(\"Select Folder\")').should('exist');\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.largestudy });\ncy.waitUntil(function () { return cy.get('[data-cy=\"uploaderNextButton\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.wait(configFile.tinyTimeout * 2);\ncy.get('.cancelUpload').click();\ncy.get('.js-confirm').click();\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('span:contains(\"Select Folder\")').should('exist');\ncy.get('[data-cy=\"selectFolderButton\"]').click();\nselectDicom({ filePaths: this.largestudy });\ncy.waitUntil(function () { return cy.get('[data-cy=\"uploaderNextButton\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.get('[data-cy=\"uploaderNextButton\"]').click();\ncy.wait(configFile.tinyTimeout * 3);\ncy.request({\n    url: \"\".concat(baseUrl, \"/study-notifications/organization/\").concat(orgId, \"?type=updated\"),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body.organizationId).to.eq(orgId);\n    expect(res.body.nextUpdateHref);\n    expect(res.body.notifications.studyInstanceUid);\n    expect(res.body.notifications[0].studyInfo.nucleusBaseUrl);\n    expect(res.body.notifications[0].studyInfo.nucleusStudyId);\n    expect(res.body.notifications[0].studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n    expect(res.body.notifications[0].studyInfo.info.href);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.durableMetadata.href);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.contentType);\n    expect(res.body.notifications[0].studyInfo.versionMetadata.href);\n    expect(res.body.notifications[0].studyInfo.modification.contentType);\n    expect(res.body.notifications[0].studyInfo.modification.href);\n    expect(res.body.notifications.lastUpdateTime);\n    expect(res.body.notifications[0].patientId);\n    expect(res.body.notifications[0].patientName);\n    expect(res.body.notifications[0].studyDate);\n    expect(res.body.notifications.studyTime);\n    expect(res.body.notifications[0].modality);\n    expect(res.body.notifications[0].images.numberExpected);\n    expect(res.body.notifications[0].images.numberAvailable);\n    expect(res.body.notifications[0].notifyTypes.eventTime);\n    expect(res.body.notifications[0].notifyTypes[0].type).to.equal(\"updated\");\n});",
+              "err": {},
+              "uuid": "f72e7deb-477a-45a3-82c1-a7f8f5c61f8c",
+              "parentUUID": "1c23ea1e-551a-4210-9d78-f5e13b4120b9",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2787 - Study Notification API Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "12fe656d-c044-4781-9158-00b36c59d1e0",
+              "parentUUID": "1c23ea1e-551a-4210-9d78-f5e13b4120b9",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2f1e1ac2-15c6-49f3-bc9d-476ee358f026"
+          ],
+          "failures": [
+            "f2295aa0-b749-4f04-9185-bea51bab023a"
+          ],
+          "pending": [],
+          "skipped": [
+            "effd2ac4-ccaa-4bef-afa0-810abc36df2f",
+            "d0348f2e-933e-473a-9b03-4cd58583e57e",
+            "7a43786e-5bef-443b-afa0-f0ca007456e9",
+            "621b73fb-89af-49f2-90e5-4f6bd5a5fc12",
+            "f72e7deb-477a-45a3-82c1-a7f8f5c61f8c",
+            "12fe656d-c044-4781-9158-00b36c59d1e0"
+          ],
+          "duration": 173371,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

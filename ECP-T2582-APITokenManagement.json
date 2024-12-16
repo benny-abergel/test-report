@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:16:31.740Z",
+    "end": "2024-12-15T03:20:57.898Z",
+    "duration": 266158,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "7f0386b1-3152-43ef-bfa5-54dbd79c32fa",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2582-APITokenManagement.spec.ts",
+      "file": "cypress/test-suites/ECP-T2582-APITokenManagement.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1affcb24-de28-475d-b658-17f8067baa7e",
+          "title": "ECP-T2582 - API Token Management",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step",
+              "fullTitle": "ECP-T2582 - API Token Management Test Preparation - Before Step",
+              "timedOut": null,
+              "duration": 99186,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true\n}, facilityName);",
+              "err": {},
+              "uuid": "f25aecc0-3df0-4ce3-b0bb-22544dbd4d98",
+              "parentUUID": "1affcb24-de28-475d-b658-17f8067baa7e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Starting API Token Management Test - Upto 11 steps in one",
+              "fullTitle": "ECP-T2582 - API Token Management Starting API Token Management Test - Upto 11 steps in one",
+              "timedOut": null,
+              "duration": 40138,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 1 - Using an org. admin account, navigate to My Org > Integration > API Access tab and verify the tab is displayed.\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Integration');\ncy.get(api.apiAccessTab).should('exist');\ncommon_1.Common.switchTab('API Access');\n// Step 2 - Verify the API access table contains the listed columns. - Status, Created by, Created, Actions\ncy.get(es.statusColumn).should('exist');\ncy.get(es.createdByColumn).should('exist');\ncy.get(es.createdAtColumn).should('exist');\ncy.get(es.actionsColumn).should('exist');\n// Step 3 - Verify the \"display inactive tokens\" check box is checked by default.\ncy.get(api.displayInactiveTokenCheckbox).should('be.checked');\n// Step 4 - Click the CREATE API TOKEN link and verify the create API token pop-over opens.\ncy.get(api.addApiToken).click();\ncy.waitUntil(function () { return cy.get(es.tokenDescription).should('exist'); }, { timeout: configFile.waitUntilTimeout });\n// Step 5 - Verify the Create API token popover contains the listed items. - Token description field (required),\n// Token status check box for active tokens, CANCEL button, CREATE button\ncy.get(es.tokenDescription).should('exist');\ncy.get(es.tokenStatus).should('exist');\ncy.get(es.closePopup).should('exist');\ncy.get(es.createToken).should('exist');\n// Step 6 - Input a description and click CREATE.  Verify the token is displayed and the pop-over contents are correct.\ncy.get(es.tokenDescription).type(\"\".concat(tokenName).concat(facilityName, \"_\"));\ncy.waitUntil(function () { return cy.get(es.createToken).should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.createToken).click();\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get(es.tokenContent).should('exist'); }, { timeout: configFile.longTimeout });\ncy.get(es.tokenContent).then(function (el) {\n    token = el.text();\n});\ncy.wait(configFile.tinyTimeout); // added by mahipal\ncy.get(es.copyToClipboard).should('exist');\ncy.get(es.copyTokenValidation).should('contain.text', \"For security purposes, the token will not be available\\n                again after closing this dialog. Be sure to securely\\n                manage the token outside of application to prevent unauthorized access to your account.\");\ncy.get(es.saveToken).should('have.text', 'OK');\n// cy.get(es.tokenDescription).should('exist');\n// Step 7 - Click outside the pop-over, verify the confirmation text is displayed and is correct.\ncy.get(es.saveToken).click();\ncy.waitUntil(function () { return cy.get(es.reminderBox).should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.reminderBox).should('have.text', 'Did you copy the token value?');\ncy.get(es.saveToken).click();\n// Step 8 - Click the edit button.  Verify the edit pop-over opens and the user can update the token description.\ncy.waitUntil(function () { return cy.get(es.editToken).should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.editToken).first().click();\ncy.waitUntil(function () { return cy.get(es.tokenDescription); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.tokenDescription).type(\"edited\");\ncy.waitUntil(function () { return cy.get(es.saveEditToken).should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.saveEditToken).click();\n// Step 9 - Verify an API token can be de-activated from the edit pop-over.\ncy.waitUntil(function () { return cy.get(es.editToken).should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.editToken).first().click();\ncy.waitUntil(function () { return cy.get(es.tokenStatus); }, { timeout: configFile.waitUntilTimeout });\n//        cy.get(es.tokenStatus).uncheck();\ncy.get(es.tokenStatus).invoke('attr', 'checked', 'false').trigger('change').should('not.have.attr', 'checked', 'true');\ncy.wait(configFile.tinyTimeout);\ncy.waitUntil(function () { return cy.get(es.saveEditToken, { timeout: configFile.waitUntilTimeout }).should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.saveEditToken).click();\ncy.waitUntil(function () { return cy.get(api.tokenStatusCell).should('have.text', 'Inactive'); }, { timeout: configFile.waitUntilTimeout });\n// Step 10 - Verify an API token can be activated from the edit pop-over.\ncy.get(es.editToken).first().click();\ncy.waitUntil(function () { return cy.get(es.tokenStatus); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.tokenStatus).check();\ncy.waitUntil(function () { return cy.get(es.saveEditToken).should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.saveEditToken).click();\ncy.waitUntil(function () { return cy.get(api.tokenStatusCell).should('have.text', 'Active'); }, { timeout: configFile.waitUntilTimeout });\n// Step 11 - Click the delete action button and verify an API token can be deleted after confirming.\ncy.get(api.tokenRow).first().should('contain.text', \"\".concat(tokenName));\ncy.get(api.deleteToken).first().click();\ncy.waitUntil(function () { return cy.get(es.deleteTokenPopup).should('have.text', 'Do you want to delete this token? A deleted token cannot be recreated.NoYes, Delete'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.deleteTokenClosePopup).should('exist');\ncy.get(es.confirmDeleteToken).should('exist');\ncy.get(es.confirmDeleteToken).click();\ncy.wait(configFile.tinyTimeout);\ncy.get(api.tokenRow).should('not.exist');",
+              "err": {},
+              "uuid": "d9fa4f8e-8be2-4163-b861-850cfae2e144",
+              "parentUUID": "1affcb24-de28-475d-b658-17f8067baa7e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "API Token Management Test - Steps 12 & 13",
+              "fullTitle": "ECP-T2582 - API Token Management API Token Management Test - Steps 12 & 13",
+              "timedOut": null,
+              "duration": 31094,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 12 - Using a system admin account, open the system admin section and click \"Authentication tokens\" and verify a list of active, inactive and deleted API tokens is displayed for the selected organization.\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('System Tools');\ncy.get('a').contains('Authentication Tokens').click();\ncy.waitUntil(function () { return cy.get(api.tableDescriptionCell).should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(api.tableDescriptionCell).first().should('include.text', \"\".concat(tokenName).concat(facilityName));\ncommon_1.Common.logout();\n// Step 13 - Verify the token values are not visible to the system admin.\n// cy.contains(token).should('not.exist');",
+              "err": {},
+              "uuid": "e4f0d1eb-3eed-4789-8451-48e5fa1149f9",
+              "parentUUID": "1affcb24-de28-475d-b658-17f8067baa7e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "API Token Management Test - Step 14, 15, 16",
+              "fullTitle": "ECP-T2582 - API Token Management API Token Management Test - Step 14, 15, 16",
+              "timedOut": null,
+              "duration": 70781,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 14 - Using an active API token, verify a user can access the expected information in the system using the active API token.\n// create an API token first\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Integration');\ncommon_1.Common.switchTab('API Access');\ncy.get(api.addApiToken).click();\ncy.waitUntil(function () { return cy.get(es.tokenDescription).should('exist'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.tokenDescription).type(\"for_api_testing_\".concat(facilityName, \"_\"));\ncy.get(es.createToken).click();\ncy.waitUntil(function () { return cy.get(es.tokenContent).should('exist'); }, { timeout: configFile.longTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get(es.tokenContent).then(function (el) {\n    token = el.text();\n    console.log('#### token: ', token);\n});\ncy.get(es.saveToken).click();\ncy.wait(configFile.tinyTimeout);\ncy.get(es.saveToken).click();\ncy.wait(configFile.timeout);\ncy.get(api.tokenStatusCell).then(function (el) {\n    return cy.request({\n        url: \"\".concat(configFile.url, \"/sessions?userId=\").concat(configFile.password, \"&userName=\").concat(configFile.username),\n        failOnStatusCode: false,\n        headers: {\n            Authorization: \"Bearer \".concat(token),\n            Accept: 'application/json; charset=utf-8',\n            'Content-Type': 'application/json; charset=utf-8'\n        }\n    });\n})\n    .then(function (response) {\n    expect(response.status).to.be.eql(200);\n});\n// Step 15 - Deactivate an API token, verify the system blocks access when using the inactive API token.\ncy.get(es.editToken).first().click();\ncy.waitUntil(function () { return cy.get(es.tokenStatus); }, { timeout: configFile.waitUntilTimeout });\n// cy.get(es.tokenStatus).uncheck();\ncy.get(es.tokenStatus).invoke('attr', 'checked', 'false').trigger('change').should('not.have.attr', 'checked', 'true');\ncy.waitUntil(function () { return cy.get(es.saveEditToken, { timeout: configFile.waitUntilTimeout }).should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.saveEditToken).click({ force: true });\ncy.wait(configFile.mediumTimeout);\ncy.get(api.tokenStatusCell).then(function () {\n    return cy.request({\n        url: \"\".concat(configFile.url, \"/sessions?userId=\").concat(configFile.password, \"&userName=\").concat(configFile.username),\n        failOnStatusCode: false,\n        headers: {\n            Authorization: \"Bearer \".concat(token),\n            Accept: 'application/json; charset=utf-8',\n            'Content-Type': 'application/json; charset=utf-8'\n        }\n    });\n})\n    .then(function (response) {\n    expect(response.status).to.be.eql(403);\n});\n// Step 16 - Reactivate the API token being used, inactivate the organization in the system, wait approx. 1 minute for the  inactivation to take place on the back end, then attempt to access exam data using an API in the system.  Verify access to the system is denied using the active token associated with an inactive organization.\ncy.get(es.editToken).first().click();\ncy.waitUntil(function () { return cy.get(es.tokenStatus); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.tokenStatus).check();\ncy.waitUntil(function () { return cy.get(es.saveEditToken).should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.saveEditToken).click();\ncy.wait(configFile.tinyTimeout);",
+              "err": {},
+              "uuid": "5059ec78-83e8-4370-b39b-4879faeacd8d",
+              "parentUUID": "1affcb24-de28-475d-b658-17f8067baa7e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2582 - API Token Management Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6804,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "f95cb7e5-b9de-4bae-8895-249f7a60e71d",
+              "parentUUID": "1affcb24-de28-475d-b658-17f8067baa7e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f25aecc0-3df0-4ce3-b0bb-22544dbd4d98",
+            "d9fa4f8e-8be2-4163-b861-850cfae2e144",
+            "e4f0d1eb-3eed-4789-8451-48e5fa1149f9",
+            "5059ec78-83e8-4370-b39b-4879faeacd8d",
+            "f95cb7e5-b9de-4bae-8895-249f7a60e71d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 248003,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

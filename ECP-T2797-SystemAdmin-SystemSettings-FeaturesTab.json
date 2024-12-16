@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T04:17:13.328Z",
+    "end": "2024-12-15T04:20:08.977Z",
+    "duration": 175649,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a129118f-07bd-4cb2-8f36-970d8e668902",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2797-SystemAdmin-SystemSettings-FeaturesTab.spec.ts",
+      "file": "cypress/test-suites/ECP-T2797-SystemAdmin-SystemSettings-FeaturesTab.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8d7f3cae-9474-4cad-9c29-d8a63c3199f9",
+          "title": "ECP-T2797 - System Admin - System Settings - Features tab",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting ECP-T2797 - System Admin - System Settings - Features tab Test - all 7 steps in one",
+              "fullTitle": "ECP-T2797 - System Admin - System Settings - Features tab Starting ECP-T2797 - System Admin - System Settings - Features tab Test - all 7 steps in one",
+              "timedOut": null,
+              "duration": 161280,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Step 1 - Using a system admin account, navigate to the system admin > system settings page and verify the system settings page contains the listed tabs.\n// General tab, Features tab, HL7 Report Template, DICOM tags\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.systemDefaultFeatureSwitches();\ncy.reload();\ncy.get('.ui-buttonset label[title=\"General\"]').should('exist');\ncy.get('.ui-buttonset label[title=\"Features\"]').should('exist');\ncy.get('.ui-buttonset label[title=\"HL7 Report Template\"]').should('exist');\ncy.get('.ui-buttonset label[title=\"DICOM Tags\"]').should('exist');\n// Step 2 - Click on the features tab and verify the tab is displayed.\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureExist('allowCdUploader');\ncommon_1.Common.verifyFeatureExist('allowGuestUploader');\ncommon_1.Common.verifyFeatureExist('allowInboundSharing');\ncommon_1.Common.verifyFeatureExist('allowOutboundSharing');\ncommon_1.Common.verifyFeatureExist('allowPatientSharing');\ncommon_1.Common.verifyFeatureExist('allowStatShares');\ncommon_1.Common.verifyFeatureExist('allowSAML');\ncommon_1.Common.verifyFeatureExist('allowEdgeServer');\ncommon_1.Common.verifyFeatureExist('allowAD');\ncommon_1.Common.verifyFeatureExist('allowPushToPACS');\ncommon_1.Common.verifyFeatureExist('allowTagEditing');\ncommon_1.Common.verifyFeatureExist('allowDICOMReceive');\ncommon_1.Common.verifyFeatureExist('allowQueryRetrieve');\ncommon_1.Common.verifyFeatureExist('allowModalityWorklist');\ncommon_1.Common.verifyFeatureExist('allowReportQuerySources');\ncommon_1.Common.verifyFeatureExist('allowAPIs');\ncommon_1.Common.verifyFeatureExist('allowHl7');\ncommon_1.Common.verifyFeatureExist('allowNixViewerApi');\ncommon_1.Common.verifyFeatureExist('allowAutomaticActions');\ncommon_1.Common.verifyFeatureExist('allowWorkstationViewer');\ncommon_1.Common.verifyFeatureExist('allowWorklist');\n//c.verifyFeatureExist('allowHtJ2kCodec'); // commented by mahipal, due to failing in 0.7 release\n//c.verifyFeatureExist('allowHaarCodec'); // commented by mahipal, due to failing in 0.7 release\n//c.verifyFeatureExist('allowHaarQuantization'); // commented by mahipal, due to failing in 0.7 release\n// Step 3 - If the test environment is a fresh deployment, verify the system defaults are correct as listed.\n// If the test environment is an existing deployment this test step can be skipped.\ncommon_1.Common.verifyFeatureToggle('allowCdUploader');\ncommon_1.Common.verifyFeatureToggle('allowGuestUploader', false);\ncommon_1.Common.verifyFeatureToggle('allowInboundSharing');\ncommon_1.Common.verifyFeatureToggle('allowOutboundSharing');\ncommon_1.Common.verifyFeatureToggle('allowPatientSharing', false);\ncommon_1.Common.verifyFeatureToggle('allowStatShares');\ncommon_1.Common.verifyFeatureToggle('allowSAML', false);\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer', false);\ncommon_1.Common.verifyFeatureToggle('allowAD');\ncommon_1.Common.verifyFeatureToggle('allowPushToPACS');\ncommon_1.Common.verifyFeatureToggle('allowTagEditing', false);\ncommon_1.Common.verifyFeatureToggle('allowDICOMReceive');\ncommon_1.Common.verifyFeatureToggle('allowQueryRetrieve');\ncommon_1.Common.verifyFeatureToggle('allowModalityWorklist', false);\ncommon_1.Common.verifyFeatureToggle('allowReportQuerySources', false);\ncommon_1.Common.verifyFeatureToggle('allowAPIs', false);\ncommon_1.Common.verifyFeatureToggle('allowHl7');\ncommon_1.Common.verifyFeatureToggle('allowNixViewerApi');\ncommon_1.Common.verifyFeatureToggle('allowAutomaticActions', false);\ncommon_1.Common.verifyFeatureToggle('allowWorkstationViewer', false);\ncommon_1.Common.verifyFeatureToggle('allowWorklist', false);\n// c.verifyFeatureToggle('allowHtJ2kCodec', false);\n// c.verifyFeatureToggle('allowHaarCodec', false);\n// c.verifyFeatureToggle('allowHaarQuantization', false);\n// Step 4 - Verify system level feature switch values can be changed, either enabled or disabled, by the system admin.\ncommon_1.Common.verifyFeatureToggle('allowAPIs', false);\ncommon_1.Common.toggleFeature('allowAPIs');\ncommon_1.Common.verifyFeatureToggle('allowAPIs');\ncommon_1.Common.toggleFeature('allowAPIs', false);\ncommon_1.Common.verifyFeatureToggle('allowAPIs', false);\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\n// Step 5 - Verify changes made to the system level feature switches do not affect existing organizations in the system.\ncy.reload();\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureToggle('allowAPIs', false);\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.toggleFeature('allowAPIs');\ncy.reload();\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureToggle('allowAPIs', false);\n// Step 6 - Create a new organization and verify the system level feature switch values are inherited by the newly created organization.\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility3Name), { timeout: configFile.hugeTimeout });\ncy.reload();\ncommon_1.Common.switchToFacility(facility3Name);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureToggle('allowAPIs');\n// Step 7 - Make any change to the system features, click the Cancel button and verify a confirmation message is displayed with the correct contents.\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.toggleFeature('allowAPIs', false);\n//  c.toggleFeature('allowAPIs', false);\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowAPIs: false,\n});\ncy.get('.checkboxTree input[data-key=\"allowAPIs\"]').check();\ncy.get('.js-adminSettings-cancel').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.DiscardChanges-popover .popover-content p').should('contain.text', 'Do you want to discard your changes?');\ncy.get('.DiscardChanges-popover .popover-content .popover-btn-group .js-close-popover').should('exist');\ncy.get('.DiscardChanges-popover .popover-content .popover-btn-group #confirm-DiscardChanges').should('exist');\ncy.get('.DiscardChanges-popover .popover-content .popover-btn-group #confirm-DiscardChanges').click();",
+              "err": {},
+              "uuid": "3c973fc0-a67e-485e-96b2-ea25e9a82870",
+              "parentUUID": "8d7f3cae-9474-4cad-9c29-d8a63c3199f9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2797 - System Admin - System Settings - Features tab Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6658,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "c4a18308-f583-4af7-94bc-e944c869b187",
+              "parentUUID": "8d7f3cae-9474-4cad-9c29-d8a63c3199f9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3c973fc0-a67e-485e-96b2-ea25e9a82870",
+            "c4a18308-f583-4af7-94bc-e944c869b187"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 167938,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

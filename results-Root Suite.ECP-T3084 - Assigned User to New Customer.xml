@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="222.210" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:36:34" tests="0" file="cypress/e2e/test-suites/ECP-T3084-Assigned User to New Customer.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3084 - Assigned User to New Customer" timestamp="2024-12-15T03:36:34" tests="3" time="222.185" failures="0">
+    <testcase name="Step 1 -5" time="149.127" classname="ECP-T3084 - Assigned User to New Customer">
+    </testcase>
+    <testcase name="Step 6-7" time="52.819" classname="ECP-T3084 - Assigned User to New Customer">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.661" classname="ECP-T3084 - Assigned User to New Customer">
+    </testcase>
+  </testsuite>
+</testsuites>

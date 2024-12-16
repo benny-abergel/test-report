@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:35:49.455Z",
+    "end": "2024-12-15T03:38:16.178Z",
+    "duration": 146723,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d27b3c6a-d0c2-4b75-bddf-9a0dba4e5cb0",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2655-ExamAttachmentViewAPI.spec.ts",
+      "file": "cypress/test-suites/ECP-T2655-ExamAttachmentViewAPI.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "dc39cfae-c457-4ee5-9643-a9969c412718",
+          "title": "ECP-T2655 - Exam Attachment View API ",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1-2",
+              "fullTitle": "ECP-T2655 - Exam Attachment View API  Step 1-2",
+              "timedOut": null,
+              "duration": 131159,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true\n}, facilityName);\n//Step 1\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    //Step 2\n    var examUploadCmd_01 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd_01, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n    common_1.Common.navigateTo('Sharing List');\n    cy.waitUntil(function () { return cy.get('[title=\"a-01\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n    cy.wait(configFile.smallTimeout);\n    var pdf = 'sample.pdf';\n    cy.get('.exam-attachments-btn').click();\n    cy.get('#selectAttachment', { timeout: configFile.hugeTimeout }).attachFile(pdf);\n    cy.wait(configFile.mediumTimeout);\n    cy.get('.expanderCell').click();\n    cy.get(iex.moreInfo).click();\n    cy.wait(configFile.smallTimeout);\n    var examID = '';\n    cy.get(iex.examID).then(function (el) {\n        examID = el.text();\n        var viewurl = \"\".concat(configFile.url, \"/attachment/study/\").concat(examID);\n        header = {\n            Authorization: \"Bearer \".concat(token),\n            'Content-Type': 'application/json; charset=utf-8'\n        };\n        return cy.request({\n            url: viewurl,\n            method: 'GET',\n            headers: header\n        }).then(function (response) {\n            expect(response.status).to.equals(200);\n            expect(response.body[0].name).to.equal('sample');\n            expect(response.body[0].fileExtension).to.equal('pdf');\n            expect(response.body[0].fileSize).to.be.greaterThan(2024);\n            expect(response.body[0].createdAt);\n            expect(response.body[0].updatedAt);\n            expect(response.body[0].updatedByUserId);\n            expect(response.body[0].urls.view);\n            expect(response.body[0].urls.download);\n            expect(response.body[0].urls.delete);\n            capturedurl = response.body[0].urls.view;\n        });\n    });\n});",
+              "err": {},
+              "uuid": "d2a6cac1-84a4-404a-ae72-0b7496041d8b",
+              "parentUUID": "dc39cfae-c457-4ee5-9643-a9969c412718",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 3",
+              "fullTitle": "ECP-T2655 - Exam Attachment View API  Step 3",
+              "timedOut": null,
+              "duration": 779,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "return cy.request({\n    url: capturedurl,\n    method: 'GET',\n    headers: header\n}).then(function (response) {\n    expect(response.status).to.equals(200);\n});",
+              "err": {},
+              "uuid": "e27b6da2-cc00-43f8-9fa4-f9404cca630b",
+              "parentUUID": "dc39cfae-c457-4ee5-9643-a9969c412718",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2655 - Exam Attachment View API  Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7315,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "616c3a4b-d0ab-431c-9468-33fee1adbdd9",
+              "parentUUID": "dc39cfae-c457-4ee5-9643-a9969c412718",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d2a6cac1-84a4-404a-ae72-0b7496041d8b",
+            "e27b6da2-cc00-43f8-9fa4-f9404cca630b",
+            "616c3a4b-d0ab-431c-9468-33fee1adbdd9"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 139253,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

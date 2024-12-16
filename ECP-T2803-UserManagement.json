@@ -1,0 +1,135 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 0,
+    "passes": 0,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:51:42.156Z",
+    "end": "2024-12-15T03:57:11.767Z",
+    "duration": 329611,
+    "testsRegistered": 2,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 1,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "454e6895-fb00-4510-9c7f-a901ed66ba4d",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2803-UserManagement.spec.ts",
+      "file": "cypress/test-suites/ECP-T2803-UserManagement.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b450b99c-751b-4ecd-b137-521b1b22f00a",
+          "title": "ECP-T2803 - System Admin - User Management",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 - 37",
+              "fullTitle": "ECP-T2803 - System Admin - User Management Step 1 - 37",
+              "timedOut": null,
+              "duration": 230086,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin'); // Navigate to System Admin\ncommon_1.Common.navigateTo('User Management');\n//Step 1\ncy.get('.test-e2e-header-fullName > div').should('exist');\ncy.get('.test-e2e-header-email > div').should('exist');\ncy.get('div:contains(\"PHONE\")').should('exist');\ncy.get('.text-center.-cursor-pointer > div').should('exist');\ncy.get('div:contains(\"ACTIONS\")').should('exist');\ncy.get('div:contains(\"STATUS\")').should('exist');\n//Step 2\ncy.get('.test-e2e-header-fullName > .form-control').type('test');\ncy.get('.test-e2e-header-email > .form-control').type('Test@ch.com');\ncy.get('.form-control.test-e2e-phone').last().type('888888888');\n//Step 3\ncy.get('[title=\"Any Status\"]').should('exist').click();\ncy.get('[aria-label=\"Any Status\"]').should('exist');\ncy.get('[aria-label=\"Active\"]').should('exist');\ncy.get('[aria-label=\"Inactive\"]').should('exist');\ncy.get('.test-e2e-expander').click();\n//Step 4\ncy.wait(configFile.smallTimeout);\ncy.get('.test-e2e-header-email > .form-control').type(\"\".concat(Orgadmin, \"{enter}\"));\ncy.wait(configFile.smallTimeout);\ncy.get('.test-e2e-edit-user-btn').click();\ncy.get('.active > a').should('exist');\ncy.get('#firstNameField').should('exist');\ncy.get('#lastNameField').should('exist');\ncy.get('#emailConfirmField').should('exist');\ncy.get('#emailField').should('exist');\ncy.get('#phoneNumber').should('exist');\n//  cy.get('[for=\"secondaryFactor\"]').parents('.col-xs-4').find('.Select-placeholder').click();   \n// cy.get('[aria-label=\"Mobile Phone SMS\"]').should('exist')\n//cy.get('[aria-label=\"Secondary Email\"]').should('exist')\ncy.get('label:contains(\"Profession Type\")').parent().find('.Select-placeholder').click();\ncy.get('[aria-label=\"Healthcare Provider\"]').should('exist');\ncy.get('[aria-label=\"PACS/RIS Administrator\"]').should('exist');\ncy.get('[aria-label=\"Imaging Manager/Director\"]').should('exist');\ncy.get('[aria-label=\"IT Manager/Director\"]').should('exist');\ncy.get('[aria-label=\"Radiology Technologist\"]').should('exist');\ncy.get('[aria-label=\"Other Director-Level Administrator\"]').should('exist');\ncy.get('[aria-label=\"C-Level Administrator\"]').should('exist');\ncy.get('[aria-label=\"Healthcare staff/support\"]').should('exist');\ncy.get('[aria-label=\"Attorney/Paralegal\"]').should('exist');\ncy.get('[aria-label=\"Other\"]').should('exist');\ncy.get('span:contains(\"PENDING SETUP\")').should('exist');\n// cy.get('#secondaryFactorEmail').should('exist')\n// cy.get('#confirmSecondaryEmail').should('exist')\ncy.get('#activeUser').should('exist');\ncy.get('.confirm-popover-btn').should('exist');\ncy.get('.js-decline').should('exist');\ncy.get('#organizationsTab').click();\ncy.get('.Select-placeholder').should('exist');\ncy.get('#addOrganizationBtn').should('exist');\ncy.get('thead > tr > .table-col-name').should('exist');\ncy.get('thead > tr > .table-col-cityState').should('exist');\ncy.get('thead > tr > .table-col-type').should('exist');\ncy.get('thead > tr > .table-col-action').should('exist');\ncy.get('label:Contains(\"Group Membership For \")').should('exist');\ncy.get('#saveUserBtn').should('exist');\ncy.get('.js-decline').should('exist');\n// Step 5,6, 7 and 8\ncy.get('.modal-header > .close > span').click();\ncy.get('.test-e2e-edit-user-btn').click();\ncy.get('#firstNameField').clear();\ncy.get('#lastNameField').clear();\ncy.get('.confirm-popover-btn').should('be.disabled');\ncy.get('[placeholder=\"(###) ###-####\"]').should('exist');\ncy.get('#firstNameField').clear().type('test');\ncy.get('#lastNameField').clear().type(\"test\".concat(date));\ncy.get('[placeholder=\"(###) ###-####\"]').first().clear().type('8888888888');\ncy.get('.confirm-popover-btn').should('be.enabled');\ncy.get('.js-decline').click();\ncy.get('p:contains(\"Do you want to discard your changes?\")').should('exist');\ncy.get('#back').should('exist');\ncy.get('#discard').should('exist');\ncy.get('#back').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.modal-header > .close > span').click();\ncy.get('p:contains(\"Do you want to discard your changes?\")').should('exist');\ncy.get('#back').should('exist');\ncy.get('#discard').should('exist');\ncy.get('#back').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#organizationsTab').click();\ncy.get('p:contains(\"Do you want to discard your changes?\")').should('exist');\ncy.get('#back').should('exist');\ncy.get('#discard').should('exist');\ncy.get('#back').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.confirm-popover-btn').click();\ncy.wait(configFile.smallTimeout);\n//Step 9 and 10 is skipped as Email Notification cannot be verified\n//Step 11\ncy.get('#organizationsTab').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.td-popup.table-col-name').contains(facility2Name);\n//Step 12\ncy.wait(configFile.smallTimeout);\ncy.get('.Select-placeholder').click().type(facility3Name);\ncy.get('[aria-label=\"' + facility3Name + '\"]').click();\ncy.get('#addOrganizationBtn').click();\ncy.get('.modal-header > .close > span').click();\ncy.get('p:contains(\"Do you want to discard your changes?\")').should('exist');\ncy.get('#back').should('exist');\ncy.get('#discard').should('exist');\ncy.get('#back').click();\ncy.get('.modal-header > .close > span').click();\ncy.get('#discard').click();\n//Step 13\ncy.get('.test-e2e-edit-user-btn').click();\ncy.get('#organizationsTab').click();\ncy.get('[title=\"' + facility3Name + '\"]').should('not.exist');\ncy.wait(configFile.smallTimeout);\ncy.get('.Select-placeholder').click().type(facility3Name);\ncy.get('[aria-label=\"' + facility3Name + '\"]').should('exist');\n//Step 14\ncy.get('[aria-label=\"' + facility3Name + '\"]').click();\ncy.get('#addOrganizationBtn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#saveUserBtn').should('be.disabled');\n//Step 15 and 16\ncy.get('.Select-placeholder').click();\ncy.get('[aria-label=\"Interpreting Provider\"]').should('exist');\ncy.get('[aria-label=\"Organization Administrators\"]').should('exist');\ncy.get('[aria-label=\"Referring Provider\"]').should('exist');\ncy.get('[aria-label=\"Restricted Users\"]').should('exist');\ncy.get('[aria-label=\"Super Technologist\"]').should('exist');\ncy.get('[aria-label=\"Technologist\"]').should('exist');\ncy.get('[aria-label=\"Users\"]').should('exist');\ncy.get('[aria-label=\"Users\"]').click();\ncy.get('[aria-label=\"Delete Exams\"]').should('exist');\ncy.get('[aria-label=\"Download Exams\"]').should('exist');\ncy.get('[aria-label=\"Query/Retrieve\"]').should('exist');\ncy.get('[aria-label=\"Performance Logging\"]').should('exist');\ncy.get('[aria-label=\"Interpreting Provider\"]').click();\n//Step  17 and 18\ncy.get('.Select-value-icon').first().click();\ncy.get('[aria-label=\"Delete Exams\"]').click();\ncy.get('.Select-value-icon').first().click();\ncy.get('div:contains(\"At least one primary group is required\")').should('exist');\n//Step 19 , 20 ,21 , 22 and 23\ncy.get('[aria-label=\"Users\"]').click();\ncy.get('.removeFromOrg').last().click();\ncy.get('p:contains(\"This action will remove the last organization administrator.\")').should('exist');\ncy.get('p:contains(\"Do you want to continue?\")').should('exist');\ncy.get('.js-close-popover').click();\ncy.get('.removeFromOrg').last().click();\ncy.get('#confirm-removeUserFromOrg').click();\ncy.get('#saveUserBtn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[data-id=\"accountInfo\"]').click();\ncy.get('#activeUser').uncheck();\ncy.get('.confirm-popover-btn').click();\ncy.get('#confirm-saveDeactivatedUser').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.modal-header > .close > span').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.test-e2e-expander').click();\ncy.wait(configFile.smallTimeout);\n//Step 24 and 25\ncy.get('.test-e2e-header-email > .form-control').type(\"\".concat(user2Name, \"{enter}\"));\ncy.wait(configFile.smallTimeout);\ncy.get('.test-e2e-edit-user-btn').click();\ncy.get('#firstNameField').clear().type(\"EditfirstName\".concat(date));\ncy.get('#lastNameField').clear().type(\"EditlastName\".concat(date));\ncy.get('.confirm-popover-btn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#organizationsTab').click();\ncy.get('p:contains(\"This user is a member of the system organization. Manage system organization members through My Organization/Users & Groups.\")').should('exist');\ncy.get('.modal-header > .close > span').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.test-e2e-expander').click();\n// Patient account Verification\ncy.waitUntil(function () { return cy.get('.editUserBtn').eq(0).should('exist'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.custom-value').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('[aria-label=\"Patient\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('.hipaaLogBtn').length > 0) {\n        //Step 26\n        cy.get('.editPatientBtn').should('exist');\n        cy.get('.viewAccountBtn').should('exist');\n        cy.get('.hipaaLogBtn').should('exist');\n        //Step 27 and 28\n        cy.get('.editPatientBtn').first().click();\n        cy.get('.modal-title').should('exist');\n        cy.get('#title').should('exist');\n        cy.get('#firstName').should('exist').type(\"Edited patient Name\".concat(date));\n        cy.get('#middleName').should('exist');\n        cy.get('#lastName').should('exist').type(\"Edited Last patient\".concat(date));\n        cy.get('#suffix').should('exist');\n        cy.get('#city').should('exist');\n        cy.get('.Select-placeholder').should('exist');\n        cy.get('#email').should('exist');\n        cy.get('#emailConfirmation').should('exist');\n        cy.get('#status').should('exist');\n        cy.get('#cancel').should('exist');\n        cy.get('#save').click();\n        cy.wait(configFile.smallTimeout);\n        // Step 32\n        cy.get('.hipaaLogBtn').eq(0).click();\n        cy.waitUntil(function () { return cy.get('.table-cell-createdAt').eq(0).should('exist'); }, { timeout: configFile.hugeTimeout });\n        cy.get('.table-col-createdAt').should('exist');\n        cy.get('.table-col-patient').should('exist');\n        cy.get('.table-col-examDescription > a').should('exist');\n        cy.get('.table-col-eventType > a').should('exist');\n        cy.get('.table-col-user').should('exist');\n        cy.get('.table-col-clientAddress > a').should('exist');\n        cy.get('.modal-header > [aria-label=\"Close\"]').click();\n        cy.wrap(meteor_1.Meteor.getPatientID('')).then(function (UserID) {\n            cy.log(UserID);\n            cy.visit(configFile.url + '/patient/' + UserID + '/exams');\n        });\n        cy.get('.date-received').should('exist');\n    }\n});\n// Step 29,30,31,33,34,35,36,37 is skipped as this steps belongs to Patient account and 1 step belongs to AD User\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('#back').length > 0) {\n        cy.get('#back').click();\n    }\n});\ncy.get('#emailAddress').type(Orgadmin);\ncy.get('#at-btn').click();\ncy.get('#password').type(userpassword);\ncy.get('#at-btn').click();\ncy.get('p:contains(\"Your account has been inactivated.\")').should('exist');\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin'); // Navigate to System Admin\ncommon_1.Common.navigateTo('User Management');\ncy.get('.test-e2e-header-email > .form-control').type(\"\".concat(Orgadmin, \"{enter}\"));\ncy.wait(configFile.smallTimeout);\ncy.get('.test-e2e-edit-user-btn').click();\ncy.get('#activeUser').check();\ncy.get('.confirm-popover-btn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.modal-header > .close > span').click();\ncommon_1.Common.logout();\ncommon_1.Common.login(customerName, Orgadmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(Orgadmin, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facility3Name);\ncy.get('body').then(function (elx) {\n    if (elx.find('[data-template=\"usersAndGroups\"]').length > 0) {\n        cy.get('[data-template=\"usersAndGroups\"]').click({ force: true });\n        cy.get('p:contains(\"You cannot open this page for the current facility.\")').should('exist');\n    }\n});\ncommon_1.Common.switchToFacility(facility2Name);\ncy.get('[title=\"My Facility\"]').should('exist');\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.Select-value').click();\ncy.get('[aria-label=\"' + facilityName + '\"]').should('not.exist');\ncy.get('[data-template=\"usersAndGroups\"]').click({ force: true });\ncy.get('p:contains(\"You cannot open this page for the current facility.\")').should('not.exist');",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 60000ms: expected '<button.btn.btn-primary.save-account-info.confirm-popover-btn>' to be 'enabled'",
+                "estack": "AssertionError: Timed out retrying after 60000ms: expected '<button.btn.btn-primary.save-account-info.confirm-popover-btn>' to be 'enabled'\n    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2803-UserManagement.spec.ts:137:39)",
+                "diff": null
+              },
+              "uuid": "f57ac182-e167-47f7-80a5-214cf91f813b",
+              "parentUUID": "b450b99c-751b-4ecd-b137-521b1b22f00a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2803 - System Admin - User Management Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);\nmeteor_1.Meteor.changeFacilityStatus(facility3Name, false);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "a6a0dac7-33ca-4dd2-af63-03e10be9468d",
+              "parentUUID": "b450b99c-751b-4ecd-b137-521b1b22f00a",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "f57ac182-e167-47f7-80a5-214cf91f813b"
+          ],
+          "pending": [],
+          "skipped": [
+            "a6a0dac7-33ca-4dd2-af63-03e10be9468d"
+          ],
+          "duration": 230086,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

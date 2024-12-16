@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="173.561" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:16:32" tests="0" file="cypress/e2e/test-suites/ECP-T2432-APILoginToken.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2432 - Api Login Token " timestamp="2024-12-15T03:16:32" tests="3" time="173.532" failures="0">
+    <testcase name="Step 1-8" time="116.211" classname="ECP-T2432 - Api Login Token ">
+    </testcase>
+    <testcase name="Step 9- 11" time="37.366" classname="ECP-T2432 - Api Login Token ">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.008" classname="ECP-T2432 - Api Login Token ">
+    </testcase>
+  </testsuite>
+</testsuites>

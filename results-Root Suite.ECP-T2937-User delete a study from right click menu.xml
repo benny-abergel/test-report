@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="138.846" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:41:40" tests="0" file="cypress/e2e/test-suites/ECP-T2937-User delete a study from right click menu.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2937-User delete a study from right click menu" timestamp="2024-12-15T03:41:41" tests="3" time="138.796" failures="0">
+    <testcase name="ECP-T2937 - data prep" time="92.581" classname="ECP-T2937-User delete a study from right click menu">
+    </testcase>
+    <testcase name="Step 2-7" time="35.166" classname="ECP-T2937-User delete a study from right click menu">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.076" classname="ECP-T2937-User delete a study from right click menu">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="168.323" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:29:57" tests="0" file="cypress/e2e/test-suites/ECP-T3073-User sets a default view while saving a new view.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3073-User sets a default view while saving a new view" timestamp="2024-12-15T03:29:57" tests="4" time="168.299" failures="0">
+    <testcase name="ECP-T3073 - data prep" time="87.223" classname="ECP-T3073-User sets a default view while saving a new view">
+    </testcase>
+    <testcase name="ECP-T3073 - step 1-9" time="43.737" classname="ECP-T3073-User sets a default view while saving a new view">
+    </testcase>
+    <testcase name="step10" time="17.739" classname="ECP-T3073-User sets a default view while saving a new view">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.935" classname="ECP-T3073-User sets a default view while saving a new view">
+    </testcase>
+  </testsuite>
+</testsuites>

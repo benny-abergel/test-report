@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:04:11.122Z",
+    "end": "2024-12-15T02:07:39.542Z",
+    "duration": 208420,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "22eafe35-8ac6-44d7-96db-bd83a0e5b098",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2680-FeatureSwitch-WorkStationViewer.spec.ts",
+      "file": "cypress/test-suites/ECP-T2680-FeatureSwitch-WorkStationViewer.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "37aaf8e5-e42e-4b9d-ba62-d24e4b831fbb",
+          "title": "ECP-T2680 - Feature Switch - WorkStation Viewer",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting Feature Switch - WorkStation Viewer Test - All 10 Steps in one",
+              "fullTitle": "ECP-T2680 - Feature Switch - WorkStation Viewer Starting Feature Switch - WorkStation Viewer Test - All 10 Steps in one",
+              "timedOut": null,
+              "duration": 172231,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "facilityName = facilityName + Cypress.currentRetry;\nfacility2Name = facility2Name + Cypress.currentRetry;\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Step 1 - Using a system admin account, navigate to System admin->system settings->Features tab and verify the page is displayed.\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncy.get('#features').should('exist');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowWorklist: false,\n    allowWorkstationViewer: false\n});\ncy.reload();\ncommon_1.Common.switchTab('Features');\n// Step 2 - Verify the Workstation option is unchecked by default.\ncy.get('.checkboxTree input[data-key=\"allowWorkstationViewer\"]').should('exist');\ncy.get('.checkboxTree input[data-key=\"allowWorkstationViewer\"]').should('not.be.checked');\n// Step 3 - Create a new organization and verify the workstation feature is disabled based on the system settings.\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facilityName), { timeout: configFile.hugeTimeout });\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowWorklist: false,\n    allowWorkstationViewer: false\n});\ncy.reload();\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowWorkstationViewer\"]').should('exist');\ncy.get('.checkboxTree input[data-key=\"allowWorkstationViewer\"]').should('not.be.checked');\n// Step 4 - Launch any exam in the viewer, for the newly created org. and verify the clinical viewer is loaded.\n// TODO cannot launch viewer in cypress because of multiple tabs\n// Step 5 - Navigate to System admin->System settings -> Features page-> Enable the Workstation option and SAVE.\ncommon_1.Common.switchToCustomer('System');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowWorkstationViewer: true\n});\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.toggleFeature('allowWorkstationViewer');\ncy.reload();\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowWorkstationViewer\"]').should('be.checked');\n// Step 6 - Create a new organization and verify the workstation feature is enabled for the new org.\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowWorkstationViewer\"]').should('exist');\ncy.get('.checkboxTree input[data-key=\"allowWorkstationViewer\"]').should('be.checked');\n// Step 7 - View images in the newly created organization, with the workstation feature enabled, and verify the workstation viewer is opened and displays the selected exam.\n// TODO - Cannot open viewer yet\n// Step 8 - Using the system admin account, verify the workstation feature can be disabled for an organization.\n// c.toggleFeature('allowWorkstationViewer', false);\nmeteor_1.Meteor.changeFeatures({\n    allowWorklist: false,\n    allowWorkstationViewer: false\n}, facility2Name);\ncy.reload();\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowWorkstationViewer\"]').should('not.be.checked');\ncy.wait(configFile.tinyTimeout);\n// Step 9 - Verify when the workstation feature is disabled for an organization, the my org > hanging protocol page is not available.\ncommon_1.Common.navigateTo('My Facility');\n// cy.get('#leftNavMenu').then(elm => {\n//     if (elm.find(`li a[title=\"Hanging Protocols\"]`).length > 0) {\n//         elm.find(`li a[title=\"Hanging Protocols\"]`).click();\n//         cy.wait(configFile.tinyTimeout);\n//         cy.get('.modal-content .modal-body p').should('contain.text', 'You cannot open this page for the current facility.')\n//     } else {\n//         cy.get(`#leftNavMenu li a[title=\"Hanging Protocols\"]`).should('not.exist');\n//     }\n// });\n// Step 10 - View an exam and verify without the workstation feature enabled, the clinical viewer is displayed.\n// TODO - Cannot open viewer yet",
+              "err": {},
+              "uuid": "08348666-eb82-47a5-9971-5cf8948f0cfe",
+              "parentUUID": "37aaf8e5-e42e-4b9d-ba62-d24e4b831fbb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Change System default back",
+              "fullTitle": "ECP-T2680 - Feature Switch - WorkStation Viewer Change System default back",
+              "timedOut": null,
+              "duration": 14551,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowWorkstationViewer: false\n});\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowWorkstationViewer\"]').should('not.be.checked');\n// c.toggleFeature('allowWorkstationViewer', false);",
+              "err": {},
+              "uuid": "8a96a2e5-bdd0-4fd4-9a58-0b0f4d3bbdff",
+              "parentUUID": "37aaf8e5-e42e-4b9d-ba62-d24e4b831fbb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2680 - Feature Switch - WorkStation Viewer Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7753,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "3ad9a937-7046-4865-a903-213ca2f9ccc2",
+              "parentUUID": "37aaf8e5-e42e-4b9d-ba62-d24e4b831fbb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "08348666-eb82-47a5-9971-5cf8948f0cfe",
+            "8a96a2e5-bdd0-4fd4-9a58-0b0f4d3bbdff",
+            "3ad9a937-7046-4865-a903-213ca2f9ccc2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 194535,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

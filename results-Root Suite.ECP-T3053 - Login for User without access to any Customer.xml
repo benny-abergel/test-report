@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="116.849" tests="1" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:34:37" tests="0" file="cypress/e2e/test-suites/ECP-T3053-LoginforUserwithoutaccesstoanyCustomer.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3053 - Login for User without access to any Customer" timestamp="2024-12-15T03:34:37" tests="1" time="116.828" failures="0">
+    <testcase name="Step 1-4" time="108.197" classname="ECP-T3053 - Login for User without access to any Customer">
+    </testcase>
+  </testsuite>
+</testsuites>

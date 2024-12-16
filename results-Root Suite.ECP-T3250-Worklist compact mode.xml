@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="74.346" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:45:21" tests="0" file="cypress/e2e/test-suites/ECP-T3250-Worklist compact mode.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3250-Worklist compact mode" timestamp="2024-12-15T03:45:21" tests="2" time="74.307" failures="0">
+    <testcase name="ECP-T3250 - step 1-4" time="61.637" classname="ECP-T3250-Worklist compact mode">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.679" classname="ECP-T3250-Worklist compact mode">
+    </testcase>
+  </testsuite>
+</testsuites>

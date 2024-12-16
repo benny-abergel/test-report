@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="189.275" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:50:52" tests="0" file="cypress/e2e/test-suites/ECP-T3415-AssignNonExistingUser.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3415-CHRS: Ingestion of HL7 Assignee information functionality for non existing user " timestamp="2024-12-15T03:50:52" tests="2" time="189.256" failures="0">
+    <testcase name="ECP-T3557" time="174.419" classname="ECP-T3415-CHRS: Ingestion of HL7 Assignee information functionality for non existing user ">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.139" classname="ECP-T3415-CHRS: Ingestion of HL7 Assignee information functionality for non existing user ">
+    </testcase>
+  </testsuite>
+</testsuites>

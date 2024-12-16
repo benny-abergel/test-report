@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:32:22.474Z",
+    "end": "2024-12-15T03:36:19.097Z",
+    "duration": 236623,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a2e293b5-a783-40f5-8707-fb81dbe9ef7e",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2664-Examlistsharesouttab.spec.ts",
+      "file": "cypress/test-suites/ECP-T2664-Examlistsharesouttab.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e3f86b00-88ce-407e-b4a8-47fcee36d088",
+          "title": "ECP-T2664 - Exam list shares out tab",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1-4",
+              "fullTitle": "ECP-T2664 - Exam list shares out tab Step 1-4",
+              "timedOut": null,
+              "duration": 180241,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowAutomaticActions: true,\n    allowPushEvidenceToPACS: true,\n    allowEdgeServer: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd_01 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd_01, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n}).catch(function (err) {\n    console.log(err);\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"a-01\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n//Step 1\ncy.get('.openExtra').click();\ncy.get('.shareHistoryTab').click();\ncy.get('.actionCell').should('exist');\ncy.get('.shareTypeCell').should('exist');\ncy.get('th:contains(Share Date)').should('exist');\ncy.get('th:contains(Shared With)').should('exist');\ncy.get('th:contains(Shared By)').should('exist');\ncy.get('th:contains(Permission)').should('exist');\ncy.get('th:contains(Expires After)').should('exist');\ncy.get('.statusCell').should('exist');\ncy.get('.activityCell').should('exist');\ncy.get('#showInactive').should('exist');\n//Step 2\ncy.get('.shareExam').click();\ncy.get('#organization').type(facility2Name);\ncy.get('.multiStateButtonWrapper').click();\ncy.get('.addUser > .addRecipientBtn').click();\ncy.get('#shareExam').click();\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.shareExam').click();\ncy.get('.btn-pro-share').click();\ncy.get('#organization').type(facility2Name);\ncy.get('.multiStateButtonWrapper').click();\ncy.get('.addUser > .addRecipientBtn').click();\ncy.get('#shareExam').click();\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.shareExam').click();\ncy.get('.btn-statshare-share').click();\ncy.get('#recipientAddress').type(\"chc\".concat(date, \"@chc.com\"));\ncy.get('#createStatShare').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#copyStatShareLink').click();\ncy.get('button:contains(\"OK\")').click();\n// Step 3\ncy.get('.openExtra').click();\ncy.get('.shareHistoryTab').click();\ncy.get('.iconShareStatshare').should('exist');\ncy.get('[title=\"Shared with Professional\"]').should('exist');\ncy.get('[title=\"Shared with Facility\"]').should('exist');\n//Editing Statshare\ncy.get('.iconEdit').first().click();\ncy.get('label:Contains(NUMBER OF VIEWS)').parents('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"2\"]').click({ force: true });\ncy.get('label:Contains(EXPIRES AFTER)').parents('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"3 days\"]').click({ force: true });\ncy.get('[title=\"2\"]').should('exist');\ncy.get('[title=\"3 days\"]').should('exist');\ncy.get('#SharingUpdateShare').click();\ncy.get('td:contains(2 Views)').should('exist');\ncy.get('#statShareUrl').invoke('text').then(function (testURL) {\n    cy.wait(configFile.smallTimeout);\n    //Editing Professional share\n    cy.get('.iconEdit').eq(1).click();\n    cy.get('label:contains(\"PERMISSION\")').parents('.form-group').find('.Select-value').click({ force: true });\n    cy.get('[aria-label=\"Export\"]').click({ force: true });\n    cy.get('.js-editsharedialog-save').click();\n    cy.wait(configFile.smallTimeout);\n    cy.get('[title=\"Export\"]').should('exist');\n    //Editing Org share\n    cy.get('.iconEdit').last().click();\n    cy.get('label:contains(\"PERMISSION\")').parents('.form-group').find('.Select-value').click({ force: true });\n    cy.get('[aria-label=\"View and Report\"]').click({ force: true });\n    cy.get('.js-editsharedialog-save').click();\n    cy.wait(configFile.smallTimeout);\n    cy.get('[title=\"View and Report\"]').should('exist');\n    //Step 4\n    cy.get('.resendShareBtn').first().click();\n    cy.get('#confirm-ResendShare').click();\n    cy.get('.exam-shared-message').should('exist');\n    common_1.Common.logout();\n    //Step 5\n    cy.log(testURL);\n    cy.visit(testURL);\n    cy.get('#statSharePassCode').type('123456');\n    cy.get('#login').click();\n    cy.wait(configFile.smallTimeout);\n    cy.get('.imageThumbnailOverlay').should('exist');\n});",
+              "err": {},
+              "uuid": "1966e85a-b638-4a57-8880-de33b1be11ee",
+              "parentUUID": "e3f86b00-88ce-407e-b4a8-47fcee36d088",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 5 to 7",
+              "fullTitle": "ECP-T2664 - Exam list shares out tab Step 5 to 7",
+              "timedOut": null,
+              "duration": 46396,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//Step 6 \ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\ncy.get('.openExtra').click();\ncy.get('.shareHistoryTab').click();\ncy.waitUntil(function () { return cy.get('.iconEdit').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.activityStatusBtn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.table-col-date').should('exist');\ncy.get('.table-col-activity').should('exist');\ncy.get('.table-col-user').should('exist');\ncy.get('.table-col-ip').should('exist');\ncy.get('[title=\"Viewed\"]').should('exist');\n//Step 7\ncy.get('.iconEdit').last().click();\ncy.get('[title=\"View and Report\"]').should('exist');\ncommon_1.Common.switchToFacility(facility2Name);\ncy.waitUntil(function () { return cy.get('[title=\"a-01\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.openExtra').click();\ncy.get('[title=\"View and Report\"]').should('exist');",
+              "err": {},
+              "uuid": "fdb7d317-c5dc-45fd-b3ae-3e689e570ca5",
+              "parentUUID": "e3f86b00-88ce-407e-b4a8-47fcee36d088",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2664 - Exam list shares out tab Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6697,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "a3aa3aa5-3960-4b22-bdfa-e467d92e3b31",
+              "parentUUID": "e3f86b00-88ce-407e-b4a8-47fcee36d088",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1966e85a-b638-4a57-8880-de33b1be11ee",
+            "fdb7d317-c5dc-45fd-b3ae-3e689e570ca5",
+            "a3aa3aa5-3960-4b22-bdfa-e467d92e3b31"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 233334,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T04:13:08.252Z",
+    "end": "2024-12-15T04:14:44.390Z",
+    "duration": 96138,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "724ec313-d413-4acf-9aa6-20702e338f7a",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2934-SystemdefaultUserGroupsforCustomersandFacilities.spec.ts",
+      "file": "cypress/test-suites/ECP-T2934-SystemdefaultUserGroupsforCustomersandFacilities.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3be66a05-f0bc-478c-9710-f5a7d33bbbfb",
+          "title": "ECP-T2934 - System default user groups for Customers and Facilities ",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 to 5- System default user groups for Customers and Facilities",
+              "fullTitle": "ECP-T2934 - System default user groups for Customers and Facilities  Step 1 to 5- System default user groups for Customers and Facilities",
+              "timedOut": null,
+              "duration": 83372,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 1 and 2\ncommon_1.Common.navigateTo('My Organization');\ncy.get('[title=\"Users & Groups\"]').eq(1).click();\ncy.wait(configFile.smallTimeout);\ncy.get('.addExistingUserBtn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('span:contains(\"Customer Administrators\")').should('exist');\ncy.get('.modal-header > .close > span').click();\n// Step 3 and 4\ncommon_1.Common.navigateTo('My Facility');\ncy.get('[title=\"Users & Groups\"]').eq(0).click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchTab('User Groups');\ncy.get('td:contains(\"Organization Administrators\")').should('exist');\ncy.get('td:contains(\"Users\")').should('exist');\ncy.get('td:contains(\"Restricted Users\")').should('exist');\ncy.get('td:contains(\"Interpreting Provider\")').should('exist');\ncy.get('td:contains(\"Technologist\")').should('exist');\ncy.get('td:contains(\"Super Technologist\")').should('exist');\n// Step 5 - Creation of Duplicate group\ncy.get('.duplicateUserGroupBtn').first().click();\ncy.get('#confirm-SystemAdminUsersAndGroupsWarning').click();\ncy.get('.duplicateUserGroupBtn').first().click();\ncy.wait(configFile.smallTimeout);\ncy.get('#nameField').clear().type('A Test group');\ncy.get('button:contains(\"Save\")').click();\ncy.wait(configFile.smallTimeout);\n// Deleting Duplicate group\ncy.wait(configFile.smallTimeout);\ncy.get('.deleteUserGroupBtn').last().click();\ncy.get('#confirm-DeleteUserGroup').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "36c86626-38d6-4529-a693-ef21f446093d",
+              "parentUUID": "3be66a05-f0bc-478c-9710-f5a7d33bbbfb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2934 - System default user groups for Customers and Facilities  Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6914,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "9d482126-ac05-4255-9f54-306714ce1cc4",
+              "parentUUID": "3be66a05-f0bc-478c-9710-f5a7d33bbbfb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "36c86626-38d6-4529-a693-ef21f446093d",
+            "9d482126-ac05-4255-9f54-306714ce1cc4"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 90286,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

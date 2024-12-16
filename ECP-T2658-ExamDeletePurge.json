@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:20:31.283Z",
+    "end": "2024-12-15T02:24:58.985Z",
+    "duration": 267702,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2e8b4b94-7553-46a9-af32-67cb4a756aa8",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2658-ExamDeletePurge.spec.ts",
+      "file": "cypress/test-suites/ECP-T2658-ExamDeletePurge.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "30302109-eef8-477f-b9ee-f369ce866057",
+          "title": "ECP-T2658 - Exam Delete Purge",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step, creating API token and uploading exams",
+              "fullTitle": "ECP-T2658 - Exam Delete Purge Test Preparation - Before Step, creating API token and uploading exams",
+              "timedOut": null,
+              "duration": 132571,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowStatShares: true,\n    allowPatientSharing: true\n}, facilityName);\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c5_-Palette_Color_secondary_capture -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED } })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"c-05\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncommon_1.Common.switchToFacility(facility2Name);\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowStatShares: true,\n    allowPatientSharing: true\n}, facility2Name);",
+              "err": {},
+              "uuid": "503ea9fc-c0eb-40ac-ab17-af41a23e0d67",
+              "parentUUID": "30302109-eef8-477f-b9ee-f369ce866057",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Starting ECP-T2658 - Exam Delete Purge Test - all 22 steps in one",
+              "fullTitle": "ECP-T2658 - Exam Delete Purge Starting ECP-T2658 - Exam Delete Purge Test - all 22 steps in one",
+              "timedOut": null,
+              "duration": 114767,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 1 - Navigate to system admin > system tools > exam purging. Verify the facility name is present at the top of the page.\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('System Tools');\ncy.get('.adminHeader a').contains('Exam Purging').click();\ncy.get('.pageTitle--highlighted').should('contain.text', facilityName);\n// Step 2 - Verify the default setting for purge is correct for all new Facilities.\ncy.get('.btn.btn-default.durationDefault.deleteAgeDays').click();\ncy.get('.btn.btn-default.durationDefault.purgeAgeDays').click();\ncy.get('.btn.btn-default.durationDefault.p2pProtectionPeriodDays').click();\ncy.get('.btn.btn-default.resetAutoDelete').click();\ncy.get('.btn.btn-default.resetDeleteAfterP2PProtectionPeriod').click();\ncy.get('.deleteAgeDaysValue').should('contain.value', '60');\ncy.get('.purgeAgeDaysValue').should('contain.value', '30');\ncy.get('.p2pProtectionPeriodDaysValue').should('contain.value', '4');\ncy.get('.enableAutoDelete').should('be.checked');\ncy.get('.deleteAfterP2PProtectionPeriod').should('not.be.checked');\n// Step 3 - Verify the exam purging settings are per-facilities and available to the system admin only.\n// TODO - cannot verify\n// Step 4 - Verify default configuration for delete age is correct.\ncy.get('.deleteAgeDaysValue').should('contain.value', '60');\n// Step 5 - Verify default configuration for purge age is correct.\ncy.get('.purgeAgeDaysValue').should('contain.value', '30');\n// Step 6 - Verify default configuration for p2p protection is correct.\ncy.get('.p2pProtectionPeriodDaysValue').should('contain.value', '4');\n// Step 7 - Verify default configuration delete after p2p is set to \"NO\".\ncy.get('.deleteAfterP2PProtectionPeriod').should('not.be.checked');\n// Step 9 - Verify the Cancel and Save buttons are present.\ncy.get('#cancel').should('exist');\ncy.get('#save').should('exist');\n// Step 8 - Verify each default value is configurable.\ncy.get('.deleteAgeDaysValue').type('{selectall}30');\ncy.get('.purgeAgeDaysValue').type('{selectall}60');\ncy.get('.p2pProtectionPeriodDaysValue').type('{selectall}10');\ncy.get('.enableAutoDelete').uncheck();\ncy.get('.deleteAfterP2PProtectionPeriod').check();\ncy.waitUntil(function () { return cy.get('#save').should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#save').click();\n// Step 10 - Verify when a new change is saved, the user is displayed with the correct confirmation message test and buttons.\ncy.get('.confirmation-popover .popover-content p').should('contain.text', 'Warning! These changes can have serious implications for the organizations data. Are you sure you want to apply them?');\ncy.get('.js-close-popover').should('exist');\ncy.get('#confirm-saveChanges').should('exist');\n// Step 11 - Verify all configuration changes take effect immediately.\ncy.get('#confirm-saveChanges').click();\ncy.get('.deleteAgeDaysValue').should('contain.value', '30');\ncy.get('.purgeAgeDaysValue').should('contain.value', '60');\ncy.get('.p2pProtectionPeriodDaysValue').should('contain.value', '10');\ncy.get('.enableAutoDelete').should('not.be.checked');\ncy.get('.deleteAfterP2PProtectionPeriod').should('be.checked');\n// Step 12 - Verify the delete and purge fields can be set to a period of at least 5 years.\ncy.get('.deleteAgeDaysValue').type('{selectall}1825');\ncy.get('.purgeAgeDaysValue').type('{selectall}1825');\ncy.waitUntil(function () { return cy.get('#save').should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#save').click();\ncy.waitUntil(function () { return cy.get('#confirm-saveChanges').should('exist'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#confirm-saveChanges').click();\ncy.get('.deleteAgeDaysValue').should('contain.value', '1825');\ncy.get('.purgeAgeDaysValue').should('contain.value', '1825');\n// Step 13 - Verify default settings can be restored to defaults after they have been customized.\ncy.get('.durationDefault.deleteAgeDays').click();\ncy.get('.deleteAgeDaysValue').should('contain.value', '60');\ncy.get('.durationDefault.purgeAgeDays').click();\ncy.get('.purgeAgeDaysValue').should('contain.value', '30');\ncy.get('.durationDefault.p2pProtectionPeriodDays').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.p2pProtectionPeriodDaysValue').should('contain.value', '4');\ncy.get('.resetAutoDelete').click();\ncy.get('.enableAutoDelete').should('be.checked');\ncy.get('.resetDeleteAfterP2PProtectionPeriod').click();\ncy.get('.deleteAfterP2PProtectionPeriod').should('not.be.checked');\ncy.waitUntil(function () { return cy.get('#save').should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#save').click();\ncy.waitUntil(function () { return cy.get('#confirm-saveChanges').should('exist'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#confirm-saveChanges').click();\n// Step 14 - Verify the purge cycle can be run manually at any time by clicking the Purge button.\n// c.createFacilityIfNotExists(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('table tbody tr td.patientName.td-popup span.cell-text.avoid-overflow').should('contain.text', 'Clinical, Set 5');\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('System Tools');\ncy.get('.adminHeader a').contains('Exam Purging').click();\ncy.get('.deleteAgeDaysValue').type(\"{selectall}\".concat(secondFive));\ncy.waitUntil(function () { return cy.get('#save').should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#save').click();\ncy.waitUntil(function () { return cy.get('#confirm-saveChanges').should('exist'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#confirm-saveChanges').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.runDeletePurge').click();\ncy.wait(configFile.timeout * 2);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('table tbody tr td.patientName.td-popup span.cell-text.avoid-overflow[title=\"Clinical, Set 5\"]').should('not.exist');\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('System Tools');\ncy.get('.adminHeader a').contains('Exam Purging').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.durationDefault.deleteAgeDays').click();\ncy.waitUntil(function () { return cy.get('#save').should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#save').click({ force: true });\ncy.waitUntil(function () { return cy.get('#confirm-saveChanges').should('exist'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#confirm-saveChanges').click();\n// Step 15 - Verify creating a push request extends the auto-delete period.\n// TODO cannot test this without edge server\n// c.navigateTo('Sharing List');\n// cy.get('#p2pSendStudy').first().click();\n// Step 16 - Verify cancelled pushes are treated as un-pushed exams.\n// TODO cannot test this without edge server\n// Step 17 - Verify all listed share types are protected from automatic delete/purge\n// events until the \"min. share retention value\" has been surpassed.\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('[data-cy=\"restoreNavLink\"]').click();\ncy.get('button:contains(\"Study Deleted\")').first().should('be.visible', { timeout: configFile.mediumTimeout });\ncy.get('[class=\"icon_undelete\"]').first().click();\ncy.get('[data-cy=\"actionYesButton\"]').click();\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('table tbody tr td.patientName.td-popup span.cell-text.avoid-overflow').should('contain.text', 'Clinical, Set 5');\ncy.get('.icon-more').first().click({ force: true });\ncy.get('#tableStudies_wrapper button.shareExam').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#statShare .popover-content #organization').type(facility2Name);\ncy.get('#statShare .popover-content .multiStateButtonWrapper button').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#statShare .popover-content .orgSearchTable .selectableRecipientRow button.addRecipientBtn').first().click();\ncy.get('#statShare .popover-content .popover-btn-group #shareExam').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#tableStudies_wrapper button.shareExam .iconShare title').should('have.text', 'share-filled');\ncy.get('h2.pageTitle').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('System Tools');\ncy.get('.adminHeader a').contains('Exam Purging').click();\ncy.get('.deleteAgeDaysValue').type(\"{selectall}\".concat(secondFive));\ncy.waitUntil(function () { return cy.get('#save').should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#save').click();\ncy.waitUntil(function () { return cy.get('#confirm-saveChanges').should('exist'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#confirm-saveChanges').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.runDeletePurge').click();\ncy.wait(configFile.timeout * 2);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('table tbody tr td.patientName.td-popup span.cell-text.avoid-overflow').should('contain.text', 'Clinical, Set 5');\n// Step 18 - Verify when shares are older than the configured minimum share retention\n// value that the auto-purge/delete cycle can remove them with the exception\n// of the listed protected shares.\n// *Note: This also includes when the min share retention value is less than\n// the auto-delete/purge value.\n// TODO - cannot set retention period to less than a day\n// cy.wait(configFile.longTimeout);\n//\n// c.navigateTo('System Admin');\n// c.navigateTo('System Tools');\n// cy.get('.adminHeader a').contains('Exam Purging').click();\n//\n// cy.wait(configFile.tinyTimeout);\n// cy.get('.runDeletePurge').click();\n//\n// cy.wait(configFile.timeout);\n//\n// c.navigateTo('Sharing List');\n// cy.get('table tbody tr td.patientName.td-popup span.cell-text.avoid-overflow[title=\"Clinical, Set 5\"]').should('not.exist');\n//\n// c.navigateTo('Sharing List');\n// cy.get('#deletedExams').click();\n//\n// c.clickMoreIconOnExam('#tableStudies_wrapper');\n//\n// cy.get('.iconUndelete').first().click({ force: true });\n// cy.get('#confirmUndeleteYes').click();\n// cy.get('#orgExams').click();\n// Step 19 - Verify expired StatShares are removed by the auto-delete/purge cycle.\n// TODO - cannot test as minimum expire is 1 hour\n// Step 20 - Verify the purged exams are removed from blob storage.\n//\n// *Note: Use the value returned on My org > Admin settings > Azure tab for\n// total storage before and after exams are purged.\n// TODO - cannot test backend\n// Step 21 - Verify automatic delete and purge can be completely disabled for archiving\n// customers by unchecking the \"Enable auto-delete\" checkbox.\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('System Tools');\ncy.get('.adminHeader a').contains('Exam Purging').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.enableAutoDelete').uncheck();\n// cy.waitUntil(() => cy.get('#save').should('be.enabled'));\ncy.waitUntil(function () { return cy.get('#save').should('be.enabled'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#save').click({ force: true });\ncy.waitUntil(function () { return cy.get('#confirm-saveChanges').should('exist'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#confirm-saveChanges').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.runDeletePurge').click();\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('table tbody tr td.patientName.td-popup span.cell-text.avoid-overflow').should('contain.text', 'Clinical, Set 5');\n// Step 22 - Verify all purged exams are hidden from the end user.\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('System Tools');\ncy.get('.adminHeader a').contains('Exam Purging').click();\ncy.get('.deleteAgeDaysValue').type(\"{selectall}\".concat(secondFive));\ncy.get('.purgeAgeDaysValue').type(\"{selectall}\".concat(secondFive));\ncy.get('.enableAutoDelete').check();\n// cy.waitUntil(() => cy.get('#save').should('be.enabled'));\ncy.get('#save').click({ force: true });\ncy.waitUntil(function () { return cy.get('#confirm-saveChanges').should('exist'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#confirm-saveChanges').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.runDeletePurge').click();\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('table tbody tr td.patientName.td-popup span.cell-text.avoid-overflow[title=\"Clinical, Set 5\"]').should('not.exist');\ncy.get('[data-cy=\"restoreNavLink\"]').click();\ncy.get('span:contains(\"Clinical, Set 5\")').should('not.exist');\n// extra step - reset all the times\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('System Tools');\ncy.get('.adminHeader a').contains('Exam Purging').click();\ncy.get('.durationDefault.deleteAgeDays').click();\ncy.get('.durationDefault.purgeAgeDays').click();\ncy.get('.durationDefault.p2pProtectionPeriodDays').click();\ncy.get('.resetAutoDelete').click();\ncy.get('.resetDeleteAfterP2PProtectionPeriod').click();\n// cy.waitUntil(() => cy.get('#save').should('be.enabled'));\ncy.get('#save').click({ force: true });\ncy.waitUntil(function () { return cy.get('#confirm-saveChanges').should('exist'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#confirm-saveChanges').click();",
+              "err": {},
+              "uuid": "0065c669-109c-4c0b-9de6-2ecfc3685d94",
+              "parentUUID": "30302109-eef8-477f-b9ee-f369ce866057",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2658 - Exam Delete Purge Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8051,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "84e3e6f7-d540-48d0-a5d7-cc8db20adf66",
+              "parentUUID": "30302109-eef8-477f-b9ee-f369ce866057",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "503ea9fc-c0eb-40ac-ab17-af41a23e0d67",
+            "0065c669-109c-4c0b-9de6-2ecfc3685d94",
+            "84e3e6f7-d540-48d0-a5d7-cc8db20adf66"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 255389,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

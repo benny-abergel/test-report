@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="181.285" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:36:28" tests="0" file="cypress/e2e/test-suites/ECP-T3442-Sorting.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3442 - Filtering" timestamp="2024-12-15T02:36:28" tests="3" time="181.251" failures="0">
+    <testcase name="ECP-T3442 - data prep" time="92.707" classname="ECP-T3442 - Filtering">
+    </testcase>
+    <testcase name="ECP-T3442 - step 1-6" time="67.928" classname="ECP-T3442 - Filtering">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.081" classname="ECP-T3442 - Filtering">
+    </testcase>
+  </testsuite>
+</testsuites>

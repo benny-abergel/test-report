@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="355.894" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:26:21" tests="0" file="cypress/e2e/test-suites/ECP-T2660-ExamDownloads.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2660 - Exam Downloads " timestamp="2024-12-15T03:26:21" tests="3" time="355.885" failures="0">
+    <testcase name="Step 1-13" time="130.627" classname="ECP-T2660 - Exam Downloads ">
+    </testcase>
+    <testcase name="Step 15-26" time="202.171" classname="ECP-T2660 - Exam Downloads ">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="9.501" classname="ECP-T2660 - Exam Downloads ">
+    </testcase>
+  </testsuite>
+</testsuites>

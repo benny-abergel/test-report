@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:13:58.354Z",
+    "end": "2024-12-15T02:15:44.216Z",
+    "duration": 105862,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "54fee536-84c9-49ed-81f1-73d1ff3c11be",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2725-MyOrgIntegrationPage.spec.ts",
+      "file": "cypress/test-suites/ECP-T2725-MyOrgIntegrationPage.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1d11c235-ccf0-4f24-aa71-fb27a8f7655c",
+          "title": "ECP-T2725 - My Org - Integration Page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "All Steps in one 1- 15",
+              "fullTitle": "ECP-T2725 - My Org - Integration Page All Steps in one 1- 15",
+              "timedOut": null,
+              "duration": 91184,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowModalityWorklist: true,\n    allowEdgeServer: true,\n    allowPushToPACS: true,\n    allowTagEditing: true,\n    allowNixViewerApi: true,\n    allowDICOMReceive: true,\n    allowReportQuerySources: true,\n    allowWorkstationViewer: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\n// Step 1 - Navigate to the My Org > Integration page for the test organization.\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Integration');\n// Step 2 - Verify the listed tabs are present on the Integration Page.\ncy.get('#edgeServers').should('exist');\ncy.get('#DICOM').should('exist');\ncy.get('#dataSourceSystems').should('exist');\ncy.get('#apiAccess').should('exist');\ncy.get('#integratedDomains').should('exist');\ncy.get('#guestViewers').should('exist');\ncy.get('#reportQuerySources').should('exist');\ncy.get('#ndxDesktop').should('exist');\n// Step 3 - Verify the Organization ID is displayed.\ncy.get('#orgId').should('exist');\n// Step 4 - Verify there is a copy button next to the organization ID.\ncy.get('#copyOrgId').should('exist');\n// Step 5 - Using the available copy button, verify the organization ID can be copied and pasted into a 3rd party application.\n// TODO - Cypress cannot check copy functionality\n// Step 6 - Verify the pasted organization ID exactly matches the displayed organization ID within the product.\n// TODO - Cypress cannot check copy functionality\n// Step 7 - Navigate to the Edge Servers tab and verify the edge servers table is displayed.\ncommon_1.Common.switchTab('Edge Servers');\ncy.get('.edgeServers table').should('exist');\ncy.get('th:contains(\"Token Description\")').should('exist');\ncy.get('th:contains(\"Status\")').should('exist');\ncy.get('th:contains(\"Created By\")').should('exist');\ncy.get('th:contains(\"Actions\")').should('exist');\ncy.get('th:contains(\"Created\")').should('exist');\n// Step 8 - Verify that User can copy the ES token when created and a warning message before the token is gone -\n// 'For security purposes, the token will not be available again after closing\n// this dialog. Be sure to securely manage the token outside of nucleus.io to\n// prevent unauthorized access to your account.'\ncy.get(es.addESToken).click();\ncy.waitUntil(function () { return cy.get(es.tokenDescription).should('exist'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.tokenDescription).type(\"token_1\");\ncy.get(es.createToken).click();\ncy.waitUntil(function () { return cy.get(es.tokenContent).should('exist'); }, { timeout: configFile.longTimeout });\ncy.get(es.tokenContent).should('exist');\n// cy.get('#copy-token').click();\ncy.get('.tokenCreated p.alert--content').should('contain.text', \"For security purposes, the token will not be available\\n                again after closing this dialog. Be sure to securely\\n                manage the token outside of application to prevent unauthorized access to your account.\");\ncy.get(es.saveToken).click();\ncy.wait(configFile.tinyTimeout);\ncy.get(es.saveToken).click();\ncy.wait(configFile.tinyTimeout);\n// Step 9 - Navigate to the DICOM tab and verify the listed sections are displayed.\ncommon_1.Common.switchTab('DICOM');\ncy.get('.pushToPacs h3.sectionHeader').should('contain.text', 'Push to PACS');\ncy.get('.OrganizationDicomTags__Page h3.sectionHeader').should('contain.text', 'Advanced Tag Editor');\ncy.get('h3.sectionHeader').should('contain.text', 'DICOM Systems');\n// Step 10 - Navigate to the Stratus Imaging Diagnostic Viewer tab and verify the listed sections are present.\ncommon_1.Common.switchTab('Stratus Imaging Diagnostic Viewer');\ncy.get('h3:contains(\"PowerScribe Configuration\")').should('exist');\ncy.get('h3:contains(\"Epic Configuration\")').should('exist');\ncy.get('.epic-config-cancel').should('exist');\ncy.get('.epic-config-save').should('exist');\n// Step 11 - Navigate to the HL7 tab and verify the listed sections are present.\ncommon_1.Common.switchTab('HL7');\ncy.get('.ReportTemplate__Tabs #data-source').should('exist');\ncy.get('.ReportTemplate__Tabs #report-template').should('exist');\ncy.get('.ReportTemplate__Tabs #availability-notification').should('exist');\n// Step 12 - Navigate to the API Access tab and verify the table is displayed.\ncommon_1.Common.switchTab('API Access');\ncy.get('.apiAccess table').should('exist');\ncy.get('.table-col-description').should('exist');\ncy.get('.table-col-status').should('exist');\ncy.get('.table-col-createdBy').should('exist');\ncy.get('.table-col-createdAt').should('exist');\ncy.get('.table-col-actions').should('exist');\n// Step 13 - Navigate to the Integrated Domains tab and verify the table is displayed.\ncommon_1.Common.switchTab('Integrated Domains');\ncy.get('#integratedDomains table').should('exist');\ncy.get('.add-integrated-domain').should('exist');\ncy.get('.url-cell').should('exist');\ncy.get('.action-cell').should('exist');\n// Step 14 - Navigate to Viewer tab and verify the table is displayed.\ncommon_1.Common.switchTab('NIX Viewer');\ncy.get('.table-col-name').should('exist');\ncy.get('.table-col-integrationType').should('exist');\ncy.get('.table-col-active').should('exist');\ncy.get('.table-col-createdBy').should('exist');\ncy.get('.table-col-createdAt').should('exist');\ncy.get('.table-col-actions').should('exist');\n// Step 14 - Navigate to Report Query Sources, verify the page loads and the table is displayed.\ncommon_1.Common.switchTab('Report Query Sources');\ncy.get('#reportQuerySources table').should('exist');\ncy.get('.table-col-hostName').should('exist');\ncy.get('.table-col-aeTitleSender').should('exist');\ncy.get('.table-col-aeTitleReceiver').should('exist');\ncy.get('.table-col-port').should('exist');\ncy.get('.table-col-actions').should('exist');",
+              "err": {},
+              "uuid": "ba6c0173-08d5-4d14-b928-4b7bcc7a3c1e",
+              "parentUUID": "1d11c235-ccf0-4f24-aa71-fb27a8f7655c",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2725 - My Org - Integration Page Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7297,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "80db8aba-e8b3-409a-a149-803976eb6b75",
+              "parentUUID": "1d11c235-ccf0-4f24-aa71-fb27a8f7655c",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ba6c0173-08d5-4d14-b928-4b7bcc7a3c1e",
+            "80db8aba-e8b3-409a-a149-803976eb6b75"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 98481,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

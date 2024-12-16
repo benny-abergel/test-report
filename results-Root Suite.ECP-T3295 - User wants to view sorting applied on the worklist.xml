@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="611.272" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:42:25" tests="0" file="cypress/e2e/test-suites/ECP-T3295-Worklist-Sorting.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3295 - User wants to view sorting applied on the worklist" timestamp="2024-12-15T03:42:25" tests="4" time="611.184" failures="0">
+    <testcase name="ECP-T3295 - Steps 1 - 12 (Admin)" time="312.799" classname="ECP-T3295 - User wants to view sorting applied on the worklist">
+    </testcase>
+    <testcase name="ECP-T3295 - Steps 13(Interpreting Provider)" time="230.172" classname="ECP-T3295 - User wants to view sorting applied on the worklist">
+    </testcase>
+    <testcase name="Cleanup - Delete the sorting views" time="44.545" classname="ECP-T3295 - User wants to view sorting applied on the worklist">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.822" classname="ECP-T3295 - User wants to view sorting applied on the worklist">
+    </testcase>
+  </testsuite>
+</testsuites>

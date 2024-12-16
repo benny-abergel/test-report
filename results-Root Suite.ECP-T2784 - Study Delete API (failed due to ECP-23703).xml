@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="277.146" tests="5" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:42:54" tests="0" file="cypress/e2e/test-suites/ECP-T2784-StudyDeleteAPI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2784 - Study Delete API (failed due to ECP-23703)" timestamp="2024-12-15T03:42:54" tests="5" time="277.121" failures="0">
+    <testcase name="Data prep" time="106.128" classname="ECP-T2784 - Study Delete API (failed due to ECP-23703)">
+    </testcase>
+    <testcase name="Step 2-4" time="28.556" classname="ECP-T2784 - Study Delete API (failed due to ECP-23703)">
+    </testcase>
+    <testcase name="Step 5-8" time="84.558" classname="ECP-T2784 - Study Delete API (failed due to ECP-23703)">
+    </testcase>
+    <testcase name="​Negative Test" time="26.901" classname="ECP-T2784 - Study Delete API (failed due to ECP-23703)">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.212" classname="ECP-T2784 - Study Delete API (failed due to ECP-23703)">
+    </testcase>
+  </testsuite>
+</testsuites>

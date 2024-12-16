@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:07:45.437Z",
+    "end": "2024-12-15T02:11:24.822Z",
+    "duration": 219385,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c9783ff4-a370-4a7b-871c-003616454f85",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2682-FeatureSwitch-TagEditing.spec.ts",
+      "file": "cypress/test-suites/ECP-T2682-FeatureSwitch-TagEditing.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2833e136-9f22-4f30-8c11-d78dc3439745",
+          "title": "ECP-T2682 - Feature Switch - Tag Editing",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting Feature Switch Tag Editing Test - all 7 Steps in one",
+              "fullTitle": "ECP-T2682 - Feature Switch - Tag Editing Starting Feature Switch Tag Editing Test - all 7 Steps in one",
+              "timedOut": null,
+              "duration": 199108,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "facilityName = facilityName + Cypress.currentRetry;\nfacility2Name = facility2Name + Cypress.currentRetry;\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Part of Step 7 - checked before creating org - Verify when a new organization is created the system level feature switch value for Tag Editing is inherited by the new organization.\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowEdgeServer: true,\n    allowTagEditing: true\n});\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowTagEditing\"]').should('be.checked');\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facilityName), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowTagEditing\"]').should('be.checked');\n// Step 1 - Using a system admin account, navigate to system admin > system  settings > features tab and verify the feature switch for Tag Editing is present.\ncommon_1.Common.switchToCustomer('System');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowTagEditing: false\n});\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowTagEditing\"]').should('exist');\n// Step 2 - Verify the feature switch can be enabled and disabled at the system level.\ncy.get('.checkboxTree input[data-key=\"allowTagEditing\"]').should('not.checked');\n// Step 3 - Navigate to the My org > admin settings > features page and verify the Tag Editing feature switch is present.\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowTagEditing\"]').should('exist');\n// Step 4 - Verify the feature switch can be enabled and disabled at the organization level.\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowTagEditing: false\n}, facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowTagEditing\"]').should('not.checked');\ncy.wait(configFile.smallTimeout);\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowTagEditing: true\n}, facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowTagEditing\"]').should('be.checked');\n// Step 5 - With the Tag Editing feature switch disabled for the organization, verify the Advanced Tag Editing section is hidden on the My Org > Integration Page > DICOM tab.\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowTagEditing: false\n}, facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Integration');\ncommon_1.Common.switchTab('DICOM');\ncy.get('.OrganizationDicomTags__Page').should('not.exist');\n// Step 6 - Enable the Tag Editing feature switch for the organization, verify the Advanced Tag Editing section is present on the My Org > Integration Page > DICOM tab.\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowTagEditing: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Integration');\ncommon_1.Common.switchTab('DICOM');\ncy.get('.OrganizationDicomTags__Page').should('exist');\n// Step 7 -Verify when a new organization is created the system level feature switch value for Tag Editing is inherited by the new organization.\ncommon_1.Common.switchToCustomer('System');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowEdgeServer: true,\n    allowTagEditing: false\n});\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowTagEditing\"]').should('not.checked');\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowTagEditing\"]').should('not.checked');",
+              "err": {},
+              "uuid": "c6fa3f09-0435-4c80-9231-ab9071a23966",
+              "parentUUID": "2833e136-9f22-4f30-8c11-d78dc3439745",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2682 - Feature Switch - Tag Editing Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7129,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "1b5dcf0f-68c0-49dc-ac7d-63022b7e8abe",
+              "parentUUID": "2833e136-9f22-4f30-8c11-d78dc3439745",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c6fa3f09-0435-4c80-9231-ab9071a23966",
+            "1b5dcf0f-68c0-49dc-ac7d-63022b7e8abe"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 206237,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:49:44.234Z",
+    "end": "2024-12-15T03:52:35.063Z",
+    "duration": 170829,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b1ec8dc2-6dd1-4516-bdba-ff1a7e92b372",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2978-ActiveFacilitiesDICOMIngestionRoutingRules.spec.ts",
+      "file": "cypress/test-suites/ECP-T2978-ActiveFacilitiesDICOMIngestionRoutingRules.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "fe9ff44b-4348-42ea-8ae4-89d8a440ae00",
+          "title": "ECP-T2978 - Active Facilities - DICOM Ingestion Routing Rules",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step",
+              "fullTitle": "ECP-T2978 - Active Facilities - DICOM Ingestion Routing Rules Test Preparation - Before Step",
+              "timedOut": null,
+              "duration": 116532,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowPushToPACS: true,\n    allowTagEditing: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true\n}, facility2Name);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowPushToPACS: true,\n    allowTagEditing: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true\n}, facilityName);\ncommon_1.Common.switchToFacility(facility3Name);\nmeteor_1.Meteor.changeFacilityStatus(facility3Name, false);",
+              "err": {},
+              "uuid": "d7418fa9-a7e0-46ac-b42a-2074fc3e5553",
+              "parentUUID": "fe9ff44b-4348-42ea-8ae4-89d8a440ae00",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T2978 - Active Facilities - DICOM Ingestion Routing Rules - Steps 1 - 7",
+              "fullTitle": "ECP-T2978 - Active Facilities - DICOM Ingestion Routing Rules ECP-T2978 - Active Facilities - DICOM Ingestion Routing Rules - Steps 1 - 7",
+              "timedOut": null,
+              "duration": 36557,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 1 - Using system admin account and login\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 2 - On the customer selector, select customer organization, which associated to facility organization from precondition steps\n// Step 3 - Go to My Facility -> Integrations -> Edge Servers Tab\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Integration');\ncy.get('#edgeServers').should('exist');\n// c.switchTab('Edge Servers');\n// Step 4 - Create edge server token if it's not exists\ncy.get(es.addESToken).click();\ncy.waitUntil(function () { return cy.get(es.tokenDescription).should('exist'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(es.tokenDescription).type(\"\".concat(tokenName).concat(facilityName, \"_\"));\ncy.get(es.createToken).click();\ncy.waitUntil(function () { return cy.get(es.tokenContent).should('exist'); }, { timeout: configFile.longTimeout });\ncy.get(es.tokenContent).then(function (el) {\n    token = el.text();\n});\ncy.get(es.saveToken).click();\ncy.wait(configFile.tinyTimeout);\ncy.get(es.saveToken).click();\ncy.wait(configFile.tinyTimeout);\n// Step 5 - Click on \"Configure Ingestion Routing\" Button\ncy.get('.edit-ingestion-routing-rules').click();\ncy.wait(configFile.smallTimeout);\n// Step 6 - Click 'Add Rule' link\ncy.get('.ingestionOrgRoutingDialogForm .add-routing-rule').click();\ncy.get('#fieldValue').type('{selectall}4242');\n// Step 7 - Click on Select Organization\ncy.get('#routingOrganization .Select-input input').type(facility2Name, { force: true });\nvar orgSelector = '#routingOrganization .Select-menu-outer .Select-option span.needsclick';\ncy.get('#routingOrganization').then(function (el) {\n    if (el.find('.Select-menu-outer .Select-option span.needsclick').length > 0) {\n        cy.waitUntil(function () { return cy.get(orgSelector).should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\n        cy.get(orgSelector).first().click();\n    }\n});\ncy.get('#routingOrganization .Select-input input').type(facility3Name, { force: true });\ncy.get('#routingOrganization').then(function (el) {\n    if (el.find('.Select-menu-outer .Select-option span.needsclick').length > 0) {\n        cy.contains(\"The org should not be shown in the dropdown\").should('not.exist');\n    }\n});",
+              "err": {},
+              "uuid": "09ef92cc-2b6f-4eed-ab9f-6c07c587ca22",
+              "parentUUID": "fe9ff44b-4348-42ea-8ae4-89d8a440ae00",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2978 - Active Facilities - DICOM Ingestion Routing Rules Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7231,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "ffb9da18-f7e0-4322-ae2d-3e63e7d11095",
+              "parentUUID": "fe9ff44b-4348-42ea-8ae4-89d8a440ae00",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d7418fa9-a7e0-46ac-b42a-2074fc3e5553",
+            "09ef92cc-2b6f-4eed-ab9f-6c07c587ca22",
+            "ffb9da18-f7e0-4322-ae2d-3e63e7d11095"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 160320,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

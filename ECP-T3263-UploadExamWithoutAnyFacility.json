@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:34:28.626Z",
+    "end": "2024-12-15T03:36:43.566Z",
+    "duration": 134940,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "6126f951-70f8-4632-a82d-30df4d2dbd4c",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3263-UploadExamWithoutAnyFacility.spec.ts",
+      "file": "cypress/test-suites/ECP-T3263-UploadExamWithoutAnyFacility.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "34a34177-793a-48b7-8e43-1aa4e68363a5",
+          "title": "ECP-T3263 - Message of Unable to Upload Exam for a user without any facility",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Before step - Creating or activating facility",
+              "fullTitle": "ECP-T3263 - Message of Unable to Upload Exam for a user without any facility Before step - Creating or activating facility",
+              "timedOut": null,
+              "duration": 70460,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowCdUploader: true\n}, facilityName);",
+              "err": {},
+              "uuid": "6321c318-eafc-41dc-910e-1c5e64aa87d4",
+              "parentUUID": "34a34177-793a-48b7-8e43-1aa4e68363a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 1 & 2 - Login and Open Upload exam page",
+              "fullTitle": "ECP-T3263 - Message of Unable to Upload Exam for a user without any facility Step 1 & 2 - Login and Open Upload exam page",
+              "timedOut": null,
+              "duration": 32380,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 1 - Use an account which is supposed to upload an exam to login\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\n// Step 2 - Click \"Upload Exam\" on the page of Image Exchange (IX)\n// cy.get('#uploadImages').click(); // TODO - it will open uploader in new tab - which is bad for cypress\n// m.login(customerName,'#uploaderLogo', `${configFile.url}/uploader`,false,userName,userpassword);\ncommon_1.Common.meteorLogin(\"\".concat(configFile.url, \"/uploader\"), userName, userpassword);\ncy.wait(configFile.smallTimeout);\ncy.window().then(function (win) {\n    // @ts-ignore\n    window.top.chrome = true;\n});\n//  cy.reload();\ncy.get('#uploaderLogo').should('exist');\ncy.get('.uploadTo h4[data-cy=\"uploadToTitle\"]').should('contain.text', 'Upload Exams to');\ncy.get('.uploadTo .uploadTo__orgName').should('contain.text', \"\".concat(facilityName));",
+              "err": {},
+              "uuid": "b343f729-d647-4cab-bd3e-23b2cd3cfaeb",
+              "parentUUID": "34a34177-793a-48b7-8e43-1aa4e68363a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 3 & 4 - Disable All facilities",
+              "fullTitle": "ECP-T3263 - Message of Unable to Upload Exam for a user without any facility Step 3 & 4 - Disable All facilities",
+              "timedOut": null,
+              "duration": 7357,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(customerName + '-Facility', false);",
+              "err": {},
+              "uuid": "360ed431-943e-45b1-9b74-ed37cc9bcb23",
+              "parentUUID": "34a34177-793a-48b7-8e43-1aa4e68363a5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 5 & 6 - Check the error message at upload exam page",
+              "fullTitle": "ECP-T3263 - Message of Unable to Upload Exam for a user without any facility Step 5 & 6 - Check the error message at upload exam page",
+              "timedOut": null,
+              "duration": 21551,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 5 - Go refresh the opened Uploader page\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\n// c.switchToFacility(facilityName);\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.get('.uploadTo h4[data-cy=\"uploadToTitle\"]').should('not.exist');\ncy.get('.uploadTo .uploadTo__orgName').should('not.exist');\n// Step 6 - On the main page, switch to another customer and inactive all facilities. Later, refresh the Uploader page\n//cy.get('.noFacility p').should('contain.text', 'There is no facility associated with this customer. In order to use exam uploader, a facility must be selected.');\ncy.get('p').should('contain.text', 'There is no facility associated with this customer. In order to use exam uploader, a facility must be selected.');\n// m.changeFacilityStatus(fixedfacilityName,true);",
+              "err": {},
+              "uuid": "98f17ed6-1601-4b1c-be06-a2f7be38d4c4",
+              "parentUUID": "34a34177-793a-48b7-8e43-1aa4e68363a5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6321c318-eafc-41dc-910e-1c5e64aa87d4",
+            "b343f729-d647-4cab-bd3e-23b2cd3cfaeb",
+            "360ed431-943e-45b1-9b74-ed37cc9bcb23",
+            "98f17ed6-1601-4b1c-be06-a2f7be38d4c4"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 131748,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

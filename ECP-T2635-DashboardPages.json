@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:10:37.707Z",
+    "end": "2024-12-15T02:12:58.780Z",
+    "duration": 141073,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "16ddf8a1-39ce-4968-9139-a0b8482a6ac4",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2635-DashboardPages.spec.ts",
+      "file": "cypress/test-suites/ECP-T2635-DashboardPages.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "bfa8a556-ac19-4901-b462-8b8d6ed376c0",
+          "title": "ECP-T2635 - Dashboard Pages",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step",
+              "fullTitle": "ECP-T2635 - Dashboard Pages Test Preparation - Before Step",
+              "timedOut": null,
+              "duration": 80349,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowEdgeServer: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true,\n    allowCdUploader: true\n}, facilityName);",
+              "err": {},
+              "uuid": "01bbdaf6-d5cf-45e7-841f-3976899386ea",
+              "parentUUID": "bfa8a556-ac19-4901-b462-8b8d6ed376c0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Starting Dashboard Pages Test - 1 - 7 steps",
+              "fullTitle": "ECP-T2635 - Dashboard Pages Starting Dashboard Pages Test - 1 - 7 steps",
+              "timedOut": null,
+              "duration": 42255,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Dashboard');\n// Step 1 - Verify the Dashboard contains the following sections:\n// 30 Day Exam Trends, User Role Stats, Exam Send/Receive Stats\ncy.get(dash.dashboardTxt).should('contain.text', '30 Day Exam Trends');\ncy.get(dash.dashboardTxt).should('contain.text', 'User Role Stats');\ncy.get(dash.dashboardTxt).should('contain.text', 'Exam Send/Receive Stats');\n// Step 2 - Verify the 30-day exam trends graph contains the following:\n// Dates (x-axis), Number of Exams (y-axis), Uploads (blue), Receives (orange), Pushes (green)\n// TODO - cannot check date range in graphs\ncy.get(\"\".concat(dash.graphSeries, \":nth-child(2) circle\")).should('have.css', 'fill', 'rgb(255, 127, 14)');\ncy.get(\"\".concat(dash.graphSeries, \":nth-child(3) circle\")).should('have.css', 'fill', 'rgb(44, 160, 44)');\n// Step 3 - Upload an exam and verify it is reflected in the dashboard graph.\n// TODO - need to check image comparison for comparing graphs\n// Step 4 - DICOM receive an exam and verify it is reflected in the dashboard graph.\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    var token = res.token;\n    var orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/c5_-Palette_Color_secondary_capture\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED } })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncommon_1.Common.navigateTo('Dashboard');\ncy.get('div.row.statContent div:nth-child(2) div div table tbody tr:nth-child(2) td:nth-child(2)').should('include.text', '1');\n// Step 5 - Push an exam to PACS and verify it is reflected in the dashboard graph.\n// TODO - cannot check push to pacs\n// Step 6 - Verify the User Roles Stats table contains the following:\n// Columns - Role, Count\n// Rows - Organization Administrators, Users, Restricted Users, Delete Exams, Download Exams, Query/Retrieve, Interpreting Provider Users, Total\ncy.get(dash.th).should('contain.text', 'Role');\ncy.get(dash.th).should('contain.text', 'Count');\ncy.get(dash.td).should('contain.text', 'Users');\ncy.get(dash.td).should('contain.text', 'Restricted Users');\ncy.get(dash.td).should('contain.text', 'Delete Exams');\ncy.get(dash.td).should('contain.text', 'Download Exams');\ncy.get(dash.td).should('contain.text', 'Performance Logging');\ncy.get(dash.td).should('contain.text', 'Query/Retrieve');\ncy.get(dash.td).should('contain.text', 'Interpreting Provider');\n// cy.get(dash.td).should('contain.text', 'Read Group Administrator');\ncy.get(dash.td).should('contain.text', 'Organization Administrators');\n// Step 7 - Verify the count per role accurately reflects the members of the organization.\ncy.get('table tbody tr:nth-child(1) td:nth-child(2)').should('contain.text', '0');\ncy.get('table tbody tr:nth-child(2) td:nth-child(2)').should('contain.text', '0');\ncy.get('table tbody tr:nth-child(3) td:nth-child(2)').should('contain.text', '0');\ncy.get('table tbody tr:nth-child(4) td:nth-child(2)').should('contain.text', '0');\ncy.get('table tbody tr:nth-child(5) td:nth-child(2)').should('contain.text', '0');\ncy.get('table tbody tr:nth-child(6) td:nth-child(2)').should('contain.text', '0');\ncy.get('table tbody tr:nth-child(7) td:nth-child(2)').should('contain.text', '0');\ncy.get('table tbody tr:nth-child(8) td:nth-child(2)').should('contain.text', '0');\ncy.get('table tbody tr:nth-child(9) td:nth-child(2)').should('contain.text', '0');\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('System Tools');\ncy.get('.adminHeader a').contains('Bulk Add Users').click();\ncy.get('#users').type(\"\".concat(dummyUser.email, \" \").concat(dummyUser.lastName, \" \").concat(dummyUser.firstName, \" \").concat(dummyUser.password));\ncy.get('#generateUsers').click();\ncy.get('#generateUsers').click();\ncommon_1.Common.navigateTo('Dashboard');\ncy.get('table tbody tr:nth-child(2) td:nth-child(2)').should('include.text', '1');\n// Step 8 - Verify the Exam Send/Receive Stats table contains the following:\n// Columns - Status, Today, 30 Days, 12 Months\n// Rows - Uploaded, DICOM Received, Push Requested, Push In Progress, Push Cancelled, Push Completed, Push Failed\ncy.get('div.row.statContent div:nth-child(2) div div table tbody tr:nth-child(1) td:nth-child(1)').should('contain.text', 'Uploaded');\ncy.get('div.row.statContent div:nth-child(2) div div table tbody tr:nth-child(2) td:nth-child(1)').should('contain.text', 'DICOM Received');\ncy.get('div.row.statContent div:nth-child(2) div div table tbody tr:nth-child(3) td:nth-child(1)').should('contain.text', 'Push Requested');\ncy.get('div.row.statContent div:nth-child(2) div div table tbody tr:nth-child(4) td:nth-child(1)').should('contain.text', 'Push In Progress');\ncy.get('div.row.statContent div:nth-child(2) div div table tbody tr:nth-child(5) td:nth-child(1)').should('contain.text', 'Push Cancelled');\ncy.get('div.row.statContent div:nth-child(2) div div table tbody tr:nth-child(6) td:nth-child(1)').should('contain.text', 'Push Completed');\ncy.get('div.row.statContent div:nth-child(2) div div table tbody tr:nth-child(7) td:nth-child(1)').should('contain.text', 'Push Failed');\n// Step 9 - Verify the numbers present in the table accurately reflect the sample organization being used.\ncy.get('div.row.statContent div:nth-child(2) div div table tbody tr:nth-child(2) td:nth-child(2)').should('contain.text', '1');",
+              "err": {},
+              "uuid": "e05b2dbb-895d-44c6-85ec-f391e7074afd",
+              "parentUUID": "bfa8a556-ac19-4901-b462-8b8d6ed376c0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2635 - Dashboard Pages Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8414,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "34487dd0-3368-40ac-ae65-91373407be45",
+              "parentUUID": "bfa8a556-ac19-4901-b462-8b8d6ed376c0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "01bbdaf6-d5cf-45e7-841f-3976899386ea",
+            "e05b2dbb-895d-44c6-85ec-f391e7074afd",
+            "34487dd0-3368-40ac-ae65-91373407be45"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 131018,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

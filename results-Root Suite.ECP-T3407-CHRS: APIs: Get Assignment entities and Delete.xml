@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="104.938" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:42:12" tests="0" file="cypress/e2e/test-suites/ECP-T3407-CHRSAPIsGetAssignmentEntitiesAndDelete.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3407-CHRS: APIs: Get Assignment entities and Delete" timestamp="2024-12-15T03:42:12" tests="2" time="104.918" failures="0">
+    <testcase name="ECP-T3407" time="87.358" classname="ECP-T3407-CHRS: APIs: Get Assignment entities and Delete">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.674" classname="ECP-T3407-CHRS: APIs: Get Assignment entities and Delete">
+    </testcase>
+  </testsuite>
+</testsuites>

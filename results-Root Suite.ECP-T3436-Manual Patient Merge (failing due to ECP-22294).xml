@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="657.144" tests="14" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:38:18" tests="0" file="cypress/e2e/test-suites/ECP-T3436-ManualPatientMerge.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3436-Manual Patient Merge (failing due to ECP-22294)" timestamp="2024-12-15T02:38:18" tests="14" time="657.095" failures="0">
+    <testcase name="ECP-T3436 - data prep" time="170.601" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="Customer Administrator run all PM flow" time="56.886" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="Organization Administrator run - cancel in step 1" time="30.594" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="Technologist run - cancel in step 2" time="36.316" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="Super Technologist run - back from step 2 to step 1, search by MPI" time="60.699" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="Client Services Manager run - search by accession number" time="75.428" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="Client Services run - back from step 3 to step 2, search by patient name" time="53.827" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="Viewer Locking" time="27.250" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="check viewer lock" time="23.456" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="Unlock view" time="20.948" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="Admin locking" time="20.648" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="Check Admin locking" time="24.126" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="Admin Unlock" time="11.909" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.598" classname="ECP-T3436-Manual Patient Merge (failing due to ECP-22294)">
+    </testcase>
+  </testsuite>
+</testsuites>

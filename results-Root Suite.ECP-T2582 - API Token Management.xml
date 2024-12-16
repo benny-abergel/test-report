@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="266.158" tests="5" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:16:31" tests="0" file="cypress/e2e/test-suites/ECP-T2582-APITokenManagement.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2582 - API Token Management" timestamp="2024-12-15T03:16:31" tests="5" time="266.112" failures="0">
+    <testcase name="Test Preparation - Before Step" time="99.186" classname="ECP-T2582 - API Token Management">
+    </testcase>
+    <testcase name="Starting API Token Management Test - Upto 11 steps in one" time="40.138" classname="ECP-T2582 - API Token Management">
+    </testcase>
+    <testcase name="API Token Management Test - Steps 12 &amp; 13" time="31.094" classname="ECP-T2582 - API Token Management">
+    </testcase>
+    <testcase name="API Token Management Test - Step 14, 15, 16" time="70.781" classname="ECP-T2582 - API Token Management">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.804" classname="ECP-T2582 - API Token Management">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:22:55.530Z",
+    "end": "2024-12-15T02:26:13.164Z",
+    "duration": 197634,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "3fe98dc7-b1d1-436a-9cc0-50365a541a67",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3054-PageNavigationbasedonFacilityDropdownforSingleFacility.spec.ts",
+      "file": "cypress/test-suites/ECP-T3054-PageNavigationbasedonFacilityDropdownforSingleFacility.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "bc963653-5e79-42c0-b068-fd4e2ebf3d31",
+          "title": "ECP-T3054 - Page Navigation based on Facility Dropdown for Single Facility",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Login as Facility Admin",
+              "fullTitle": "ECP-T3054 - Page Navigation based on Facility Dropdown for Single Facility Login as Facility Admin",
+              "timedOut": null,
+              "duration": 94083,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, facadmin, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facadmin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.OrganizationSelector div .drop-down').should('not.exist');\ncy.get('#facilityName').invoke('text').then(function (facname) {\n    expect(facilityName).to.equal(facname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncy.get('#customerName').invoke('text').then(function (cusname) {\n    expect(customerName).to.equal(cusname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncommon_1.Common.navigateTo('Facility Details');\ncy.get(\"[value=\".concat(facilityName, \"]\")).should('exist');\ncy.get('#facilityName').invoke('text').then(function (facname) {\n    expect(facilityName).to.equal(facname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "63b27e41-fd4b-4e75-ae68-82a750ef1205",
+              "parentUUID": "bc963653-5e79-42c0-b068-fd4e2ebf3d31",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login as IP User",
+              "fullTitle": "ECP-T3054 - Page Navigation based on Facility Dropdown for Single Facility Login as IP User",
+              "timedOut": null,
+              "duration": 44561,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, ip, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facadmin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.get('.OrganizationSelector div .drop-down').should('not.exist');\ncy.get('#facilityName').should('not.exist');\ncy.get('#customerName').invoke('text').then(function (cusname) {\n    expect(customerName).to.equal(cusname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "d7430114-6823-42e1-a9f9-c9883f425301",
+              "parentUUID": "bc963653-5e79-42c0-b068-fd4e2ebf3d31",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login as Customer admin",
+              "fullTitle": "ECP-T3054 - Page Navigation based on Facility Dropdown for Single Facility Login as Customer admin",
+              "timedOut": null,
+              "duration": 41845,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, custadmin, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facadmin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.OrganizationSelector div .drop-down').should('not.exist');\ncy.get('#facilityName').invoke('text').then(function (facname) {\n    expect(facilityName).to.equal(facname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncy.get('#customerName').invoke('text').then(function (cusname) {\n    expect(customerName).to.equal(cusname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});\ncommon_1.Common.navigateTo('Facility Details');\ncy.get(\"[value=\".concat(facilityName, \"]\")).should('exist');\ncy.get('#facilityName').invoke('text').then(function (facname) {\n    expect(facilityName).to.equal(facname.replaceAll('\\n', '').replaceAll('\\r', '').trim());\n});",
+              "err": {},
+              "uuid": "e3d30bf5-4bc4-4992-96e8-cb0321ef2a12",
+              "parentUUID": "bc963653-5e79-42c0-b068-fd4e2ebf3d31",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3054 - Page Navigation based on Facility Dropdown for Single Facility Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7374,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "4a0ecb27-fb40-4beb-82f8-ea39a1aabc99",
+              "parentUUID": "bc963653-5e79-42c0-b068-fd4e2ebf3d31",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "63b27e41-fd4b-4e75-ae68-82a750ef1205",
+            "d7430114-6823-42e1-a9f9-c9883f425301",
+            "e3d30bf5-4bc4-4992-96e8-cb0321ef2a12",
+            "4a0ecb27-fb40-4beb-82f8-ea39a1aabc99"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 187863,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

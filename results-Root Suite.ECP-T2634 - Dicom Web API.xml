@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="142.952" tests="13" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:24:14" tests="0" file="cypress/e2e/test-suites/ECP-T2634-DicomWebApi.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2634 - Dicom Web API" timestamp="2024-12-15T03:24:14" tests="13" time="142.883" failures="0">
+    <testcase name="For Study URL" time="105.024" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+    <testcase name="For Series URL" time="0.733" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+    <testcase name="For Instance URL" time="0.770" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+    <testcase name="For StudyUID URL" time="0.930" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+    <testcase name="For SeriesUID URL" time="1.063" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+    <testcase name="For InstanceUID URL" time="1.122" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+    <testcase name="Study Metadata Response" time="0.886" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+    <testcase name="Series Metadata Response" time="0.879" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+    <testcase name="Instance Metadata Response" time="0.743" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+    <testcase name="Verifying Frames url" time="0.882" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+    <testcase name="Wrong Org Id" time="0.847" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+    <testcase name="Wrong Token" time="0.641" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="8.320" classname="ECP-T2634 - Dicom Web API">
+    </testcase>
+  </testsuite>
+</testsuites>

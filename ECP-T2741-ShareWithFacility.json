@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:27:26.439Z",
+    "end": "2024-12-15T03:42:49.168Z",
+    "duration": 922729,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "42c3aec8-1edf-4968-97c6-4990a4d46dc0",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2741-ShareWithFacility.spec.ts",
+      "file": "cypress/test-suites/ECP-T2741-ShareWithFacility.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7fbb079a-448e-4c8a-a952-df208c3f466f",
+          "title": "ECP-T2741 - Share With Facility",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Precondition",
+              "fullTitle": "ECP-T2741 - Share With Facility Precondition",
+              "timedOut": null,
+              "duration": 136964,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\n// Get profile name\ncy.get('[data-cy=\"usernameLabel\"]').should('be.visible').click();\ncy.get('.drop-menu__account').should('be.visible');\ncy.get('.js-my-account').should('be.visible').click();\ncy.get('.accountInfo').should('be.visible');\ncy.get('#lastName').invoke('val').then(function (last) {\n    cy.get('#firstName').invoke('val').then(function (first) {\n        profileName = \"\".concat(last, \", \").concat(first);\n    });\n});\n// Close the My Account popup\ncy.get('.modal-header > .close > span').click();\n//  cy.get('.myAccount').should('not.be.visible');\ncy.wait(configFile.smallTimeout);\n// Clean up facilities\n//CleanUpfacility();\n// c.switchToFacility(facilityName);\n// Make sure the API is enabled\n// Upload exam if not exists\ncommon_1.Common.createAPIToken(tokenName + facilityName).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd_01 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat('resources/a-01', \" -keepAlive=1\");\n    cy.exec(examUploadCmd_01, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    var examUploadCmd_02 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat('resources/a-02', \" -keepAlive=1\");\n    cy.exec(examUploadCmd_02, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n}).catch(function (err) {\n    console.log(err);\n});",
+              "err": {},
+              "uuid": "27aed5f7-8f0a-4a0d-bdc7-3f73a219b69d",
+              "parentUUID": "7fbb079a-448e-4c8a-a952-df208c3f466f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Steps 1 - 20 ",
+              "fullTitle": "ECP-T2741 - Share With Facility Steps 1 - 20 ",
+              "timedOut": null,
+              "duration": 154851,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\n//    c.switchToFacility(facilityName);\nselectFacility();\n// Confirm page is not still loading\nwaitForLoading();\n// Select any exam that isn't shared\ncy.get('tr[data-cy=\"examListStudy\"]').first()\n    .then(function (ele) {\n    var moreIcon = ele.find('.viewCellBox .icon-more:visible');\n    if (moreIcon.length) {\n        moreIcon.click();\n        cy.wrap(ele).find('.button-context--right').should('be.visible');\n    }\n    cy.wrap(ele).find('.shareExam').should('be.visible').click();\n});\n// Wait for the pop-up to appear\ncy.waitUntil(function () { return cy.get('#statShare', { timeout: configFile.longTimeout }).should('be.visible').find('.shareModeButtons').should('be.visible'); }, { timeout: configFile.longTimeout });\n// Iterate on the tabs\ncy.wrap(tabs).each(function (val) {\n    // Step 01 - Verify the tab item is present\n    cy.get(val.select).contains(val.name).should('be.visible').click();\n    cy.get('form.shareForm').should('be.visible').then(function (form) {\n        // Step 2: Double-check that all of the stated items are in the tabs.\n        if (val.name !== 'Invite') {\n            if (val.name === 'Favorites' || val.name === 'Recent') {\n                cy.get('.organization-search-input #organization').invoke('attr', 'placeholder').should('contain', 'Type to Filter');\n            }\n            if (val.name === 'Directory Search') {\n                cy.get('.organization-search-input #organization').type('a{enter}').click().then(function (elem) {\n                    cy.wrap(elem).parent().find('.popover-content').contains('Please enter at least 2 characters.');\n                });\n                cy.wrap(form).find('.empty-table-message').contains('Enter criteria above to start searching.');\n                //  cy.get('.organization-search-input #organization').clear().type('facility{enter}');\n                cy.get('.organization-search-input #organization').clear().type(\"\".concat(facilitySearch, \"{enter}\"));\n                cy.get('.directory-search-btn').click();\n                //  Step 12 - Verify Facility name search results can be clicked and a pop-over is displayed that displays the Facility details.\n                cy.get('.js-orgName').first().click();\n                cy.get('.organizationDetailsPopover').should('be.visible').then(function ($el) {\n                    cy.wrap($el).find('.name').should('be.visible');\n                    //  cy.wrap($el).find('.type').should('be.visible');\n                });\n                // Close the popup by clicking the same element\n                cy.get('.js-orgName').first().click();\n            }\n            // Step 03 & 04 - Verify the listed columns on both directory search and favorites tab\n            cy.get('.shareForm table.fixed-header th').should(function ($th) {\n                expect($th).to.have.length((val.name === 'Recent' && 6) || 5);\n                expect($th.eq(0)).to.contain('Add');\n                expect($th.eq(1)).to.contain('Facility');\n                expect($th.eq(2)).to.contain('City');\n                expect($th.eq(3)).to.contain('State');\n                expect($th.eq(4)).to.contain('Favorite');\n                if (val.name === 'Recent') {\n                    expect($th.eq(5)).to.contain('Remove');\n                }\n            });\n            cy.get('.shareRecipientsRow').should('be.visible').then(function (eleRecipient) {\n                cy.wrap(eleRecipient).find('label').should('be.visible').contains('Recipients');\n                cy.wrap(eleRecipient).find('.shareRecipients').should('be.visible');\n            });\n        }\n        else {\n            // Step 06 - Double-check that all of the stated items are in the Invite tabs\n            cy.get('#recipientAddress').should('be.visible');\n        }\n        cy.wrap(form).contains('Permission').parent().should('be.visible')\n            .then(function (elem) {\n            cy.wrap(elem).find('span.needsclick').invoke('text').then(function (val) {\n                defaultPermission = val;\n            });\n            cy.wrap(elem).find('span.needsclick').first().click({ force: true });\n            cy.get('.Select-menu-outer').should('be.visible');\n        });\n        cy.wrap(form).contains('Expires After').parent().should('be.visible')\n            .then(function (elem) {\n            cy.wrap(elem).find('span.needsclick').invoke('text').then(function (val) {\n                defaultExpiry = val;\n            });\n            cy.wrap(elem).find('span.needsclick').first().click({ force: true });\n            cy.get('.Select-menu-outer').should('be.visible');\n            cy.wrap(form).click({ force: true });\n        });\n        cy.get('#activeShares').should('be.visible').focus().click({ force: true });\n        cy.waitUntil(function () { return cy.get('.activeShareHistoryWrapper').should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\n        cy.get('#activeShares').should('be.visible').click();\n        cy.get('#cancelOrgShare').should('be.visible').contains('Cancel');\n        cy.get('#shareExam').should('be.visible').contains('Share Exam');\n    });\n});\n// Step 09 - The sharing pop-over is closed\ncy.get('tr[data-cy=\"examListStudy\"]').first()\n    .then(function (ele) {\n    var moreIcon = ele.find('.viewCellBox .icon-more:visible');\n    if (moreIcon.length) {\n        moreIcon.click();\n        cy.wrap(ele).find('.button-context--right').should('be.visible');\n    }\n    ele.find('.shareExam').click();\n});\ncy.waitUntil(function () { return cy.get('#statShare', { timeout: configFile.longTimeout }).should('be.visible').find('.shareModeButtons').should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get('body').click({ force: true });\n//cy.get('#statShare').should('not.be.visible');\ncy.wait(configFile.smallTimeout);\ncy.get('tr[data-cy=\"examListStudy\"]').first()\n    .then(function (ele) {\n    var moreIcon = ele.find('.viewCellBox .icon-more:visible');\n    if (moreIcon.length) {\n        moreIcon.click();\n        cy.wrap(ele).find('.button-context--right').should('be.visible');\n    }\n    ele.find('.shareExam').click();\n});\ncy.waitUntil(function () { return cy.get('#statShare', { timeout: configFile.longTimeout }).should('be.visible').find('.shareModeButtons').should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get('#cancelOrgShare').click();\n// cy.get('#statShare').should('not.be.visible');\ncy.wait(configFile.tinyTimeout);\n// Step 7 and 8\nvar permission = [];\nvar expiry = [];\nvar permissionArr = [];\nvar expiryArr = [];\n// c.login(customerName,userName,userpassword)\n// c.switchToCustomer(customerName,configFile.timeout,true);\n// c.switchToFacility(facilityName);\nselectFacility();\n// Navigate to sharing list\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Sharing');\ncy.get('.contentBox').first().contains('New Share Defaults').parent()\n    .then(function (ele) {\n    cy.wrap(ele).contains('Permission').parent().find('.Select-control')\n        .click();\n    cy.get('body').then(function ($el) {\n        $el.find('.Select-menu-outer span').each(function ($id, $ele) {\n            cy.log($ele.textContent);\n            permission.push($ele.textContent);\n        });\n    });\n    cy.get('body').click();\n    cy.wrap(ele).contains('Expires After').parent().find('.Select-control')\n        .click();\n    cy.get('body').then(function ($el) {\n        $el.find('.Select-menu-outer span').each(function ($id, $ele) {\n            cy.log($ele.textContent);\n            expiry.push($ele.textContent);\n        });\n    });\n});\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('tr[data-cy=\"examListStudy\"]').first().find('.shareExam').click({ force: true });\ncy.get('#statShare').should('be.visible').find('.shareModeButtons').should('be.visible');\ncy.get('form.shareForm').should('be.visible').then(function (form) {\n    cy.wrap(form).contains('Permission').parent().should('be.visible')\n        .then(function () {\n        cy.get('div.form-group.col-xs-4.has-info .needsclick').first().click({ force: true });\n        cy.waitUntil(function () { return cy.get('.Select-menu-outer').should('be.visible'); }, { timeout: configFile.longTimeout });\n        cy.get('#tableStudies_wrapper').find('.Select-menu-outer span').each(function ($ele) {\n            cy.wrap($ele).invoke('text').then(function (text) {\n                permissionArr.push(text.trim());\n            });\n        }).then(function () {\n            expect(permission).to.deep.eq(permissionArr);\n        });\n    });\n    cy.wrap(form).contains('Expires After').parent().should('be.visible')\n        .then(function (elem) {\n        cy.wrap(elem).find('.needsclick').first().click({ force: true });\n        cy.waitUntil(function () { return cy.get('.Select-menu-outer').should('be.visible'); }, { timeout: configFile.longTimeout });\n        cy.get('#tableStudies_wrapper').find('.Select-menu-outer span').each(function ($ele) {\n            cy.wrap($ele).invoke('text').then(function (text) {\n                expiryArr.push(text.trim());\n            });\n        }).then(function () {\n            expect(expiry).to.deep.eq(expiryArr);\n        });\n    });\n});\n// Step 13,17,19 and 20\ncommon_1.Common.switchToFacility(testFacility2);\ncy.wait(configFile.smallTimeout);\n//  Select exam to share\nselectFacility();\ncy.get('tr[data-cy=\"examListStudy\"]').first()\n    .then(function (ele) {\n    var moreIcon = ele.find('.viewCellBox .icon-more:visible');\n    if (moreIcon.length) {\n        moreIcon.click();\n        cy.wrap(ele).find('.button-context--right').should('be.visible');\n    }\n    ele.find('.shareExam').click();\n});\ncy.waitUntil(function () { return cy.get('#statShare', { timeout: configFile.longTimeout }).should('be.visible').find('.shareModeButtons').should('be.visible'); }, { timeout: configFile.longTimeout });\n// Step 17 - Sharing Exam to Multiple Facility\n// Verify recipients list is scrollable by adding upto 10 facilities\n//Code Modified\ncy.get('.organization-search-input #organization').clear().type('facility{enter}');\ncy.get('.directory-search-btn').click();\ncy.get('.orgSearchTableBody table tr:nth-child(-n+10)').each(function (ele) {\n    cy.wrap(ele).find('.addRecipientBtn').click({ force: true }).parents('td')\n        .should('have.class', 'selected');\n});\n// Make sure search result scrollable\ncy.get('.orgSearchTableBody .selectableRecipientRow').last().click({ force: true });\ncy.get('.orgSearchTableBody .slimScrollBar').should('be.visible');\n// Make sure recipient scrollable\ncy.get('.shareRecipients .recipient').last().click({ force: true });\ncy.get('.shareRecipients .slimScrollBar').should('be.visible');\n// Remove a RECIPIENT by click the he close button\ncy.get('.recipientCloseBtn').each(function ($ele) {\n    cy.wrap($ele).click().should('not.exist');\n});\n// Step 13 - Verify facility properly added to RECIPIENTS list\ncy.wrap([testFacility, testFacility2]).each(function (val) {\n    cy.get('.organization-search-input #organization').clear().type(\"\".concat(val, \"{enter}\"));\n    cy.get('.directory-search-btn').click();\n    cy.get('.orgSearchTableBody table tr').first().then(function (ele) {\n        if (!ele.find('.alreadySharedToolTip').length) {\n            cy.wrap(ele).find('.addRecipientBtn').should('be.visible').click({ force: true })\n                .parents('td')\n                .should('have.class', 'selected');\n            cy.get('.shareRecipients').contains(val);\n        }\n        if (!ele.find('.favorited').length) {\n            cy.wrap(ele).find('.addToFavoritesBtn').click({ force: true }).should('have.class', 'favorited');\n        }\n    });\n});\n// Step 19- Verify favorite facility & share from favorite tab\ncy.get('[data-id=\"orgFavorites\"]').should('contain.text', 'Favorites').and('be.visible').click();\n//  Step 20 - Remove favorite after confirmation\ncy.get('.favorites').first().click();\ncy.get('.popover-content').should('be.visible');\ncy.get('#confirmDeleteFavorite').should('be.visible').click();\n// Click share button\ncy.get('#shareExam').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.reload();\ncy.wait(configFile.smallTimeout);\ncy.get('.shareExam').first().click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('[data-id=\"orgRecent\"]').click();\ncy.get('.js-orgName').first().invoke('text').then(function (nam) {\n    expect(nam).contains(testFacility2);\n});",
+              "err": {},
+              "uuid": "d33cef8a-5a1f-4be8-99bc-c37d22ed115e",
+              "parentUUID": "7fbb079a-448e-4c8a-a952-df208c3f466f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 21 -25",
+              "fullTitle": "ECP-T2741 - Share With Facility Step 21 -25",
+              "timedOut": null,
+              "duration": 85469,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\n// c.switchToFacility(facilityName);\nselectFacility();\n// Filter shared in exams\nchangeShareStatus('Shared Out');\n// Confirm page is not still loading\nwaitForLoading();\ncy.get('#studyListTable').then(function ($el) {\n    if ($el.find('[data-cy=\"examListStudy\"]').length) {\n        cy.get('tr[data-cy=\"examListStudy\"]').first().then(function ($ele) {\n            cy.wrap($ele).find('.openExtra').click({ force: true });\n            cy.waitUntil(function () { return cy.wrap($ele).siblings('tr.deletedView').should('be.visible'); }, { timeout: configFile.longTimeout });\n            cy.wrap($ele).next('tr.deletedView').find('.shareHistoryTab').should('be.visible')\n                .click();\n            cy.get('.shareHistoryRow').should('be.visible').each(function ($li) {\n                cy.wrap($li).find('.revokeShareBtn').click();\n                cy.get('.popover-content').should('be.visible');\n                cy.get('#revokeShareYes').should('be.visible').click();\n            });\n        });\n    }\n});\n// Select facilities that's not shared\nchangeShareStatus('Not Shared');\n// Confirm page is not still loading\nwaitForLoading();\ncy.get('tr[data-cy=\"examListStudy\"]').first()\n    .then(function (ele) {\n    // Get Exam ID\n    cy.wait(configFile.smallTimeout);\n    cy.wrap(ele).find('.openExtra').click({ force: true });\n    cy.waitUntil(function () { return cy.wrap(ele).siblings('tr.deletedView').should('be.visible'); }, { timeout: configFile.longTimeout });\n    cy.get(iex.moreInfo, { timeout: configFile.longTimeout }).should('be.visible').click();\n    cy.get(iex.examID).then(function (el) {\n        examID = el.text();\n        cy.log(examID);\n    });\n    var moreIcon = ele.find('.viewCellBox .icon-more:visible');\n    if (moreIcon.length) {\n        moreIcon.click();\n        cy.wrap(ele).find('.button-context--right').should('be.visible');\n    }\n    cy.wrap(ele).find('.shareExam').should('be.visible').click();\n    return examID;\n}).then(function () {\n    cy.log(examID);\n    cy.waitUntil(function () { return cy.get('#statShare', { timeout: configFile.longTimeout }).should('be.visible').find('.shareModeButtons').should('be.visible'); }, { timeout: configFile.longTimeout });\n    // Add recipients\n    cy.wrap([testFacility2, testFacility]).each(function (val) {\n        cy.get('[data-id=\"orgSearch\"]').contains('Directory Search').should('be.visible').click();\n        cy.get('.organization-search-input #organization').clear().type(\"\".concat(val, \"{enter}\"));\n        cy.get('.directory-search-btn').click();\n        cy.get('.orgSearchTableBody table tr').first().then(function (ele) {\n            cy.wrap(ele).find('.addRecipientBtn').click({ force: true }).parents('td')\n                .should('have.class', 'selected');\n        });\n    });\n    // Navigate to recent tab\n    cy.get('[data-id=\"orgRecent\"]').should('be.visible').click();\n    cy.get('#shareExam').click();\n    //  cy.get('#shareExam').should('not.be.visible');\n    cy.wait(configFile.smallTimeout);\n    //  Verify the exam by its Exam ID\n    changeShareStatus('Shared Out');\n    // Confirm page is not still loading\n    waitForLoading();\n    cy.get(\"#checkbox-\".concat(examID)).should('have.length', 1);\n});\n// Step 14 and 15\ncommon_1.Common.switchToFacility(testFacility);\ncy.wait(5000);\n// Confirm page is not still loading\nwaitForLoading();\n// Filter \"Shared In\" exams\nchangeShareStatus('Shared In');\n// Confirm page is not still loading after filter\nwaitForLoading();\n// Get Exam ID before deleting the Exam\ncy.get('tr[data-cy=\"examListStudy\"]').should('be.visible').first().then(function (ele) {\n    cy.wait(configFile.smallTimeout);\n    cy.wrap(ele).find('.openExtra').click({ force: true });\n    cy.wait(configFile.tinyTimeout);\n    cy.waitUntil(function () { return cy.get(iex.moreInfo, { timeout: configFile.longTimeout }).should('be.visible').click(); }, { timeout: configFile.longTimeout });\n    cy.wait(configFile.smallTimeout);\n    cy.get(iex.examID).then(function (el) {\n        examID = el.text();\n    });\n    cy.wrap(ele).find('.viewExam').should('be.visible');\n});\ncy.wait(configFile.tinyTimeout);\ncy.get('span[data-cy=\"usernameLabel\"]').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('.js-my-account').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('#firstName').invoke('val').then(function (nam) {\n    var profileName1 = nam;\n    cy.get('.modal-header > .close > span').click({ force: true });\n    cy.wait(configFile.tinyTimeout);\n    cy.get('#sharedBy').invoke('val')\n        .then(function (text) {\n        expect(text).to.contain(profileName1);\n    });\n});\ncy.get('#permissionType').invoke('val')\n    .then(function (text) {\n    expect(text).to.be.equal(defaultPermission);\n});\n//  To Delete an Exam\ncy.get('[data-cy=\"deleteExamBtn\"]').click();\ncy.get('.confirmDelete').should('be.visible');\ncy.get('#confirmDeleteYes').should('be.visible').click();\n// Step 16",
+              "err": {},
+              "uuid": "24995dff-dff0-49b4-812a-11c15febc56e",
+              "parentUUID": "7fbb079a-448e-4c8a-a952-df208c3f466f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": " Step 16",
+              "fullTitle": "ECP-T2741 - Share With Facility  Step 16",
+              "timedOut": null,
+              "duration": 207689,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Confirm page is not still loading\nwaitForLoading();\n//  Step 18 - Click the sharing action icon for any exam with a previously created active\n// Filter shared out exams\ncy.waitUntil(function () { return cy.get('.data-tables__rows > .table', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.wait(configFile.smallTimeout);\nchangeShareStatus('Shared Out');\n// Confirm page is not still loading\nwaitForLoading();\ncy.get('tr[data-cy=\"examListStudy\"]').first()\n    .then(function (ele) {\n    var moreIcon = ele.find('.viewCellBox .icon-more:visible');\n    if (moreIcon.length) {\n        moreIcon.click();\n        cy.wrap(ele).find('.button-context--right').should('be.visible');\n    }\n    ele.find('.shareExam').click();\n});\ncy.waitUntil(function () { return cy.get('#statShare .popover-content', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get('#activeShares').should('be.visible').click();\ncy.get('.shareHistoryTable > table').should('be.visible').then(function (ele) {\n    cy.wrap(ele).find('.shareTypeCell').invoke('text').then(function (text) {\n        expect(text.trim().toLowerCase()).to.be.equal('share type');\n    });\n    cy.wrap(ele).find('.dateCell').invoke('text').then(function (text) {\n        expect(text.trim().toLowerCase()).to.be.equal('share date');\n    });\n    cy.wrap(ele).find('.recipientCell').invoke('text').then(function (text) {\n        expect(text.trim().toLowerCase()).to.be.equal('shared with');\n    });\n    cy.wrap(ele).find('.userCell').invoke('text').then(function (text) {\n        expect(text.trim().toLowerCase()).to.be.equal('shared by');\n    });\n    cy.wrap(ele).find('.expiresAfterCell').invoke('text').then(function (text) {\n        expect(text.trim().toLowerCase()).to.be.equal('expires after');\n    });\n});\n// Step 21\nselectFacility();\n// Filter shared in exams\nchangeShareStatus('Shared Out');\n// Confirm page is not still loading\nwaitForLoading();\ncy.get('tr[data-cy=\"examListStudy\"]').first()\n    .then(function (ele) {\n    var moreIcon = ele.find('.viewCellBox .icon-more:visible');\n    if (moreIcon.length) {\n        moreIcon.click();\n        cy.wrap(ele).find('.button-context--right').should('be.visible');\n    }\n    ele.find('.shareExam').click();\n});\ncy.waitUntil(function () { return cy.get('#statShare', { timeout: configFile.longTimeout }).should('be.visible').find('.shareModeButtons').should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get('#activeShares').should('be.visible').click();\ncy.get('.shareHistoryTable').should('be.visible').then(function ($el) {\n    if ($el.find('.shareHistoryRow').length) {\n        cy.wrap($el).find('.shareHistoryRow .recipientCell').first().invoke('text')\n            .then(function (text) {\n            cy.get('.organization-search-input #organization').clear().type(\"\".concat(text, \"{enter}\"));\n            cy.get('.directory-search-btn').click();\n            cy.get('.orgSearchTableBody table tr').first().then(function (ele) {\n                cy.wrap(ele).find('.alreadySharedToolTip').should('be.visible');\n            });\n        });\n    }\n});\n// Step 23,24,26\nselectFacility();\n// Confirm page is not still loading\nwaitForLoading();\n// Select any exam\ncy.get('tr[data-cy=\"examListStudy\"]').first()\n    .then(function (ele) {\n    var moreIcon = ele.find('.viewCellBox .icon-more:visible');\n    if (moreIcon.length) {\n        moreIcon.click();\n        cy.wrap(ele).find('.button-context--right').should('be.visible');\n    }\n    ele.find('.shareExam').click();\n});\n// Wait for the pop-up to appear\ncy.waitUntil(function () { return cy.get('#statShare', { timeout: configFile.longTimeout }).should('be.visible').find('.shareModeButtons').should('be.visible'); }, { timeout: configFile.longTimeout });\n// Step 23 - A single recent recipient can be removed\ncy.get('[data-id=\"orgRecent\"]').contains('Recent').should('be.visible').click();\ncy.get('.recentTableBody tbody').then(function ($el) {\n    if ($el.find('tr').length) {\n        cy.get('.removeRecent').first().click();\n        cy.get('.recentTableBody .popover-content').should('be.visible').find('.btn-danger').should('be.visible')\n            .click();\n    }\n});\n// Step 24 - All recent Facility share recipients can be removed\ncy.get('.removeAllRecentsBtn').should('be.visible').click();\ncy.get('.popover-content').should('be.visible');\ncy.get('#confirmDeleteAllRecent').should('be.visible').click();\n// Step 26 - Customers should not be displayed in the share search list\ncy.get('[data-id=\"orgSearch\"]').contains('Directory Search').should('be.visible').click();\ncy.get('.organization-search-input #organization').clear().type(\"\".concat(customerName, \"{enter}\"));\ncy.get('.directory-search-btn').click();\ncy.get('.orgSearchTableBody').then(function ($el) {\n    if ($el.find('table').length) {\n        cy.wrap($el).should('include', customerName);\n    }\n});\n// Step 25 \nselectFacility();\n// Partially upload exam to the facility\n// Make sure the API is enabled\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd_03 = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat('resources/a-03', \" -keepAlive=1\");\n    cy.exec(examUploadCmd_03, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n});\ncy.wait(configFile.smallTimeout);\n// Share paritially uploaded exam to another facility\n//cy.wait(2000);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.data-tables__rows tr td[title=\"a-03\"]').first().parents('tr').then(function ($el) {\n    cy.wrap($el).find('.shareExam')\n        .click();\n    cy.waitUntil(function () { return cy.get('#statShare', { timeout: configFile.longTimeout }).should('be.visible').find('.shareModeButtons').should('be.visible'); }, { timeout: configFile.longTimeout });\n    cy.get('.organization-search-input #organization').clear().type(\"\".concat(testFacility, \"{enter}\"));\n    cy.get('.directory-search-btn').click();\n    cy.get('.orgSearchTableBody table tr').each(function (ele) {\n        cy.wrap(ele).find('.addRecipientBtn').click({ force: true }).parents('td')\n            .should('have.class', 'selected');\n    });\n    cy.get('#shareExam').click({ force: true });\n    //  cy.get('#shareExam').should('not.be.visible');\n    cy.wait(configFile.smallTimeout);\n    // Verify exam shared to right facility\n    cy.wrap($el).find('.openExtra').click({ force: true });\n    cy.get('.shareHistoryTab').should('be.visible').click();\n    cy.get('.shareHistoryTableBody .recipientCell').should('be.visible').contains(testFacility);\n});",
+              "err": {},
+              "uuid": "613e0df6-7fcd-4ab2-8a16-1e6f6ee29e29",
+              "parentUUID": "7fbb079a-448e-4c8a-a952-df208c3f466f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2741 - Share With Facility Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 9753,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(testFacility, false);\nmeteor_1.Meteor.changeFacilityStatus(testFacility2, false);\nmeteor_1.Meteor.changeFacilityStatus(testFacility3, false);\nmeteor_1.Meteor.changeFacilityStatus(facilitySearch, false);",
+              "err": {},
+              "uuid": "872e6a52-d3e8-4539-8ab7-3b9901ac5dd1",
+              "parentUUID": "7fbb079a-448e-4c8a-a952-df208c3f466f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "27aed5f7-8f0a-4a0d-bdc7-3f73a219b69d",
+            "d33cef8a-5a1f-4be8-99bc-c37d22ed115e",
+            "24995dff-dff0-49b4-812a-11c15febc56e",
+            "613e0df6-7fcd-4ab2-8a16-1e6f6ee29e29",
+            "872e6a52-d3e8-4539-8ab7-3b9901ac5dd1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 594726,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="208.219" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:47:43" tests="0" file="cypress/e2e/test-suites/ECP-T3443-Filtering.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3443 - Filtering" timestamp="2024-12-15T02:47:43" tests="4" time="208.185" failures="0">
+    <testcase name="ECP-T3443 - data prep" time="82.713" classname="ECP-T3443 - Filtering">
+    </testcase>
+    <testcase name="ECP-T3443 - step 1-12   -  Filtering - Mongo-Search" time="89.211" classname="ECP-T3443 - Filtering">
+    </testcase>
+    <testcase name="ECP-T3443 - step 13   -  Filtering - Atlas-Search" time="18.872" classname="ECP-T3443 - Filtering">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.995" classname="ECP-T3443 - Filtering">
+    </testcase>
+  </testsuite>
+</testsuites>

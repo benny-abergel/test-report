@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="922.729" tests="5" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:27:26" tests="0" file="cypress/e2e/test-suites/ECP-T2741-ShareWithFacility.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2741 - Share With Facility" timestamp="2024-12-15T03:27:26" tests="5" time="922.705" failures="0">
+    <testcase name="Precondition" time="136.964" classname="ECP-T2741 - Share With Facility">
+    </testcase>
+    <testcase name="Steps 1 - 20 " time="154.851" classname="ECP-T2741 - Share With Facility">
+    </testcase>
+    <testcase name="Step 21 -25" time="85.469" classname="ECP-T2741 - Share With Facility">
+    </testcase>
+    <testcase name=" Step 16" time="207.689" classname="ECP-T2741 - Share With Facility">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="9.753" classname="ECP-T2741 - Share With Facility">
+    </testcase>
+  </testsuite>
+</testsuites>

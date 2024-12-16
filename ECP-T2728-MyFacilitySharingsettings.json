@@ -1,0 +1,206 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:28:14.324Z",
+    "end": "2024-12-15T03:36:18.884Z",
+    "duration": 484560,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "fe7c0e62-b257-4d66-a13e-1d43a5a91d02",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2728-MyFacilitySharingsettings.spec.ts",
+      "file": "cypress/test-suites/ECP-T2728-MyFacilitySharingsettings.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6e873bda-05aa-464c-99c5-79b399f24d44",
+          "title": "ECP-T2728 - My Facility - Sharing settings",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 to 30",
+              "fullTitle": "ECP-T2728 - My Facility - Sharing settings Step 1 to 30",
+              "timedOut": null,
+              "duration": 156476,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Upload a Study\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    // upload exam now\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=resources/c5_-Palette_Color_secondary_capture -keepAlive=1\");\n    cy.exec(examUploadCmd, {\n        log: true,\n        env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }\n    })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n}).catch(function (err) {\n    console.log(err);\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\ncy.waitUntil(function () { return cy.get('[title=\"c-05\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n// Step 56\ncommon_1.Common.navigateTo('Admin Settings');\ncy.wait(configFile.smallTimeout);\ncy.get('#allowUnlimitedStatShareDuration').check({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.js-adminSettings-save').click({ force: true });\ncy.wait(configFile.smallTimeout);\n// Step 1 and 2\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing');\ncy.wait(configFile.smallTimeout);\ncy.get('h2:contains(\"Organization and Professional Share Settings\")').should('exist');\ncy.get('h2:contains(\"StatShare Settings\")').should('exist');\n// Step 3\ncy.get('h3:contains(\"General\")').should('exist');\ncy.get('label:contains(\"Maximum Share Permission\")').should('exist');\ncy.get('label:contains(\"Permission\")').should('exist');\ncy.get('label:contains(\"Expires After\")').should('exist');\ncy.get('label:contains(\"Automatically Accept Exam Ownership Offers\")').should('exist');\n// Step 4 n 5\ncy.get('[data-title=\"This will be the default permission for new shares.\"]').click();\ncy.get('div:contains(\"This will be the default permission for new shares.\")').should('exist');\ncy.get('.iconWithTooltip > .btn').first().click();\ncy.get('div:contains(\"This option determines the available share permissions when creating a share.\")').should('exist');\ncy.get('[data-title=\"This will be the default expires after value for new shares.\"]').click();\ncy.get('div:contains(\"This will be the default expires after value for new shares.\")').should('exist');\ncy.get('[data-title=\"This option determines whether exam ownership offers must be individually accepted or will be automatically accepted upon share receipt.\"]').click();\ncy.get('div:contains(\"This option determines whether exam ownership offers must be individually accepted or will be automatically accepted upon share receipt.\")').should('exist');\n// Step 7\ncy.get('[title=\"Export\"]').click();\ncy.get('[aria-label=\"View Only\"]').should('exist');\ncy.get('[aria-label=\"Export\"]').should('exist');\ncy.get('[aria-label=\"View and Report\"]').should('exist');\ncy.get('[aria-label=\"Owner\"]').should('exist');\n// Step 8\ncy.get('[title=\"View Only\"]').click();\ncy.get('[aria-label=\"View Only\"]').should('exist');\ncy.get('[aria-label=\"Export\"]').should('exist');\ncy.get('[aria-label=\"View and Report\"]').should('exist');\n// Step 9\ncy.get('[title=\"No Expiration\"]').click({ force: true });\ncy.get('[aria-label=\"No Expiration\"]').should('exist');\ncy.get('[aria-label=\"1 week\"]').should('exist');\ncy.get('[aria-label=\"2 weeks\"]').should('exist');\ncy.get('[aria-label=\"1 month\"]').should('exist');\ncy.get('[aria-label=\"2 months\"]').should('exist');\ncy.get('[aria-label=\"3 weeks\"]').should('exist');\n// Step 10 and 30\ncy.get('[title=\"Export\"]').click();\ncy.get('[aria-label=\"View Only\"]').click();\ncy.get('.js-statShareConfig-save').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.shareExam').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[title=\"View Only\"]').click();\ncy.get('[aria-label=\"View Only\"]').should('exist');\ncy.get('[aria-label=\"View and Report\"]').should('not.exist');\ncy.get('[title=\"No Expiration\"]').should('exist');\ncy.get('.btn-pro-share').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[title=\"View Only\"]').click();\ncy.get('[aria-label=\"View Only\"]').should('exist');\ncy.get('[aria-label=\"View and Report\"]').should('not.exist');\ncy.get('[title=\"No Expiration\"]').should('exist');\ncy.get('.btn-statshare-share').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#allowRelatedCheck').should('not.exist');\n// Step 11, 12 13 14 15 ,16 , 60 and 61 \ncommon_1.Common.navigateTo('Sharing');\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"View Only\"]').first().click();\ncy.get('[aria-label=\"Export\"]').click();\ncy.get('[title=\"View Only\"]').last().click();\ncy.get('[aria-label=\"View and Report\"]').click();\ncy.get('[title=\"No Expiration\"]').click({ force: true });\ncy.get('[aria-label=\"1 week\"]').click();\ncy.get('#enableStatShare').uncheck();\ncy.wait(configFile.tinyTimeout);\ncy.get('.js-statShareConfig-save').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.shareExam').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[title=\"1 week\"]').should('exist');\ncy.get('[title=\"1 week\"]').click();\ncy.get('[aria-label=\"2 weeks\"]').click();\ncy.get('[title=\"View and Report\"]').click();\ncy.get('[aria-label=\"View Only\"]').should('exist');\ncy.get('[aria-label=\"View and Report\"]').should('exist');\ncy.get('[aria-label=\"Export\"]').should('exist');\ncy.get('[aria-label=\"Export\"]').click();\ncy.get('#organization').type(facility2Name);\ncy.get('.multiStateButtonWrapper > .btn').click();\ncy.get('.addRecipientBtn').click();\ncy.get('#shareExam').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"c-05\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.plus').click({ force: true });\ncy.get('[title=\"Export\"]').should('exist');",
+              "err": {},
+              "uuid": "044b77b2-49a1-4141-9d50-2259e31a6178",
+              "parentUUID": "6e873bda-05aa-464c-99c5-79b399f24d44",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 30 to 61",
+              "fullTitle": "ECP-T2728 - My Facility - Sharing settings Step 30 to 61",
+              "timedOut": null,
+              "duration": 114072,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"c-05\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.plus').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.shareHistoryTab').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.iconEdit').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Export\"]').last().click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[aria-label=\"Owner\"]').should('not.exist');\ncy.get('[aria-label=\"View Only\"]').click({ force: true });\ncy.get('.js-editsharedialog-save').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"View Only\"]').should('exist');\n// Step 17 \ncommon_1.Common.navigateTo('Sharing');\ncy.get('#enableStatShare').check();\ncy.get('.js-statShareConfig-save').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.js-auto-accept').should('not.be.checked');\n//Parent tab\ncy.get('h2:contains(\"Patient Share Settings\")').should('exist');\ncy.get('.js-dob-match').should('be.checked');\ncy.get('[data-title=\"Check this option to require the exam date of birth and the patient account date of birth to match for shares to patients.\"]').click();\ncy.get('div:contains(\"Check this option to require the exam date of birth and the patient account date of birth to match for shares to patients.\")').should('exist');\n// Step 18 and 21 is skipped as its related to Patient account\n// Step 19\ncy.get('.js-dob-match').uncheck();\ncy.get('.js-statShareConfig-cancel').click();\ncy.get('#confirmDiscardStatShareSettings').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.js-dob-match').should('be.checked');\n// Step 20\ncy.get('.js-dob-match').uncheck();\ncy.wait(configFile.tinyTimeout);\ncy.get('.js-statShareConfig-save').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.js-dob-match').should('not.be.checked');\n// Step 22,23,26,27,28,31,32,33,35,36,39,42,43,45,46,49,50,51,52,53,57,55\n//Share setting tab\ncy.get('#enableStatShare').should('be.checked');\ncy.get('label:contains(\"Enable StatShare for your Facility\")').should('exist');\ncy.get('h3:contains(\"General\")').should('exist');\ncy.get('h3:contains(\"New Share Defaults\")').should('exist');\ncy.get('label:contains(\"Allow Related Exams\")').should('exist');\ncy.get('label:contains(\"Passcodes\")').should('exist');\ncy.get('label:contains(\"Shared Passcode\")').should('exist');\ncy.get('label:contains(\"Maximum Allowed Views\")').should('exist');\ncy.get('label:contains(\"Maximum Duration\")').should('exist');\ncy.get('label:contains(\"Number of Views\")').should('exist');\ncy.get('label:contains(\"Duration\")').should('exist');\n//Dropdown -2 \ncy.get('[title=\"No\"]').click();\ncy.get('li:contains(\"No\")').should('exist');\ncy.get('li:contains(\"Per StatShare\")').should('exist');\ncy.get('li:contains(\"Always\")').should('exist');\ncy.get('#sharedPasscode').should('exist');\ncy.get('#sharedPasscode').invoke('val').then(function (text) {\n    var actualname = text;\n    var expectedname = '12345';\n    expect(actualname).contain(expectedname);\n});\ncy.get('[title=\"Unlimited\"]').first().click({ force: true });\ncy.get('li:contains(\"1 View\")').should('exist');\ncy.get('li:contains(\"2 Views\")').should('exist');\ncy.get('li:contains(\"3 Views\")').should('exist');\ncy.get('li:contains(\"4 Views\")').should('exist');\ncy.get('li:contains(\"5 Views\")').should('exist');\ncy.get('li:contains(\"10 Views\")').should('exist');\ncy.get('li:contains(\"25 Views\")').should('exist');\ncy.get('[title=\"7 days\"]').first().click({ force: true });\ncy.get('li:contains(\"1 hour\")').should('exist');\ncy.get('li:contains(\"4 hours\")').should('exist');\ncy.get('li:contains(\"8 hours\")').should('exist');\ncy.get('li:contains(\"24 hours\")').should('exist');\ncy.get('li:contains(\"3 days\")').should('exist');\ncy.get('li:contains(\"5 days\")').should('exist');\ncy.get('li:contains(\"7 days\")').should('exist');\ncy.get('li:contains(\"Unlimited\")').should('exist');\ncy.get('[title=\"Unlimited\"]').last().click({ force: true });\ncy.get('li:contains(\"1 View\")').should('exist');\ncy.get('li:contains(\"2 Views\")').should('exist');\ncy.get('li:contains(\"3 Views\")').should('exist');\ncy.get('li:contains(\"4 Views\")').should('exist');\ncy.get('li:contains(\"5 Views\")').should('exist');\ncy.get('li:contains(\"10 Views\")').should('exist');\ncy.get('li:contains(\"25 Views\")').should('exist');\ncy.get('[title=\"7 days\"]').last().click({ force: true });\ncy.get('li:contains(\"1 hour\")').should('exist');\ncy.get('li:contains(\"4 hours\")').should('exist');\ncy.get('li:contains(\"8 hours\")').should('exist');\ncy.get('li:contains(\"24 hours\")').should('exist');\ncy.get('li:contains(\"3 days\")').should('exist');\ncy.get('li:contains(\"5 days\")').should('exist');\ncy.get('li:contains(\"7 days\")').should('exist');\ncy.get('[title=\"Shared\"]').click({ force: true });\ncy.get('li:contains(\"None\")').should('exist');\ncy.get('li:contains(\"Shared\")').should('exist');\ncy.get('li:contains(\"Per StatShare\")').should('exist');\n// Tooltip\ncy.get('[data-content=\"This will be the default setting for Number of Views when a new StatShare is created.\"]').click();\ncy.get('div:contains(\"This will be the default setting for Number of Views when a new StatShare is created.\")').should('exist');\ncy.get('[data-content=\"This will be the default duration used for setting the expiration date when a new StatShare is created.\"]').click({ force: true });\ncy.get('div:contains(\"This will be the default duration used for setting the expiration date when a new StatShare is created.\")').should('exist');\ncy.get('[data-content=\"This option determines the maximum allowed expiration period for StatShares.\"]').click({ force: true });\ncy.get('div:contains(\"This option determines the maximum allowed expiration period for StatShares.\")').should('exist');\ncy.get('[data-content=\"This option determines the maximum number of views allowed for StatShares.<br/><br/>Set this option to ‘Unlimited’ if you want StatShare expiration to be solely determined by Duration.\"]').click({ force: true });\ncy.get('div:contains(\"This option determines the maximum number of views allowed for StatShares.\")').should('exist');\ncy.get('div:contains(\"Set this option to ‘Unlimited’ if you want StatShare expiration to be solely determined by Duration.\")').should('exist');\ncy.get('[data-content=\"The shared passcode must be 4-16 characters and can contain letters, numbers, and symbols but no spaces.\"]').click({ force: true });\ncy.get('div:contains(\"The shared passcode must be 4-16 characters and can contain letters, numbers, and symbols but no spaces.\")').should('exist');\ncy.get('[data-content=\"This option determines whether a passcode will be required, in addition to the link, to view a StatShare. <br/><br/><b>None</b> - A passcode will not be required to view a StatShare. <br/><b>Shared</b> - A single passcode will be used to view all StatShares.<br/><b>Per StatShare</b> -  When sharing exams individually, passcodes will be generated for each StatShare. When bulk sharing, the passcode will be the same for all StatShares.\"]').click({ force: true });\ncy.get('div:contains(\"This option determines whether a passcode will be required, in addition to the link, to view a StatShare. \")').should('exist');\ncy.get('div:contains(\"A passcode will not be required to view a StatShare.\")').should('exist');\ncy.get('div:contains(\"When sharing exams individually, passcodes will be generated for each StatShare. When bulk sharing, the passcode will be the same for all StatShares.\")').should('exist');\ncy.get('[data-content=\"This option determines whether related exams will be available when viewing a StatShare. <br/><br/><b>No</b> - Related exams will not be available.<br/><b>Per StatShare</b> - Members will be able to set the availability of related exams individually for each StatShare. <br/> <b>Always</b> - Related exams will always be available.\"]').click({ force: true });\ncy.get('div:contains(\"This option determines whether related exams will be available when viewing a StatShare. \")').should('exist');\ncy.get('div:contains(\"Related exams will not be available.\")').should('exist');\ncy.get('div:contains(\"Members will be able to set the availability of related exams individually for each StatShare.\")').should('exist');\ncy.get('div:contains(\"Related exams will always be available.\")').should('exist');\n// Step 24 and 25\ncy.get('#enableStatShare').uncheck();\ncy.get('div:contains(\"Disabling the StatShare feature will make all active StatShares inaccessible.\")').should('exist');\ncy.get('#enableStatShare').check();\n// Step 29 , 34 and 48\ncy.get('[title=\"No\"]').click();\ncy.get('li:contains(\"Per StatShare\")').click();\ncy.get('[title=\"Shared\"]').click({ force: true });\ncy.get('li:contains(\"None\")').click();\ncy.get('.js-statShareConfig-save').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.shareExam').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.btn-statshare-share').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#allowRelatedCheck').should('exist');\ncy.get('[title=\"7 days\"]').click();\ncy.get('[aria-label=\"1 hour\"]').click({ force: true });\ncy.get('#recipientAddress').clear().type('test@chc.com');\ncy.wait(configFile.tinyTimeout);\ncy.get('#createStatShare').click();\ncy.wait(configFile.smallTimeout);\ncy.get('p:contains(\"123456\")').should('not.exist');\ncy.get('#statShareUrl').then(function (el) {\n    staturl = el.text();\n    cy.log(staturl);\n});\n// Step 38 , 40 , 41 , 44 and 54\ncommon_1.Common.navigateTo('Sharing');\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"None\"]').click({ force: true });\ncy.get('li:contains(\"Per StatShare\")').click({ force: true });\ncy.get('.js-statShareConfig-save').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"6 digits\"]').click();\ncy.get('li:contains(\"4 digits\")').should('exist');\ncy.get('li:contains(\"6 digits\")').should('exist');\ncy.get('li:contains(\"8 digits\")').should('exist');\ncy.get('li:contains(\"8 digits\")').click();\ncy.get('[title=\"7 days\"]').first().click({ force: true });\ncy.get('li:contains(\"Unlimited\")').click();\ncy.get('.js-statShareConfig-save').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('.shareExam').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.btn-statshare-share').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Unlimited\"]').should('exist');\ncy.get('[title=\"7 days\"]').click();\ncy.get('[aria-label=\"Unlimited\"]').click({ force: true });\ncy.get('#recipientAddress').clear().type('test@chc.com');\ncy.wait(configFile.tinyTimeout);\ncy.get('#createStatShare').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.statSharePassCode').invoke('text').then(function (text) {\n    var sharelength = text.length;\n    var expectedlength = 8;\n    expect(sharelength).equals(expectedlength);\n});\n// Step 58    \ncommon_1.Common.navigateTo('Sharing');\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Unlimited\"]').eq(1).click();\ncy.get('li:contains(\"8 hours\")').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[title=\"1 hour\"]').click();\ncy.get('li:contains(\"1 hour\")').should('exist');\ncy.get('li:contains(\"4 hours\")').should('exist');\ncy.get('li:contains(\"8 hours\")').should('exist');\ncy.get('li:contains(\"24 hours\")').should('not.exist');\ncy.get('li:contains(\"8 hours\")').click();\n// Step 59\ncy.get('.js-statShareConfig-cancel').click();\ncy.get('#confirmDiscardStatShareSettings').click();\ncy.get('[title=\"8 hours\"]').should('not.exist');\ncy.get('#enableStatShare').uncheck();\ncy.wait(configFile.smallTimeout);\ncy.get('.js-statShareConfig-save').click();\ncy.wait(configFile.smallTimeout);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "8a346a06-2caa-4d4e-846a-4f7f2c625e70",
+              "parentUUID": "6e873bda-05aa-464c-99c5-79b399f24d44",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Statshare should not be viewable ",
+              "fullTitle": "ECP-T2728 - My Facility - Sharing settings Statshare should not be viewable ",
+              "timedOut": null,
+              "duration": 32844,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 60\ncy.log(staturl);\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.visit(staturl);\ncy.get('p:contains(\"StatShares have been turned off for this organization. Please contact the StatShare sender for assistance.\")').should('exist');",
+              "err": {},
+              "uuid": "27d255c7-20a9-495f-baf6-096952398071",
+              "parentUUID": "6e873bda-05aa-464c-99c5-79b399f24d44",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Inactiving Statshare setting ",
+              "fullTitle": "ECP-T2728 - My Facility - Sharing settings Inactiving Statshare setting ",
+              "timedOut": null,
+              "duration": 136822,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 62,63, 64 and 67\ncommon_1.Common.login(customerName, userName, userpassword);\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility3Name), { timeout: configFile.hugeTimeout });\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing');\ncy.wait(configFile.smallTimeout);\ncy.get('.js-statShareConfig-cancel').should('be.disabled');\ncy.get('.js-statShareConfig-save').should('be.disabled');\ncy.get('#enableStatShare').check();\ncy.wait(configFile.tinyTimeout);\ncy.get('[title=\"Per StatShare\"]').last().click();\ncy.get('li:contains(\"Shared\")').click();\ncy.get('#sharedPasscode').clear().type('000000');\ncy.get('.js-statShareConfig-save').click();\ncy.wait(configFile.tinyTimeout);\n// Step 65 and 66\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"c-05\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.plus ').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.shareHistoryTab').click();\ncy.waitUntil(function () { return cy.get('.revokeShareBtn').first().should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.iconEdit').first().click();\ncy.wait(configFile.smallTimeout);\ncy.get('.Select-value').eq(1).click({ force: true });\ncy.get('[aria-label=\"1\"]').click({ force: true });\ncy.get('.Select-value').eq(2).click({ force: true });\ncy.get('[aria-label=\"1 hour\"]').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('#SharingUpdateShare').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.shareExam').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.btn-statshare-share').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#recipientAddress').clear().type('test@chc.com');\ncy.wait(configFile.tinyTimeout);\ncy.get('#createStatShare').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.statSharePassCode').invoke('text').then(function (text) {\n    var num = text;\n    var expectednum = '000000';\n    expect(num).contain(expectednum);\n});\ncy.get('#statShareUrl').then(function (el) {\n    staturl2 = el.text();\n});\ncy.get('.js-statShare-close').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.shareExam').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"View and Report\"]').should('exist');\ncy.get('#organization').type(facility3Name);\ncy.get('.multiStateButtonWrapper').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.iconCircleCheck').click();\ncy.get('#shareExam').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.exam-attachments-btn').click();\nvar pdf = 'sample.pdf';\ncy.get('#selectAttachment', { timeout: configFile.hugeTimeout }).attachFile(pdf);\ncy.wait(configFile.mediumTimeout);\ncommon_1.Common.switchToFacility(facility3Name);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"c-05\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.plus ').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"View and Report\"]').should('exist');\ncy.get('.exam-attachments-btn').click();\nvar p = 'download.jpg';\ncy.get('#selectAttachment', { timeout: configFile.hugeTimeout }).attachFile(p);\ncy.get('.open-dot-menu').click();\ncy.get('.js-edit-attachment').click();\ncy.get('#attachment-name').clear().type('Test-Attachment');\ncy.get('.js-confirm-edit-attachment .iconCircleCheck').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Test-Attachment.jpg\"]').should('exist');\ncy.get('.open-dot-menu').click();\ncy.get('.js-delete-attachment').click();\ncy.get('.js-confirm-delete-attachment').click();\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('.js-view-attachment').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.js-view-attachment').first().click();",
+              "err": {},
+              "uuid": "b228fb85-a67e-4256-8aec-0d18885c5e3e",
+              "parentUUID": "6e873bda-05aa-464c-99c5-79b399f24d44",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Viewing the Statshare with 000000 passcode",
+              "fullTitle": "ECP-T2728 - My Facility - Sharing settings Viewing the Statshare with 000000 passcode",
+              "timedOut": null,
+              "duration": 34020,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 60\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.visit(staturl2);\ncy.wait(configFile.tinyTimeout);\ncy.get('#statSharePassCode').type('000000');\ncy.wait(configFile.tinyTimeout);\ncy.get('#login').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.imageThumbnailOverlay').should('exist');",
+              "err": {},
+              "uuid": "051754b6-7ed8-410a-977d-7e1b58f11c90",
+              "parentUUID": "6e873bda-05aa-464c-99c5-79b399f24d44",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "disable facilities",
+              "fullTitle": "ECP-T2728 - My Facility - Sharing settings disable facilities",
+              "timedOut": null,
+              "duration": 7246,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Disabling the facilities \ncommon_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);\nmeteor_1.Meteor.changeFacilityStatus(facility3Name, false);",
+              "err": {},
+              "uuid": "3a41015e-8b1c-4b33-85a5-2414d36686fb",
+              "parentUUID": "6e873bda-05aa-464c-99c5-79b399f24d44",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "044b77b2-49a1-4141-9d50-2259e31a6178",
+            "8a346a06-2caa-4d4e-846a-4f7f2c625e70",
+            "27d255c7-20a9-495f-baf6-096952398071",
+            "b228fb85-a67e-4256-8aec-0d18885c5e3e",
+            "051754b6-7ed8-410a-977d-7e1b58f11c90",
+            "3a41015e-8b1c-4b33-85a5-2414d36686fb"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 481480,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

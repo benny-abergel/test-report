@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="284.331" tests="5" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:21:47" tests="0" file="cypress/e2e/test-suites/ECP-T2782-StatShare.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2782 - StatShare" timestamp="2024-12-15T02:21:47" tests="5" time="284.310" failures="0">
+    <testcase name="Create a Facility, turn on API feature, create an API token and Upload a Study" time="101.796" classname="ECP-T2782 - StatShare">
+    </testcase>
+    <testcase name="Validate StatShare Settings and Manual TAB , remove all recent emails, validate email format and create a StatShare and  cancel of send and resend of StatShare from exam list, shares out TAB" time="49.061" classname="ECP-T2782 - StatShare">
+    </testcase>
+    <testcase name="Validate Recent TAB elements, modify expiration views/days, create duplicate share, create a second StatShare and Favorite TAB elements, # of share emails and listed order, # of shares, choose a favorite  and Share from favorite TAB, remove favorite, remove a single recent share, " time="57.996" classname="ECP-T2782 - StatShare">
+    </testcase>
+    <testcase name="Validate total # of shares and revoke all shares from exam list &gt; shares out TAB and Create a StatShare, launch StatShare URL, validate passcode, customer support elements and view Shared exam" time="51.876" classname="ECP-T2782 - StatShare">
+    </testcase>
+    <testcase name="Deactive facility and logout" time="7.158" classname="ECP-T2782 - StatShare">
+    </testcase>
+  </testsuite>
+</testsuites>

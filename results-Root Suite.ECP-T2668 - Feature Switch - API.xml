@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="383.828" tests="5" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:04:12" tests="0" file="cypress/e2e/test-suites/ECP-T2668-FeatureSwitch-API.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2668 - Feature Switch - API" timestamp="2024-12-15T02:04:12" tests="5" time="383.791" failures="0">
+    <testcase name="Starting Feature Switch - API Test - Steps 1-3" time="156.171" classname="ECP-T2668 - Feature Switch - API">
+    </testcase>
+    <testcase name="4 to 7" time="104.344" classname="ECP-T2668 - Feature Switch - API">
+    </testcase>
+    <testcase name="Step 8-9" time="85.886" classname="ECP-T2668 - Feature Switch - API">
+    </testcase>
+    <testcase name="API call with disabled API feature" time="2.521" classname="ECP-T2668 - Feature Switch - API">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.625" classname="ECP-T2668 - Feature Switch - API">
+    </testcase>
+  </testsuite>
+</testsuites>

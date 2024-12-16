@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:16:32.305Z",
+    "end": "2024-12-15T03:19:25.866Z",
+    "duration": 173561,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ef518fdc-b661-457f-a1fd-9f3e3798956c",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2432-APILoginToken.spec.ts",
+      "file": "cypress/test-suites/ECP-T2432-APILoginToken.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "36faad2b-1dd6-418c-9950-9f6fc2305081",
+          "title": "ECP-T2432 - Api Login Token ",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1-8",
+              "fullTitle": "ECP-T2432 - Api Login Token  Step 1-8",
+              "timedOut": null,
+              "duration": 116211,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowWorkstationViewer: true\n}, facilityName);\n//Step 1\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    //Step 2\n    common_1.Common.navigateTo('System Tools');\n    cy.get('[href=\"/authTokens\"]').click();\n    cy.get('.superUserCheckbox').should('not.be.checked');\n    //Step 3,4,5,6,7,8\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    return cy.request({\n        url: tokenurl,\n        failOnStatusCode: false,\n        method: 'POST',\n        body: {\n            \"firstName\": \"P\",\n            \"lastName\": \"L\",\n            \"email\": email\n        },\n        headers: header\n    }).then(function (response) {\n        expect(response.status).to.equals(403);\n    });\n});",
+              "err": {},
+              "uuid": "dc9b234a-5e49-4783-8f3b-e33f105a8908",
+              "parentUUID": "36faad2b-1dd6-418c-9950-9f6fc2305081",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 9- 11",
+              "fullTitle": "ECP-T2432 - Api Login Token  Step 9- 11",
+              "timedOut": null,
+              "duration": 37366,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    common_1.Common.navigateTo('System Tools');\n    cy.get('[href=\"/authTokens\"]').click();\n    cy.get('.superUserCheckbox').check();\n    cy.wait(configFile.smallTimeout);\n    //Step 3,4,5,6,7,8\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    return cy.request({\n        url: tokenurl,\n        method: 'POST',\n        body: {\n            \"firstName\": \"P\",\n            \"lastName\": \"L\",\n            \"email\": email\n        },\n        headers: header\n    }).then(function (response) {\n        expect(response.status).to.equals(200);\n        expect(response.body).to.have.property('email', email);\n        expect(response.body).to.have.property('orgId', orgId);\n        expect(response.body).to.have.property('userId');\n        expect(response.body).to.have.property('loginToken');\n        expect(response.body).to.have.property('loginTokenExpires');\n        expect(response.body).to.have.property('userVerified', true);\n    });\n});",
+              "err": {},
+              "uuid": "1452f4de-27bb-4b02-84bf-20bbdf502e18",
+              "parentUUID": "36faad2b-1dd6-418c-9950-9f6fc2305081",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2432 - Api Login Token  Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8008,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "17e5ce54-9e32-47ce-a1ec-66f251b13097",
+              "parentUUID": "36faad2b-1dd6-418c-9950-9f6fc2305081",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "dc9b234a-5e49-4783-8f3b-e33f105a8908",
+            "1452f4de-27bb-4b02-84bf-20bbdf502e18",
+            "17e5ce54-9e32-47ce-a1ec-66f251b13097"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 161585,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

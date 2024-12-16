@@ -1,0 +1,206 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:22:19.206Z",
+    "end": "2024-12-15T03:25:09.170Z",
+    "duration": 169964,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "056aa7cf-2aee-4140-8a91-9b4c6627a95b",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2785-StudyInformationAPI.spec.ts",
+      "file": "cypress/test-suites/ECP-T2785-StudyInformationAPI.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0cae02d6-a398-473b-bc02-99de41015e7b",
+          "title": "ECP-T2785 - Study Information API",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verifying the Study Information with Study uid",
+              "fullTitle": "ECP-T2785 - Study Information API Verifying the Study Information with Study uid",
+              "timedOut": null,
+              "duration": 105470,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n// Step 3 - Navigate to My Org > Admin Settings > Features tab. Enable features switches for APIs > HL7, Worklist, and PACS Workflow. Verify Worklist, Patient, Procedure, and My Org > IOCM History tabs only become available once all 3 features have been enabled.\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    cy.wrap(token).as('token');\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    common_1.Common.navigateTo('Sharing List');\n    cy.get('.plus > .fa').first().click();\n    cy.get('.col-xs-4 > .btn').first().click();\n    cy.get('.examInfoExtra >li >p').last().invoke('text').then(function (resText) {\n        studyid = resText;\n    });\n    cy.request({\n        url: \"\".concat(baseUrl, \"/study-information/organization/\").concat(orgId, \"/study/\").concat(studyuid),\n        method: 'GET',\n        headers: header,\n    }).then(function (res) {\n        expect(res.status).to.eq(200);\n        expect(res.body.organizationId).to.equal(orgId);\n        expect(res.body.studyId).to.equal(studyid);\n        expect(res.body.studyInstanceUid).to.equal(studyuid);\n        expect(res.body.lastUpdateTime);\n        expect(res.body.studyInfo.nucleusBaseUrl);\n        expect(res.body.studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n        expect(res.body.studyInfo.durableMetadata.contentType);\n        expect(res.body.studyInfo.durableMetadata.href);\n        expect(res.body.studyInfo.versionMetadata.contentType);\n        expect(res.body.studyInfo.versionMetadata.href);\n        expect(res.body.studyInfo.modification.contentType);\n        expect(res.body.studyInfo.modification.href);\n    });\n});",
+              "err": {},
+              "uuid": "62073284-e994-48b2-bd28-6d276d4cca71",
+              "parentUUID": "0cae02d6-a398-473b-bc02-99de41015e7b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Verifying the Study Information with Studyid",
+              "fullTitle": "ECP-T2785 - Study Information API Verifying the Study Information with Studyid",
+              "timedOut": null,
+              "duration": 767,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n    url: \"\".concat(baseUrl, \"/study-information/study/\").concat(studyid),\n    method: 'GET',\n    headers: header,\n}).then(function (res) {\n    expect(res.status).to.eq(200);\n    expect(res.body.organizationId).to.equal(orgId);\n    expect(res.body.studyId).to.equal(studyid);\n    expect(res.body.studyInstanceUid).to.equal(studyuid);\n    expect(res.body.lastUpdateTime);\n    expect(res.body.studyInfo.nucleusBaseUrl);\n    expect(res.body.studyInfo.info.contentType).to.equal(\"application/json; charset=utf-8\");\n    expect(res.body.studyInfo.durableMetadata.contentType);\n    expect(res.body.studyInfo.durableMetadata.href);\n    expect(res.body.studyInfo.versionMetadata.contentType);\n    expect(res.body.studyInfo.versionMetadata.href);\n    expect(res.body.studyInfo.modification.contentType);\n    expect(res.body.studyInfo.modification.href);\n});",
+              "err": {},
+              "uuid": "d59500cf-7dab-4c92-858a-b4375bf9ca4e",
+              "parentUUID": "0cae02d6-a398-473b-bc02-99de41015e7b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "With Invalid Token",
+              "fullTitle": "ECP-T2785 - Study Information API With Invalid Token",
+              "timedOut": null,
+              "duration": 850,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n    url: \"\".concat(baseUrl, \"/study-information/study/\").concat(studyid),\n    method: 'GET',\n    headers: header2,\n    failOnStatusCode: false\n}).then(function (res) {\n    expect(res.status).to.eq(403);\n});",
+              "err": {},
+              "uuid": "23c926d9-b8d9-4f93-a18b-d3f81a038e89",
+              "parentUUID": "0cae02d6-a398-473b-bc02-99de41015e7b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "With Invalid Study ID",
+              "fullTitle": "ECP-T2785 - Study Information API With Invalid Study ID",
+              "timedOut": null,
+              "duration": 966,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n    url: \"\".concat(baseUrl, \"/study-information/study/sdhhd8763b\"),\n    method: 'GET',\n    headers: header,\n    failOnStatusCode: false\n}).then(function (res) {\n    expect(res.status).to.eq(404);\n    expect(res.body.response).to.equal(\"study was not found [Not Found]\");\n});",
+              "err": {},
+              "uuid": "3af7d3e2-ea52-4be8-a1cd-f358fae5adfe",
+              "parentUUID": "0cae02d6-a398-473b-bc02-99de41015e7b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Using Token of different organization",
+              "fullTitle": "ECP-T2785 - Study Information API Using Token of different organization",
+              "timedOut": null,
+              "duration": 36270,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n// Step 3 - Navigate to My Org > Admin Settings > Features tab. Enable features switches for APIs > HL7, Worklist, and PACS Workflow. Verify Worklist, Patient, Procedure, and My Org > IOCM History tabs only become available once all 3 features have been enabled.\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facility2Name))\n    .then(function (res) {\n    token2 = res.token;\n    orgId2 = res.orgId;\n    cy.wrap(token2).as('token');\n    header3 = {\n        Authorization: \"Bearer \".concat(token2),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    cy.request({\n        url: \"\".concat(baseUrl, \"/study-information/study/\").concat(studyid),\n        method: 'GET',\n        headers: header3,\n        failOnStatusCode: false\n    }).then(function (res) {\n        expect(res.status).to.eq(403);\n    });\n});",
+              "err": {},
+              "uuid": "76a0f9e8-d84f-4f72-adbd-cf19318848b7",
+              "parentUUID": "0cae02d6-a398-473b-bc02-99de41015e7b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2785 - Study Information API Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7856,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "cbf9ac88-11d2-4535-914e-8a43fcaf3377",
+              "parentUUID": "0cae02d6-a398-473b-bc02-99de41015e7b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "62073284-e994-48b2-bd28-6d276d4cca71",
+            "d59500cf-7dab-4c92-858a-b4375bf9ca4e",
+            "23c926d9-b8d9-4f93-a18b-d3f81a038e89",
+            "3af7d3e2-ea52-4be8-a1cd-f358fae5adfe",
+            "76a0f9e8-d84f-4f72-adbd-cf19318848b7",
+            "cbf9ac88-11d2-4535-914e-8a43fcaf3377"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 152179,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

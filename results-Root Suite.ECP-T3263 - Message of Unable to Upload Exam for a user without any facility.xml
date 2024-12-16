@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="134.940" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:34:28" tests="0" file="cypress/e2e/test-suites/ECP-T3263-UploadExamWithoutAnyFacility.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3263 - Message of Unable to Upload Exam for a user without any facility" timestamp="2024-12-15T03:34:28" tests="4" time="134.916" failures="0">
+    <testcase name="Before step - Creating or activating facility" time="70.460" classname="ECP-T3263 - Message of Unable to Upload Exam for a user without any facility">
+    </testcase>
+    <testcase name="Step 1 &amp; 2 - Login and Open Upload exam page" time="32.380" classname="ECP-T3263 - Message of Unable to Upload Exam for a user without any facility">
+    </testcase>
+    <testcase name="Step 3 &amp; 4 - Disable All facilities" time="7.357" classname="ECP-T3263 - Message of Unable to Upload Exam for a user without any facility">
+    </testcase>
+    <testcase name="Step 5 &amp; 6 - Check the error message at upload exam page" time="21.551" classname="ECP-T3263 - Message of Unable to Upload Exam for a user without any facility">
+    </testcase>
+  </testsuite>
+</testsuites>

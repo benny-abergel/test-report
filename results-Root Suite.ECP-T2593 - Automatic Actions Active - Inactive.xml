@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="306.442" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:21:02" tests="0" file="cypress/e2e/test-suites/ECP-T2593-AutomaticActions-ActiveInActive.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2593 - Automatic Actions Active - Inactive" timestamp="2024-12-15T03:21:02" tests="3" time="306.424" failures="0">
+    <testcase name="Test Preparation - Data Prep" time="84.576" classname="ECP-T2593 - Automatic Actions Active - Inactive">
+    </testcase>
+    <testcase name="Starting Automatic Actions Acive - Inactive Test - all 6 in one" time="200.549" classname="ECP-T2593 - Automatic Actions Active - Inactive">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.716" classname="ECP-T2593 - Automatic Actions Active - Inactive">
+    </testcase>
+  </testsuite>
+</testsuites>

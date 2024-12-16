@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="110.948" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:28:07" tests="0" file="cypress/e2e/test-suites/ECP-T2972-Active Facilities - Share with Organization.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2972 - Active Facilities - Share with Organization" timestamp="2024-12-15T02:28:07" tests="2" time="110.910" failures="0">
+    <testcase name="Step 1-10" time="95.994" classname="ECP-T2972 - Active Facilities - Share with Organization">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.469" classname="ECP-T2972 - Active Facilities - Share with Organization">
+    </testcase>
+  </testsuite>
+</testsuites>

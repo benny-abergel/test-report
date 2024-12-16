@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:26:49.056Z",
+    "end": "2024-12-15T03:29:06.972Z",
+    "duration": 137916,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "179a7064-664e-4c20-83f8-3302af6d5ded",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2975-AutomaticActionSearchCustomer Share with Facility.spec.ts",
+      "file": "cypress/test-suites/ECP-T2975-AutomaticActionSearchCustomer Share with Facility.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "2063421f-8ba9-4dfd-9c67-73fe2022e111",
+          "title": "ECP-T2975 - Automatic Actions Active - Search Customer Name",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Data Prep",
+              "fullTitle": "ECP-T2975 - Automatic Actions Active - Search Customer Name Test Preparation - Data Prep",
+              "timedOut": null,
+              "duration": 121257,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.tinyTimeout);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowAutomaticActions: true,\n    allowPatientSharing: true,\n    allowOutboundSharing: true,\n    allowInboundSharing: true\n}, facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Automatic Actions');\ncy.wait(configFile.smallTimeout);\ncy.get('.table-btn-container > .btn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.Select-value').last().click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[aria-label=\"Share exam with facility\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.Select-placeholder').should('not.contain.text', 'Loading', { timeout: configFile.longTimeout });\ncy.get('.Select-placeholder').type(\"\".concat(customer2Name));\ncy.get(\"div:contains(\\\"\".concat(customer2Name, \"\\\")\")).should('not.exist');\ncy.wait(configFile.tinyTimeout);\ncy.get('[title=\"Share exam with facility\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[aria-label=\"Share exam with professional\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.Select-placeholder').should('not.contain.text', 'Loading', { timeout: configFile.longTimeout });\ncy.get('.Select-placeholder').type(\"\".concat(date));\ncy.get('div:contains(\"No results found\") .Select-noresults').should('exist');\ncy.wait(configFile.tinyTimeout);\ncy.get('[title=\"Share exam with professional\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[aria-label=\"Share exam with facility\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.Select-placeholder').should('not.contain.text', 'Loading', { timeout: configFile.longTimeout });\ncy.get('.Select-placeholder').type(\"{selectall}\".concat(facilityName2));\ncy.get(\"[aria-label=\\\"\".concat(facilityName2, \"\\\"]\")).click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[title=\"Share exam with facility\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[aria-label=\"Share exam with professional\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.Select-placeholder').should('not.contain.text', 'Loading', { timeout: configFile.longTimeout });\ncy.get('.Select-placeholder').type(\"\".concat(date));\ncy.get('div:contains(\"No results found\") .Select-noresults').should('exist');",
+              "err": {},
+              "uuid": "7118e9fb-7170-4087-8b2a-288f77cc83e7",
+              "parentUUID": "2063421f-8ba9-4dfd-9c67-73fe2022e111",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2975 - Automatic Actions Active - Search Customer Name Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8611,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facilityName2, false);",
+              "err": {},
+              "uuid": "9b5cf7d7-00de-4a76-9b8a-4d34ea855b8b",
+              "parentUUID": "2063421f-8ba9-4dfd-9c67-73fe2022e111",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7118e9fb-7170-4087-8b2a-288f77cc83e7",
+            "9b5cf7d7-00de-4a76-9b8a-4d34ea855b8b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 129868,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

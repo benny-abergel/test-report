@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="184.972" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:18:18" tests="0" file="cypress/e2e/test-suites/ECP-T2646-EdgeServerTokenTableUI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2646 - Edge Server Token Table UI" timestamp="2024-12-15T02:18:18" tests="3" time="184.924" failures="0">
+    <testcase name="Test Preparation - Before Step" time="70.695" classname="ECP-T2646 - Edge Server Token Table UI">
+    </testcase>
+    <testcase name="ECP-T2646 - Edge Server Token Table UI - Steps 1 - 2" time="95.709" classname="ECP-T2646 - Edge Server Token Table UI">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.795" classname="ECP-T2646 - Edge Server Token Table UI">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="236.623" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:32:22" tests="0" file="cypress/e2e/test-suites/ECP-T2664-Examlistsharesouttab.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2664 - Exam list shares out tab" timestamp="2024-12-15T03:32:22" tests="3" time="236.583" failures="0">
+    <testcase name="Step 1-4" time="180.241" classname="ECP-T2664 - Exam list shares out tab">
+    </testcase>
+    <testcase name="Step 5 to 7" time="46.396" classname="ECP-T2664 - Exam list shares out tab">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.697" classname="ECP-T2664 - Exam list shares out tab">
+    </testcase>
+  </testsuite>
+</testsuites>

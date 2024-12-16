@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="314.509" tests="8" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:21:27" tests="0" file="cypress/e2e/test-suites/ECP-T2443-ExamAttachmentsRetrievalAPI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2442 - Exam Attachment Delete API " timestamp="2024-12-15T03:21:27" tests="8" time="314.493" failures="0">
+    <testcase name="Step 1-2" time="116.302" classname="ECP-T2442 - Exam Attachment Delete API ">
+    </testcase>
+    <testcase name="Step 3-4" time="106.056" classname="ECP-T2442 - Exam Attachment Delete API ">
+    </testcase>
+    <testcase name="Deleting the Attachment" time="1.886" classname="ECP-T2442 - Exam Attachment Delete API ">
+    </testcase>
+    <testcase name="Verifying the response without attachment" time="0.865" classname="ECP-T2442 - Exam Attachment Delete API ">
+    </testcase>
+    <testcase name="Invalid Study ID" time="0.827" classname="ECP-T2442 - Exam Attachment Delete API ">
+    </testcase>
+    <testcase name="Study Id for Different Organization" time="59.611" classname="ECP-T2442 - Exam Attachment Delete API ">
+    </testcase>
+    <testcase name="Invalid Token" time="0.828" classname="ECP-T2442 - Exam Attachment Delete API ">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.774" classname="ECP-T2442 - Exam Attachment Delete API ">
+    </testcase>
+  </testsuite>
+</testsuites>

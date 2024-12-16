@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="580.079" tests="9" failures="1">
+  <testsuite name="" timestamp="2024-12-15T02:38:01" tests="0" file="cypress/e2e/test-suites/ECP-T3555-ManualMatchingUnmatchingOfStudiesAndProcedures.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702)" timestamp="2024-12-15T02:38:01" tests="9" time="0.000" failures="1">
+    <testcase name="ECP-T3555 - data prep" time="191.906" classname="ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702)">
+    </testcase>
+    <testcase name="Step 1 - 10 - Setting up view, checking modal buttons and matchind study to unmatched procedure" time="85.475" classname="ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702)">
+    </testcase>
+    <testcase name="Step 11 - 12 - Matching studies with already matched procedures " time="17.239" classname="ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702)">
+    </testcase>
+    <testcase name="Step 13 - 21 - Matching unmatched procedures to studies " time="32.507" classname="ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702)">
+    </testcase>
+    <testcase name="Step 21 - 26 - Unmatching studies and unmatching procedures" time="71.284" classname="ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702)">
+      <failure message="Timed out retrying after 60000ms: Expected to find element: `[id=&quot;column-select-hidden&quot;] button`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 60000ms: Expected to find element: `[id="column-select-hidden"] button`, but never found it.
+    at showAllColumns (webpack:///./cypress/e2e/test-suites/ECP-T3555-ManualMatchingUnmatchingOfStudiesAndProcedures.spec.ts:239:7)
+    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T3555-ManualMatchingUnmatchingOfStudiesAndProcedures.spec.ts:522:8)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

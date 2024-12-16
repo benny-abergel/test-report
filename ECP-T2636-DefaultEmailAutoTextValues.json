@@ -1,0 +1,115 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 0,
+    "passes": 0,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:42:28.485Z",
+    "end": "2024-12-15T03:46:40.845Z",
+    "duration": 252360,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "52b3c15b-08f3-4fa3-b306-da49494d48a7",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2636-DefaultEmailAutoTextValues.spec.ts",
+      "file": "cypress/test-suites/ECP-T2636-DefaultEmailAutoTextValues.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "728f74ef-c1b8-4d08-b365-abb443a4a8b6",
+          "title": "ECP-T2636 - Default Email Auto Text Values ",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T2636 - System Admin - Notification Page - All Step  Email Auto Text Tab",
+              "fullTitle": "ECP-T2636 - Default Email Auto Text Values  ECP-T2636 - System Admin - Notification Page - All Step  Email Auto Text Tab",
+              "timedOut": null,
+              "duration": 77219,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Step 1 - Login with a system admin account, click on the system admin section of the side navigation menu, click on the notifications section. Verify the system admin > notifications page is displayed and it contains the listed tabs\ncommon_1.Common.navigateTo('System Admin');\ncy.reload();\ncy.visit(configFile.url + '/admin/notification-management');\n//c.navigateByProperty('data-template=\"notificationManagementPage\"');\ncy.get('#emailAutoText').should('exist');\ncy.get('#emailAutoText').click();\n// d.defaultvaluesloop();\nDefaultEmailAutoTextValuespage_1.EmailAutotextvalue.editpopup();",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 60000ms: Expected to find element: `#emailAutoText`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 60000ms: Expected to find element: `#emailAutoText`, but never found it.\n    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2636-DefaultEmailAutoTextValues.spec.ts:52:29)",
+                "diff": null
+              },
+              "uuid": "bcd973d5-daa0-44b4-b14c-1ee31f96ae36",
+              "parentUUID": "728f74ef-c1b8-4d08-b365-abb443a4a8b6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "bcd973d5-daa0-44b4-b14c-1ee31f96ae36"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 77219,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

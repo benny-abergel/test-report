@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="291.974" tests="5" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:40:23" tests="0" file="cypress/e2e/test-suites/ECP-T3098-Factory public view should be created for any new customer.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3098-Factory public view should be created for any new customer" timestamp="2024-12-15T03:40:23" tests="5" time="291.931" failures="0">
+    <testcase name="ECP-T3098 - data prep" time="88.773" classname="ECP-T3098-Factory public view should be created for any new customer">
+    </testcase>
+    <testcase name="Step 1-7" time="103.157" classname="ECP-T3098-Factory public view should be created for any new customer">
+    </testcase>
+    <testcase name="Step 8 - 11" time="36.587" classname="ECP-T3098-Factory public view should be created for any new customer">
+    </testcase>
+    <testcase name="Step 12 - 15" time="39.888" classname="ECP-T3098-Factory public view should be created for any new customer">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.208" classname="ECP-T3098-Factory public view should be created for any new customer">
+    </testcase>
+  </testsuite>
+</testsuites>

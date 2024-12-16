@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="202.167" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:32:49" tests="0" file="cypress/e2e/test-suites/ECP-T3057-CannotSwitchCustomerContextforUserwithSingleCustomer.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3057 - Cannot Switch Customer Context for User with Single Customer" timestamp="2024-12-15T03:32:49" tests="2" time="202.146" failures="0">
+    <testcase name="Login as Customer admin ,Facility admin and Ip User to verify Single Customer access-" time="187.190" classname="ECP-T3057 - Cannot Switch Customer Context for User with Single Customer">
+    </testcase>
+    <testcase name="Post step - Cleanup" time="6.986" classname="ECP-T3057 - Cannot Switch Customer Context for User with Single Customer">
+    </testcase>
+  </testsuite>
+</testsuites>

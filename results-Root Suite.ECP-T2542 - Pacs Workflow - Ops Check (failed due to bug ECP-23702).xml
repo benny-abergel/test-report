@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="376.314" tests="6" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:29:43" tests="0" file="cypress/e2e/test-suites/ECP-T2542-PacsWorkflow-OpsCheck.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702)" timestamp="2024-12-15T02:29:43" tests="6" time="376.290" failures="0">
+    <testcase name="Starting ECP-T2542 - Feature Switch - Edge Server Test - all 7 steps in one" time="82.391" classname="ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702)">
+    </testcase>
+    <testcase name="Step 7 &amp; 8 - verify information and edit" time="49.056" classname="ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702)">
+    </testcase>
+    <testcase name="Step 9 - 13" time="64.559" classname="ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702)">
+    </testcase>
+    <testcase name="Step 14 - 17" time="104.435" classname="ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702)">
+    </testcase>
+    <testcase name="Deleting Order" time="46.637" classname="ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702)">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.075" classname="ECP-T2542 - Pacs Workflow - Ops Check (failed due to bug ECP-23702)">
+    </testcase>
+  </testsuite>
+</testsuites>

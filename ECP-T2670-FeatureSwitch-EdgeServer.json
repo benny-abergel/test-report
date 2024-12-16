@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:38:21.144Z",
+    "end": "2024-12-15T03:44:03.002Z",
+    "duration": 341858,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "317d55db-250a-4c4c-a33a-145e25082ec0",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2670-FeatureSwitch-EdgeServer.spec.ts",
+      "file": "cypress/test-suites/ECP-T2670-FeatureSwitch-EdgeServer.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "51a9031e-2cd3-4437-8c5b-54b1765a9abc",
+          "title": "ECP-T2670 - Feature Switch - Edge Server",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step ",
+              "fullTitle": "ECP-T2670 - Feature Switch - Edge Server Test Preparation - Before Step ",
+              "timedOut": null,
+              "duration": 27094,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncy.wait(configFile.tinyTimeout);\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowEdgeServer: false,\n    allowAD: true,\n    allowPushToPACS: true,\n    allowTagEditing: false,\n    allowDICOMReceive: true,\n    allowQueryRetrieve: true,\n    allowNucleusIoQueryRetrieve: true,\n    allowModalityWorklist: false,\n    allowReportQuerySources: false\n});\ncy.wait(configFile.smallTimeout);\ncy.reload();\n// Step 1 - Using a system admin account, navigate to system admin > system   settings > features tab and verify the feature switch for Edge Server is present.\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer', false);\n// Step 2 - Verify all the listed sub-switches are present under the edge server feature switch.\ncommon_1.Common.verifyFeatureExist('allowAD');\ncommon_1.Common.verifyFeatureExist('allowPushToPACS');\ncommon_1.Common.verifyFeatureExist('allowTagEditing');\ncommon_1.Common.verifyFeatureExist('allowDICOMReceive');\ncommon_1.Common.verifyFeatureExist('allowQueryRetrieve');\ncommon_1.Common.verifyFeatureExist('allowNucleusIoQueryRetrieve');\ncommon_1.Common.verifyFeatureExist('allowModalityWorklist');\ncommon_1.Common.verifyFeatureExist('allowReportQuerySources');",
+              "err": {},
+              "uuid": "0db341da-f2e8-4f38-a41d-8629169dd48e",
+              "parentUUID": "51a9031e-2cd3-4437-8c5b-54b1765a9abc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Starting ECP-T2670 - Feature Switch - Edge Server Test - all 1-6 steps in one",
+              "fullTitle": "ECP-T2670 - Feature Switch - Edge Server Starting ECP-T2670 - Feature Switch - Edge Server Test - all 1-6 steps in one",
+              "timedOut": null,
+              "duration": 100377,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Step 3 - Verify the Edge Server feature switch can be enabled and disabled at the system level.\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowEdgeServer: true\n});\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowEdgeServer: false\n});\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer', false);\n// Step 4 - Verify enabling or disabling the edge server feature switch value has no affect on the values listed for the sub-switches in the system level feature switch UI.\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowEdgeServer: true\n});\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer');\ncommon_1.Common.verifyFeatureToggle('allowAD');\ncommon_1.Common.verifyFeatureToggle('allowPushToPACS');\ncommon_1.Common.verifyFeatureToggle('allowTagEditing', false);\ncommon_1.Common.verifyFeatureToggle('allowDICOMReceive');\ncommon_1.Common.verifyFeatureToggle('allowQueryRetrieve');\ncommon_1.Common.verifyFeatureToggle('allowNucleusIoQueryRetrieve');\ncommon_1.Common.verifyFeatureToggle('allowModalityWorklist', false);\ncommon_1.Common.verifyFeatureToggle('allowReportQuerySources', false);\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowEdgeServer: false\n});\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer', false);\ncommon_1.Common.verifyFeatureToggle('allowAD');\ncommon_1.Common.verifyFeatureToggle('allowPushToPACS');\ncommon_1.Common.verifyFeatureToggle('allowTagEditing', false);\ncommon_1.Common.verifyFeatureToggle('allowDICOMReceive');\ncommon_1.Common.verifyFeatureToggle('allowQueryRetrieve');\ncommon_1.Common.verifyFeatureToggle('allowNucleusIoQueryRetrieve');\ncommon_1.Common.verifyFeatureToggle('allowModalityWorklist', false);\ncommon_1.Common.verifyFeatureToggle('allowReportQuerySources', false);\n// Step 5 - Verify the sub-switches cannot be changed when the parent switch is disabled.\ncy.get('.checkboxTree input[data-key=\"allowAD\"]').should('be.disabled');\ncy.get('.checkboxTree input[data-key=\"allowPushToPACS\"]').should('be.disabled');\ncy.get('.checkboxTree input[data-key=\"allowTagEditing\"]').should('be.disabled');\ncy.get('.checkboxTree input[data-key=\"allowDICOMReceive\"]').should('be.disabled');\ncy.get('.checkboxTree input[data-key=\"allowQueryRetrieve\"]').should('be.disabled');\ncy.get('.checkboxTree input[data-key=\"allowNucleusIoQueryRetrieve\"]').should('be.disabled');\ncy.get('.checkboxTree input[data-key=\"allowModalityWorklist\"]').should('be.disabled');\ncy.get('.checkboxTree input[data-key=\"allowReportQuerySources\"]').should('be.disabled');\n// Step 6 - Navigate to the My org > admin settings > features page and verify the Edge server feature switch is present.\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facilityName), { timeout: configFile.hugeTimeout });\n//    c.logout()\n//    c.login(customerName,userName,userpassword);\n//cy.get('div > span > .btn').click()\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureExist('allowEdgeServer');\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer', false);\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "989e7280-a589-4101-a8c8-32ada5491595",
+              "parentUUID": "51a9031e-2cd3-4437-8c5b-54b1765a9abc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Starting ECP-T2670 - Feature Switch - Edge Server Test - all 7-10 steps in one",
+              "fullTitle": "ECP-T2670 - Feature Switch - Edge Server Starting ECP-T2670 - Feature Switch - Edge Server Test - all 7-10 steps in one",
+              "timedOut": null,
+              "duration": 171537,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\n// Step 7 - Verify the feature switch can be enabled and disabled at the organization level.\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureExist('allowEdgeServer');\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer', true);\ncy.wait(configFile.smallTimeout);\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: false\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\n// c.verifyFeatureExist('allowEdgeServer');\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer', false);\n// Step 8 - Verify enabling or disabling the edge server feature switch value has no affect on the values listed for the sub-switches in the organization feature switch UI.\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureExist('allowEdgeServer');\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer', true);\ncommon_1.Common.verifyFeatureToggle('allowAD');\ncommon_1.Common.verifyFeatureToggle('allowPushToPACS');\ncommon_1.Common.verifyFeatureToggle('allowTagEditing', false);\ncommon_1.Common.verifyFeatureToggle('allowDICOMReceive');\ncommon_1.Common.verifyFeatureToggle('allowQueryRetrieve');\ncommon_1.Common.verifyFeatureToggle('allowNucleusIoQueryRetrieve');\ncommon_1.Common.verifyFeatureToggle('allowModalityWorklist', false);\ncommon_1.Common.verifyFeatureToggle('allowReportQuerySources', false);\ncy.wait(configFile.smallTimeout);\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: false\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureExist('allowEdgeServer');\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer', false);\ncommon_1.Common.verifyFeatureToggle('allowAD');\ncommon_1.Common.verifyFeatureToggle('allowPushToPACS');\ncommon_1.Common.verifyFeatureToggle('allowTagEditing', false);\ncommon_1.Common.verifyFeatureToggle('allowDICOMReceive');\ncommon_1.Common.verifyFeatureToggle('allowQueryRetrieve');\ncommon_1.Common.verifyFeatureToggle('allowNucleusIoQueryRetrieve');\ncommon_1.Common.verifyFeatureToggle('allowModalityWorklist', false);\ncommon_1.Common.verifyFeatureToggle('allowReportQuerySources', false);\n// Step 9 - Verify when a new organization is created the system level feature switch value for Edge server is inherited by the new organization.\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowEdgeServer: true\n});\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer');\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureExist('allowEdgeServer');\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer');\n// Step 10 - Enable all edge server sub-switches at the organization level, but disable the edge server feature switch.  Verify when the parent feature switch is disabled, all sub-switch controlled functionality is hidden from the system.\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureExist('allowEdgeServer');\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer', true);\nmeteor_1.Meteor.changeFeatures({\n    allowAD: true,\n    allowPushToPACS: true,\n    allowTagEditing: true,\n    allowDICOMReceive: true,\n    allowQueryRetrieve: true,\n    allowNucleusIoQueryRetrieve: true,\n    allowModalityWorklist: true,\n    allowReportQuerySources: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.reload();\n// c.toggleFeature('allowAD');\n// c.toggleFeature('allowPushToPACS');\n// c.toggleFeature('allowTagEditing');\n// c.toggleFeature('allowDICOMReceive');\n// c.toggleFeature('allowQueryRetrieve');\n// c.toggleFeature('allowNucleusIoQueryRetrieve');\n// c.toggleFeature('allowModalityWorklist',true);\n// c.toggleFeature('allowReportQuerySources',true);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Integration');\ncy.get('#edgeServers').should('not.exist');\ncy.get('#DICOM').should('not.exist');\ncy.get('#reportQuerySources').should('not.exist');",
+              "err": {},
+              "uuid": "b31c420e-c048-4c2c-a29b-07bd7eaf4899",
+              "parentUUID": "51a9031e-2cd3-4437-8c5b-54b1765a9abc",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2670 - Feature Switch - Edge Server Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 9674,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "f65d50f9-aafc-44a4-9927-9c48642601ec",
+              "parentUUID": "51a9031e-2cd3-4437-8c5b-54b1765a9abc",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "0db341da-f2e8-4f38-a41d-8629169dd48e",
+            "989e7280-a589-4101-a8c8-32ada5491595",
+            "b31c420e-c048-4c2c-a29b-07bd7eaf4899",
+            "f65d50f9-aafc-44a4-9927-9c48642601ec"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 308682,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

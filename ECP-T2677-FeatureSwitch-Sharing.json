@@ -1,0 +1,207 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 1,
+    "failures": -1,
+    "start": "2024-12-15T02:13:15.613Z",
+    "end": "2024-12-15T02:20:32.042Z",
+    "duration": 436429,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 16.666666666666664,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "15c60c39-2bf0-4f36-9d5e-9893c4a8b975",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2677-FeatureSwitch-Sharing.spec.ts",
+      "file": "cypress/test-suites/ECP-T2677-FeatureSwitch-Sharing.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a81172d3-984a-46c1-be53-219e8063947e",
+          "title": "ECP-T2677 - Feature Switch - Sharing",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Before step - change feature switch",
+              "fullTitle": "ECP-T2677 - Feature Switch - Sharing Before step - change feature switch",
+              "timedOut": null,
+              "duration": 50380,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.systemDefaultFeatureSwitches(); // not working in c001 env",
+              "err": {},
+              "uuid": "8fc0acec-faff-4807-b76e-43dacbe4e0cc",
+              "parentUUID": "a81172d3-984a-46c1-be53-219e8063947e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Starting Feature Switch - Sharing Test - 1 - 7 Steps in one",
+              "fullTitle": "ECP-T2677 - Feature Switch - Sharing Starting Feature Switch - Sharing Test - 1 - 7 Steps in one",
+              "timedOut": null,
+              "duration": 159815,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Step 1 - Using a system admin account, navigate to System admin->System settings->Features tab from side navigation menu and verify the features tab is displayed.\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncy.get('#features').should('exist');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowPatientSharing: false,\n    allowStatShares: true\n});\n// Step 2 - Verify the system settings Features tab has a Sharing section which contains all the listed options and their default values.\n// Sharing section contents: Inbound sharing Default = Enabled, Outbound sharing Default = Enabled, Patient sharing (child of outbound sharing) Default = Disabled, StatShares (child of outbound sharing) Default = Enabled\ncy.get('.checkboxTree input[data-key=\"allowInboundSharing\"]').should('exist');\ncy.get('.checkboxTree input[data-key=\"allowInboundSharing\"]').should('be.checked');\ncy.get('.checkboxTree input[data-key=\"allowOutboundSharing\"]').should('exist');\ncy.get('.checkboxTree input[data-key=\"allowOutboundSharing\"]').should('be.checked');\ncy.get('.checkboxTree input[data-key=\"allowPatientSharing\"]').should('exist');\ncy.get('.checkboxTree input[data-key=\"allowPatientSharing\"]').should('not.be.checked');\ncy.get('.checkboxTree input[data-key=\"allowStatShares\"]').should('exist');\ncy.get('.checkboxTree input[data-key=\"allowStatShares\"]').should('be.checked');\n// Step 3 - Disable both inbound and outbound sharing features at the system level, save, then create a new organization in the system.  Verify the new organization does not have any sharing related options available.\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowInboundSharing: false,\n    allowOutboundSharing: false\n});\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\nfacility3Name = facility3Name + Cypress.currentRetry;\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility3Name), { timeout: configFile.hugeTimeout });\ncy.reload();\ncy.wait(1000);\ncommon_1.Common.switchToFacility(facility3Name);\ncommon_1.Common.navigateTo('My Facility');\n//cy.get(`#leftNavMenu li a[title=\"Sharing\"]`).should('not.exist');\ncy.wait(configFile.tinyTimeout);\ncy.get('#leftNavMenu').then(function (elm) {\n    if (elm.find(\"li a[title=\\\"Sharing\\\"]\").length > 0) {\n        cy.get(\"li a[title=\\\"Sharing\\\"]\").click();\n        cy.wait(configFile.tinyTimeout);\n        cy.get('.modal-content .modal-body p').eq(0).should('contain.text', 'You cannot open this page for the current facility.');\n    }\n    else {\n        cy.get(\"#leftNavMenu li a[title=\\\"Sharing\\\"]\").should('not.exist');\n    }\n});\n// Step 4 - Using a system admin account select the newly created organization from the org selector, navigate to My Org > Admin settings > Features tab and verify the in bound and outbound features are disabled.\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowInboundSharing\"]').should('not.be.checked');\ncy.get('.checkboxTree input[data-key=\"allowOutboundSharing\"]').should('not.be.checked');\n// Step 5 - Navigate to System admin > system settings > features tab, enable inbound sharing, save, create a new organization and verify their sharing features are correct.\ncommon_1.Common.switchToCustomer('System');\n//cy.wait(2000)\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowInboundSharing: true,\n    allowOutboundSharing: true\n});\ncommon_1.Common.switchToCustomer(customerName);\nfacility2Name = facility2Name + Cypress.currentRetry;\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\ncy.reload();\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowInboundSharing\"]').should('be.checked');\ncy.get('.checkboxTree input[data-key=\"allowOutboundSharing\"]').should('be.checked');\n// Step 6 - Navigate to System admin > system settings > features tab, enable inbound sharing, enable outbound sharing, disable patient shares and StatShares, save, create a new organization and verify their sharing features are correct.\ncommon_1.Common.switchToCustomer('System');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowPatientSharing: false,\n    allowStatShares: false\n});\ncommon_1.Common.switchToCustomer(customerName);\nfacility4Name = facility4Name + Cypress.currentRetry;\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility4Name), { timeout: configFile.hugeTimeout });\ncy.reload();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facility4Name);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowPatientSharing\"]').should('not.be.checked');\ncy.get('.checkboxTree input[data-key=\"allowStatShares\"]').should('not.be.checked');",
+              "err": {},
+              "uuid": "b54b8b04-4305-474b-a659-1a5bff46e02b",
+              "parentUUID": "a81172d3-984a-46c1-be53-219e8063947e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 7 - 10",
+              "fullTitle": "ECP-T2677 - Feature Switch - Sharing Step 7 - 10",
+              "timedOut": null,
+              "duration": 187429,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Step 7 - Navigate to System admin > system settings > features tab, enable inbound sharing, enable outbound sharing, enable patient shares and disable StatShares, save, create a new organization and verify their sharing features are correct.\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowPatientSharing: true,\n    allowStatShares: false\n});\ncommon_1.Common.switchToCustomer(customerName);\nfacility5Name = facility5Name + Cypress.currentRetry;\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility5Name), { timeout: configFile.hugeTimeout });\ncy.reload();\ncommon_1.Common.switchToFacility(facility5Name);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowPatientSharing\"]').should('be.checked');\ncy.get('.checkboxTree input[data-key=\"allowStatShares\"]').should('not.be.checked');\n// Step 8 - Navigate to System admin > system settings > features tab, enable inbound sharing, enable outbound sharing, enable patient shares and enable StatShares, save, create a new organization and verify their sharing features are correct.\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowStatShares: true\n});\ncommon_1.Common.switchToCustomer(customerName);\nfacility6Name = facility6Name + Cypress.currentRetry;\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility6Name), { timeout: configFile.hugeTimeout });\ncy.reload();\ncommon_1.Common.switchToFacility(facility6Name);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowStatShares\"]').should('be.checked');\n// Step 9 - Navigate to System admin > system settings > features tab, enable inbound sharing, enable outbound sharing, disable patient shares and enable StatShares, save, create a new organization and verify their sharing features are correct.\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowPatientSharing: false,\n    allowStatShares: true\n});\ncommon_1.Common.switchToCustomer(customerName);\nfacility7Name = facility7Name + Cypress.currentRetry;\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility7Name), { timeout: configFile.hugeTimeout });\ncy.reload();\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.switchToFacility(facility7Name);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowPatientSharing\"]').should('not.be.checked');\ncy.get('.checkboxTree input[data-key=\"allowStatShares\"]').should('be.checked');\n// Step 10 - Navigate to System admin > system settings > features tab, disable inbound sharing, enable outbound sharing, enable patient shares and enable StatShares, save, create a new organization and verify their sharing features are correct.\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowInboundSharing: false,\n    allowStatShares: true,\n    allowPatientSharing: true\n});\ncommon_1.Common.switchToCustomer(customerName);\nfacility8Name = facility8Name + Cypress.currentRetry;\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility8Name), { timeout: configFile.hugeTimeout });\ncy.reload();\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.switchToFacility(facility8Name);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.get('.checkboxTree input[data-key=\"allowInboundSharing\"]').should('not.be.checked');\ncy.get('.checkboxTree input[data-key=\"allowPatientSharing\"]').should('be.checked');\ncy.get('.checkboxTree input[data-key=\"allowStatShares\"]').should('be.checked');\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Sharing');\ncy.get('.js-auto-accept').should('not.exist');",
+              "err": {},
+              "uuid": "a6fe9f02-792f-4d9b-bdaa-8980346e3b6e",
+              "parentUUID": "a81172d3-984a-46c1-be53-219e8063947e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 11 - Create a patient share, disable the patient sharing feature for the organization, and verify the previously created patient share is still listed.",
+              "fullTitle": "ECP-T2677 - Feature Switch - Sharing Step 11 - Create a patient share, disable the patient sharing feature for the organization, and verify the previously created patient share is still listed.",
+              "timedOut": null,
+              "duration": 0,
+              "state": "pending",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": true,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\n// Step 11 - Create a patient share, disable the patient sharing feature for the organization, and verify the previously created patient share is still listed.\nfacility9Name = facility9Name + Cypress.currentRetry;\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility9Name), { timeout: configFile.hugeTimeout });\ncommon_1.Common.logout();\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facility9Name);\n// TODO - not sure how to do",
+              "err": {},
+              "uuid": "3671e455-f0bb-420a-bb71-0962e0b104d0",
+              "parentUUID": "a81172d3-984a-46c1-be53-219e8063947e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Change System default back",
+              "fullTitle": "ECP-T2677 - Feature Switch - Sharing Change System default back",
+              "timedOut": null,
+              "duration": 10234,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.systemDefaultFeatureSwitches(); // not working in c001 env",
+              "err": {},
+              "uuid": "03e4b09d-c0f1-4e66-9ba2-c4fa3751dc2e",
+              "parentUUID": "a81172d3-984a-46c1-be53-219e8063947e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2677 - Feature Switch - Sharing Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8048,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\n// cy.wrap(m.disableAllFacilities(customerName,'not-use-Facility'),{timeout:configFile.hugeTimeout});\ncy.wrap(meteor_1.Meteor.changeFacilityStatus(facilityName, false), { timeout: configFile.hugeTimeout });\n;\ncy.wrap(meteor_1.Meteor.changeFacilityStatus(facility2Name, false), { timeout: configFile.hugeTimeout });\n;\ncy.wrap(meteor_1.Meteor.changeFacilityStatus(facility3Name, false), { timeout: configFile.hugeTimeout });\n;\ncy.wrap(meteor_1.Meteor.changeFacilityStatus(facility4Name, false), { timeout: configFile.hugeTimeout });\n;\ncy.wrap(meteor_1.Meteor.changeFacilityStatus(facility5Name, false), { timeout: configFile.hugeTimeout });\n;\ncy.wrap(meteor_1.Meteor.changeFacilityStatus(facility6Name, false), { timeout: configFile.hugeTimeout });\n;\ncy.wrap(meteor_1.Meteor.changeFacilityStatus(facility7Name, false), { timeout: configFile.hugeTimeout });\n;\ncy.wrap(meteor_1.Meteor.changeFacilityStatus(facility8Name, false), { timeout: configFile.hugeTimeout });\n;",
+              "err": {},
+              "uuid": "0467aca6-17ec-4a05-8bc4-c244b489d841",
+              "parentUUID": "a81172d3-984a-46c1-be53-219e8063947e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8fc0acec-faff-4807-b76e-43dacbe4e0cc",
+            "b54b8b04-4305-474b-a659-1a5bff46e02b",
+            "a6fe9f02-792f-4d9b-bdaa-8980346e3b6e",
+            "03e4b09d-c0f1-4e66-9ba2-c4fa3751dc2e",
+            "0467aca6-17ec-4a05-8bc4-c244b489d841"
+          ],
+          "failures": [],
+          "pending": [
+            "3671e455-f0bb-420a-bb71-0962e0b104d0"
+          ],
+          "skipped": [],
+          "duration": 415906,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

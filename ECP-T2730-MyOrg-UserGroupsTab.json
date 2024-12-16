@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:21:29.436Z",
+    "end": "2024-12-15T02:25:16.536Z",
+    "duration": 227100,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "758e88d9-addb-4dac-9c93-4aa3dca79518",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2730-MyOrg-UserGroupsTab.spec.ts",
+      "file": "cypress/test-suites/ECP-T2730-MyOrg-UserGroupsTab.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e5e3b95b-524e-4cfa-b73f-360a8832a694",
+          "title": "ECP-T2730 - My Org - Users and Groups - User groups tab",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 - 42 ",
+              "fullTitle": "ECP-T2730 - My Org - Users and Groups - User groups tab Step 1 - 42 ",
+              "timedOut": null,
+              "duration": 210822,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\n// Login as System admin\ncommon_1.Common.login(customerName, facilityadmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facilityadmin, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 2 and 3\ncommon_1.Common.navigateTo('Users & Groups');\ncommon_1.Common.switchTab('User Groups');\ncommon_1.Common.switchTab('Users');\ncommon_1.Common.switchTab('User Groups');\n// Step 4\ncy.get('span:contains(\"Rows per page\")').should('exist');\ncy.get('li > .btn').should('exist');\n//Step 5\ncy.get('a:contains(\"Group Name\")').should('exist');\ncy.get('a:contains(\"Description\")').should('exist');\ncy.get('th:contains(\"actions\")').should('exist');\n//Step 6\ncy.get('.form-control').should('exist');\ncy.get('.iconTableFilter').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[name=\"name\"]').should('not.exist');\ncy.get('[name=\"description\"]').should('not.exist');\ncy.get('.iconTableFilter').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('[name=\"name\"]').should('exist');\ncy.get('[name=\"description\"]').should('exist');\n// Step 7 ,8,9 and 10\ncy.get('.form-control').first().type(\"Download{enter}\");\ncy.wait(configFile.tinyTimeout);\ncy.get('td:contains(\"Download Exams\")').should('exist');\ncy.get('td:contains(\"Users\")').should('not.exist');\ncy.get('[title=\"Go to Page 1\"]').contains('1');\ncy.get('.filter-clear > a').click();\ncy.get('[name=\"name\"]').clear().type(\"Organization Administrators{enter}\");\ncy.wait(configFile.tinyTimeout);\ncy.get('td:contains(\"Organization Administrators\")').should('exist');\ncy.get('td:contains(\"Users\")').should('not.exist');\ncy.get('span:contains(\"12\")').should('exist');\ncy.wait(configFile.smallTimeout);\n//Step 11\ncy.get('a:contains(\"Edit\")').should('exist');\ncy.get('a:contains(\"Delete\")').should('exist');\n//Step 12\ncy.get('.adDisabledBtn').first().should('exist');\ncy.get('.adDisabledBtn').last().should('exist');\ncy.get('[data-content=\"<p>System groups cannot be changed</p>\"]').should('exist');\ncy.get('.filter-clear > a').click();\ncy.wait(configFile.smallTimeout);\n//Step 13 and 14\ncy.get('.duplicateUserGroupBtn').first().click();\ncy.get('body').then(function (elx) {\n    if (elx.find('p:contains(\"Any changes to Users & Groups should be performed by the organization administrator.\")').length > 0) {\n        cy.get('p:contains(\"Any changes to Users & Groups should be performed by the organization administrator.\")').should('exist');\n        cy.get('#confirm-SystemAdminUsersAndGroupsWarning').click();\n        cy.get('.duplicateUserGroupBtn').first().click();\n    }\n});\n//Step 15 and 27\ncy.get('h4:Contains(\"Duplicate Organization Administrators\")').should('exist');\ncy.get('.modal-footer > .btn-default').should('exist');\ncy.get('.modal-footer > .btn-primary').should('exist');\ncy.get('#nameField').then(function (element) {\n    var text = element.val();\n    expect(text).contain(\"Copy of Organization Administrators\");\n});\ncy.get('#descriptionField').then(function (element1) {\n    var text = element1.val();\n    expect(text).contain(\"Organization Administrators group\");\n});\ncy.get('label:contains(\"Available Roles\")').should('exist');\ncy.get('.rolesList.required-inline').should('exist');\ncy.get('.col-sm-12.required-inline').should('exist');\n//Step 16\ncy.get('#nameField').type('Edited');\ncy.get('#descriptionField').type('Edited');\n//Step 17\ncy.get('.availableRolesListTable > .slimScrollDiv > .scrollThis > .table-studies > tbody > :nth-child(2) > td > .btn').click({ force: true });\ncy.get('.availableRolesListTable > .slimScrollDiv > .scrollThis > .table-studies > tbody > :nth-child(1) > td > .btn').click({ force: true });\ncy.get('.send').click();\n//Step 18\ncy.get('.assignedRolesListTable > .slimScrollDiv > .scrollThis > .table-studies > tbody > :nth-child(1) > td > .btn').click({ force: true });\ncy.get('.assignedRolesListTable > .slimScrollDiv > .scrollThis > .table-studies > tbody > :nth-child(2) > td > .btn').click({ force: true });\ncy.get('.return').click();\n//Step 19 and 20\ncy.get('.modal-footer > .btn-default').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.duplicateUserGroupBtn').first().click();\ncy.get('#nameField').type('Edited');\ncy.get('#descriptionField').type('Edited');\ncy.get('.modal-footer > .btn-primary').click();\ncy.wait(configFile.smallTimeout);\n//Step 21\ncy.get('.duplicateUserGroupBtn').first().click();\ncy.get('#nameField').clear().type('Users');\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.get('div:contains(\"User group name is already in use\")').should('exist');\n//Step 22 and 35\ncy.get('body').then(function (elx) {\n    if (elx.find('.modal-header > .close > span').length > 0) {\n        cy.get('.modal-header > .close > span').click();\n    }\n});\ncy.get('.duplicateUserGroupBtn').first().click();\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('td:contains(Copy of Organization Administrators)').should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.modal-header > .close > span').length > 0) {\n        cy.get('.modal-header > .close > span').click();\n    }\n});\n//Step 23,25 , 26 and 28\n// Creating duplicate group\ncy.get('.duplicateUserGroupBtn').last().click();\ncy.get('#nameField').clear().type('Test Test');\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.wait(configFile.smallTimeout);\n// Editing Duplicate group - Step 29\ncy.get('.form-control').first().type(\"Test Test{enter}\");\ncy.wait(configFile.smallTimeout);\ncy.get('.editUserGroupBtn').click();\ncy.get('body').then(function (elx) {\n    if (elx.find('p:contains(\"Any changes to Users & Groups should be performed by the organization administrator.\")').length > 0) {\n        cy.get('p:contains(\"Any changes to Users & Groups should be performed by the organization administrator.\")').should('exist');\n        cy.get('#confirm-SystemAdminUsersAndGroupsWarning').click();\n        cy.get('.editUserGroupBtn').click();\n    }\n});\ncy.wait(configFile.tinyTimeout);\ncy.get('#nameField').clear().type('Cancel button functionality');\ncy.get('.js-decline').click();\n// Step 30 and 34\ncy.get('.editUserGroupBtn').click();\ncy.get('#nameField').clear().type('Test Test - Edited');\ncy.get('.selected').should('not.exist');\ncy.get('.availableRolesListTable > .slimScrollDiv > .scrollThis > .table-studies > tbody > :nth-child(2) > td > .btn').click({ force: true });\ncy.get('.availableRolesListTable > .slimScrollDiv > .scrollThis > .table-studies > tbody > :nth-child(1) > td > .btn').click({ force: true });\ncy.get('.selected').should('exist');\ncy.get('.send').click();\ncy.get('.selected').should('not.exist');\ncy.get('.assignedRolesListTable > .slimScrollDiv > .scrollThis > .table-studies > tbody > :nth-child(1) > td > .btn').click({ force: true });\ncy.get('.assignedRolesListTable > .slimScrollDiv > .scrollThis > .table-studies > tbody > :nth-child(2) > td > .btn').click({ force: true });\ncy.get('.selected').should('exist');\ncy.get('.return').click();\n// Step 31\ncy.get('#filterAvailableRoles').type('lock');\ncy.wait(configFile.tinyTimeout);\ncy.get('span:contains(\"Lock Exam - Radiologist Lock\")').should('exist');\ncy.get('span:contains(\"API Service Reports - Org\")').should('not.exist');\ncy.get('#filterAvailableRoles').clear();\n//Step 32\ncy.get('#filterAssignedRoles').type('Assign');\ncy.wait(configFile.tinyTimeout);\ncy.get('span:contains(\"Assign To\")').first().should('exist');\ncy.get('span:contains(\"Assign To\")').last().should('exist');\ncy.get('span:contains(\"Administrator\")').should('not.exist');\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.wait(configFile.smallTimeout);\n//Deleting Group - Step 24\ncy.get('.filter-clear > a').click();\ncy.get('.form-control').first().type(\"Test Test - Edited{enter}\");\ncy.wait(configFile.smallTimeout);\ncy.get('.deleteUserGroupBtn').click();\ncy.get('p:contains(\"Do you want to delete this user group?\")').should('exist');\ncy.get('.btn-default:contains(\"No\")').should('exist');\ncy.get('#confirm-DeleteUserGroup').should('exist');\n// cy.get('.btn-default').click()\ncy.get('.deleteUserGroupBtn').click();\ncy.get('#confirm-DeleteUserGroup').click();\ncy.get('td:contains(Test Test - Edited)').should('exist');\n//Step 33 is skipped as row will be changed from white to grey can not be automated\n// Step 36 and 37\ncy.get('.filter-clear > a').click();\ncy.get('.table-btn-container > .btn').click();\ncy.get('h4:contains(\"Create User Group\")').should('exist');\ncy.get('.rolesList.required-inline').should('exist');\ncy.get('.col-sm-12.required-inline').should('exist');\n//Step 38 is verified as popup should not be closed when required fields are empty\ncy.get('.js-confirm').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('h4:contains(\"Create User Group\")').should('exist');\n//Step 39\ncy.get('#nameField').type('New Group');\ncy.get('#descriptionField').type('New Group description');\ncy.get('.availableRolesListTable > .slimScrollDiv > .scrollThis > .table-studies > tbody > :nth-child(2) > td > .btn').click({ force: true });\ncy.get('.availableRolesListTable > .slimScrollDiv > .scrollThis > .table-studies > tbody > :nth-child(1) > td > .btn').click({ force: true });\ncy.get('.selected').should('exist');\ncy.get('.send').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.modal-footer > .btn-default').click();\ncy.get('td:contains(\"New Group\")').should('not.exist');\n//Step 40\ncy.get('.table-btn-container > .btn').click();\ncy.get('#nameField').type('Users');\ncy.get('#descriptionField').type('New Group description');\ncy.get('.availableRolesListTable > .slimScrollDiv > .scrollThis > .table-studies > tbody > :nth-child(2) > td > .btn').click({ force: true });\ncy.get('.availableRolesListTable > .slimScrollDiv > .scrollThis > .table-studies > tbody > :nth-child(1) > td > .btn').click({ force: true });\ncy.get('.selected').should('exist');\ncy.get('.send').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.get('div:contains(\"User group name is already in use\")').should('exist');\n//Step 41 and 42\ncy.get('#nameField').clear().type('New Group');\ncy.get('.modal-footer > .btn-primary').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('td:contains(\"New Group\")').should('exist');\n//Step 43 and 45\ncommon_1.Common.switchTab('Users');\ncy.wait(configFile.smallTimeout);\ncy.get('.addExistingUserBtn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.Select-placeholder').click();\ncy.get('[aria-label=\"New Group\"]').should('exist');\ncy.get('.modal-header > .close > span').click();\ncy.get('.createUserBtn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.Select-placeholder').first().click();\ncy.get('[aria-label=\"New Group\"]').should('exist');\ncy.get('.modal-header > .close > span').click();\ncommon_1.Common.logout();\n//Step 44 and 46 is Skipped as new User with Custom group cannot be added as it require registration process",
+              "err": {},
+              "uuid": "1501821d-4174-40b7-9973-268072677ff3",
+              "parentUUID": "e5e3b95b-524e-4cfa-b73f-360a8832a694",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2730 - My Org - Users and Groups - User groups tab Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8119,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "5687db08-3189-4263-ad83-132059a1139f",
+              "parentUUID": "e5e3b95b-524e-4cfa-b73f-360a8832a694",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1501821d-4174-40b7-9973-268072677ff3",
+            "5687db08-3189-4263-ad83-132059a1139f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 218941,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

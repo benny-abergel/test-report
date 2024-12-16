@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:21:47.521Z",
+    "end": "2024-12-15T02:26:31.852Z",
+    "duration": 284331,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c663a552-8c34-450e-88f9-4d5f4ff00bba",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2782-StatShare.spec.ts",
+      "file": "cypress/test-suites/ECP-T2782-StatShare.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c01174fd-d40b-4454-9b81-04ab1883a7af",
+          "title": "ECP-T2782 - StatShare",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Create a Facility, turn on API feature, create an API token and Upload a Study",
+              "fullTitle": "ECP-T2782 - StatShare Create a Facility, turn on API feature, create an API token and Upload a Study",
+              "timedOut": null,
+              "duration": 101796,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n//Turn on API feature for new facility\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true,\n    allowCdUploader: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowPatientSharing: true,\n    allowStatShares: true,\n}, facilityName);\n//Create an API token\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    //Upload a-01 study from resources folder\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n}).catch(function (err) {\n    console.log(err);\n});",
+              "err": {},
+              "uuid": "39a3c975-39c9-482c-88c7-fc2f3df7aaa6",
+              "parentUUID": "c01174fd-d40b-4454-9b81-04ab1883a7af",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validate StatShare Settings and Manual TAB , remove all recent emails, validate email format and create a StatShare and  cancel of send and resend of StatShare from exam list, shares out TAB",
+              "fullTitle": "ECP-T2782 - StatShare Validate StatShare Settings and Manual TAB , remove all recent emails, validate email format and create a StatShare and  cancel of send and resend of StatShare from exam list, shares out TAB",
+              "timedOut": null,
+              "duration": 49061,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n//Step 1, 2\n//StatShare is defaulted to on for a new facility, turn off \ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Sharing');\ncy.waitUntil(function () { return cy.get(ss.statshareCheckbox).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(ss.statshareCheckbox).should('be.checked');\ncy.get(ss.statshareCheckbox).click();\ncy.waitUntil(function () { return cy.get(ss.saveButton).click(); }, { timeout: configFile.longTimeout });\ncy.wait(configFile.smallTimeout);\n//Navigate to Sharing List,filter for the exam that was uploaded using MRN, verify StatShare is NOT there\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('button.viewExam').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get(ss.mrnFilter).type(\"{selectall}a-01\");\ncy.get(ss.shareIconButton).click();\n// cy.get(ss.statShareButton).should('not.be.visible')\ncy.wait(configFile.smallTimeout);\n//Step 3\n//Turn StatShare back on\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Sharing');\ncy.waitUntil(function () { return cy.get(ss.statshareCheckbox).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(ss.statshareCheckbox).click();\ncy.waitUntil(function () { return cy.get(ss.saveButton).click(); }, { timeout: configFile.longTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get(ss.statshareCheckbox).should('be.checked');\ncy.log('Statshare is re-enabled');\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('button.viewExam').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get(ss.mrnFilter).type(\"{selectall}a-01\");\ncy.get(ss.shareIconButton).click();\ncy.get(ss.statShareButton).should('be.visible');\ncy.get(ss.statShareButton).click();\ncy.waitUntil(function () { return cy.get(ss.manualEntryButton).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(ss.manualEntryButton).should('be.visible');\ncy.get(ss.favoritesButton).should('be.visible');\ncy.get(ss.recentButton).should('be.visible');\ncy.get(ss.recipientEmail).should('be.visible');\ncy.get(ss.expirationDropDowns).eq(0).should('be.visible');\ncy.get(ss.expirationDropDowns).eq(1).should('be.visible');\ncy.get(ss.activeSharesButton).should('be.visible');\ncy.get(ss.cancelStatShareButton).should('be.visible');\ncy.get(ss.createSharesButton).should('be.visible');\n//Step 27\n//Remove all\ncy.get(ss.recentButton).click();\ncy.get(ss.removeAllRecentsButton).click();\ncy.get(ss.yesRemoveAllButton).click();\n//Step 4, 5, 6\n//Validate email address format, create a StatShare\ncy.get(ss.manualEntryButton).click();\ncy.get(ss.createSharesButton).should('be.disabled');\ncy.get(ss.recipientEmail).type(\"{selectall}Bob\");\ncy.get(ss.manualEntryButton).click(); //Click somewhere outside email input field\ncy.get(ss.emailFormatError).should('contain', 'Email format is not valid.');\ncy.get(ss.createSharesButton).should('be.disabled');\ncy.get(ss.recipientEmail).type(\"{selectall}1@chc.com\");\ncy.get(ss.createSharesButton).should('be.enabled');\ncy.get(ss.createSharesButton).click();\ncy.waitUntil(function () { return cy.get('#statShareUrl', { timeout: configFile.longTimeout }); }).should('be.visible');\n//Exam shared successfully\ncy.get(ss.examSharedGreenCheckmark).should('be.visible');\ncy.get(ss.copyStatshareURLButton).should('be.visible');\ncy.get(ss.statsharePassCode).should('be.visible');\ncy.get(ss.statsharePassCode).should('contain', '123456');\ncy.get(ss.okButton).should('be.visible');\ncy.get(ss.okButton).click();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('button.viewExam').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get(ss.mrnFilter).type(\"{selectall}a-01\");\ncy.get(ss.examExpanderButton).click();\ncy.get(ss.sharesOutTAB).click();\ncy.get(ss.resendShareButton).should('be.visible');\ncy.get(ss.resendRecipientEmail).should('contain', '1@chc.com');\n//Step 7\n//Select Mail ICON, cancel send and then resend StatShare\ncy.get(ss.resendShareButton).click();\ncy.get(ss.resendShareDialog).should('contain', 'Do you want to resend this share?');\ncy.get(ss.cancelResendButton).click();\ncy.get(ss.resendShareButton).click();\ncy.get(ss.yesResendButton).click();\n//Close exam detail\ncy.get(ss.examExpanderButton).click();",
+              "err": {},
+              "uuid": "d2f1bad3-0f89-471c-a44c-3934be1b5f5b",
+              "parentUUID": "c01174fd-d40b-4454-9b81-04ab1883a7af",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validate Recent TAB elements, modify expiration views/days, create duplicate share, create a second StatShare and Favorite TAB elements, # of share emails and listed order, # of shares, choose a favorite  and Share from favorite TAB, remove favorite, remove a single recent share, ",
+              "fullTitle": "ECP-T2782 - StatShare Validate Recent TAB elements, modify expiration views/days, create duplicate share, create a second StatShare and Favorite TAB elements, # of share emails and listed order, # of shares, choose a favorite  and Share from favorite TAB, remove favorite, remove a single recent share, ",
+              "timedOut": null,
+              "duration": 57996,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('button.viewExam').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n//Step 21, 23, 33\ncy.get(ss.mrnFilter).type(\"{selectall}a-01\");\ncy.get(ss.shareIconButton).click();\ncy.get(ss.statShareButton).click();\ncy.waitUntil(function () { return cy.get(ss.manualEntryButton).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(ss.recentButton).click();\ncy.get(ss.recentSelectButton).should('be.visible');\ncy.get(ss.resentEmailAddress).should('be.visible').should('contain', '1@chc.com');\ncy.get(ss.recentFavoriteButton).should('be.visible');\ncy.get(ss.recentRemoveButton).should('be.visible');\ncy.get(ss.removeAllRecentsButton).should('be.visible');\ncy.get(ss.expirationDropDowns).eq(0).should('be.visible');\ncy.get(ss.expirationDropDowns).eq(1).should('be.visible');\ncy.get(ss.activeSharesButton).should('be.visible');\ncy.get(ss.cancelStatShareButton).should('be.visible');\ncy.get(ss.createSharesButton).should('be.visible');\n//Modify number of views to 3 and expires after to 5 days\n//Select StatShare and resend\ncy.get(ss.expirationDropDowns).eq(0).click();\ncy.get(ss.expirationSelection).contains('3').click();\ncy.get(ss.expirationDropDowns).eq(1).click();\ncy.get(ss.expirationSelection).contains('5 days').click();\ncy.get(ss.recentSelectButton).eq(0).click();\ncy.get(ss.createSharesButton).should('be.enabled');\ncy.get(ss.createSharesButton).click();\n//Exam shared successfully\ncy.get(ss.examSharedGreenCheckmark).should('be.visible');\ncy.get(ss.okButton).should('be.visible');\ncy.get(ss.okButton).click();\n//Step 22\n//Add a StatShare with duplicate email address, add a second Statshare with a different email address\ncy.get(ss.mrnFilter).type(\"{selectall}a-01\");\ncy.get(ss.shareIconButton).click();\ncy.get(ss.statShareButton).click();\ncy.waitUntil(function () { return cy.get(ss.manualEntryButton).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(ss.createSharesButton).should('be.disabled');\ncy.get(ss.recipientEmail).type(\"{selectall}1@chc.com\");\ncy.get(ss.createSharesButton).should('be.enabled');\ncy.get(ss.createSharesButton).click();\ncy.get(ss.examSharedGreenCheckmark).should('be.visible');\ncy.get(ss.copyStatshareURLButton).should('be.visible');\ncy.get(ss.okButton).should('be.visible');\ncy.get(ss.okButton).click();\ncy.get(ss.shareIconButton).click();\ncy.get(ss.statShareButton).click();\ncy.waitUntil(function () { return cy.get(ss.manualEntryButton).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(ss.createSharesButton).should('be.disabled');\ncy.get(ss.recipientEmail).type(\"{selectall}2@chc.com\");\ncy.get(ss.createSharesButton).should('be.enabled');\ncy.get(ss.createSharesButton).click();\ncy.get(ss.examSharedGreenCheckmark).should('be.visible');\ncy.get(ss.copyStatshareURLButton).should('be.visible');\ncy.get(ss.okButton).should('be.visible');\ncy.get(ss.okButton).click();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('button.viewExam').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n//Step 23, 24, 25, 26, 28, 28, 29, 30, 32\ncy.get(ss.mrnFilter).type(\"{selectall}a-01\");\ncy.get(ss.shareIconButton).click();\ncy.get(ss.statShareButton).click();\ncy.waitUntil(function () { return cy.get(ss.manualEntryButton).should('be.visible'); }, { timeout: configFile.longTimeout });\n//Go to Recents TAB, 4 active shares, expanded with scroll bar present\ncy.get(ss.recentButton).click();\ncy.waitUntil(function () { return cy.get(ss.resentEmailAddress).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(ss.activeShares).should('contain', '4');\ncy.get(ss.expandActiveShareIcon).click();\ncy.get(ss.shareHistoryTable).find('tr').should('have.length', 4);\ncy.get(ss.shareHistoryScrollBar).should('exist');\n//2 unique emails should be listed, 2nd StatShare email should be listed first\ncy.get(ss.recentEmailTable).find('tr').should('have.length', 2);\ncy.get(ss.resentEmailAddress).eq(0).should('contain', '2@chc.com');\n//Select 2@chc.com as a favorite\ncy.get(ss.recentFavoriteButton).eq(0).should('be.visible');\ncy.get(ss.recentFavoriteButton).eq(0).click();\n//Go to Favorites TAB, verify chosen favorite is listed, verify favorite TABelements\ncy.get(ss.favoritesButton).click();\ncy.get(ss.favoriteSelectButton).should('be.visible');\ncy.get(ss.favoriteEmailAddress).should('be.visible').should('contain', '2@chc.com');\ncy.get(ss.favoriteRemoveButton).should('be.visible');\ncy.get(ss.expirationDropDowns).eq(0).should('be.visible');\ncy.get(ss.expirationDropDowns).eq(1).should('be.visible');\ncy.get(ss.activeSharesButton).should('be.visible');\ncy.get(ss.cancelStatShareButton).should('be.visible');\ncy.get(ss.createSharesButton).should('be.visible').should('not.be.enabled');\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('button.viewExam').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get(ss.mrnFilter).type(\"{selectall}a-01\");\ncy.get(ss.shareIconButton).click();\ncy.get(ss.statShareButton).click();\ncy.waitUntil(function () { return cy.get(ss.manualEntryButton).should('be.visible'); }, { timeout: configFile.longTimeout });\n//Select the favorite and share exam from favorites\ncy.get(ss.favoritesButton).click();\ncy.get(ss.favoriteEmailAddress).should('be.visible').should('contain', '2@chc.com');\ncy.get(ss.favoriteSelectButton).eq(0).click();\ncy.get(ss.createSharesButton).should('be.enabled');\ncy.get(ss.createSharesButton).click();\ncy.get(ss.okButton).should('be.visible');\ncy.get(ss.okButton).click();\n//Step 31\ncy.get(ss.mrnFilter).type(\"{selectall}a-01\");\ncy.get(ss.shareIconButton).click();\ncy.get(ss.statShareButton).click();\ncy.waitUntil(function () { return cy.get(ss.manualEntryButton).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(ss.favoritesButton).click();\ncy.get(ss.favoriteEmailAddress).should('be.visible').should('contain', '2@chc.com');\n//Remove favorite\ncy.get(ss.favoriteRemoveButton).eq(0).click();\ncy.get(ss.reusableCancelButton).should('be.visible');\ncy.get(ss.yesRemoveFavoriteButton).should('be.visible');\ncy.get(ss.yesRemoveFavoriteButton).eq(0).click();\n// cy.get(ss.favoriteEmailAddress).should('not.be.visible');\n//Step 26\n//Perform single remove of a recent email\ncy.get(ss.recentButton).click();\ncy.get(ss.resentEmailAddress).eq(0).should('contain', '2@chc.com');\ncy.get(ss.recentRemoveButton).eq(0).click();\ncy.get(ss.reusableCancelButton).should('be.visible');\ncy.get(ss.yesRemoveRecent).should('be.visible');\ncy.get(ss.yesRemoveRecent).click({ force: true });\n//Close Statshare\ncy.get(ss.cancelStatShareButton).click();",
+              "err": {},
+              "uuid": "71161ef9-2401-4f43-92dd-850cc4aba772",
+              "parentUUID": "c01174fd-d40b-4454-9b81-04ab1883a7af",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validate total # of shares and revoke all shares from exam list > shares out TAB and Create a StatShare, launch StatShare URL, validate passcode, customer support elements and view Shared exam",
+              "fullTitle": "ECP-T2782 - StatShare Validate total # of shares and revoke all shares from exam list > shares out TAB and Create a StatShare, launch StatShare URL, validate passcode, customer support elements and view Shared exam",
+              "timedOut": null,
+              "duration": 51876,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('button.viewExam').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n//Step 40\n//Verify we have 5 StatShares, revoke all\ncy.get(ss.mrnFilter).type(\"{selectall}a-01\");\ncy.get(ss.examExpanderButton).click();\ncy.get(ss.sharesOutTAB).click();\ncy.get(ss.shareHistoryTable).find('tr').should('have.length', 5);\ncy.get(ss.revokeShareButton).eq(0).click();\ncy.get(ss.revokeShareNoButton).should('be.visible');\ncy.get(ss.revokeShareYesButton).click();\ncy.get(ss.shareHistoryTable).find('tr').should('have.length', 4);\ncy.get(ss.revokeShareButton).eq(0).click();\ncy.get(ss.revokeShareYesButton).click();\ncy.get(ss.shareHistoryTable).find('tr').should('have.length', 3);\ncy.get(ss.revokeShareButton).eq(0).click();\ncy.get(ss.revokeShareYesButton).click();\ncy.get(ss.shareHistoryTable).find('tr').should('have.length', 2);\ncy.get(ss.revokeShareButton).eq(0).click();\ncy.get(ss.revokeShareYesButton).click();\ncy.get(ss.shareHistoryTable).find('tr').should('have.length', 1);\ncy.get(ss.revokeShareButton).eq(0).click();\ncy.get(ss.revokeShareYesButton).click();\ncy.get(ss.shareHistoryTable).find('tr').should('have.length', 0);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('button.viewExam').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n//Step 10, 12, 13, 14, 15, 16, 17, 18, 19, 20\n//Create one more share and capture the StatShare URL\ncy.get(ss.mrnFilter).type(\"{selectall}a-01\");\ncy.get(ss.shareIconButton).click();\ncy.get(ss.statShareButton).click();\ncy.waitUntil(function () { return cy.get(ss.manualEntryButton).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.get(ss.createSharesButton).should('be.disabled');\ncy.get(ss.recipientEmail).type(\"{selectall}1@chc.com\");\ncy.get(ss.createSharesButton).should('be.enabled');\ncy.get(ss.createSharesButton).click();\ncy.get(ss.examSharedGreenCheckmark).should('be.visible');\n//Parse URL to get StatShare Id\nvar shareURL = '';\nvar statURLId = '';\ncy.get('#statShareUrl').then(function (el) {\n    shareURL = el.text();\n    statURLId = shareURL.split('/').slice(-1)[0];\n    //These variables are critcal for the launching the statshare, leaving the log statements in the test\n    cy.log(shareURL);\n    cy.log(statURLId);\n    //Exam shared successfully\n    cy.get(ss.examSharedGreenCheckmark).should('be.visible');\n    cy.get(ss.copyStatshareURLButton).should('be.visible');\n    cy.get(ss.statsharePassCode).should('be.visible');\n    cy.get(ss.statsharePassCode).should('contain', '123456');\n    cy.get(ss.okButton).should('be.visible');\n    cy.get(ss.okButton).click();\n    //Launch StatShare \n    cy.visit(\"\".concat(configFile.url, \"/statshare/\").concat(statURLId));\n    cy.waitUntil(function () { return cy.get(ss.statSharePassCode).should('be.visible'); }, { timeout: configFile.longTimeout });\n    cy.get(ss.viewStatShareButton).click();\n    //Validate PassCode is required\n    cy.get(ss.requiredMessage).should('contain', 'Passcode is Required');\n    //Contact Support, validate required elements\n    cy.get(ss.contactSupportButton).click();\n    cy.get(ss.sendToSupportButton).click();\n    cy.get(ss.requiredMessage).should('contain', 'Name is missing.');\n    cy.get(ss.userName).type(\"{selectall}Name\");\n    cy.get(ss.sendToSupportButton).click();\n    cy.get(ss.requiredMessage).should('contain', 'E-mail address is missing.');\n    cy.get(ss.userEmail).type(\"{selectall}email@chc.com\");\n    cy.get(ss.sendToSupportButton).click();\n    cy.get(ss.requiredMessage).should('contain', 'Please add details about your issue.');\n    cy.get(ss.userComment).type(\"{selectall}Comment\");\n    cy.get(ss.sendToSupportButton).click();\n    cy.contains(ss.supportSuccessMessage, 'Your support request has been sent. Thank you!');\n    //Go back to StatShare login\n    //Test invalid PassCode\n    cy.get(ss.contactSupportButton).click();\n    cy.get(ss.statSharePassCode).type(\"{selectall}12345\");\n    cy.get(ss.viewStatShareButton).click();\n    cy.contains(ss.invalidPassCodeMessage, 'Invalid passcode provided. 3 attempts remaining.');\n    cy.get(ss.viewStatShareButton).click();\n    cy.contains(ss.invalidPassCodeMessage, 'Invalid passcode provided. 2 attempts remaining.');\n    cy.get(ss.viewStatShareButton).click();\n    cy.contains(ss.invalidPassCodeMessage, 'Invalid passcode provided. 1 attempts remaining.');\n    //Test valid PassCode\n    cy.get(ss.statSharePassCode).type(\"{selectall}123456\");\n    cy.get(ss.viewStatShareButton).click();\n    //Verify we are able to see the study\n    cy.get(ss.thumbNailStudyDescription).should('contain', 'CT Axial Noise');\n});",
+              "err": {},
+              "uuid": "f06f2679-692e-494b-862e-34e236330f56",
+              "parentUUID": "c01174fd-d40b-4454-9b81-04ab1883a7af",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deactive facility and logout",
+              "fullTitle": "ECP-T2782 - StatShare Deactive facility and logout",
+              "timedOut": null,
+              "duration": 7158,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "02703944-c8a8-40a4-81d3-9b3eef9928fb",
+              "parentUUID": "c01174fd-d40b-4454-9b81-04ab1883a7af",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "39a3c975-39c9-482c-88c7-fc2f3df7aaa6",
+            "d2f1bad3-0f89-471c-a44c-3934be1b5f5b",
+            "71161ef9-2401-4f43-92dd-850cc4aba772",
+            "f06f2679-692e-494b-862e-34e236330f56",
+            "02703944-c8a8-40a4-81d3-9b3eef9928fb"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 267887,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

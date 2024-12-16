@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="430.268" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:54:43" tests="0" file="cypress/e2e/test-suites/ECP-T2663-ExamListFilteringSorting.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2663 - Exam list filtering and sorting " timestamp="2024-12-15T02:54:43" tests="4" time="430.250" failures="0">
+    <testcase name="Starting ECP-T2663 - Data Preperation" time="140.311" classname="ECP-T2663 - Exam list filtering and sorting ">
+    </testcase>
+    <testcase name="Step 1 - 16" time="112.696" classname="ECP-T2663 - Exam list filtering and sorting ">
+    </testcase>
+    <testcase name="Step 17-31" time="156.453" classname="ECP-T2663 - Exam list filtering and sorting ">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.333" classname="ECP-T2663 - Exam list filtering and sorting ">
+    </testcase>
+  </testsuite>
+</testsuites>

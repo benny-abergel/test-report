@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:21:10.784Z",
+    "end": "2024-12-15T02:28:13.340Z",
+    "duration": 422556,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f7b5c333-c832-4da1-86b9-a1c5ba1466a5",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3058-SwitchCustomerContextforUserwithMultipleCustomer.spec.ts",
+      "file": "cypress/test-suites/ECP-T3058-SwitchCustomerContextforUserwithMultipleCustomer.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b307222f-3e04-4cfc-ba2b-5150f220c17b",
+          "title": "ECP-T3058 - Switch Customer Context for User with Multiple Customer",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Login with System admin and Customer admin",
+              "fullTitle": "ECP-T3058 - Switch Customer Context for User with Multiple Customer Login with System admin and Customer admin",
+              "timedOut": null,
+              "duration": 260939,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login as System admin\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncy.get('span:contains(\"' + customerName + '\")').should('exist');\ncy.visit(baseUrl + '/organization/organizationDetails');\ncy.wait(configFile.smallTimeout);\ncy.get('[value=\"' + customerName + '\"]').should('exist');\ncommon_1.Common.switchToCustomer(customer2Name);\ncy.get('span:contains(\"' + customer2Name + '\")').should('exist');\ncy.visit(baseUrl + '/organization/organizationDetails');\ncy.wait(configFile.smallTimeout);\ncy.get('[value=\"' + customer2Name + '\"]').should('exist');\ncommon_1.Common.logout();\n//Login as Customer admin\ncommon_1.Common.login(customerName, cusadmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(cusadmin, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncy.get('span:contains(\"' + customerName + '\")').should('exist');\ncy.visit(baseUrl + '/organization/organizationDetails');\ncy.wait(configFile.smallTimeout);\ncy.get('[value=\"' + customerName + '\"]').should('exist');\ncommon_1.Common.switchToCustomer(customer2Name);\ncy.get('span:contains(\"' + customer2Name + '\")').should('exist');\ncy.visit(baseUrl + '/organization/organizationDetails');\ncy.wait(configFile.smallTimeout);\ncy.get('[value=\"' + customer2Name + '\"]').should('exist');\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "ea151cb0-dca5-47b4-b5c5-d4166f85ec01",
+              "parentUUID": "b307222f-3e04-4cfc-ba2b-5150f220c17b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login with Facility admin and User",
+              "fullTitle": "ECP-T3058 - Switch Customer Context for User with Multiple Customer Login with Facility admin and User",
+              "timedOut": null,
+              "duration": 139489,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login as Facility admin\ncommon_1.Common.login(customerName, facilityAdmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facilityAdmin, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncy.get('span:contains(\"' + customerName + '\")').should('exist');\ncommon_1.Common.navigateTo('Dashboard');\ncy.get('span:contains(\"' + customerName + '\")').should('exist');\ncommon_1.Common.switchToCustomer(customer2Name);\ncy.get('span:contains(\"' + customer2Name + '\")').should('exist');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\n// Login as User\ncommon_1.Common.login(customerName, stdUser, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(stdUser, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncy.get('span:contains(\"' + customerName + '\")').should('exist');\ncommon_1.Common.navigateTo('Dashboard');\ncy.get('span:contains(\"' + customerName + '\")').should('exist');\ncommon_1.Common.switchToCustomer(customer2Name);\ncy.get('span:contains(\"' + customer2Name + '\")').should('exist');\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "9eb9e32b-998e-4eab-9aad-ae83767b2a14",
+              "parentUUID": "b307222f-3e04-4cfc-ba2b-5150f220c17b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Post step - Cleanup",
+              "fullTitle": "ECP-T3058 - Switch Customer Context for User with Multiple Customer Post step - Cleanup",
+              "timedOut": null,
+              "duration": 7011,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName1_1, false);\nmeteor_1.Meteor.changeFacilityStatus(facilityName1_2, false);\nmeteor_1.Meteor.changeFacilityStatus(facilityName2_1, false);\nmeteor_1.Meteor.changeFacilityStatus(facilityName2_2, false);",
+              "err": {},
+              "uuid": "04c9c783-d214-49a2-a37e-7728d11803ed",
+              "parentUUID": "b307222f-3e04-4cfc-ba2b-5150f220c17b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ea151cb0-dca5-47b4-b5c5-d4166f85ec01",
+            "9eb9e32b-998e-4eab-9aad-ae83767b2a14",
+            "04c9c783-d214-49a2-a37e-7728d11803ed"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 407439,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

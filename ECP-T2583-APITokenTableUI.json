@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:04:11.318Z",
+    "end": "2024-12-15T02:07:51.681Z",
+    "duration": 220363,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a9ccb34b-85d3-492f-8a25-e8335818acd1",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2583-APITokenTableUI.spec.ts",
+      "file": "cypress/test-suites/ECP-T2583-APITokenTableUI.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5e31170b-8979-440a-929f-6334034647db",
+          "title": "ECP-T2583 - API Token Table UI",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Test Preparation - Before Step",
+              "fullTitle": "ECP-T2583 - API Token Table UI Test Preparation - Before Step",
+              "timedOut": null,
+              "duration": 101551,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowPushToPACS: true,\n    allowTagEditing: true,\n    allowAPIs: true,\n    allowNixViewerApi: true,\n    allowWorkstationViewer: true\n}, facilityName);",
+              "err": {},
+              "uuid": "63b0e26f-9215-4fcc-a589-039a9ea7ab05",
+              "parentUUID": "5e31170b-8979-440a-929f-6334034647db",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T2583 - API Token Table UI - Steps 1 - 2",
+              "fullTitle": "ECP-T2583 - API Token Table UI ECP-T2583 - API Token Table UI - Steps 1 - 2",
+              "timedOut": null,
+              "duration": 99930,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Integration');\ncy.get(api.apiAccessTab).should('exist');\ncommon_1.Common.switchTab('API Access');\n// Step 1 - Click the COPY button, verify the copied API token can be pasted in another location and is correct.\n// Cannot test copy functionality via cypress\n// Craete two API tokens with one minute difference\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.createAPIToken('token_1').then(function (res) {\n    console.log('token: ', res.token, ' , orgId: ', res.orgId);\n}).catch(function (err) {\n    console.log(err);\n});\n//cy.get('.apiAccess .data-tables table tbody:nth-child(3) tr.tokenRowActions td:nth-child(1)',{ timeout: configFile.longTimeout }).should('contain.text', 'token_1',{ timeout: configFile.longTimeout });\n//cy.get('.tokenRowActions > :nth-child(1)',{ timeout: configFile.longTimeout }).should('contain.text', 'token_1',{ timeout: configFile.longTimeout });\ncy.get(':nth-child(2) > .tokenRowActions > :nth-child(1)', { timeout: configFile.longTimeout }).should('contain.text', 'token_1', { timeout: configFile.longTimeout });\n//need to wait at least one minute to sort on created date\ncy.wait(60000);\ncommon_1.Common.createAPIToken('token_2').then(function (res) {\n    console.log('token: ', res.token, ' , orgId: ', res.orgId);\n}).catch(function (err) {\n    console.log(err);\n});\n//  cy.wait(configFile.smallTimeout);\n// Step 3 - Verify the list API access tokens is sorted with the most recently created tokens at the top of the table.\ncy.get(':nth-child(2) > .tokenRowActions > :nth-child(1)', { timeout: configFile.longTimeout }).should('contain.text', 'token_2', { timeout: configFile.longTimeout });\n// cy.get('.apiAccess .data-tables table tbody:nth-child(3) tr.tokenRowActions td:nth-child(1)').should('contain.text', 'token_1');\n// Step 2 - Verify the displayed list of tokens can be sorted by \"Created At\".\ncy.get('.apiAccess .data-tables table .table-col-createdAt a').click();\ncy.get(':nth-child(2) > .tokenRowActions > :nth-child(1)', { timeout: configFile.longTimeout }).should('contain.text', 'token_1', { timeout: configFile.longTimeout });\ncy.get(':nth-child(3) > .tokenRowActions > :nth-child(1)', { timeout: configFile.longTimeout }).should('contain.text', 'token_2', { timeout: configFile.longTimeout });\ncy.get('.apiAccess .data-tables table .table-col-createdAt a').click();\ncy.get(':nth-child(2) > .tokenRowActions > :nth-child(1)', { timeout: configFile.longTimeout }).should('contain.text', 'token_2'), { timeout: configFile.longTimeout };\ncy.get(':nth-child(3) > .tokenRowActions > :nth-child(1)', { timeout: configFile.longTimeout }).should('contain.text', 'token_1'), { timeout: configFile.longTimeout };",
+              "err": {},
+              "uuid": "2c3e0c08-90b5-4154-8cf9-37bace0970e4",
+              "parentUUID": "5e31170b-8979-440a-929f-6334034647db",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2583 - API Token Table UI Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7241,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "ba72ca51-a074-4678-b69f-7865fdc26846",
+              "parentUUID": "5e31170b-8979-440a-929f-6334034647db",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "63b0e26f-9215-4fcc-a589-039a9ea7ab05",
+            "2c3e0c08-90b5-4154-8cf9-37bace0970e4",
+            "ba72ca51-a074-4678-b69f-7865fdc26846"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 208722,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

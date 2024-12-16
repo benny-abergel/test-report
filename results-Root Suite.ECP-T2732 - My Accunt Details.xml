@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="167.089" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:36:24" tests="0" file="cypress/e2e/test-suites/ECP-T2732-MyAccountDetails.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2732 - My Accunt Details" timestamp="2024-12-15T03:36:24" tests="2" time="167.068" failures="0">
+    <testcase name="Step 1 - 17" time="148.108" classname="ECP-T2732 - My Accunt Details">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.992" classname="ECP-T2732 - My Accunt Details">
+    </testcase>
+  </testsuite>
+</testsuites>

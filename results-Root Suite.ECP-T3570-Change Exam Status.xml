@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="1389.093" tests="13" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:52:57" tests="0" file="cypress/e2e/test-suites/ECP-T3570-ChangeExamStatus.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3570-Change Exam Status" timestamp="2024-12-15T02:52:57" tests="13" time="1389.077" failures="0">
+    <testcase name="ECP-T3570 - data prep" time="85.794" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+    <testcase name="Step 3" time="151.463" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+    <testcase name="Step 4" time="32.581" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+    <testcase name="Steps 5-6" time="31.338" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+    <testcase name="Step 7" time="155.865" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+    <testcase name="Step 9" time="74.299" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+    <testcase name="Step 10" time="20.988" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+    <testcase name="Step 11" time="74.080" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+    <testcase name="Step 12" time="121.214" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+    <testcase name="Step 13" time="148.360" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+    <testcase name="Steps 14-16" time="169.385" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+    <testcase name="Steps 17-24" time="190.475" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.995" classname="ECP-T3570-Change Exam Status">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="329.611" tests="2" failures="1">
+  <testsuite name="" timestamp="2024-12-15T03:51:42" tests="0" file="cypress/e2e/test-suites/ECP-T2803-UserManagement.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2803 - System Admin - User Management" timestamp="2024-12-15T03:51:42" tests="2" time="0.000" failures="1">
+    <testcase name="Step 1 - 37" time="230.086" classname="ECP-T2803 - System Admin - User Management">
+      <failure message="Timed out retrying after 60000ms: expected &apos;&lt;button.btn.btn-primary.save-account-info.confirm-popover-btn&gt;&apos; to be &apos;enabled&apos;" type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 60000ms: expected '<button.btn.btn-primary.save-account-info.confirm-popover-btn>' to be 'enabled'
+    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2803-UserManagement.spec.ts:137:39)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

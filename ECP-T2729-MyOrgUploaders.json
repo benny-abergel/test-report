@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:14:21.288Z",
+    "end": "2024-12-15T02:16:46.957Z",
+    "duration": 145669,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a124ad25-a111-460c-997f-047c6b0e7627",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2729-MyOrgUploaders.spec.ts",
+      "file": "cypress/test-suites/ECP-T2729-MyOrgUploaders.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "45f98a92-0e58-4df7-8e4d-b592b73bed64",
+          "title": "ECP-T2729 - My Org Uploader Options",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verify Uploader Option elements, verify patient/MRN study modification options on Uploader page based on Uploader Mode",
+              "fullTitle": "ECP-T2729 - My Org Uploader Options Verify Uploader Option elements, verify patient/MRN study modification options on Uploader page based on Uploader Mode",
+              "timedOut": null,
+              "duration": 125688,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var _this = this;\n// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n//Set Exam and Guest uploader options in features\nmeteor_1.Meteor.changeFeatures({\n    allowCdUploader: true,\n    allowGuestUploader: true\n}, facilityName);\n// Navigate to My Org > Uploaders and verify both uploader TABs exist\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Uploaders');\ncy.waitUntil(function () { return cy.get(upl.settings).should('exist'); });\ncy.waitUntil(function () { return cy.get(upl.guestSettings).should('exist'); });\n//The correct elements exist on the Settings TAB\ncy.get(upl.helpIconButton).eq(0).should('be.visible');\ncy.get(upl.helpIconButton).eq(0).click();\ncy.get(upl.helpIconText).should('contain.text', 'This option sets the behavior of the exam uploader.');\ncy.get(upl.showAttachments).should('be.visible');\ncy.get(upl.helpIconButton).eq(1).should('be.visible');\ncy.get(upl.helpIconButton).eq(1).click();\ncy.get(upl.helpIconText).should('contain.text', 'Allow attachments to be added to exams in the uploader workflow.');\ncy.get(upl.cancelButton).should('be.visible');\ncy.get(upl.saveButton).should('be.visible');\n//Discard dialog displays with correct elements\ncy.get(upl.showAttachments).click();\ncy.get(upl.cancelButton).click();\ncy.get(upl.discardPopOverDialog).should('contain.text', 'Do you want to Discard Changes?');\ncy.get(upl.discardNoButton).should('be.visible');\ncy.get(upl.discardYesButton).should('be.visible');\ncy.get(upl.discardYesButton).click();\n//Go to Guest TAB, verify correct elements exist, add a new Guest Uploader\ncommon_1.Common.switchTab('Guest');\ncy.get(upl.addGuestUploaderButton).should('be.visible');\ncy.get(upl.rtColumnHeaderSourceName).should('be.visible').should('contain.text', 'Source Name');\ncy.get(upl.rtColumnHeaderURL).should('be.visible').should('contain.text', 'URL');\ncy.get(upl.rtColumnHeaderActions).should('be.visible').should('contain.text', 'actions');\ncy.get(upl.addGuestUploaderButton).click();\ncy.get(upl.createNewGuestUploaderDialog).should('be.visible').should('contain.text', 'Create New Guest Uploader');\ncy.waitUntil(function () { return cy.get(upl.inputNewGuestUploaderSourceName).should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(upl.inputNewGuestUploaderSourceName).type('{selectall}Add Guest Uploader', { force: true });\ncy.get(upl.popUpSaveButton).click();\ncy.get(upl.copyNewGuestURLButton).should('be.visible');\ncy.get(upl.popUpCancelNoButton).click();\n//Find newly added Guest Uploader and delete\ncy.get(upl.sourceNameFilter).type('{selectall}Add Guest Uploader', { force: true });\ncy.get(upl.deleteGuestUploader).first().click();\ncy.waitUntil(function () { return cy.get(upl.confirmdeleteButton).should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.get(upl.confirmdeleteButton).should('be.visible');\ncy.get(upl.confirmdeleteButton).click();\n//New Facility will have a default of Pass-Through for Uploader Mode\n//Display Uploader Page \ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.wait(configFile.smallTimeout);\n// Confirm move to uploader page\ncy.get('body').then(function (el) {\n    if (el.find('[data-cy=uploadToTitle]').length > 0) {\n        cy.wait(2000);\n        cy.waitUntil(function () { return cy.get('[data-cy=uploadToTitle]')\n            .invoke('text')\n            .should('equal', 'Upload Exams to'); });\n        cy.get('[data-cy=selectFolderButton]')\n            .click();\n        //Upload study\n        selectDicom({ filePaths: _this.datasetsArray });\n        //Confirm Pass-Through Uploader Page\n        cy.waitUntil(function () { return cy.get(upl.wizardStepOneInstructions, { timeout: configFile.hugeTimeout }).should('be.visible').should('contain', 'Select the exams to include in the upload.'); });\n        cy.get(upl.studyList, { timeout: configFile.longTimeout }).should('be.visible');\n        cy.get(upl.studyListHeaderCheckbox).should('be.visible');\n        cy.get(upl.studyListHeaderPatient).should('be.visible').should('contain', 'Patient');\n        cy.get(upl.studyListHeaderDescription).should('be.visible').should('contain', 'Description');\n        cy.get(upl.studyListHeaderUploaded).should('be.visible').should('contain', 'Uploaded');\n        //  cy.get(upl.studyListHeaderAction).should('not.be.visible');\n        //  cy.get(upl.wizardStepTwo).should('not.be.visible');\n        cy.wait(configFile.smallTimeout);\n    }\n});\n//Set Uploader Mode to Edit Exam\ncy.visit(\"\".concat(configFile.url, \"/studies\"));\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Uploaders');\ncy.get(upl.uploaderDropDownList).click();\ncy.get(upl.uploaderChoiceEditExam).click();\ncy.get(upl.saveButton).click();\ncy.wait(configFile.smallTimeout);\ncy.wait(configFile.smallTimeout);\n//Display Uploader Page\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('[data-cy=uploadToTitle]').length > 0) {\n        cy.wait(2000);\n        // Confirm move to uploader\n        cy.waitUntil(function () { return cy.get('[data-cy=uploadToTitle]')\n            .invoke('text')\n            .should('equal', 'Upload Exams to'); });\n        cy.get('[data-cy=selectFolderButton]')\n            .click();\n        //Upload study\n        selectDicom({ filePaths: _this.datasetsArray });\n        //Confirm Edit Exam Uploader Page\n        cy.waitUntil(function () { return cy.get(upl.wizardStepOneInstructions, { timeout: configFile.hugeTimeout }).should('be.visible').should('contain', 'Select the exams to include in the upload.'); });\n        cy.get(upl.studyList, { timeout: configFile.longTimeout }).should('be.visible');\n        cy.get(upl.studyListHeaderCheckbox).should('be.visible');\n        cy.get(upl.studyListHeaderPatient).should('be.visible').should('contain', 'Patient');\n        cy.get(upl.studyListHeaderDescription).should('be.visible').should('contain', 'Description');\n        cy.get(upl.studyListHeaderUploaded).should('be.visible').should('contain', 'Uploaded');\n        cy.get(upl.studyListHeaderAction).should('be.visible').should('contain', 'Action');\n        cy.get(upl.wizardStepTwo).should('be.visible').should('contain', '2');\n        cy.get(upl.wizardStepTwoInstructions).should('be.visible').should('contain', 'Select patient information');\n        cy.get(upl.selectPatientDropDown).should('be.visible');\n        cy.get(upl.editPatientButton).should('be.visible');\n    }\n});\n//Set Uploader Mode to MRN Entry\ncy.visit(\"\".concat(configFile.url, \"/studies\"));\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Uploaders');\ncy.get(upl.uploaderDropDownList).click();\ncy.get(upl.uploaderChoiceMRNEntry).click();\ncy.get(upl.saveButton).click();\ncy.wait(configFile.smallTimeout);\ncy.wait(configFile.smallTimeout);\n//Display Uploader Page\ncy.visit(\"\".concat(configFile.url, \"/uploader\"));\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (el) {\n    if (el.find('[data-cy=uploadToTitle]').length > 0) {\n        cy.wait(2000);\n        // Confirm move to uploader\n        cy.waitUntil(function () { return cy.get('[data-cy=uploadToTitle]')\n            .invoke('text')\n            .should('equal', 'Upload Exams to'); });\n        cy.get('[data-cy=selectFolderButton]')\n            .click();\n        //Upload study\n        selectDicom({ filePaths: _this.datasetsArray });\n        //Confirm MRN Entry Uploader Page\n        cy.waitUntil(function () { return cy.get(upl.wizardStepOneInstructions, { timeout: configFile.hugeTimeout }).should('be.visible').should('contain', 'Select the exams to include in the upload.'); });\n        cy.get(upl.studyList, { timeout: configFile.longTimeout }).should('be.visible');\n        cy.get(upl.studyListHeaderCheckbox).should('be.visible');\n        cy.get(upl.studyListHeaderPatient).should('be.visible').should('contain', 'Patient');\n        cy.get(upl.studyListHeaderDescription).should('be.visible').should('contain', 'Description');\n        cy.get(upl.studyListHeaderUploaded).should('be.visible').should('contain', 'Uploaded');\n        // cy.get(upl.studyListHeaderAction).should('not.be.visible');\n        cy.wait(configFile.smallTimeout);\n        cy.get(upl.wizardStepTwo).should('be.visible').should('contain', '2');\n        //These step 2 instructions are specific to this upload as there are 2 different patient names listed\n        cy.get(upl.wizardStepTwoInstructions).should('be.visible').should('contain', 'Select patient information and enter MRN for upload.');\n        cy.get(upl.selectPatientDropDown).should('be.visible');\n        cy.get(upl.mrnInputField).should('be.visible');\n    }\n});\n//Go back to Studies page, change facility to inactive and logout\ncy.visit(\"\".concat(configFile.url, \"/studies\"));",
+              "err": {},
+              "uuid": "5c409e5d-032e-4bfa-b186-94000ce5a4c6",
+              "parentUUID": "45f98a92-0e58-4df7-8e4d-b592b73bed64",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2729 - My Org Uploader Options Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7424,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "e45628ea-0f97-4fbd-8a64-cb0a367f3556",
+              "parentUUID": "45f98a92-0e58-4df7-8e4d-b592b73bed64",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5c409e5d-032e-4bfa-b186-94000ce5a4c6",
+            "e45628ea-0f97-4fbd-8a64-cb0a367f3556"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 133112,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

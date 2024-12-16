@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:22:44.513Z",
+    "end": "2024-12-15T03:24:33.040Z",
+    "duration": 108527,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "09acfea1-d6f4-4ff8-9291-31fba536f9b9",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2723-My OrgIntegrationIntegrated Domains.spec.ts",
+      "file": "cypress/test-suites/ECP-T2723-My OrgIntegrationIntegrated Domains.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f347f39e-ac1e-4a1f-bb3d-fa0c38b01f2f",
+          "title": "ECP-T2723 - Integrated Domain",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 to 15",
+              "fullTitle": "ECP-T2723 - Integrated Domain Step 1 to 15",
+              "timedOut": null,
+              "duration": 92100,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Sharing List');\nmeteor_1.Meteor.changeFeatures({\n    allowEdgeServer: true,\n    allowDICOMReceive: true,\n    allowQueryRetrieve: true,\n    allowNucleusIoQueryRetrieve: true,\n    allowModalityWorklist: true,\n    allowReportQuerySources: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\n// Step 1 and 2\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Integration');\ncommon_1.Common.switchTab('Integrated Domains');\n// Step 3,4 and 5\ncy.get('.url-cell').should('exist');\ncy.get('.action-cell').should('exist');\ncy.get('.add-integrated-domain').should('exist').click();\ncy.get('#domainUrl').should('exist');\ncy.get('.js-close-edit-domain-popover').should('exist');\ncy.get('.add-domain').should('exist');\ncy.get('.js-close-edit-domain-popover').click();\n// Step 6,7 and 8\ncy.get('.add-integrated-domain').click();\ncy.get('.add-domain').should('be.disabled');\ncy.get('#domainUrl').type('test');\ncy.get('.add-domain').click();\n// Step 9, 10, 11 and 12\ncy.get('.edit-integrated-domain').click();\ncy.get('#domainUrl').clear().type('Edited details');\ncy.get('.js-close-edit-domain-popover').click();\ncy.get('td:contains(\"test\")').should('exist');\ncy.get('.edit-integrated-domain').click();\ncy.get('#domainUrl').clear().type('Edited details');\ncy.get('.popover-btn-group > .btn-primary').click();\ncy.reload();\ncommon_1.Common.switchTab('Integrated Domains');\ncy.get('td:contains(\"Edited details\")').should('exist');\n// Step 13 and 14\ncy.get('.add-integrated-domain').click();\ncy.get('#domainUrl').type('statrad.com');\ncy.get('.add-domain').click();\ncy.get('td:contains(\"statrad.com\")').should('exist');\ncy.get('.add-integrated-domain').click();\ncy.get('#domainUrl').type('statrad.com');\ncy.get('.add-domain').click({ force: true });\ncy.get('div:contains(\"An Integrated Domain with this name already exists.\")');\n// Step 15\ncy.get('.delete-integrated-domain').eq(0).click();\ncy.get('p:contains(\"Do you want to delete this domain?\")').should('exist');\ncy.get('.popover-btn-group > .btn-default').should('exist');\ncy.get('#confirm-deleteDomain').should('exist');\ncy.get('#confirm-deleteDomain').click();\ncy.get('td:contains(\"Edited details\")').should('not.exist');",
+              "err": {},
+              "uuid": "664a0fc1-f03e-4740-883f-1c6502565160",
+              "parentUUID": "f347f39e-ac1e-4a1f-bb3d-fa0c38b01f2f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2723 - Integrated Domain Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7767,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "4eccf4d2-087e-4bda-aa17-216fb7a20ece",
+              "parentUUID": "f347f39e-ac1e-4a1f-bb3d-fa0c38b01f2f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "664a0fc1-f03e-4740-883f-1c6502565160",
+            "4eccf4d2-087e-4bda-aa17-216fb7a20ece"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 99867,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

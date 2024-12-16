@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="134.648" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:48:32" tests="0" file="cypress/e2e/test-suites/ECP-T3260- User is checking the UI of patient jacket.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3260- User is checking the UI of patient jacket" timestamp="2024-12-15T03:48:32" tests="3" time="134.598" failures="0">
+    <testcase name="ECP-T3260 - data prep" time="91.473" classname="ECP-T3260- User is checking the UI of patient jacket">
+    </testcase>
+    <testcase name="Step 3-5" time="33.753" classname="ECP-T3260- User is checking the UI of patient jacket">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.607" classname="ECP-T3260- User is checking the UI of patient jacket">
+    </testcase>
+  </testsuite>
+</testsuites>

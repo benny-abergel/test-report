@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="122.512" tests="13" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:19:41" tests="0" file="cypress/e2e/test-suites/ECP-T2776-SessionAPI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2776 - Session API " timestamp="2024-12-15T03:19:41" tests="13" time="122.484" failures="0">
+    <testcase name="Generating Session ID" time="88.780" classname="ECP-T2776 - Session API ">
+    </testcase>
+    <testcase name="Verifying list of the current available services" time="0.738" classname="ECP-T2776 - Session API ">
+    </testcase>
+    <testcase name="Verifying a service login" time="0.933" classname="ECP-T2776 - Session API ">
+    </testcase>
+    <testcase name="Verifying a list of the current sessions" time="0.615" classname="ECP-T2776 - Session API ">
+    </testcase>
+    <testcase name="List of the current login" time="0.759" classname="ECP-T2776 - Session API ">
+    </testcase>
+    <testcase name="List of the current sessions for an organization" time="0.738" classname="ECP-T2776 - Session API ">
+    </testcase>
+    <testcase name="List of the current service logins" time="0.763" classname="ECP-T2776 - Session API ">
+    </testcase>
+    <testcase name="study information API" time="0.850" classname="ECP-T2776 - Session API ">
+    </testcase>
+    <testcase name="Verify a service can be logged out" time="0.720" classname="ECP-T2776 - Session API ">
+    </testcase>
+    <testcase name="Verify the service is logged out" time="0.703" classname="ECP-T2776 - Session API ">
+    </testcase>
+    <testcase name="Verify a session can be logged out." time="0.906" classname="ECP-T2776 - Session API ">
+    </testcase>
+    <testcase name="Verify the recently deleted session is no longer logged in " time="0.731" classname="ECP-T2776 - Session API ">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.396" classname="ECP-T2776 - Session API ">
+    </testcase>
+  </testsuite>
+</testsuites>

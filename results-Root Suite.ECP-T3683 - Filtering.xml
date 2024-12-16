@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="655.682" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:38:09" tests="0" file="cypress/e2e/test-suites/ECP-T3683-AssigningExams.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3683 - Filtering" timestamp="2024-12-15T02:38:09" tests="3" time="655.650" failures="0">
+    <testcase name="ECP-T3683 - data prep" time="141.130" classname="ECP-T3683 - Filtering">
+    </testcase>
+    <testcase name="ECP-T3683 - step 1 - 22" time="483.408" classname="ECP-T3683 - Filtering">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="9.946" classname="ECP-T3683 - Filtering">
+    </testcase>
+  </testsuite>
+</testsuites>

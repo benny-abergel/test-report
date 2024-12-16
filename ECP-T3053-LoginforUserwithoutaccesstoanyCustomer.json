@@ -1,0 +1,111 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:34:37.909Z",
+    "end": "2024-12-15T03:36:34.758Z",
+    "duration": 116849,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "88811556-6618-45fc-bb2e-01e8efda622b",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3053-LoginforUserwithoutaccesstoanyCustomer.spec.ts",
+      "file": "cypress/test-suites/ECP-T3053-LoginforUserwithoutaccesstoanyCustomer.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "663aa176-caab-4d45-b8b3-466f01770272",
+          "title": "ECP-T3053 - Login for User without access to any Customer",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1-4",
+              "fullTitle": "ECP-T3053 - Login for User without access to any Customer Step 1-4",
+              "timedOut": null,
+              "duration": 108197,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\n// cy.wrap(m.disableAllFacilities(customerName,'not-use-Facility'),{timeout:configFile.hugeTimeout});\ncy.wrap(meteor_1.Meteor.changeFacilityStatus(facilityName, false), { timeout: configFile.hugeTimeout });\ncy.wrap(meteor_1.Meteor.changeFacilityStatus(customerName + '-Facility', false), { timeout: configFile.hugeTimeout });\ncy.reload();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('Customers');\ncy.waitUntil(function () { return cy.get('.rt-tr > .action-cell > .btn').eq(0).should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.form-control').eq(0).type(\"\".concat(customerName, \"{enter}\"));\ncy.wait(configFile.smallTimeout);\ncy.get('.action-cell > .btn').click();\ncy.get('.js-status-btn').uncheck();\ncy.get('.btn--with-spinner').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncy.get('#emailAddress').type(custadmin);\ncy.get('#at-btn').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('#password').type(password);\ncy.get('#at-btn').click({ force: true });\ncy.wait(3000);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(custadmin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('div:contains(\"There are no customers for you to select. Contact your administrator\")').should('exist');\ncy.get('#noCusomerBtn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('h3:contains(\"Sign in to your account\")').should('exist');\ncy.reload();\ncy.get('#emailAddress').type(facadmin);\ncy.get('#at-btn').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('#password').type(password);\ncy.get('#at-btn').click({ force: true });\ncy.wait(3000);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(facadmin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('div:contains(\"There are no customers for you to select. Contact your administrator\")').should('exist');\ncy.get('#noCusomerBtn').click();\ncy.get('h3:contains(\"Sign in to your account\")').should('exist');",
+              "err": {},
+              "uuid": "8f241697-f876-4a32-952f-d2fef69ff44f",
+              "parentUUID": "663aa176-caab-4d45-b8b3-466f01770272",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8f241697-f876-4a32-952f-d2fef69ff44f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 108197,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

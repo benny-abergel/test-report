@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:04:12.047Z",
+    "end": "2024-12-15T02:10:35.875Z",
+    "duration": 383828,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a500ca94-41a6-438e-ae2d-f7fc13553d84",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2668-FeatureSwitch-API.spec.ts",
+      "file": "cypress/test-suites/ECP-T2668-FeatureSwitch-API.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ba37d44f-e5e6-46e1-bef8-1b07248fd753",
+          "title": "ECP-T2668 - Feature Switch - API",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting Feature Switch - API Test - Steps 1-3",
+              "fullTitle": "ECP-T2668 - Feature Switch - API Starting Feature Switch - API Test - Steps 1-3",
+              "timedOut": null,
+              "duration": 156171,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "var date = Date.now();\nfacilityName = \"facility_\".concat(date);\nfacility2Name = \"facility_2_\".concat(date);\nfacility3Name = \"facility_3_\".concat(date);\ncy.log(facilityName);\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Part of Step 7 - Verify when a new organization is created the system level feature switch value for API is inherited by the new organization.\nmeteor_1.Meteor.systemFeatureSwitch({ allowAPIs: true });\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\n//c.toggleFeature('allowAPIs', true);\ncy.get('.checkboxTree input[data-key=\"allowAPIs\"]').should('be.checked');\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facilityName), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.verifyFeatureToggle('allowAPIs');\n// Step 1 - Using a system admin account, navigate to system admin > system  settings > features tab and verify the feature switch for API is present.\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureToggle('allowAPIs');\n// Step 2 - Verify the feature switch can be enabled and disabled at the system level.\nmeteor_1.Meteor.systemFeatureSwitch({ allowAPIs: false });\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureToggle('allowAPIs', false);\nmeteor_1.Meteor.systemFeatureSwitch({ allowAPIs: true });\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\n// Step 3 -Navigate to the My org > admin settings > features page and verify the API feature switch is present.\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "cfbb5d57-2d67-462b-bfd8-92e9e45345d4",
+              "parentUUID": "ba37d44f-e5e6-46e1-bef8-1b07248fd753",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "4 to 7",
+              "fullTitle": "ECP-T2668 - Feature Switch - API 4 to 7",
+              "timedOut": null,
+              "duration": 104344,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.verifyFeatureToggle('allowAPIs');\n// Step 4 - Verify the feature switch can be enabled and disabled at the organization level.\nmeteor_1.Meteor.changeFeatures({ allowAPIs: false }, facility2Name);\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.verifyFeatureToggle('allowAPIs', false);\n// Step 5 - With the API feature switch disabled for the organization, verify the API Access tab is hidden on the My Org > Integration Page.\nmeteor_1.Meteor.changeFeatures({ 'allowEdgeServer': true, allowAPIs: false }, facility2Name);\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Integration');\ncy.get('#apiAccess').should('not.exist');\n// Step 6 - Enable the API feature switch at the organization level and verify the API Access tab is visible on the My Org > Integration Page.\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\nmeteor_1.Meteor.changeFeatures({ allowAPIs: true }, facility2Name);\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Integration');\ncy.get('#apiAccess').should('exist');\n// Step 7 - Verify when a new organization is created the system level feature switch value for API is inherited by the new organization.\ncommon_1.Common.switchToCustomer('System');\nmeteor_1.Meteor.systemFeatureSwitch({ allowAPIs: false });\ncy.wait(configFile.smallTimeout);\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility3Name), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facility3Name);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Admin Settings');\ncommon_1.Common.switchTab('Features');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.verifyFeatureToggle('allowAPIs', false);",
+              "err": {},
+              "uuid": "459aa8f3-1d49-4eb7-ad6a-690269d6b588",
+              "parentUUID": "ba37d44f-e5e6-46e1-bef8-1b07248fd753",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 8-9",
+              "fullTitle": "ECP-T2668 - Feature Switch - API Step 8-9",
+              "timedOut": null,
+              "duration": 85886,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n// Step 8 - Enable the API feature switch at the organizational level for the sample organization, create an API token, verify the API token can be used for the listed API and returns the expected results.\nmeteor_1.Meteor.changeFeatures({ allowAPIs: true }, facilityName);\ncy.wait(configFile.smallTimeout);\ncy.reload();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    var header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    // create Patient\n    cy.request({\n        url: patientUrl,\n        method: 'POST',\n        body: {\n            dataSourceSystemName: 'cypress-e2e-test',\n            patientInfo: {\n                mrn: 'testmrn',\n                name: 'test',\n                birthDate: '1111111',\n                patientSex: 'M'\n            },\n            patientVisit: {\n                admitDateTime: '20190101201212',\n                dischargeDateTime: ''\n            }\n        },\n        headers: header\n    }).then(function (response) {\n        expect(response.status).to.equals(200);\n    });\n    // Step 9 - Disable the API feature at the organizational level, verify the previously used API token fails for the listed API and returns the expected results.\n    common_1.Common.navigateTo('My Facility');\n    common_1.Common.navigateTo('Admin Settings');\n    common_1.Common.switchTab('Features');\n    meteor_1.Meteor.changeFeatures({ allowWorklist: false,\n        allowAPIs: false,\n        allowHl7: false }, facilityName);\n    cy.wait(configFile.smallTimeout);\n    cy.reload();\n    common_1.Common.navigateTo('My Facility');\n    common_1.Common.navigateTo('Admin Settings');\n    common_1.Common.switchTab('Features');\n    cy.wait(configFile.smallTimeout);\n    common_1.Common.verifyFeatureToggle('allowAPIs', false);\n    cy.wait(configFile.mediumTimeout);\n    common_1.Common.logout();\n});",
+              "err": {},
+              "uuid": "11cf4e99-370d-4535-9d5b-f52e31fa6fa0",
+              "parentUUID": "ba37d44f-e5e6-46e1-bef8-1b07248fd753",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "API call with disabled API feature",
+              "fullTitle": "ECP-T2668 - Feature Switch - API API call with disabled API feature",
+              "timedOut": null,
+              "duration": 2521,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.wait(configFile.smallTimeout);\nvar header = {\n    Authorization: \"Bearer \".concat(token),\n    Accept: 'application/json; charset=utf-8',\n    'Content-Type': 'application/json; charset=utf-8'\n};\ncy.log(token);\ncy.request({\n    url: procedureUrl,\n    method: 'POST',\n    failOnStatusCode: false,\n    body: {\n        dataSourceSystemName: 'cypress-e2e-test',\n        patientInfo: {\n            mrn: mrn,\n            name: patientName,\n            birthDate: patientDOB,\n            patientSex: 'M'\n        },\n        patientVisit: {\n            admitDateTime: '20190101201212',\n            dischargeDateTime: ''\n        },\n        procedureInfo: {\n            \"accessionNumber\": accession,\n            \"procedureCode\": \"CAPC\",\n            \"procedureDescription\": \"CTA CHEST\",\n            \"procedureStatus\": 'Ordered',\n            \"reasonForExam\": \"\",\n            \"relevantClinicalInfo\": \"<NTE.3.1>CREATED BY LOAD SCRIPT - Clinical Indications for requested exam: patient developed foul tasting drainage after dental surgery eval for infection or other abnormality .</NTE.3.1><NTE.3.1>Information desired from requested exam: DX .</NTE.3.1>\",\n            \"orderingDepartment\": \"\",\n            modality: modality,\n            \"bodyPart\": \"\",\n            \"priority\": \"R\",\n            \"scheduledDateTime\": \"\",\n            \"startedDateTime\": '20190504201212',\n            \"completedDateTime\": \"\",\n            \"cancelledDateTime\": \"\",\n            \"requestingPhysicianName\": \"Bruce^Banner^^MD^\",\n            \"referringPhysicianName\": \"ASDF^ASDF^ASDFE^^\",\n            \"attendingPhysicianName\": \"\",\n            \"technologist\": \"\",\n            \"visitClass\": \"\",\n            \"visitNumber\": \"\",\n            \"visitPrimaryLocation\": \"RAD\",\n            \"visitCurrentLocation\": \"\"\n        }\n    },\n    headers: header\n}).then(function (response) {\n    expect(response.status).to.equals(200);\n});",
+              "err": {},
+              "uuid": "c0d1cfcf-1e9d-41cc-bdf6-9302c0c831fd",
+              "parentUUID": "ba37d44f-e5e6-46e1-bef8-1b07248fd753",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2668 - Feature Switch - API Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7625,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);\nmeteor_1.Meteor.changeFacilityStatus(facility3Name, false);",
+              "err": {},
+              "uuid": "d18fb197-b5cf-40d2-8a8f-84103f6369fc",
+              "parentUUID": "ba37d44f-e5e6-46e1-bef8-1b07248fd753",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "cfbb5d57-2d67-462b-bfd8-92e9e45345d4",
+            "459aa8f3-1d49-4eb7-ad6a-690269d6b588",
+            "11cf4e99-370d-4535-9d5b-f52e31fa6fa0",
+            "c0d1cfcf-1e9d-41cc-bdf6-9302c0c831fd",
+            "d18fb197-b5cf-40d2-8a8f-84103f6369fc"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 356547,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

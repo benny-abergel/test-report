@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="462.870" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:23:38" tests="0" file="cypress/e2e/test-suites/ECP-T2758-ProfessionalShareAccess.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2758 - Professional Share access Step " timestamp="2024-12-15T02:23:38" tests="3" time="462.774" failures="0">
+    <testcase name="Step 1-5" time="253.108" classname="ECP-T2758 - Professional Share access Step ">
+    </testcase>
+    <testcase name="Step 6- 12" time="186.859" classname="ECP-T2758 - Professional Share access Step ">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.775" classname="ECP-T2758 - Professional Share access Step ">
+    </testcase>
+  </testsuite>
+</testsuites>

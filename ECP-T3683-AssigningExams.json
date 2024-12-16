@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:38:09.465Z",
+    "end": "2024-12-15T02:49:05.147Z",
+    "duration": 655682,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a997f17c-f7b1-4518-9e8f-c729672c7b7f",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3683-AssigningExams.spec.ts",
+      "file": "cypress/test-suites/ECP-T3683-AssigningExams.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "67b6fa0f-725f-4cef-971e-a08322134531",
+          "title": "ECP-T3683 - Filtering",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3683 - data prep",
+              "fullTitle": "ECP-T3683 - Filtering ECP-T3683 - data prep",
+              "timedOut": null,
+              "duration": 141130,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\nloadStudyForFacility(facility_1_name);\nloadStudyForFacility(facility_2_name);",
+              "err": {},
+              "uuid": "5f7ec014-f673-432a-80d5-b60b04a65244",
+              "parentUUID": "67b6fa0f-725f-4cef-971e-a08322134531",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "ECP-T3683 - step 1 - 22",
+              "fullTitle": "ECP-T3683 - Filtering ECP-T3683 - step 1 - 22",
+              "timedOut": null,
+              "duration": 483408,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 1 - Load Worklist\ncommon_1.Common.login(customerName, ipUser1, accAdmPass);\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(ipUser1, accAdmPass));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\nclearFiltersAndSortByFacility();\nclearAllAssignes();\n// Step 2 - Assign to me - batch\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignToMe\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function ($body) {\n    if ($body.find('[data-cy=\"assignConfirmation\"]').length > 0) {\n        cy.get('.assign-to-confirmation button').last().click();\n    }\n});\n// cy.get('[data-cy=\"assignConfirmButton\"]').click();\n// cy.get('[data-cy=\"assignCancelButton\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-1-\".concat(date));\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-1-\".concat(date));\n// Step 3 - Assign to an Interpreting Provider - batch\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-2-\".concat(date, \"{enter}\"));\ncy.get('.popover-btn-group button:contains(\"Cancel\")').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-2-\".concat(date, \"{enter}\"));\ncy.get('.popover-btn-group button:contains(\"Assign\")').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function ($body) {\n    if ($body.find('[data-cy=\"assignConfirmation\"]').length > 0) {\n        cy.get('.assign-to-confirmation button').last().click();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-2-\".concat(date));\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-2-\".concat(date));\n// Step 4 - Re-assign to another Interpreting Provider - batch\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-3-\".concat(date, \"{enter}\"));\ncy.get('.popover-btn-group button:contains(\"Cancel\")').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-3-\".concat(date, \"{enter}\"));\ncy.get('.popover-btn-group button:contains(\"Assign\")').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function ($body) {\n    if ($body.find('[data-cy=\"assignConfirmation\"]').length > 0) {\n        cy.get('.assign-to-confirmation button').last().click();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-3-\".concat(date));\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-3-\".concat(date));\n// Step 5 - Un-assign - batch\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"unassign\"]').click();\ncy.get('[data-cy=\"unassignCancelButton\"]').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"unassign\"]').click();\ncy.get('[data-cy=\"unassignConfirmButton\"]').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('span[data-cy=\"assignedName-cell\"]').should('have.text', '');\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('span[data-cy=\"assignedName-cell\"]').should('have.text', '');\n// Step 6 - Assign to an Interpreting Provider - batch\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-3-\".concat(date, \"{enter}\"));\ncy.contains('One of the exams is not authorized for this user and will not be updated.').should('exist');\ncy.get('.popover-btn-group button:contains(\"Cancel\")').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-3-\".concat(date, \"{enter}\"));\ncy.contains('One of the exams is not authorized for this user and will not be updated.').should('exist');\ncy.get('.popover-btn-group button:contains(\"Assign\")').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function ($body) {\n    if ($body.find('[data-cy=\"assignConfirmation\"]').length > 0) {\n        cy.get('.assign-to-confirmation button').last().click();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find('span[data-cy=\"assignedName-cell\"]').should('have.text', '');\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-3-\".concat(date));\n// Step 7 - Re-assign to another Interpreting Provider - batch\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-2-\".concat(date, \"{enter}\"));\ncy.contains('One of the exams is not authorized for this user and will not be updated.').should('exist');\ncy.get('.popover-btn-group button:contains(\"Cancel\")').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-2-\".concat(date, \"{enter}\"));\ncy.contains('One of the exams is not authorized for this user and will not be updated.').should('exist');\ncy.get('.popover-btn-group button:contains(\"Assign\")').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function ($body) {\n    if ($body.find('[data-cy=\"assignConfirmation\"]').length > 0) {\n        cy.get('.assign-to-confirmation button').last().click();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find('span[data-cy=\"assignedName-cell\"]').should('have.text', '');\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-2-\".concat(date));\n// Step 8 - Can't assign to Admin\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"\".concat(accAdmUser, \"{enter}\"));\ncy.get('.Select-noresults').should('exist');\ncy.get('.popover-btn-group button:contains(\"Cancel\")').click();\n// Step 9 - Assignment operation failure error message\n/// NEADED TWO BROUSERS\n// Step 10 - Can't assign to inactive users\n/* cy.request({\n    method: 'POST', url: `${configFile.url}/api/organizations/${orgId[facility_1_name]}/externalassignment/add`, auth: {\n        bearer: token[facility_1_name]\n    }, headers: {\n        'Accept': 'application/json; charset=utf-8',\n        'Accept-Encoding': 'gzip, deflate, br',\n        'Content-Type': 'application/json; charset=utf-8'\n    }, body: {\n        accessionNumber: \"1000-1\", firstName: 'Natasha', lastName: 'Romanoff', assigneeId: '123'\n    }\n});\nWorklist.getRowsByMRN('1000-1').first().find('[data-cy=\"assignedName-cell\"]').should('contain.text', 'Natasha');\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({force: true});\ncy.get('.assign-to-dropdown .Select-input input').type(`Romanoff{enter}`);\n// cy.get('.Select-noresults').should('exist');\ncy.contains('One of the exams is not authorized for this user and will not be updated.').should('exist'); */\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-INACTIVE-\".concat(date, \"{enter}\"));\ncy.get('.Select-noresults').should('exist');\ncy.get('.popover-btn-group button:contains(\"Cancel\")').click();\n// Step 11 - Log in to SI PACS\ncommon_1.Common.logout();\ncommon_1.Common.login(customerName, accAdmUser, accAdmPass);\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(accAdmUser, accAdmPass));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\nclearFiltersAndSortByFacility();\nclearAllAssignes();\n// Step 12 - Assign to an Interpreting Provider - batch\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-1-\".concat(date, \"{enter}\"));\ncy.get('.popover-btn-group button:contains(\"Cancel\")').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-1-\".concat(date, \"{enter}\"));\ncy.get('.popover-btn-group button:contains(\"Assign\")').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function ($body) {\n    if ($body.find('[data-cy=\"assignConfirmation\"]').length > 0) {\n        cy.get('.assign-to-confirmation button').last().click();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-1-\".concat(date));\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-1-\".concat(date));\n// Step 13 - Re-assign to another Interpreting Provider - batch\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-2-\".concat(date, \"{enter}\"));\ncy.get('.popover-btn-group button:contains(\"Cancel\")').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-2-\".concat(date, \"{enter}\"));\ncy.get('.popover-btn-group button:contains(\"Assign\")').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function ($body) {\n    if ($body.find('[data-cy=\"assignConfirmation\"]').length > 0) {\n        cy.get('.assign-to-confirmation button').last().click();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-2-\".concat(date));\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-2-\".concat(date));\n// Step 14 - Un-assign - batch\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"unassign\"]').click();\ncy.get('[data-cy=\"unassignCancelButton\"]').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"unassign\"]').click();\ncy.get('[data-cy=\"unassignConfirmButton\"]').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('span[data-cy=\"assignedName-cell\"]').should('have.text', '');\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('span[data-cy=\"assignedName-cell\"]').should('have.text', '');\n// Step 15 - Assign to an Interpreting Provider - batch\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-3-\".concat(date, \"{enter}\"));\ncy.contains('One of the exams is not authorized for this user and will not be updated.').should('exist');\ncy.get('.popover-btn-group button:contains(\"Cancel\")').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-3-\".concat(date, \"{enter}\"));\ncy.contains('One of the exams is not authorized for this user and will not be updated.').should('exist');\ncy.get('.popover-btn-group button:contains(\"Assign\")').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function ($body) {\n    if ($body.find('[data-cy=\"assignConfirmation\"]').length > 0) {\n        cy.get('.assign-to-confirmation button').last().click();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find('span[data-cy=\"assignedName-cell\"]').should('have.text', '');\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-3-\".concat(date));\n// Step 16 - Re-assign to another Interpreting Provider - batch\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-2-\".concat(date, \"{enter}\"));\ncy.contains('One of the exams is not authorized for this user and will not be updated.').should('exist');\ncy.get('.popover-btn-group button:contains(\"Cancel\")').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-2-\".concat(date, \"{enter}\"));\ncy.contains('One of the exams is not authorized for this user and will not be updated.').should('exist');\ncy.get('.popover-btn-group button:contains(\"Assign\")').click();\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function ($body) {\n    if ($body.find('[data-cy=\"assignConfirmation\"]').length > 0) {\n        cy.get('.assign-to-confirmation button').last().click();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find('span[data-cy=\"assignedName-cell\"]').should('have.text', '');\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('span[data-cy=\"assignedName-cell\"]').should('contain.text', \"IP-2-\".concat(date));\n// Step 17 - Deactivating a user - automatic un-assignment\n// Step 18 - Assign to me isn't on the context menu for Admin\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(1).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignToMe\"]').should('not.exist');\ncy.reload();\n// Step 19 - Assignment operation failure error message\n// Step 20 - Can't assign to inactive users\n/* cy.request({\n    method: 'POST', url: `${configFile.url}/api/organizations/${orgId[facility_2_name]}/externalassignment/add`, auth: {\n        bearer: token[facility_2_name]\n    }, headers: {\n        'Accept': 'application/json; charset=utf-8',\n        'Accept-Encoding': 'gzip, deflate, br',\n        'Content-Type': 'application/json; charset=utf-8'\n    }, body: {\n        accessionNumber: \"1000-2\", firstName: 'Natalya', lastName: 'Romanov', assigneeId: '456'\n    }\n});\nclearFiltersAndSortByFacility();\nWorklist.getRowsByMRN('1000-2').last().find('[data-cy=\"assignedName-cell\"]').should('contain.text', 'Natalya');\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({force: true});\ncy.get('.assign-to-dropdown .Select-input input').type(`Romanov{enter}`);\n// cy.get('.Select-noresults').should('exist');\ncy.contains('One of the exams is not authorized for this user and will not be updated.').should('exist'); */\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(0).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find('label.nui-checkbox').click();\ncy.get('.rt-body-worklist [role=\"rowgroup\"]').eq(2).find(' span[data-cy=\"patientMrn-cell\"]').first().rightclick();\ncy.get('[data-cy=\"assignTo\"]').click();\ncy.get('.assign-to-dropdown .Select-control').should('exist');\ncy.get('.assign-to-dropdown .Select-input input').click({ force: true });\ncy.get('.assign-to-dropdown .Select-input input').type(\"IP-INACTIVE-\".concat(date, \"{enter}\"));\ncy.get('.Select-noresults').should('exist');\ncy.get('.popover-btn-group button:contains(\"Cancel\")').click();\n// Step 21 - Audit Log Report\ncy.reload();\nclearFiltersAndSortByFacility();\ncy.get(\"[data-cy=\\\"worklistTableBody\\\"] span[title=\\\"1000-1\\\"]\", { timeout: configFile.longTimeout }).first().rightclick();\ncy.get('[data-cy=\"hipaaLog\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.modal-title').should('contain.text', \"Audit Log\");\ncy.get('.rt-body-hipaa-logs-list').should('contain.text', 'Assign Exam');\ncy.get('.rt-body-hipaa-logs-list').should('contain.text', 'Unassign Exam');\ncy.get('.hipaa-logs-modal button.close').click();\n// Step 22 - GCP logs\n/// OUT OF CYPRESS SCOPE",
+              "err": {},
+              "uuid": "cd55c0e9-b0d4-401e-8d17-62ffc27b986e",
+              "parentUUID": "67b6fa0f-725f-4cef-971e-a08322134531",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3683 - Filtering Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 9946,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facility_1_name, false);\nmeteor_1.Meteor.changeFacilityStatus(facility_2_name, false);",
+              "err": {},
+              "uuid": "d0efa77d-d06e-4467-84e0-6cf5b7ce638d",
+              "parentUUID": "67b6fa0f-725f-4cef-971e-a08322134531",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5f7ec014-f673-432a-80d5-b60b04a65244",
+            "cd55c0e9-b0d4-401e-8d17-62ffc27b986e",
+            "d0efa77d-d06e-4467-84e0-6cf5b7ce638d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 634484,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

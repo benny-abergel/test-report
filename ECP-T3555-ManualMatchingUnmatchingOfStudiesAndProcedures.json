@@ -1,0 +1,269 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:38:01.192Z",
+    "end": "2024-12-15T02:47:41.271Z",
+    "duration": 580079,
+    "testsRegistered": 9,
+    "passPercent": 44.44444444444444,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 4,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "bfe6ee39-0f4c-4e36-9a21-9ed6f52560c1",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3555-ManualMatchingUnmatchingOfStudiesAndProcedures.spec.ts",
+      "file": "cypress/test-suites/ECP-T3555-ManualMatchingUnmatchingOfStudiesAndProcedures.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ee28e9a1-e303-474f-8797-5e76fffe8e57",
+          "title": "ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702)",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3555 - data prep",
+              "fullTitle": "ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702) ECP-T3555 - data prep",
+              "timedOut": null,
+              "duration": 191906,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    var e_1, _a;\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    var exams = [\n        {\n            folder: 'a-01',\n            proc: true,\n        },\n        {\n            folder: 'c-01',\n        },\n        {\n            folder: 'a-02',\n            proc: true,\n        },\n        {\n            folder: 'Bren_Christopher_CT_Maxillofacial_WO',\n        },\n        {\n            folder: 'a-17',\n        },\n        {\n            folder: 'c-38-6',\n        },\n        {\n            folder: 'c-38-6',\n            patientNameSuffix: 'b',\n            proc: true,\n        },\n        {\n            folder: 'c-38-6',\n            patientNameSuffix: 'a',\n            proc: true,\n        },\n        {\n            folder: 'a-15/related',\n        },\n    ];\n    var header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    try {\n        for (var exams_1 = __values(exams), exams_1_1 = exams_1.next(); !exams_1_1.done; exams_1_1 = exams_1.next()) {\n            var exm = exams_1_1.value;\n            //Upload study from resources folder\n            var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/\".concat(exm.folder), \" -keepAlive=1\");\n            cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n                .then(function (_a) {\n                var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n                console.log(code, stdout, stderr);\n            });\n            if (exm.proc) {\n                var patientNameSuffix = exm.patientNameSuffix || '';\n                cy.request({\n                    url: procedureUrl,\n                    method: 'POST',\n                    body: getProcedureBody('cypress-e2e-test', \"\".concat(mrn, \"-\").concat(exm.folder), patientName.replace('$$$', exm.folder + patientNameSuffix), patientDOB, '20000202111111', 'last 1 days'),\n                    headers: header\n                }).then(function (res) { });\n            }\n            common_1.Common.navigateTo('Dashboard');\n            cy.wait(configFile.tinyTimeout);\n            common_1.Common.navigateTo('Sharing List');\n            cy.wait(configFile.smallTimeout);\n        }\n    }\n    catch (e_1_1) { e_1 = { error: e_1_1 }; }\n    finally {\n        try {\n            if (exams_1_1 && !exams_1_1.done && (_a = exams_1.return)) _a.call(exams_1);\n        }\n        finally { if (e_1) throw e_1.error; }\n    }\n    addAutoMatchedStudyToProcedure(token, orgId);\n    addAutoMatchedProcedureToStudy(token, orgId);\n}).catch(function (err) {\n    console.log(err);\n});\ncommon_1.Common.navigateTo('Worklist');\ncy.wait(configFile.smallTimeout);\nmatchProcStudy(mrn + '-a-01', 'a-01');\ncy.wait(configFile.smallTimeout);\nmatchProcStudy(mrn + '-a-02', 'a-02');",
+              "err": {},
+              "uuid": "5d5fb494-25a5-4bf4-a338-367b1fbac6a6",
+              "parentUUID": "ee28e9a1-e303-474f-8797-5e76fffe8e57",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 1 - 10 - Setting up view, checking modal buttons and matchind study to unmatched procedure",
+              "fullTitle": "ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702) Step 1 - 10 - Setting up view, checking modal buttons and matchind study to unmatched procedure",
+              "timedOut": null,
+              "duration": 85475,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(limitedUser, limitedPassword));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\nworklist_common_1.Worklist.deleteAllViews('My Views');\nworklist_common_1.Worklist.createNewView(testViewNameTemplate);\ncy.wait(configFile.smallTimeout);\nworklist_common_1.Worklist.filterByFacility(facilityName);\ncy.wait(configFile.smallTimeout);\nworklist_common_1.Worklist.saveCurrentView();\nclickMatchUnmatchWorklistItem('c-01');\ncy.contains('Cancel').click();\nclickMatchUnmatchWorklistItem('c-01');\ncy.get('.modal-header > .close').click();\nclickMatchUnmatchWorklistItem('c-01');\nsearchMatchProcedure({\n    patientMrn: 'mrn_cypress',\n});\nsearchMatchProcedure({\n    patientName: \"p-\".concat(date),\n});\nsearchMatchProcedure({\n    patientBirthDate: '04-25-1983',\n});\ncy.contains('Match Study to Order').parent().parent().find(\"[title=\\\"\".concat(mrn, \"-c-38-6\\\"]\")).should('exist');\ncy.contains('Match Study to Order').parent().parent().find(\"[title=\\\"\".concat(mrn, \"-c-38-6\\\"]\")).parent().find('.nui-checkbox').click({ multiple: true });\ncy.get('button[title=\" Remove From List\"]').click({ multiple: true });\ncy.contains('Match Study to Order').parent().parent().find(\"[title=\\\"\".concat(mrn, \"-c-38-6\\\"]\")).parent().find('.nui-checkbox').first().click();\ncy.get('button:contains(\"Match Selected\")').click();\ncy.contains('Match Study to Order').parent().parent().find('button:contains(\"No\")').click();\ncy.get('button:contains(\"Match Selected\")').click();\ncy.contains('Match Study to Order').parent().parent().find('button:contains(\"Yes, Continue\")').click();",
+              "err": {},
+              "uuid": "50d77341-90a4-4d57-bade-0eca1e051691",
+              "parentUUID": "ee28e9a1-e303-474f-8797-5e76fffe8e57",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 11 - 12 - Matching studies with already matched procedures ",
+              "fullTitle": "ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702) Step 11 - 12 - Matching studies with already matched procedures ",
+              "timedOut": null,
+              "duration": 17239,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncommon_1.Common.navigateTo('Worklist');\nclickMatchUnmatchWorklistItem('Acceptance, Set 17', 'patientName-cell');\ncy.get('input#includeMatchedProcedures').click();\nsearchMatchProcedure({\n    patientMrn: 'mrn_cypress',\n});\ncy.contains('Match Study to Order').parent().parent().find('[title=\"Performed\"]').parent().find('.nui-checkbox').click({ multiple: true });\ncy.get('button:contains(\"Match Selected\")').click();\ncy.contains('Match Study to Order').parent().parent().find('button:contains(\"Yes, Continue\")').click();",
+              "err": {},
+              "uuid": "d29f6808-002a-44a0-b3b2-1474289b4468",
+              "parentUUID": "ee28e9a1-e303-474f-8797-5e76fffe8e57",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 13 - 21 - Matching unmatched procedures to studies ",
+              "fullTitle": "ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702) Step 13 - 21 - Matching unmatched procedures to studies ",
+              "timedOut": null,
+              "duration": 32507,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncommon_1.Common.navigateTo('Worklist');\nclickMatchUnmatchWorklistItem('Unmatched Order', 'matchStatusCell', true);\ncy.contains('Cancel').click();\ncy.get('.modal-header > .close').should('have.length', 0, { timeout: configFile.mediumTimeout });\nclickMatchUnmatchWorklistItem('Unmatched Order', 'matchStatusCell', true);\ncy.get('.modal-header > .close').click();\ncy.get('.modal-header > .close').should('have.length', 0, { timeout: configFile.mediumTimeout });\nclickMatchUnmatchWorklistItem('Unmatched Order', 'matchStatusCell', true);\nsearchMatchProcedure({\n    patientMrn: '9526121077',\n});\ncy.contains('Match Order to Study').parent().parent().find(\"[title=\\\"9526121077\\\"]\").parent().find('.nui-checkbox').click({ multiple: true });\ncy.get('button[title=\" Remove From List\"]').click({ multiple: true });\ncy.contains('Match Order to Study').parent().parent().find(\"[title=\\\"9526121077\\\"]\").parent().find('.nui-checkbox').click({ multiple: true });\ncy.get('button:contains(\"Match Selected\")').click();\ncy.contains('Match Order to Study').parent().parent().find('button:contains(\"No\")').click();\ncy.get('button:contains(\"Match Selected\")').click();\ncy.contains('Match Order to Study').parent().parent().find('button:contains(\"Yes, Continue\")').click();",
+              "err": {},
+              "uuid": "e2c81e2d-2ace-46f1-8ca5-3391ffda5797",
+              "parentUUID": "ee28e9a1-e303-474f-8797-5e76fffe8e57",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 21 - 26 - Unmatching studies and unmatching procedures",
+              "fullTitle": "ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702) Step 21 - 26 - Unmatching studies and unmatching procedures",
+              "timedOut": null,
+              "duration": 71284,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncommon_1.Common.navigateTo('Worklist');\nshowAllColumns();\ncy.get('.modal-content > .close').should('have.length', 0, { timeout: configFile.mediumTimeout });\nclickMatchUnmatchWorklistItem('US', 'modalitiesString-cell', true, true);\ncy.contains('Do you want to unmatch order and study from this exam?').parent().parent().contains('Cancel').click();\ncy.get('.modal-header > .close').should('have.length', 0, { timeout: configFile.mediumTimeout });\nclickMatchUnmatchWorklistItem('US', 'modalitiesString-cell', true, true);\ncy.contains('Do you want to unmatch order and study from this exam?').parent().parent().contains('Yes, Unmatch').click();\ncy.wait(configFile.timeout);\n// Should have one study and one procedure that are manually unmatched\ncy.get('[title=\"Manually Unmatched\"]').should('have.length', 2);",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 60000ms: Expected to find element: `[id=\"column-select-hidden\"] button`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 60000ms: Expected to find element: `[id=\"column-select-hidden\"] button`, but never found it.\n    at showAllColumns (webpack:///./cypress/e2e/test-suites/ECP-T3555-ManualMatchingUnmatchingOfStudiesAndProcedures.spec.ts:239:7)\n    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T3555-ManualMatchingUnmatchingOfStudiesAndProcedures.spec.ts:522:8)",
+                "diff": null
+              },
+              "uuid": "5d8bb705-1dde-4226-8dfa-da0cd6b6ecae",
+              "parentUUID": "ee28e9a1-e303-474f-8797-5e76fffe8e57",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 27 - 30 - Automatic Matching",
+              "fullTitle": "ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702) Step 27 - 30 - Automatic Matching",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncommon_1.Common.navigateTo('Worklist');\nvar header = {\n    Authorization: \"Bearer \".concat(token),\n    Accept: 'application/json; charset=utf-8',\n    'Content-Type': 'application/json; charset=utf-8'\n};\ncy.request({\n    url: procedureUrl,\n    method: 'POST',\n    body: getProcedureBody('cypress-e2e-test', \"a151\", 'a151,a151', '19901212', '20000202111111', 'last 1 days', 'Acc123'),\n    headers: header\n}).then(function (res) { });\ncy.request({\n    url: procedureUrl,\n    method: 'POST',\n    body: getProcedureBody('cypress-e2e-test', \"c386\", 'c386,c386', '19901212', '20000202111111', 'last 1 days', 'Acc321'),\n    headers: header\n}).then(function (res) { });\n// using previously uploaded procedure to save on performance\ncommon_1.Common.getByDataCy('patientMrn-cell', {\n    title: 'a151'\n}).parent().parent().contains('Accession Not Found').should('exist');\ncommon_1.Common.getByDataCy('patientMrn-cell', {\n    title: 'c386'\n}).parent().parent().contains('Accession Not Found').should('exist');\ncommon_1.Common.getByDataCy('patientMrn-cell', {\n    title: 'a-17'\n}).parent().parent().contains('Automatically Matched').should('exist');\ncommon_1.Common.getByDataCy('patientMrn-cell', {\n    title: 'c-38-6'\n}).parent().parent().contains('Automatically Matched').should('exist');",
+              "err": {},
+              "uuid": "e5b3b4f1-b946-4f2e-93f6-4c551a0b2906",
+              "parentUUID": "ee28e9a1-e303-474f-8797-5e76fffe8e57",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Step 30 - 33 - HIPAA Log Verification",
+              "fullTitle": "ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702) Step 30 - 33 - HIPAA Log Verification",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, limitedUser, limitedPassword);\ncommon_1.Common.navigateTo('Worklist');\ncheckHipaaLogMatchUnmatch('Study Matched to Order', 'Manually Matched');\ncheckHipaaLogMatchUnmatch('Study Matched to Order', 'Automatically Matched');\ncy.get('[title=\"Manually Unmatched\"]').each(function (elem) {\n    cy.wrap(elem).rightclick();\n    common_1.Common.getByDataCy('hipaaLog').click();\n    cy.get('.hipaa-logs-modal').contains('Study Unmatched from Order').should('exist');\n    cy.get('.hipaa-logs-modal').find('.close').click();\n    cy.wait(configFile.smallTimeout);\n});",
+              "err": {},
+              "uuid": "6ddfbc7f-19d9-403b-842b-04603272ff15",
+              "parentUUID": "ee28e9a1-e303-474f-8797-5e76fffe8e57",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Delete Views",
+              "fullTitle": "ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702) Delete Views",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Worklist');\nworklist_common_1.Worklist.deleteAllViews('My Views');\ncy.wait(configFile.timeout);",
+              "err": {},
+              "uuid": "c2e59277-21a5-4453-8fd1-7b3ab5880a42",
+              "parentUUID": "ee28e9a1-e303-474f-8797-5e76fffe8e57",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3555-Manual Matching Unmatching OfS tudies And Procedures (failed due to bug ECP-23702) Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "8c5c0fd6-9fff-4eda-915f-87fdf5272f54",
+              "parentUUID": "ee28e9a1-e303-474f-8797-5e76fffe8e57",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5d5fb494-25a5-4bf4-a338-367b1fbac6a6",
+            "50d77341-90a4-4d57-bade-0eca1e051691",
+            "d29f6808-002a-44a0-b3b2-1474289b4468",
+            "e2c81e2d-2ace-46f1-8ca5-3391ffda5797"
+          ],
+          "failures": [
+            "5d8bb705-1dde-4226-8dfa-da0cd6b6ecae"
+          ],
+          "pending": [],
+          "skipped": [
+            "e5b3b4f1-b946-4f2e-93f6-4c551a0b2906",
+            "6ddfbc7f-19d9-403b-842b-04603272ff15",
+            "c2e59277-21a5-4453-8fd1-7b3ab5880a42",
+            "8c5c0fd6-9fff-4eda-915f-87fdf5272f54"
+          ],
+          "duration": 398411,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

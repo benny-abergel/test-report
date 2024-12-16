@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="591.608" tests="5" failures="1">
+  <testsuite name="" timestamp="2024-12-15T02:51:22" tests="0" file="cypress/e2e/test-suites/ECP-T2510-ViewerSettingKeyboardShortcuts.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2510 - Viewer Settings - Keyboard Shortcuts(bug ECP-19335)" timestamp="2024-12-15T02:51:22" tests="5" time="0.000" failures="1">
+    <testcase name="Before test" time="96.759" classname="ECP-T2510 - Viewer Settings - Keyboard Shortcuts(bug ECP-19335)">
+    </testcase>
+    <testcase name="NDXWeb - Viewer Settings - Keyboard Shortcuts" time="90.148" classname="ECP-T2510 - Viewer Settings - Keyboard Shortcuts(bug ECP-19335)">
+    </testcase>
+    <testcase name="NDXWeb - Viewer Settings - Keyboard Shortcuts- blocked Keys" time="122.877" classname="ECP-T2510 - Viewer Settings - Keyboard Shortcuts(bug ECP-19335)">
+      <failure message="Timed out retrying after 60000ms: expected &apos;&lt;input#wwwcHotKey.key.form-control&gt;&apos; to have value &apos;W&apos;, but the value was &apos;CTRL+-&apos;" type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 60000ms: expected '<input#wwwcHotKey.key.form-control>' to have value 'W', but the value was 'CTRL+-'
+    at eval (webpack:///./cypress/e2e/test-suites/ECP-T2510-ViewerSettingKeyboardShortcuts.spec.ts:292:66)
+at Array.forEach (<anonymous>)
+    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2510-ViewerSettingKeyboardShortcuts.spec.ts:291:31)
+
+      + expected - actual
+
+      -'CTRL+-'
+      +'W'
+      ]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

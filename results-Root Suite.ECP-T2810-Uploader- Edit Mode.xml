@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="325.228" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:13:51" tests="0" file="cypress/e2e/test-suites/ECP-T2810-UploaderFunctionalityEditMode.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2810-Uploader- Edit Mode" timestamp="2024-12-15T02:13:51" tests="2" time="325.193" failures="0">
+    <testcase name="Step 1- 29" time="307.432" classname="ECP-T2810-Uploader- Edit Mode">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.930" classname="ECP-T2810-Uploader- Edit Mode">
+    </testcase>
+  </testsuite>
+</testsuites>

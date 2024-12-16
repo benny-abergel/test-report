@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="122.190" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:47:36" tests="0" file="cypress/e2e/test-suites/ECP-T2786-StudyModificationAPI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2786 - Study Modification API" timestamp="2024-12-15T03:47:36" tests="3" time="122.172" failures="0">
+    <testcase name="Data prep - all 4 steps in one" time="77.215" classname="ECP-T2786 - Study Modification API">
+    </testcase>
+    <testcase name="Step 5 - 15" time="28.774" classname="ECP-T2786 - Study Modification API">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.474" classname="ECP-T2786 - Study Modification API">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="348.011" tests="7" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:52:42" tests="0" file="cypress/e2e/test-suites/ECP-T3473-Patient-information.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3473 - Patient Information" timestamp="2024-12-15T03:52:42" tests="7" time="347.992" failures="0">
+    <testcase name="ECP-T3473 - data prep" time="78.695" classname="ECP-T3473 - Patient Information">
+    </testcase>
+    <testcase name="ECP-T3473 - Steps 1 - 6" time="85.509" classname="ECP-T3473 - Patient Information">
+    </testcase>
+    <testcase name="Add Orderss" time="17.154" classname="ECP-T3473 - Patient Information">
+    </testcase>
+    <testcase name="Match Exam" time="49.573" classname="ECP-T3473 - Patient Information">
+    </testcase>
+    <testcase name="ECP-T3473 - Steps  7-8" time="45.039" classname="ECP-T3473 - Patient Information">
+    </testcase>
+    <testcase name="Cleanup - Delete the studyes" time="47.512" classname="ECP-T3473 - Patient Information">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="6.098" classname="ECP-T3473 - Patient Information">
+    </testcase>
+  </testsuite>
+</testsuites>

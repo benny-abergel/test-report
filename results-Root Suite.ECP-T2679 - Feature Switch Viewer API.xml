@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="258.206" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:20:37" tests="0" file="cypress/e2e/test-suites/ECP-T2679-FeatureSwitch-ViewerAPI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2679 - Feature Switch Viewer API" timestamp="2024-12-15T02:20:37" tests="2" time="258.181" failures="0">
+    <testcase name="Starting Feature Switch Viewer API Test - all 7 Steps in one" time="236.213" classname="ECP-T2679 - Feature Switch Viewer API">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.607" classname="ECP-T2679 - Feature Switch Viewer API">
+    </testcase>
+  </testsuite>
+</testsuites>

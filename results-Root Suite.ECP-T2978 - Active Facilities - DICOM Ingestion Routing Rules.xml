@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="170.829" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:49:44" tests="0" file="cypress/e2e/test-suites/ECP-T2978-ActiveFacilitiesDICOMIngestionRoutingRules.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2978 - Active Facilities - DICOM Ingestion Routing Rules" timestamp="2024-12-15T03:49:44" tests="3" time="170.807" failures="0">
+    <testcase name="Test Preparation - Before Step" time="116.532" classname="ECP-T2978 - Active Facilities - DICOM Ingestion Routing Rules">
+    </testcase>
+    <testcase name="ECP-T2978 - Active Facilities - DICOM Ingestion Routing Rules - Steps 1 - 7" time="36.557" classname="ECP-T2978 - Active Facilities - DICOM Ingestion Routing Rules">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.231" classname="ECP-T2978 - Active Facilities - DICOM Ingestion Routing Rules">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="220.363" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:04:11" tests="0" file="cypress/e2e/test-suites/ECP-T2583-APITokenTableUI.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2583 - API Token Table UI" timestamp="2024-12-15T02:04:11" tests="3" time="220.299" failures="0">
+    <testcase name="Test Preparation - Before Step" time="101.551" classname="ECP-T2583 - API Token Table UI">
+    </testcase>
+    <testcase name="ECP-T2583 - API Token Table UI - Steps 1 - 2" time="99.930" classname="ECP-T2583 - API Token Table UI">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.241" classname="ECP-T2583 - API Token Table UI">
+    </testcase>
+  </testsuite>
+</testsuites>

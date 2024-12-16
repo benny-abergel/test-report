@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="145.669" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:14:21" tests="0" file="cypress/e2e/test-suites/ECP-T2729-MyOrgUploaders.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2729 - My Org Uploader Options" timestamp="2024-12-15T02:14:21" tests="2" time="145.649" failures="0">
+    <testcase name="Verify Uploader Option elements, verify patient/MRN study modification options on Uploader page based on Uploader Mode" time="125.688" classname="ECP-T2729 - My Org Uploader Options">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.424" classname="ECP-T2729 - My Org Uploader Options">
+    </testcase>
+  </testsuite>
+</testsuites>

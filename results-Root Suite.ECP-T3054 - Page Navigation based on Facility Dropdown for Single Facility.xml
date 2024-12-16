@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="197.634" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:22:55" tests="0" file="cypress/e2e/test-suites/ECP-T3054-PageNavigationbasedonFacilityDropdownforSingleFacility.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3054 - Page Navigation based on Facility Dropdown for Single Facility" timestamp="2024-12-15T02:22:55" tests="4" time="197.615" failures="0">
+    <testcase name="Login as Facility Admin" time="94.083" classname="ECP-T3054 - Page Navigation based on Facility Dropdown for Single Facility">
+    </testcase>
+    <testcase name="Login as IP User" time="44.561" classname="ECP-T3054 - Page Navigation based on Facility Dropdown for Single Facility">
+    </testcase>
+    <testcase name="Login as Customer admin" time="41.845" classname="ECP-T3054 - Page Navigation based on Facility Dropdown for Single Facility">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.374" classname="ECP-T3054 - Page Navigation based on Facility Dropdown for Single Facility">
+    </testcase>
+  </testsuite>
+</testsuites>

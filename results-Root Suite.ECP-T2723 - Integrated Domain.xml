@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="108.527" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:22:44" tests="0" file="cypress/e2e/test-suites/ECP-T2723-My OrgIntegrationIntegrated Domains.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2723 - Integrated Domain" timestamp="2024-12-15T03:22:44" tests="2" time="108.510" failures="0">
+    <testcase name="Step 1 to 15" time="92.100" classname="ECP-T2723 - Integrated Domain">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.767" classname="ECP-T2723 - Integrated Domain">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="223.216" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:16:01" tests="0" file="cypress/e2e/test-suites/ECP-T2989-FacilityCheckByCustomerAdmin.spec.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2989 - Facility check by customer admin" timestamp="2024-12-15T02:16:01" tests="4" time="223.192" failures="0">
+    <testcase name="Pre condition " time="83.930" classname="ECP-T2989 - Facility check by customer admin">
+    </testcase>
+    <testcase name="Step 01 to 04 - Customer details" time="65.884" classname="ECP-T2989 - Facility check by customer admin">
+    </testcase>
+    <testcase name="Step 05 to 08 - Logout and Login by the other Customer A Admin account" time="54.645" classname="ECP-T2989 - Facility check by customer admin">
+    </testcase>
+    <testcase name="Post step - Cleanup" time="8.736" classname="ECP-T2989 - Facility check by customer admin">
+    </testcase>
+  </testsuite>
+</testsuites>

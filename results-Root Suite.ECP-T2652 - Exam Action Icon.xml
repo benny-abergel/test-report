@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="314.006" tests="7" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:10:19" tests="0" file="cypress/e2e/test-suites/ECP-T2652-ExamActionIcon.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2652 - Exam Action Icon" timestamp="2024-12-15T02:10:19" tests="7" time="313.957" failures="0">
+    <testcase name="Test Preparation - Before Step, creating API token and uploading exams" time="110.526" classname="ECP-T2652 - Exam Action Icon">
+    </testcase>
+    <testcase name="Starting Exam Action Icon Test - Step 1 - 4" time="39.102" classname="ECP-T2652 - Exam Action Icon">
+    </testcase>
+    <testcase name="Exam Action Icon Test - Step 5 &amp; 6" time="34.409" classname="ECP-T2652 - Exam Action Icon">
+    </testcase>
+    <testcase name="Exam Action Icon Test - Step 7, 8 &amp; 9" time="36.733" classname="ECP-T2652 - Exam Action Icon">
+    </testcase>
+    <testcase name="Exam Action Icon Test - Step 10 &amp; 11" time="29.599" classname="ECP-T2652 - Exam Action Icon">
+    </testcase>
+    <testcase name="Exam Action Icon Test - Step 12 &amp; 13" time="31.760" classname="ECP-T2652 - Exam Action Icon">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.447" classname="ECP-T2652 - Exam Action Icon">
+    </testcase>
+  </testsuite>
+</testsuites>

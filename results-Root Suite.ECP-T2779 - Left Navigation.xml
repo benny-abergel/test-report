@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="374.398" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:24:37" tests="0" file="cypress/e2e/test-suites/ECP-T2779-Left Navigation.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2779 - Left Navigation" timestamp="2024-12-15T03:24:37" tests="2" time="374.363" failures="0">
+    <testcase name="Step 1 - 14 " time="353.956" classname="ECP-T2779 - Left Navigation">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.941" classname="ECP-T2779 - Left Navigation">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,154 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 0,
+    "passes": 0,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T04:24:04.484Z",
+    "end": "2024-12-15T04:28:55.176Z",
+    "duration": 290692,
+    "testsRegistered": 3,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 2,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "53629d13-907b-40d3-ba57-03c632aef57c",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2789-SystemAdminAccountManagement.spec.ts",
+      "file": "cypress/test-suites/ECP-T2789-SystemAdminAccountManagement.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8ee3c5f9-4044-41e4-a331-bbdb624a8ed9",
+          "title": "ECP-T2789 - System-Settings Account Management ",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Starting ECP-T2789 - System Admin - Account management",
+              "fullTitle": "ECP-T2789 - System-Settings Account Management  Starting ECP-T2789 - System Admin - Account management",
+              "timedOut": null,
+              "duration": 81358,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('Customers');\ncy.wait(configFile.smallTimeout);\ncy.wrap(meteor_1.Meteor.addSystemUser(user2Name, userpassword), { timeout: configFile.hugeTimeout });\n// Step 1 is not required\n// cy.waitUntil(() => cy.get('button:contains(\"Edit\")').first().should('be.visible'), { timeout: configFile.waitUntilTimeout });\n// cy.get('.form-control').first().type(customerName)\n// cy.wait(configFile.smallTimeout);\n// cy.get('button:contains(\"Edit\")').click({force:true});\n// cy.wait(configFile.smallTimeout);\n// cy.get('.js-status-btn').uncheck()\n// Step 2\ncommon_1.Common.navigateTo('System Users & Groups');\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('a:contains(\"Edit\")').first().should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('.createUserBtn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('#firstNameField').type('test');\ncy.get('#lastNameField').type('test');\ncy.get('#emailField').type(email);\ncy.get('#emailConfirmField').type(email);\ncy.get('.Select-placeholder').first().click();\ncy.get('[aria-label=\"System Administrator\"]').click();\ncy.get('.modal-header').click();\ncy.get('.js-confirm').click();\ncy.waitUntil(function () { return cy.get('.modal-header').should('not.be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('[name=\"email\"]').type(\"\".concat(email, \"{enter}\"));\ncy.wait(configFile.smallTimeout);\ncy.get('.deleteUserBtn').click();\ncy.get('#confirm-RemoveUser').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.visit(configFile.url);\ncy.get('#emailAddress').type(email);\ncy.get('#at-btn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#password').type('test12');\ncy.get('#at-btn').click();\ncy.get('p:contains(\"We did not recognize your email address or password.\")').should('exist');\n// Step 3 and 4\ncommon_1.Common.login(customerName, user2Name, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Users & Groups');\ncy.wait(configFile.smallTimeout);\ncy.get('td:contains(\"' + email + '\")').should('not.exist');\ncommon_1.Common.navigateTo('Users & Groups', 1);\ncy.wait(configFile.smallTimeout);\ncy.get('td:contains(\"' + email + '\")').should('not.exist');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n// Step 5, 9 and 7\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Users & Groups');\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('.editUserBtn').first().should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('[name=\"email\"]').type(\"\".concat(userName, \"{enter}\"));\ncy.wait(configFile.smallTimeout);\ncy.get('.removeSelf').click({ force: true });\ncy.get('p:contains(\"You can not remove yourself from an active organization.\")').should('exist');\ncy.get('a:contains(\"Clear\")').click();\n// cy.waitUntil(() => cy.get('.editUserBtn').first().should('be.visible'), { timeout: configFile.waitUntilTimeout });\n// cy.get('[name=\"email\"]').type(`${user2Name}{enter}`)\n// cy.wait(configFile.smallTimeout)\n// cy.get('.deleteUserBtn').click()\n// cy.get('#confirm-RemoveUser').click()\n// cy.wait(configFile.smallTimeout)\ncy.get('.addExistingUserBtn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.js-search-existing-users-text').type(professionaluser);\ncy.get('span:contains(\"' + professionaluser + '\")').click();\ncy.get('.Select-placeholder').click();\ncy.get('[aria-label=\"System Administrator\"]').click();\ncy.get('.js-confirm').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 60000ms: expected '<div.modal-header>' not to be 'visible'",
+                "estack": "AssertionError: Timed out retrying after 60000ms: expected '<div.modal-header>' not to be 'visible'\n    at cy.waitUntil.timeout (webpack:///./cypress/e2e/test-suites/ECP-T2789-SystemAdminAccountManagement.spec.ts:78:51)\n    at resolveValue (webpack:///./node_modules/cypress-wait-until/src/index.js:71:0)\n    at Context.waitUntil (webpack:///./node_modules/cypress-wait-until/src/index.js:81:0)",
+                "diff": null
+              },
+              "uuid": "09d492a0-85c1-45d6-a3df-fdd071618315",
+              "parentUUID": "8ee3c5f9-4044-41e4-a331-bbdb624a8ed9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login as Professional user",
+              "fullTitle": "ECP-T2789 - System-Settings Account Management  Login as Professional user",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 6\n// cy.visit(configFile.url)\n// cy.get('#emailAddress').type(user2Name);\n// cy.get('#at-btn').click({force:true});\n// cy.wait(configFile.tinyTimeout)\n// cy.get('#password').type(userpassword)\n// cy.get('#at-btn').click({force:true});\n// cy.wait(configFile.smallTimeout)\n// cy.get('body').then(elx => {\n//     if(elx.find('.agreement').length > 0) {\n//         cy.wrap(m.acceptTermWS(user2Name,userpassword),{timeout:configFile.hugeTimeout});\n//     cy.reload();\n//     }\n// });\n// cy.wait(configFile.smallTimeout);\n// cy.get('div:contains(\"There are no customers for you to select. Contact your administrator\")').should('exist')\n// cy.get('#noCusomerBtn').click()\n// cy.wait(configFile.smallTimeout);\n// cy.get('h3:contains(\"Sign in to your account\")').should('exist')\n// Step 8\ncommon_1.Common.login(customerName, professionaluser, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Users & Groups');\ncommon_1.Common.switchToCustomer(customerName);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n// Step 10\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Users & Groups');\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('.editUserBtn').first().should('be.visible'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('[name=\"email\"]').type(\"\".concat(professionaluser, \"{enter}\"));\ncy.wait(configFile.smallTimeout);\ncy.get('a:contains(\"Remove\")').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('button:contains(\"Yes\")').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.login(customerName, professionaluser, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(professionaluser, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.get('#customerSelector button').should('be.disabled');\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.navigateTo('Users & Groups', 0);\ncy.wait(configFile.smallTimeout);\ncy.get('a:contains(\"Remove\")').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('button:contains(\"Yes\")').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n// Step 6\ncy.visit(configFile.url);\ncy.get('#emailAddress').type(professionaluser);\ncy.get('#at-btn').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('#password').type(userpassword);\ncy.get('#at-btn').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(professionaluser, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('div:contains(\"There are no customers for you to select. Contact your administrator\")').should('exist');\ncy.get('#noCusomerBtn').click();\ncy.wait(configFile.smallTimeout);\ncy.get('h3:contains(\"Sign in to your account\")').should('exist');",
+              "err": {},
+              "uuid": "e5f8726c-797c-4849-95d3-27a9c0f8b999",
+              "parentUUID": "8ee3c5f9-4044-41e4-a331-bbdb624a8ed9",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2789 - System-Settings Account Management  Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "9dff292b-ad96-4b22-9d27-4515f261f5b9",
+              "parentUUID": "8ee3c5f9-4044-41e4-a331-bbdb624a8ed9",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "09d492a0-85c1-45d6-a3df-fdd071618315"
+          ],
+          "pending": [],
+          "skipped": [
+            "e5f8726c-797c-4849-95d3-27a9c0f8b999",
+            "9dff292b-ad96-4b22-9d27-4515f261f5b9"
+          ],
+          "duration": 81358,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

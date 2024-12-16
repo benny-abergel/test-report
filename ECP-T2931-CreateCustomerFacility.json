@@ -1,0 +1,135 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 0,
+    "passes": 0,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:46:47.127Z",
+    "end": "2024-12-15T03:55:01.296Z",
+    "duration": 494169,
+    "testsRegistered": 2,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 1,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "36a7b18c-5300-4fa8-9400-74cf3f44b6ca",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2931-CreateCustomerFacility.spec.ts",
+      "file": "cypress/test-suites/ECP-T2931-CreateCustomerFacility.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "336bbf21-c88c-4790-9e1c-70e9da28f955",
+          "title": "ECP-T2931 - Customer and Facility Creation ",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1-18",
+              "fullTitle": "ECP-T2931 - Customer and Facility Creation  Step 1-18",
+              "timedOut": null,
+              "duration": 110410,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "//Step 1 -2 Navigate to Customer page\ncommon_1.Common.login(newcustmer, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('Customers');\ncy.wait(configFile.smallTimeout);\n//Step 3 Page UI  \nCustomerFacilityCreation_1.CreateCustomerFacility.CustomerPageUI();\n//Step 4 -7 Customer popup UI check  \nCustomerFacilityCreation_1.CreateCustomerFacility.CustomerPage();\n//Step 8 Duplicate Name  \nCustomerFacilityCreation_1.CreateCustomerFacility.duplicatename();\n//Step 9- 10 Edit and reset Customer details  and in Step 11 verify button is enabled \nCustomerFacilityCreation_1.CreateCustomerFacility.fillAllCustomerDetails(customerName);\nCustomerFacilityCreation_1.CreateCustomerFacility.Resetbutton(customerName, facilityName);\nCustomerFacilityCreation_1.CreateCustomerFacility.editdetails(customerName);\ncy.get('button:contains(\"Export to CSV\")').should('be.enabled');\n//Step 11 cannot verify the csv fill only Verified  Export to CSV button is present\ncy.get('button:contains(\"Export to CSV\")').should('exist');\n// Step 12 Customer selection \ncommon_1.Common.switchToCustomer(customerName);\ncy.wait(configFile.tinyTimeout);\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Facilities');\ncy.wait(configFile.smallTimeout);\n//Step 15 Verifying Facility popup details\nCustomerFacilityCreation_1.CreateCustomerFacility.FacilityPopup();\n//Step 16 Duplicate Name of Facility  \nCustomerFacilityCreation_1.CreateCustomerFacility.duplicatefaciliy();\n//Step 13 Facility Creation  \ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facilityName), { timeout: configFile.hugeTimeout });\ncy.wrap(meteor_1.Meteor.addFacilty(newcustmer, facility3Name), { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer('System');\n//cy.wait(1000)\n//Step 24 Billing, Ingestion and storage reports for the customer  (Need to modify code once ECP-15625)\n// cf.billing(customerName,facilityName)\ncommon_1.Common.switchToCustomer(customerName);\n//Step 18 Facility Selection\ncommon_1.Common.switchToFacility(facilityName);\n//Step 17 Edit Facility details \ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Facility Details');\nCustomerFacilityCreation_1.CreateCustomerFacility.EditFacility(facility2Name);\nCustomerFacilityCreation_1.CreateCustomerFacility.Verifyfacilitydetails();\ncy.wrap(meteor_1.Meteor.addUser(EmailID[0], password, facility2Name, 'Organization Administrators'), { timeout: configFile.hugeTimeout });\ncy.wrap(meteor_1.Meteor.addUser(EmailID[1], password, customerName, 'Customer Administrators'), { timeout: configFile.hugeTimeout });\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);",
+              "err": {
+                "message": "CypressError: Timed out retrying after 60050ms: `cy.click()` failed because this element is `disabled`:\n\n`<button type=\"submit\" class=\"btn btn-primary btn--with-spinner\" disabled=\"disabled\">Save</button>`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
+                "estack": "CypressError: Timed out retrying after 60050ms: `cy.click()` failed because this element is `disabled`:\n\n`<button type=\"submit\" class=\"btn btn-primary btn--with-spinner\" disabled=\"disabled\">Save</button>`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at Object.isNotDisabled (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:151869:66)\n    at runAllChecks (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130534:26)\n    at retryActionability (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130623:16)\n    at tryCatcher (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8914:23)\n    at Promise.attempt.Promise.try (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6188:29)\n    at whenStable (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:146724:65)\n    at <unknown> (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:146165:14)\n    at tryCatcher (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8914:23)\n    at Promise._settlePromiseFromHandler (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6849:31)\n    at Promise._settlePromise (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6906:18)\n    at Promise._settlePromise0 (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6951:10)\n    at Promise._settlePromises (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:7031:18)\n    at Promise._fulfill (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6975:18)\n    at <unknown> (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8589:46)\nFrom Your Spec Code:\n    at Context.eval (webpack:///./cypress/page-objects/components/selectors/integration/CustomerFacilityCreation.ts:77:12)",
+                "diff": null
+              },
+              "uuid": "ca2377e7-4572-4d92-ab57-83ed27dfaac5",
+              "parentUUID": "336bbf21-c88c-4790-9e1c-70e9da28f955",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 19-20",
+              "fullTitle": "ECP-T2931 - Customer and Facility Creation  Step 19-20",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, EmailID[1], password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(EmailID[1], password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.get('#leftNavMenu li a[title=\"My Facility\"]').should('exist');\ncy.get('#leftNavMenu li a[title=\"My Organization\"]').should('exist');\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Facilities');\ncommon_1.Common.navigateTo('Users & Groups', 1);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.login(customerName, EmailID[0], password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(EmailID[0], password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\n// c.switchToFacility(facilityName);\ncy.get('#leftNavMenu li a[title=\"My Facility\"]').should('exist');\ncy.get('#leftNavMenu li a[title=\"My Organization\"]').should('not.exist');\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Facility Details');\ncommon_1.Common.navigateTo('Users & Groups');\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n//Step 27 and 28 \ncommon_1.Common.login(newcustmer, userName, userpassword);\n//c.switchToCustomer(customerName)\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('Customers');\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "87824be7-7878-4ee1-8190-2b03902474b4",
+              "parentUUID": "336bbf21-c88c-4790-9e1c-70e9da28f955",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "ca2377e7-4572-4d92-ab57-83ed27dfaac5"
+          ],
+          "pending": [],
+          "skipped": [
+            "87824be7-7878-4ee1-8190-2b03902474b4"
+          ],
+          "duration": 110410,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

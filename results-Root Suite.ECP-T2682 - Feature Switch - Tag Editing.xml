@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="219.385" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:07:45" tests="0" file="cypress/e2e/test-suites/ECP-T2682-FeatureSwitch-TagEditing.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2682 - Feature Switch - Tag Editing" timestamp="2024-12-15T02:07:45" tests="2" time="219.362" failures="0">
+    <testcase name="Starting Feature Switch Tag Editing Test - all 7 Steps in one" time="199.108" classname="ECP-T2682 - Feature Switch - Tag Editing">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.129" classname="ECP-T2682 - Feature Switch - Tag Editing">
+    </testcase>
+  </testsuite>
+</testsuites>

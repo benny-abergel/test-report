@@ -1,0 +1,115 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 0,
+    "passes": 0,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:54:29.093Z",
+    "end": "2024-12-15T03:58:20.103Z",
+    "duration": 231010,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ad6f3210-1531-4998-91ac-a6c58880d663",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2599-BasicLogin.spec.ts",
+      "file": "cypress/test-suites/ECP-T2599-BasicLogin.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "eb8e0558-f40e-4239-aa35-b23ca9a58ae7",
+          "title": "ECP-T2599 - Basic-Login",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Verifying basic Login Functionality",
+              "fullTitle": "ECP-T2599 - Basic-Login Verifying basic Login Functionality",
+              "timedOut": null,
+              "duration": 76486,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "//Step 1 and 9\ncy.visit(configFile.url, { timeout: configFile.longTimeout });\ncy.get('#emailAddress').should('be.visible');\ncy.get('button:contains(\"Continue\")').should('be.visible');\ncy.get('h3:contains(\"Sign in to your account\")').should('be.visible');\ncy.get('#emailAddress').type('jsahhs');\ncy.wait(configFile.smallTimeout);\ncy.get('#at-btn').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('p:contains(\"Format is not valid.\")').should('exist');\ncy.get('#emailAddress').clear();\ncy.wait(configFile.smallTimeout);\n//Step 2\ncy.get('#emailAddress').focus().type(configFile.username);\ncy.wait(configFile.tinyTimeout);\ncy.get('#at-btn').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('a:contains(\"Forgot your password?\")').should('be.visible');\ncy.get('#password').should('be.visible');\ncy.get('button:contains(\"Sign In\")').should('be.visible');\n//Step 3,4 and 6 and skipped step 5\ncy.get('#password').type(configFile.password).should('have.attr', 'type', 'password');\ncy.get('#password').should('have.attr', 'autocomplete', 'off');\ncy.get('button:contains(\"Sign In\")').click({ force: true });\n//Step 7 (Logout)\ncy.get('#selectAdminBtn').click({ force: true });\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncy.get('#password').focus().clear();\ncy.get('button:contains(\"Sign In\")').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('.required-hint').eq(1).should('exist');\n//Step 8 to 11 Valid email id and invalid password\ncy.get('#password').focus().clear();\ncy.get('#password').type('hsajss');\ncy.get('button:contains(\"Sign In\")').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('p:contains(\"We did not recognize your email address or password.\")').should('exist');\ncy.wait(configFile.smallTimeout);\n//with invalid email Id and password\ncy.get('#back').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.get('#emailAddress').type('kha@jj.co{enter}');\ncy.wait(configFile.smallTimeout);\ncy.get('#password').type('hsajss{enter}');\ncy.wait(configFile.smallTimeout);\ncy.get('p:contains(\"We did not recognize your email address or password.\")').should('exist');\ncy.get('p:contains(\" attempts remaining.\")').should('exist');",
+              "err": {
+                "message": "CypressError: Timed out retrying after 60050ms: `cy.click()` failed because this element is not visible:\n\n`<div id=\"signOutButton\" data-cy=\"signOutLink\" class=\"drop-menu-item js-sign-out\">Sign Out</div>`\n\nThis element `<div#signOutButton.drop-menu-item.js-sign-out>` is not visible because its parent `<div.drop-menu.drop-menu__account>` has CSS property: `display: none`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with",
+                "estack": "CypressError: Timed out retrying after 60050ms: `cy.click()` failed because this element is not visible:\n\n`<div id=\"signOutButton\" data-cy=\"signOutLink\" class=\"drop-menu-item js-sign-out\">Sign Out</div>`\n\nThis element `<div#signOutButton.drop-menu-item.js-sign-out>` is not visible because its parent `<div.drop-menu.drop-menu__account>` has CSS property: `display: none`\n\nFix this problem, or use `{force: true}` to disable error checking.\n\nhttps://on.cypress.io/element-cannot-be-interacted-with\n    at runVisibilityCheck (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:151903:66)\n    at Object.isStrictlyVisible (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:151917:10)\n    at runAllChecks (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130555:26)\n    at retryActionability (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:130623:16)\n    at tryCatcher (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8914:23)\n    at Promise.attempt.Promise.try (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6188:29)\n    at whenStable (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:146724:65)\n    at <unknown> (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:146165:14)\n    at tryCatcher (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8914:23)\n    at Promise._settlePromiseFromHandler (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6849:31)\n    at Promise._settlePromise (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6906:18)\n    at Promise._settlePromise0 (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6951:10)\n    at Promise._settlePromises (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:7031:18)\n    at Promise._fulfill (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:6975:18)\n    at <unknown> (https://automation-vv-01.c.ei-cs-dev01-ein.internal/__cypress/runner/cypress_runner.js:8589:46)\nFrom Your Spec Code:\n    at ./cypress/page-objects/pages/common.ts.Common.logout (webpack:///./cypress/page-objects/pages/common.ts:621:29)\n    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T2599-BasicLogin.spec.ts:58:14)",
+                "diff": null
+              },
+              "uuid": "553a861d-9a16-4d2a-a387-1d1f41445a23",
+              "parentUUID": "eb8e0558-f40e-4239-aa35-b23ca9a58ae7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "553a861d-9a16-4d2a-a387-1d1f41445a23"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 76486,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

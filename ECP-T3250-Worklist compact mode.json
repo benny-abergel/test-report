@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:45:21.008Z",
+    "end": "2024-12-15T03:46:35.354Z",
+    "duration": 74346,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "3f7edf2d-4c25-46a7-996b-157e6b547faf",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3250-Worklist compact mode.spec.ts",
+      "file": "cypress/test-suites/ECP-T3250-Worklist compact mode.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5663cd05-b4ab-40e9-8f0e-95e819d337e9",
+          "title": "ECP-T3250-Worklist compact mode",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3250 - step 1-4",
+              "fullTitle": "ECP-T3250-Worklist compact mode ECP-T3250 - step 1-4",
+              "timedOut": null,
+              "duration": 61637,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.navigateTo('Worklist');\ncy.get(\"body\").then(function (elx) {\n    if (elx.find('span[title=\"Switch to compact mode.\"]').length > 0) {\n        cy.get('.slimScrollWrapper').invoke('width').then(function (w1) {\n            cy.get('span[title=\"Switch to compact mode.\"]').click();\n            cy.get('.dark.compactMode').should('be.visible');\n            cy.get('.slimScrollWrapper').invoke('width').should('be.lt', w1);\n        });\n    }\n    else {\n        cy.get('.slimScrollWrapper').invoke('width').then(function (w1) {\n            cy.get('span[title=\"Switch to normal mode.\"]').click();\n            cy.get('.dark.compactMode').should('not.exist');\n            cy.get('.slimScrollWrapper').invoke('width').should('be.gt', w1);\n        });\n    }\n});",
+              "err": {},
+              "uuid": "75edc09f-808d-4e41-9e04-b67cbb40f8c7",
+              "parentUUID": "5663cd05-b4ab-40e9-8f0e-95e819d337e9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3250-Worklist compact mode Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6679,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "64146c66-f70d-4e62-9bc5-3bce9c626a91",
+              "parentUUID": "5663cd05-b4ab-40e9-8f0e-95e819d337e9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "75edc09f-808d-4e41-9e04-b67cbb40f8c7",
+            "64146c66-f70d-4e62-9bc5-3bce9c626a91"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 68316,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

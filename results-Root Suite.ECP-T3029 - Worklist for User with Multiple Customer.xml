@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="485.636" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:39:31" tests="0" file="cypress/e2e/test-suites/ECP-T3029-WorklistforUserwithMultipleCustomer.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3029 - Worklist for User with Multiple Customer" timestamp="2024-12-15T02:39:31" tests="4" time="485.609" failures="0">
+    <testcase name="Precondition " time="257.568" classname="ECP-T3029 - Worklist for User with Multiple Customer">
+    </testcase>
+    <testcase name="Login with Ip User " time="69.971" classname="ECP-T3029 - Worklist for User with Multiple Customer">
+    </testcase>
+    <testcase name="Login with CustomerAdmin and Facility Admin " time="147.589" classname="ECP-T3029 - Worklist for User with Multiple Customer">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.276" classname="ECP-T3029 - Worklist for User with Multiple Customer">
+    </testcase>
+  </testsuite>
+</testsuites>

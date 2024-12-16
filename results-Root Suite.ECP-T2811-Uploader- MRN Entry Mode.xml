@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="379.975" tests="3" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:46:07" tests="0" file="cypress/e2e/test-suites/ECP-T2811-UploaderMRNEntryMode.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2811-Uploader- MRN Entry Mode" timestamp="2024-12-15T03:46:07" tests="3" time="379.955" failures="0">
+    <testcase name="Step 1- 21" time="197.276" classname="ECP-T2811-Uploader- MRN Entry Mode">
+    </testcase>
+    <testcase name="Step 22- 41" time="162.450" classname="ECP-T2811-Uploader- MRN Entry Mode">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.065" classname="ECP-T2811-Uploader- MRN Entry Mode">
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T04:11:35.678Z",
+    "end": "2024-12-15T04:17:09.653Z",
+    "duration": 333975,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8dce5aca-0122-43fe-ae86-4914969e2a1b",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2794-SystemAdminNotificationPage.spec.ts",
+      "file": "cypress/test-suites/ECP-T2794-SystemAdminNotificationPage.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e36d0640-d16c-49da-ad6b-28413ec1142f",
+          "title": "ECP-T2794 - System Admin - Notification Page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Reset to default",
+              "fullTitle": "ECP-T2794 - System Admin - Notification Page Reset to default",
+              "timedOut": null,
+              "duration": 286062,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateByProperty('data-template=\"notificationManagementPage\"');\ncy.wait(configFile.smallTimeout);\nvar q = [2, 3, 4, 5, 18, 20, 21, 22];\nfor (var i = 2; i < 23; i++) {\n    cy.get('#notificationManagement table tbody:nth-child(' + i + ') tr td.action-cell .edit-email-template').click({ force: true });\n    cy.get('#emailSubject').clear().type(\"{selectall}\".concat(subjects[i - 2]));\n    if (q.includes(i)) {\n        cy.get('#allowGroupCustomization').check({ force: true });\n    }\n    else {\n        cy.get('#allowGroupCustomization').uncheck({ force: true });\n    }\n    cy.get('.save-auto-text-info').click({ force: true });\n    cy.wait(configFile.tinyTimeout);\n    cy.get('#cancel_btn').click();\n}\ncy.get('#emailAutoText').click();\n// d.defaultvaluesloop();\nDefaultEmailAutoTextValuespage_1.EmailAutotextvalue.editpopup();",
+              "err": {},
+              "uuid": "19061649-b824-4dc0-ba01-3a760e6f7107",
+              "parentUUID": "e36d0640-d16c-49da-ad6b-28413ec1142f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Starting test ECP-T2794 - System Admin - Notification Page - Step 1 - 12 - Email Templates Tab",
+              "fullTitle": "ECP-T2794 - System Admin - Notification Page Starting test ECP-T2794 - System Admin - Notification Page - Step 1 - 12 - Email Templates Tab",
+              "timedOut": null,
+              "duration": 31140,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Step 1 - Login with a system admin account, click on the system admin section of the side navigation menu, click on the notifications section. Verify the system admin > notifications page is displayed and it contains the listed tabs\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateByProperty('data-template=\"notificationManagementPage\"');\ncy.get('#emailTemplates').should('exist');\ncy.get('#emailAutoText').should('exist');\ncy.get('#notificationRecipients').should('exist');\ncy.get('#userMessage').should('exist');\n// Step 2 - Table columns are present\ncy.get('.table-col-emailName').should('exist');\ncy.get('.table-col-emailSubject').should('exist');\ncy.get('.table-col-actions').should('exist');\n// Step 3 - Verify the email templates tab contains a table with the listed columns.\ncy.get('.table-col-emailName').should('have.class', 'sortable');\ncy.get('.table-col-emailSubject').should('have.class', 'sortable');\n// Step 3 - Verify the in-line filter for the \"Email Templates\" tab is present and functional.\ncy.get('input[name=emailName]').type('Account Cancelled');\ncy.get('.table__email-templates tr').should('include.text', 'Account Cancelled');\ncy.get('.table__email-templates tr').should('not.include.text', 'Admin Welcome');\n// Step 4 - Verify the system contains all listed default email notifications.\ncy.get('input[name=emailName]').type('{selectall}{backspace}');\ncy.get('.table__email-templates tr').should('include.text', 'Account Cancelled');\ncy.get('.table__email-templates tr').should('include.text', 'Add User To Organization');\ncy.get('.table__email-templates tr').should('include.text', 'Admin Welcome');\ncy.get('.table__email-templates tr').should('include.text', 'Approve New Email Address');\ncy.get('.table__email-templates tr').should('include.text', 'Cancel Invitation');\ncy.get('.table__email-templates tr').should('include.text', 'Customer Support Email');\ncy.get('.table__email-templates tr').should('include.text', 'Exam Download Is Ready');\ncy.get('.table__email-templates tr').should('include.text', 'Inactive Account Message');\n// cy.get('.table__email-templates tr').should('include.text', 'Join Request Accepted');\n// cy.get('.table__email-templates tr').should('include.text', 'Join Request Cancelled');\n// cy.get('.table__email-templates tr').should('include.text', 'Join Request Created');\n// cy.get('.table__email-templates tr').should('include.text', 'Join Request Denied'); \ncy.get('.table__email-templates tr').should('include.text', 'Password Expiring');\ncy.get('.table__email-templates tr').should('include.text', 'Patient Contact');\ncy.get('.table__email-templates tr').should('include.text', 'Problem Upload');\ncy.get('.table__email-templates tr').should('include.text', 'Remote Share Failed (Sender)');\ncy.get('.table__email-templates tr').should('include.text', 'Remote Share Failed (Support)');\ncy.get('.table__email-templates tr').should('include.text', 'Remove Organization User');\ncy.get('.table__email-templates tr').should('include.text', 'Reset Password');\ncy.get('.table__email-templates tr').should('include.text', 'Send Invitation');\ncy.get('.table__email-templates tr').should('include.text', 'Send Patient Share');\ncy.get('.table__email-templates tr').should('include.text', 'Send StatShare');\ncy.get('.table__email-templates tr').should('include.text', 'StatShare Support Email');\ncy.get('.table__email-templates tr').should('include.text', 'Verify New Email Address');\ncy.get('.table__email-templates tr').should('include.text', 'Welcome');\n// Step 5 - Edit Email Notification Modal Contents - Click the edit action button for any available email notification template\n// and verify the edit email notification modal is opened and it contains all listed fields and items.\ncy.get('#notificationManagement table tbody:nth-child(2) tr td.action-cell .edit-email-template').click({ force: true });\n// cy.get('.edit-email-template').first().click({ force: true });\ncy.waitUntil(function () { return cy.get('.editEmailTemplate h4.modal-title').should('contain.text', 'Edit Email Notification'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('.editEmailTemplate #emailSubject').should('exist');\ncy.window().then(function (win) {\n    // @ts-ignore\n    var textAreaId = win.$('.customizeEmailTemplateForm .email-subject-and-body__body-row textarea').attr('id');\n    // @ts-ignore\n    var text = win.$(\"#\".concat(textAreaId, \"_ifr\")).contents().find(\"body\").text();\n    // @ts-ignore\n    // const text =  win.tinymce.get(textAreaId).getContent({ format: \"text\" });\n    // expect(text).to.contains('Hello'); // commented by mahipal\n    expect(text).to.contains(''); // added by mahipal\n});\ncy.get('.editEmailTemplate #allowGroupCustomization').should('exist');\ncy.get('span:contains(\"Auto Text Title\")').should('exist');\ncy.get('.item-list__input').should('exist');\ncy.get('.tox-toolbar__primary').should('exist');\ncy.get('.auto-text-selector__description-row').should('exist');\ncy.get('.item-list__text[data-replace-id=\"orgLogo\"]').should('exist');\ncy.get('.editEmailTemplate #reset_btn').should('exist');\ncy.get('.editEmailTemplate #cancel_btn').should('exist');\ncy.get('.editEmailTemplate .save-auto-text-info').should('exist');\n//Step 10\ncy.get('[data-replace-id=\"orgLogo\"]').should('exist').click({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('span:contains(\"Your organization header logo\")').should('exist');\n// cy.get('.item-list__text[data-replace-id=\"orgLogo\"]').drag('#emailSubject');\n// cy.get('#emailSubject').should('include.text', 'Org Logo');\ncy.get('#cancel_btn').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateByProperty('data-template=\"notificationManagementPage\"');\ncommon_1.Common.switchTab('Email Auto Text');\n// Step 6 - Email Auto Text tab columns - Close the edit email notification modal window, click on the Email Auto\n// text tab and verify it contains a table with all the listed columns.\ncy.get('.table__email-auto-text thead tr').should('include.text', 'Auto Text Name');\ncy.get('.table__email-auto-text thead tr').should('include.text', 'Description');\ncy.get('.table__email-auto-text thead tr').should('include.text', 'Placeholder');\ncy.get('.table__email-auto-text thead tr').should('include.text', 'Actions');\n// Step 7 - Verify the in-line filter for the listed fields is present and functional and the table allows sorting.\ncy.get('.table-col-autoTextName').should('have.class', 'sortable');\ncy.get('.table-col-description').should('have.class', 'sortable');\ncy.get('.table-col-customPlaceholder').should('have.class', 'sortable');\ncy.get('input[name=autoTextName]').type('Event Date and Time in Pacific');\ncy.wait(configFile.smallTimeout);\ncy.get('.react-table-row').should('include.text', 'Event Date and Time in Pacific');\ncy.get('.react-table-row').should('not.include.text', 'Expiration');\n// Step 8 - Verify the system contains all listed default auto text names.\n// cy.get('input[name=autoTextName]').type('{selectall}{backspace}');\ncy.get('.filter-clear > a').click();\ncy.get('.react-table-row').should('include.text', 'Approve New Email Address Link');\ncy.get('.react-table-row').should('include.text', 'Event Date and Time in Pacific');\ncy.get('.react-table-row').should('include.text', 'Expiration');\ncy.get('.react-table-row').should('include.text', 'Expire in Days');\ncy.get('.react-table-row').should('include.text', 'Message');\ncy.get('.react-table-row').should('include.text', 'Org Logo');\ncy.get('.react-table-row').should('include.text', 'Org Name');\ncy.get('.react-table-row').should('include.text', 'Org Type');\ncy.get('.react-table-row').should('include.text', 'Originator Deployment Link');\ncy.get('.react-table-row').should('include.text', 'Originator Email');\ncy.get('.react-table-row').should('include.text', 'Originator ID');\ncy.get('.react-table-row').should('include.text', 'Originator Name');\ncy.get('.react-table-row').should('include.text', 'Passcode');\ncy.get('.react-table-row').should('include.text', 'Recipient Name');\ncy.get('.react-table-row').should('include.text', 'Registration Link');\ncy.get('.react-table-row').should('include.text', 'Reset Password Link');\ncy.get('.react-table-row').should('include.text', 'Share ID');\ncy.get('.react-table-row').should('include.text', 'Share Link');\ncy.get('.react-table-row').should('include.text', 'Share Recipient Deployment Link');\ncy.get('.react-table-row').should('include.text', 'Share Recipient Name');\ncy.get('.react-table-row').should('include.text', 'Site Link');\ncy.get('.react-table-row').should('include.text', 'Study ID');\ncy.get('.react-table-row').should('include.text', 'URL for the registration page');\ncy.get('.react-table-row').should('include.text', 'Verify New Email Address Link');\n// Step 9 - Click the edit action icon for any of the email auto text rows and verify\n// the Edit auto text modal window is opened and contains the listed contents.\ncy.get('input[name=autoTextName]').type('{selectall}{backspace}');\ncy.get('.action-cell > .btn').first().click({ force: true });\ncy.waitUntil(function () { return cy.get('#editAutoText h4.modal-title').should('contain.text', 'Edit Auto Text'); }, { timeout: configFile.waitUntilTimeout });\ncy.get('#editAutoText input[name=\"autoTextName\"]').should('exist');\ncy.get('#editAutoText input[name=\"description\"]').should('exist');\ncy.get('#editAutoText input[name=\"customPlaceholder\"]').should('exist');\ncy.get('#editAutoText #cancel_btn').should('exist');\ncy.get('#editAutoText .save-auto-text-info').should('exist');\ncy.get('#editAutoText .modal-header .close').should('exist');\n// Step 10 - Verify updates made to the auto text name and description fields are present on the edit email template modal when system admins are editing an\n// email template that uses that particular auto text value.\ncy.get('#editAutoText .modal-header .close').click();\ncommon_1.Common.navigateByProperty('data-template=\"notificationManagementPage\"');\ncommon_1.Common.switchTab('Notification Recipients');\n// Step 11 - Navigate to the notification recipients tab. Verify the tab is displayed and contains all the listed items.\ncy.get('#notificationManagement h3.sectionHeader').should('include.text', 'Internal Notification Recipients');\ncy.get('#notificationManagement .notificationRecipients .form-group:nth-child(1) input').should('exist');\ncy.get('#notificationManagement .notificationRecipients .form-group:nth-child(2) input').should('exist');\ncy.get('#notificationManagement .notificationRecipients .form-group:nth-child(3) input').should('exist');\ncy.get('#notificationManagement .notificationRecipients .form-group:nth-child(4) input').should('exist');\ncy.get('#notificationManagement #cancel').should('exist');\ncy.get('#notificationManagement #save').should('exist');\n// Step 12 - Navigate to the user message tab and verify the tab contains all the listed items.\n// c.navigateTo('Sharing List');\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('Admin Settings');\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateByProperty('data-template=\"notificationManagementPage\"');\ncommon_1.Common.switchTab('User Message');\ncy.get('.userMessageForm .date-range-picker__target').should('exist');\ncy.get('.userMessageForm .timezone-selector div[role=\"combobox\"]').should('exist');\ncy.get('.userMessageForm #typeButton button:nth-child(1)').should('exist');\ncy.get('.userMessageForm #typeButton button:nth-child(2)').should('exist');\ncy.get('.userMessageForm #typeButton button:nth-child(3)').should('exist');\ncy.get('.userMessageForm #titleInput').should('exist');\ncy.get('.userMessageForm .userMessageForm__message #messageBody').should('exist');\ncy.get('.userMessageForm .edit').should('exist');",
+              "err": {},
+              "uuid": "622ac930-5939-41f4-86f6-8e510995c7d8",
+              "parentUUID": "e36d0640-d16c-49da-ad6b-28413ec1142f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2794 - System Admin - Notification Page Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6563,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "88fc829e-acc0-491a-bd16-c34649351dd6",
+              "parentUUID": "e36d0640-d16c-49da-ad6b-28413ec1142f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "19061649-b824-4dc0-ba01-3a760e6f7107",
+            "622ac930-5939-41f4-86f6-8e510995c7d8",
+            "88fc829e-acc0-491a-bd16-c34649351dd6"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 323765,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="199.540" tests="2" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:36:05" tests="0" file="cypress/e2e/test-suites/ECP-T2726-MyOrgNotifications.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2726 - My Org - Notifications" timestamp="2024-12-15T02:36:05" tests="2" time="199.515" failures="0">
+    <testcase name="Starting test ECP-T2726 - My Org - Notifications - All Steps" time="182.549" classname="ECP-T2726 - My Org - Notifications">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.640" classname="ECP-T2726 - My Org - Notifications">
+    </testcase>
+  </testsuite>
+</testsuites>

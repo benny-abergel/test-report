@@ -1,0 +1,130 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:16:32.799Z",
+    "end": "2024-12-15T03:19:02.849Z",
+    "duration": 150050,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "be0d98c8-a77e-4013-a39a-83d0d2faa7c2",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2528-CreateADTMessage.spec.ts",
+      "file": "cypress/test-suites/ECP-T2528-CreateADTMessage.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b084dfb4-99df-4447-a292-03132294ee02",
+          "title": "ECP-T2528-Create ADT Message",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T2528",
+              "fullTitle": "ECP-T2528-Create ADT Message ECP-T2528",
+              "timedOut": null,
+              "duration": 134528,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    return cy.request({\n        url: patientUrl,\n        method: 'POST',\n        body: {\n            dataSourceSystemName: 'cypress-e2e-test',\n            patientInfo: {\n                mrn: mrn,\n                name: patientName,\n                birthDate: patientDOB,\n                patientSex: 'M'\n            },\n            patientVisit: {\n                admitDateTime: '20190101201212',\n                dischargeDateTime: ''\n            }\n        },\n        headers: header\n    }).then(function (res) { return console.log; });\n});\n// Create ADT message\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('System Tools');\ncy.get('a:contains(Patient List)').click();\ncy.get('#search-value').type('test');\ncy.get('#search').click();\ncy.wait(configFile.smallTimeout);\ncy.get('td:contains(12345)').should('exist');\ncy.get('td:contains(Test Test)').should('exist');\ncy.get('td:contains(04-25-1983)').should('exist');\ncy.get('td:contains(M)').should('exist');\ncommon_1.Common.navigateTo('Reports');\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Select Report\"]').click();\ncy.get('li:contains(\"Audit Log\")').click();\ncy.get('.js-runReport').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Patient Added\"]').should('exist');",
+              "err": {},
+              "uuid": "2ef93b4e-33e1-4644-b93f-7f3931c8f906",
+              "parentUUID": "b084dfb4-99df-4447-a292-03132294ee02",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2528-Create ADT Message Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7331,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "739495c9-291e-4c4a-ac67-94f8a9d646ac",
+              "parentUUID": "b084dfb4-99df-4447-a292-03132294ee02",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2ef93b4e-33e1-4644-b93f-7f3931c8f906",
+            "739495c9-291e-4c4a-ac67-94f8a9d646ac"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 141859,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

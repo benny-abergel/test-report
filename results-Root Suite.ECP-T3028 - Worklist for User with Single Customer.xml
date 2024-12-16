@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="348.686" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:31:02" tests="0" file="cypress/e2e/test-suites/ECP-T3028-WorklistforUserwithSingleCustomer.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3028 - Worklist for User with Single Customer" timestamp="2024-12-15T03:31:02" tests="4" time="348.664" failures="0">
+    <testcase name="Precondition " time="143.672" classname="ECP-T3028 - Worklist for User with Single Customer">
+    </testcase>
+    <testcase name="Login with Org admin whose as access to 1 facility and customer admin " time="91.812" classname="ECP-T3028 - Worklist for User with Single Customer">
+    </testcase>
+    <testcase name="Login with IP User and Org admin with multiple facilities " time="101.898" classname="ECP-T3028 - Worklist for User with Single Customer">
+    </testcase>
+    <testcase name="Post step - Cleanup" time="8.099" classname="ECP-T3028 - Worklist for User with Single Customer">
+    </testcase>
+  </testsuite>
+</testsuites>

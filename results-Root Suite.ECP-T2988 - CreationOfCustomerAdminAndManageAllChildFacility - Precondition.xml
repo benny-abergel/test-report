@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="259.549" tests="4" failures="0">
+  <testsuite name="" timestamp="2024-12-15T03:44:06" tests="0" file="cypress/e2e/test-suites/ECP-T2988-CheckOnCreationNewCustomerAdmin,ThatThisNewUserWillBeAbleToManageAllChildFacilities.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2988 - CreationOfCustomerAdminAndManageAllChildFacility - Precondition" timestamp="2024-12-15T03:44:06" tests="4" time="259.519" failures="0">
+    <testcase name="Starting test ECP-T2988 - Creation of Customer and orgadmin account" time="110.047" classname="ECP-T2988 - CreationOfCustomerAdminAndManageAllChildFacility - Precondition">
+    </testcase>
+    <testcase name="Login as User-B as Customer admin and verifying the child facilities" time="80.449" classname="ECP-T2988 - CreationOfCustomerAdminAndManageAllChildFacility - Precondition">
+    </testcase>
+    <testcase name="Login as User-A as Org admin and verifying the My facility" time="49.767" classname="ECP-T2988 - CreationOfCustomerAdminAndManageAllChildFacility - Precondition">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.214" classname="ECP-T2988 - CreationOfCustomerAdminAndManageAllChildFacility - Precondition">
+    </testcase>
+  </testsuite>
+</testsuites>

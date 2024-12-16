@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:40:59.366Z",
+    "end": "2024-12-15T02:50:32.306Z",
+    "duration": 572940,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "49fe46eb-c62f-40ff-931f-c82131b6f294",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2586-ActiveInactiveUser.spec.ts",
+      "file": "cypress/test-suites/ECP-T2586-ActiveInactiveUser.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "4e4b6200-4311-4ffe-a1f9-6718af08b1cd",
+          "title": "ECP-T2586 - Activate_Inactive users",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1-7",
+              "fullTitle": "ECP-T2586 - Activate_Inactive users Step 1-7",
+              "timedOut": null,
+              "duration": 179875,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\nActiveInactive_1.Activeinactive.Inactiveaccount(EmailID, facilityName, customerName);\n//Step 6\ncommon_1.Common.switchToFacility(facility2Name);\n/*  cy.wrap(m.addUser(EmailID[1],password,facilityName,'Organization Administrators'),{timeout:configFile.hugeTimeout});\n       m.changeFeatures(\n           {\n               allowInboundSharing:true,\n               allowOutboundSharing:true,\n               allowAPIs:true,\n               allowStatShares:true\n           },\n           facility2Name\n       ) */\ncy.wait(configFile.smallTimeout);\nActiveInactive_1.Activeinactive.InactiveAccountCannotbeAdded(EmailID);\n//Step 21\nActiveInactive_1.Activeinactive.ReuseemailId(EmailID);\n//Step 7 \nActiveInactive_1.Activeinactive.reactiveuseraccount(EmailID);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.get('h3:contains(\"Sign in to your account\")').should('be.visible');",
+              "err": {},
+              "uuid": "ba461d54-62c7-428b-9d57-7c031e8d3c9b",
+              "parentUUID": "4e4b6200-4311-4ffe-a1f9-6718af08b1cd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 8",
+              "fullTitle": "ECP-T2586 - Activate_Inactive users Step 8",
+              "timedOut": null,
+              "duration": 90491,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 8\ncommon_1.Common.login(customerName, EmailID[0], password);\n//  m.login(customerName,'#headerLogo', configFile.url, false, EmailID[0], password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(EmailID[0], password), { timeout: configFile.hugeTimeout });\n    }\n    cy.reload();\n});\ncommon_1.Common.switchToFacility(facilityName);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    cy.wrap(token).as('token');\n    cy.wrap(orgId).as('orgId');\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    common_1.Common.navigateTo('Sharing List');\n    cy.waitUntil(function () { return cy.get('.data-tables__rows', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\n    cy.get('.data-tables__rows').then(function (el) {\n        if (el.find('.study > .hidden-bp').length < 1) {\n            var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n            cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n                .then(function (_a) {\n                var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n                console.log(code, stdout, stderr);\n            });\n        }\n    });\n});\ncy.wait(configFile.smallTimeout);\n//Step 8 - Organization share\nActiveInactive_1.Activeinactive.Orgshare(facility2Name);\n//Professional share\nActiveInactive_1.Activeinactive.ProfessionalShare(facility2Name);\n//Statshare\nActiveInactive_1.Activeinactive.statshare();\ncy.get('#statShareUrl').then(function (el) {\n    staturl = el.text();\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.get('h3:contains(\"Sign in to your account\")').should('be.visible');",
+              "err": {},
+              "uuid": "a75ea31f-a48e-48de-99a2-5aab83dfd724",
+              "parentUUID": "4e4b6200-4311-4ffe-a1f9-6718af08b1cd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 8.2",
+              "fullTitle": "ECP-T2586 - Activate_Inactive users Step 8.2",
+              "timedOut": null,
+              "duration": 149620,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 8.2\ncommon_1.Common.login(customerName, EmailID[1], password);\n// m.login(customerName,'#headerLogo', configFile.url, false, EmailID[1], password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(EmailID[1], password));\n    }\n    cy.reload();\n});\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facility2Name))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    cy.wrap(token).as('token');\n    cy.wrap(orgId).as('orgId');\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    common_1.Common.navigateTo('Sharing List');\n    cy.waitUntil(function () { return cy.get('.data-tables__rows', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\n    cy.get('.data-tables__rows').then(function (el) {\n        if (el.find('.study > .hidden-bp').length < 1) {\n            var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-02\", \" -keepAlive=1\");\n            cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n                .then(function (_a) {\n                var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n                console.log(code, stdout, stderr);\n            });\n        }\n    });\n});\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('[title=\"US w Cine clip, YBR full 422\"]', { timeout: configFile.longTimeout }).should('exist'); }, { timeout: configFile.longTimeout });\n//Org share\nActiveInactive_1.Activeinactive.Orgshare(facilityName);\n//Professioanl share\nActiveInactive_1.Activeinactive.ProfessionalShare(facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.get('h3:contains(\"Sign in to your account\")').should('be.visible');\n//inactive user Step 9 and 22 are same\ncommon_1.Common.login(customerName, userName, userpassword);\nActiveInactive_1.Activeinactive.activateaccount(EmailID);\ncommon_1.Common.logout();\ncy.get('h3:contains(\"Sign in to your account\")').should('be.visible');\ncommon_1.Common.login(customerName, EmailID[1], password);\ncy.reload();\n//m.login(customerName,'#headerLogo', configFile.url, false, EmailID[1], password);\n// cy.reload();\n//Step 10 and 11 \ncommon_1.Common.switchToFacility(facility2Name);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\nActiveInactive_1.Activeinactive.inactiveicon();\n//Step 12 and 23 is also same\nActiveInactive_1.Activeinactive.inactiveusershouldnotexist(facilityName, date);\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "26a62d94-da0b-413e-bb28-1192eb45fda9",
+              "parentUUID": "4e4b6200-4311-4ffe-a1f9-6718af08b1cd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 15-20 , Verfied Statshare, Inactive Error message and Inactive account remove method",
+              "fullTitle": "ECP-T2586 - Activate_Inactive users Step 15-20 , Verfied Statshare, Inactive Error message and Inactive account remove method",
+              "timedOut": null,
+              "duration": 122982,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n//Step 15\ncy.visit(staturl);\nActiveInactive_1.Activeinactive.verifystaturl();\n//Step 17\ncy.clearLocalStorage();\ncy.wait(configFile.smallTimeout);\ncy.visit(configFile.url);\ncy.get('#emailAddress').type(EmailID[0]);\ncy.get('#at-btn').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#password').type(password);\ncy.get('#at-btn').click();\ncy.get('p:contains(\"Your account has been inactivated.\")').should('exist');\ncy.get('p:contains(\"Use the message box below to contact customer support for assistance.\")').should('exist');\n//Step 18 is skipped and Step 19\ncommon_1.Common.login(customerName, EmailID[1], password);\n// m.login(customerName,'#headerLogo', configFile.url, false, EmailID[1], password);\n//  cy.reload();\ncommon_1.Common.switchToFacility(facilityName);\nActiveInactive_1.Activeinactive.removeuser();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.get('h3:contains(\"Sign in to your account\")').should('be.visible');\ncommon_1.Common.login(customerName, userName, userpassword);\n//Step 22\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\nActiveInactive_1.Activeinactive.reactiveuseraccount(EmailID);\ncommon_1.Common.logout();\ncy.get('h3:contains(\"Sign in to your account\")').should('be.visible');\n//Step 23\ncommon_1.Common.login(customerName, EmailID[1], password);\n// m.login(customerName,'#headerLogo', configFile.url, false, EmailID[1], password);\n//cy.reload();\ncommon_1.Common.switchToFacility(facility2Name);\nActiveInactive_1.Activeinactive.verifyactiveuser(date);\ncommon_1.Common.logout();\ncy.get('h3:contains(\"Sign in to your account\")').should('be.visible');\ncommon_1.Common.login(customerName, EmailID[0], password);\n// m.login(customerName,'#headerLogo', configFile.url, false, EmailID[0], password);\n//cy.reload();\ncy.get('p:contains(\"Your account has been inactivated.\")').should('not.exist');\ncy.get('p:contains(\"Use the message box below to contact customer support for assistance.\")').should('not.exist');\n// Step 24 is Skipped as Registration cannot be done",
+              "err": {},
+              "uuid": "3683dde0-231f-4941-a012-50c3289ba76f",
+              "parentUUID": "4e4b6200-4311-4ffe-a1f9-6718af08b1cd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2586 - Activate_Inactive users Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6274,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "1e9c3969-aace-4934-97e3-b4dea06766b2",
+              "parentUUID": "4e4b6200-4311-4ffe-a1f9-6718af08b1cd",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ba461d54-62c7-428b-9d57-7c031e8d3c9b",
+            "a75ea31f-a48e-48de-99a2-5aab83dfd724",
+            "26a62d94-da0b-413e-bb28-1192eb45fda9",
+            "3683dde0-231f-4941-a012-50c3289ba76f",
+            "1e9c3969-aace-4934-97e3-b4dea06766b2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 549242,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

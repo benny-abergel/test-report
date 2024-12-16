@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T04:11:35.682Z",
+    "end": "2024-12-15T04:13:07.379Z",
+    "duration": 91697,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "ce216df5-4e19-45dd-90e5-b37a028fee3c",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2805-SystemSettings-DefaultValues.spec.ts",
+      "file": "cypress/test-suites/ECP-T2805-SystemSettings-DefaultValues.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "22b8f2dc-51c5-4e76-b8ed-fd0f4a681e14",
+          "title": "ECP-T2805 - System Settings - Default Values",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Before step",
+              "fullTitle": "ECP-T2805 - System Settings - Default Values Before step",
+              "timedOut": null,
+              "duration": 67217,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.systemDefaultFeatureSwitches();\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.systemDefaultFeatureSwitches();\nmeteor_1.Meteor.systemFeatureSwitch({\n    allowWorklist: false,\n    allowCdUploader: true,\n    allowGuestUploader: false,\n    allowInboundSharing: true,\n    allowOutboundSharing: true,\n    allowPatientSharing: false,\n    allowStatShares: true,\n    allowSAML: false,\n    allowEdgeServer: true,\n    allowAD: true,\n    allowPushToPACS: true,\n    allowTagEditing: false,\n    allowDICOMReceive: true,\n    allowQueryRetrieve: true,\n    allowModalityWorklist: false,\n    allowReportQuerySources: false,\n    allowAPIs: false,\n    allowAutomaticActions: false,\n    allowWorkstationViewer: false,\n    allowExamTypeMapping: false,\n    allowErrorTestingCustomerCreation: false\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchTab('General');\ncy.get('#isNonDiagnostic').uncheck();\ncy.get('#isDemo').uncheck();\ncy.get('.form-group > label:contains(\"Default Inactivity Timeout\")').parent('.form-group').find('.Select-arrow-zone').click({ force: true });\ncy.get('[aria-label=\"5 min\"]').click();\ncy.get('#maximumExamAttachmentUploads').type('{selectall}25');\ncy.get('#version').type('{selectall}1');\ncy.get('#mfaCodeTimeout').type('{selectall}60');\ncy.get('.js-customer-support-number').type('{selectall}858-251-3440');\ncy.get('#mfaCodeTimeout').type('{selectall}60');\ncy.get('#save').click({ force: true });",
+              "err": {},
+              "uuid": "b45534b0-a4b7-427c-9477-7dc8b5eee352",
+              "parentUUID": "22b8f2dc-51c5-4e76-b8ed-fd0f4a681e14",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Starting System Settings - Default Values Test - all 7 Steps in one",
+              "fullTitle": "ECP-T2805 - System Settings - Default Values Starting System Settings - Default Values Test - all 7 Steps in one",
+              "timedOut": null,
+              "duration": 10273,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('System Settings');\n// Step 1 - Verify that the default value for the General tab is:\n// Demonstration only disclaimer checkbox Default = unchecked, Disable registration checkbox Default = unchecked, Disable join requests checkbox Default = unchecked\n// Default inactivity timeout dropdown Default = 30 mins, Maximum exam attachments Uploads 25, Version field Default = Blank, Release Date field Default = Today's date\n// Min. Share Retention Period Default = 60 days, Configurable Support Phone Number, Default = 858-251-3440, Default Value for MFA Code Timeout: 60\n// cy.get('#isDemo').should('not.be.checked'); // TODO removed\ncy.get('#isNonDiagnostic').should('not.be.checked');\ncy.get('#isDemo').should('not.be.checked');\n//    cy.get('#disableJoinRequests').should('not.be.checked');\ncy.get('#container div:nth-child(3) span[title=\"5 min\"]').should('exist');\ncy.get('#maximumExamAttachmentUploads').should('contain.value', '25');\ncy.get('#version').should('contain.value', '1');\n// cy.get('.date-range-picker__target').should('not.be.checked');\n// cy.get('.js-revocation-period').should('contain.value', '60');\ncy.get('.js-customer-support-number').should('contain.value', '858-251-3440');\ncy.get('#mfaCodeTimeout').should('contain.value', '60');\n// Step 2 - Verify that the default value for the Features tab is:\ncommon_1.Common.switchTab('Features');\ncommon_1.Common.verifyFeatureToggle('allowCdUploader');\ncommon_1.Common.verifyFeatureToggle('allowGuestUploader', false);\ncommon_1.Common.verifyFeatureToggle('allowInboundSharing');\ncommon_1.Common.verifyFeatureToggle('allowOutboundSharing');\ncommon_1.Common.verifyFeatureToggle('allowPatientSharing', false);\ncommon_1.Common.verifyFeatureToggle('allowStatShares');\ncommon_1.Common.verifyFeatureToggle('allowSAML', false);\ncommon_1.Common.verifyFeatureToggle('allowEdgeServer', true);\ncommon_1.Common.verifyFeatureToggle('allowAD');\ncommon_1.Common.verifyFeatureToggle('allowPushToPACS');\ncommon_1.Common.verifyFeatureToggle('allowTagEditing', false);\ncommon_1.Common.verifyFeatureToggle('allowDICOMReceive');\ncommon_1.Common.verifyFeatureToggle('allowQueryRetrieve');\ncommon_1.Common.verifyFeatureToggle('allowModalityWorklist', false);\ncommon_1.Common.verifyFeatureToggle('allowReportQuerySources', false);\ncommon_1.Common.verifyFeatureToggle('allowAPIs', false);\ncommon_1.Common.verifyFeatureToggle('allowHl7');\ncommon_1.Common.verifyFeatureToggle('allowNixViewerApi');\ncommon_1.Common.verifyFeatureToggle('allowAutomaticActions', false);\ncommon_1.Common.verifyFeatureToggle('allowWorkstationViewer', false);\ncommon_1.Common.verifyFeatureToggle('allowWorklist', false);\ncommon_1.Common.verifyFeatureToggle('allowExamTypeMapping', false);\ncommon_1.Common.verifyFeatureToggle('allowErrorTestingCustomerCreation', false);\n// Step 3 - Verify that the default value for the DICOM Tags tab is:\n// Accession Number, Issuer of Patient ID, Patient's Sex, Number of Frames\ncommon_1.Common.switchTab('DICOM Tags');\ncy.get('td.table-col-tagName').should('contain.text', 'Accession Number');\ncy.get('td.table-col-tagName').should('contain.text', 'Issuer of Patient ID');\ncy.get('td.table-col-tagName').should('contain.text', 'Patient\\'s Sex');\ncy.get('td.table-col-tagName').should('contain.text', 'Number of Frames');",
+              "err": {},
+              "uuid": "98f81a22-21c5-46a2-8fb6-f78fe8baf2a3",
+              "parentUUID": "22b8f2dc-51c5-4e76-b8ed-fd0f4a681e14",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2805 - System Settings - Default Values Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7057,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "128cc523-2fb9-4bc4-b0d3-e46659184fcb",
+              "parentUUID": "22b8f2dc-51c5-4e76-b8ed-fd0f4a681e14",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b45534b0-a4b7-427c-9477-7dc8b5eee352",
+            "98f81a22-21c5-46a2-8fb6-f78fe8baf2a3",
+            "128cc523-2fb9-4bc4-b0d3-e46659184fcb"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 84547,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

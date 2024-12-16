@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="697.319" tests="12" failures="1">
+  <testsuite name="" timestamp="2024-12-15T02:36:13" tests="0" file="cypress/e2e/test-suites/ECP-T3560-Edit Patient-Exams and Procedures.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T3560 - Edit Patient, Exams and Procedures (failing due to Bug ECP-29003)" timestamp="2024-12-15T02:36:13" tests="12" time="0.000" failures="1">
+    <testcase name="ECP-T3560 - data prep" time="96.773" classname="ECP-T3560 - Edit Patient, Exams and Procedures (failing due to Bug ECP-29003)">
+    </testcase>
+    <testcase name="ECP-T3560 - Steps 1 - 12 (Edit Study)" time="191.444" classname="ECP-T3560 - Edit Patient, Exams and Procedures (failing due to Bug ECP-29003)">
+      <failure message="Timed out retrying after 60000ms: Expected to find element: `div.popover-content`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 60000ms: Expected to find element: `div.popover-content`, but never found it.
+    at Context.eval (webpack:///./cypress/e2e/test-suites/ECP-T3560-Edit Patient-Exams and Procedures.spec.ts:1120:38)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

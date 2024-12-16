@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="520.340" tests="6" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:25:05" tests="0" file="cypress/e2e/test-suites/ECP-T2661-ExamListActionTabs.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2661 - Exam List Actions and Tabs" timestamp="2024-12-15T02:25:05" tests="6" time="520.313" failures="0">
+    <testcase name="Test Preparation - Before Step, creating API token and uploading exams" time="156.136" classname="ECP-T2661 - Exam List Actions and Tabs">
+    </testcase>
+    <testcase name="Starting ECP-T2661 - Exam List Actions and Tabs - Step 1 - 13" time="70.540" classname="ECP-T2661 - Exam List Actions and Tabs">
+    </testcase>
+    <testcase name="Step 15 - 18" time="54.878" classname="ECP-T2661 - Exam List Actions and Tabs">
+    </testcase>
+    <testcase name="Step 19 - 21" time="55.480" classname="ECP-T2661 - Exam List Actions and Tabs">
+    </testcase>
+    <testcase name="Step 23 - 25" time="51.702" classname="ECP-T2661 - Exam List Actions and Tabs">
+    </testcase>
+    <testcase name="Disable facility and cleanup" time="7.140" classname="ECP-T2661 - Exam List Actions and Tabs">
+    </testcase>
+  </testsuite>
+</testsuites>

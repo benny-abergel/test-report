@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:34:59.328Z",
+    "end": "2024-12-15T02:38:42.880Z",
+    "duration": 223552,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "7e8c4bf0-e34c-4fc7-9286-788709f5d72e",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3659-AtlasqueryTransformer.spec.ts",
+      "file": "cypress/test-suites/ECP-T3659-AtlasqueryTransformer.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ba49770c-22c8-49d1-a166-d387496ebc5e",
+          "title": "ECP-T3659-Atlas Query Transformer",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3659",
+              "fullTitle": "ECP-T3659-Atlas Query Transformer ECP-T3659",
+              "timedOut": null,
+              "duration": 129238,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\n// Step 3\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    cy.get('#orgId').then(function (el) {\n        orgId = el.text();\n        cy.log(orgId);\n        filterurl = \"\".concat(baseUrl, \"/api/organizations/\").concat(orgId, \"/worklistEntities\");\n        cy.log(filterurl);\n        header = {\n            Authorization: \"Bearer \".concat(token),\n            Accept: 'application/json; charset=utf-8',\n            'Content-Type': 'application/json; charset=utf-8'\n        };\n        cy.fixture('AtlasTest_data').then(function (data) {\n            for (var i = 0; i < 130; i++) {\n                cy.request({\n                    url: patientUrl,\n                    method: 'POST',\n                    body: data[i],\n                    headers: header\n                }).then(function (res) { return console.log; });\n            }\n        });\n        common_1.Common.navigateTo('Admin Settings', 1);\n        // Step 1 \n        // cy.get('[data-key=\"useAtlasSearchInWorklist\"]').check({force:true})\n        //  cy.get('button:contains(\"Enable\")').click();\n        cy.wait(configFile.smallTimeout);\n        cy.get('[data-key=\"useAtlasSearchInWorklist\"]').should('be.checked');\n        //cy.get('button:contains(\"Save\")').click();\n    });\n});",
+              "err": {},
+              "uuid": "663ce3b9-11a9-43d6-bd84-aa0624636ecd",
+              "parentUUID": "ba49770c-22c8-49d1-a166-d387496ebc5e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Check Worklist",
+              "fullTitle": "ECP-T3659-Atlas Query Transformer Check Worklist",
+              "timedOut": null,
+              "duration": 75372,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\n//Step 2\ncommon_1.Common.navigateTo('Worklist');\ncy.request({\n    url: filterurl,\n    method: 'POST',\n    body: { \"filterBy\": { \"AND\": [{ \"field\": \"patientMrn\", \"stringContains\": \"Atlas2_\" }, { \"field\": \"mappedPriority\", \"oneOf\": [90] }] }, \"sortBy\": [{ \"field\": \"mappedPriority\", \"order\": \"DESC\" }], \"limit\": 100 },\n    headers: header\n}).then(function (res) { return console.log; });\ncy.get('button:contains(\"Clear All\")').first().click();\n// cy.get('.colomn-selector-btn').click()\n// cy.pause\ncy.get('[data-cy=\"openTableConfigurationButton\"]').click();\ncy.get('[data-cy=\"columnSelectHiddenItem-visitCurrentLocation\"]').click();\ncy.get('[data-cy=\"columnSettingsAddToDisplayList\"]').click();\ncy.get('[title=\"Apply\"]').click();\ncy.wait(configFile.smallTimeout);\n//Step 4\ncy.get('[data-cy=\"patientMrnFilter\"]').type('Atlas2_');\ncy.get('[data-cy=\"FilterApplyAll\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.waitUntil(function () { return cy.get('span:contains(130)').should('exist'); }, { timeout: configFile.hugeTimeout * 2 });\n//Step 6\ncy.get('[data-cy=\"patientMrnFilter\"]').clear().type('At');\ncy.get('[data-cy=\"FilterApplyAll\"]').click();\ncy.get('span:contains(130)').should('exist');\ncy.get('div:contains(MRN:)').should('exist');\ncy.get('[title=\"Ward D\"]').should('exist');\ncy.get('.value-text').should('contain.text', \"At\");\ncy.get('.filter-icon-container').should('exist');\n//Step 7\ncy.get('.filter-icon-container').click();\ncy.get('span:contains(Does not contain)').should('exist');\ncy.get('.false').click();\ncy.get('div:contains(Does not contain)').should('exist');\ncy.get('.value-text').should('contain.text', \"At\");\ncy.get('.-rowInfo').should('not.exist');\n//Step 8\ncy.get('[data-cy=\"filterChip_patientMrn\"] > .close').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[data-cy=\"visitCurrentLocationFilter\"]').type('Wa');\ncy.get('[data-cy=\"FilterApplyAll\"]').click();\ncy.get('span:contains(130)').should('exist');\ncy.get('div:contains(MRN:)').should('not.exist');\ncy.get('div:contains(Visit Current Loc.:)').should('exist');\ncy.get('[title=\"Ward D\"]').should('exist');\ncy.get('.value-text').should('contain.text', \"Wa\");\ncy.get('.filter-icon-container').should('exist');\ncy.get('.filter-icon-container').click();\ncy.get('.false').click();\ncy.get('div:contains(Does not contain)').should('exist');\ncy.get('.value-text').should('contain.text', \"Wa\");\ncy.get('.-rowInfo').should('not.exist');\ncy.get('[data-cy=\"filterChip_visitCurrentLocation\"] > .close').click();\ncy.get('.-rowInfo').should('exist');\n//Step 9\ncommon_1.Common.navigateTo('Admin Settings', 1);\ncy.get('[data-key=\"useAtlasSearchInWorklist\"]').uncheck();\ncy.get('span:contains(Note: Disabling this feature will result in limited filtering and sorting)').should('exist');\ncy.get('span:contains(Warnings will be shown in the worklist until this feature is enabled again.)').should('exist');\n//cy.get('#enable').click()\ncy.get('button:contains(\"Disable Atlas Search\")').click();\ncy.wait(configFile.smallTimeout);\ncy.get('button:contains(\"Save\")').click();\n//Step 10 \ncommon_1.Common.navigateTo('Worklist');\ncy.get('span:contains(Filtering functionality is currently restricted due to a system issue. Existing Views may be affected.)').should('exist');\ncy.get('.more-info-tooltip').should('exist');\n//Step 11\ncy.get('.more-info-tooltip').trigger('mouseover');\ncy.get('div:contains(Change Healthcare Support has restricted filtering due to a system issue. Currently, text field filters use the \"Starts With\" operator instead of \"Contains\". For example, applying an MRN filter of \"123\" will display items with MRNs starting with \"123\".)').should('exist');\n// Step 12\ncy.request({\n    url: filterurl,\n    method: 'POST',\n    body: { \"filterBy\": { \"AND\": [{ \"field\": \"patientMrn\", \"stringContains\": \"Atlas2_\" }, { \"field\": \"patientBirthDate\", \"equal\": \"20050918\" }]\n        }, \"sortBy\": [{ \"field\": \"accessionNumber\", \"order\": \"DESC\" }],\n        \"limit\": 100 },\n    headers: header\n}).then(function (res) { return console.log; });\n//Step 13\ncommon_1.Common.navigateTo('Admin Settings', 1);\ncy.get('[data-key=\"useAtlasSearchInWorklist\"]').check();\n// cy.get('button:contains(\"Enable\")').click();\ncy.get('button:contains(\"Save\")').click();\ncommon_1.Common.navigateTo('Worklist');\ncy.get('span:contains(Filtering is currently limited, and existing Views may be affected.)').should('not.exist');\ncy.get('.more-info-tooltip').should('not.exist');",
+              "err": {},
+              "uuid": "64c0b399-405c-4b93-95a2-1a15eb77a2d5",
+              "parentUUID": "ba49770c-22c8-49d1-a166-d387496ebc5e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3659-Atlas Query Transformer Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6793,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "cc5850c9-8c3a-4297-9d6b-93bcf4f24361",
+              "parentUUID": "ba49770c-22c8-49d1-a166-d387496ebc5e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "663ce3b9-11a9-43d6-bd84-aa0624636ecd",
+            "64c0b399-405c-4b93-95a2-1a15eb77a2d5",
+            "cc5850c9-8c3a-4297-9d6b-93bcf4f24361"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 211403,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

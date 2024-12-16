@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T04:18:04.307Z",
+    "end": "2024-12-15T04:23:55.486Z",
+    "duration": 351179,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "5c1a335f-39cf-4495-939a-cc6f1954bd90",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2791-HelpCenter.spec.ts",
+      "file": "cypress/test-suites/ECP-T2791-HelpCenter.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "019b656a-721c-489f-826b-d7a047e713b4",
+          "title": "ECP-T2791 - Help Center ",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1 to 8- select Show Help center",
+              "fullTitle": "ECP-T2791 - Help Center  Step 1 to 8- select Show Help center",
+              "timedOut": null,
+              "duration": 294642,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\n// Creation of Standard Customer\ncommon_1.Common.navigateTo('Customers');\ncy.wait(configFile.smallTimeout);\ncy.get('.NewOrgButton > .btn').click();\ncy.get('#orgName').type(stdcustomer);\ncy.get('.Select-placeholder').first().click();\ncy.get('.Select-placeholder').first().type(customerName);\ncy.wait(configFile.tinyTimeout);\ncy.get('[aria-label=\"' + customerName + '\"]').click();\ncy.get('.Select-placeholder').last().click();\ncy.get('#timezone-picker').type('Central Time', { force: true });\ncy.get('.adminEditOrganizationForm .Select-menu-outer .Select-option span.needsclick').first().click();\ncy.wait(configFile.tinyTimeout);\ncy.get('button[type=\"submit\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('button.btn.btn-primary.btn--with-spinner .circularLoader', { timeout: configFile.longTimeout }).should('not.exist');\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.adminEditOrganizationForm').length > 0) {\n        cy.get('.adminEditOrganizationForm .js-close').first().click();\n    }\n});\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('Help Center');\ncommon_1.Common.switchTab('Knowledgebase Setup');\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\n// Step 1\ncy.get('#patientAccount').clear().type('patient');\ncy.get('#patientPassword').clear().type('KR7fCYqAUAZUsh%*TnhLN^i%');\ncy.get('#patientUrl').clear().type('https://nucleussupport.wpengine.com/');\ncy.get('[type=\"password\"]').should('exist');\ncy.get('#userAccount').clear().type('standarduser');\ncy.get('#userPassword').clear().type('%lcTBeVTiGE@32ceea08K93j');\ncy.get('#userUrl').clear().type('https://nucleussupport.wpengine.com/');\ncy.get('#adminAccount').clear().type('orgadmin');\ncy.get('#adminPassword').clear().type('wFQ%z)9A*ge3q!5KJxIdEulc');\ncy.get('#adminUrl').clear().type('https://nucleussupport.wpengine.com/');\ncy.get('#authEndpoint').clear().type('https://nucleussupport.wpengine.com/wp-json/aam/v1/authenticate');\ncy.get('#jsonEndpoint').clear().type('https://nucleussupport.wpengine.com/wp-json');\ncy.get('#save_btn').click({ force: true });\ncy.wait(configFile.smallTimeout);\n// Step 2\ncy.get('#patientAccount').clear().type('Test');\ncy.get('.btn-clear-form').click();\ncy.get('p:contains(\"Do you want to cancel all knowledgebase changes?\")').should('exist');\ncy.get('.popover-btn-group > .btn-default').click();\ncy.get('.btn-clear-form').click();\ncy.get('.btn-danger').click();\n// Step 3 and adding org admin to Std Customer\ncy.get('#showHelpLink').check({ force: true });\ncy.get('#save_btn').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(stdcustomer);\ncommon_1.Common.navigateTo('My Facility');\ncy.get('[title=\"Users & Groups\"]').eq(0).click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchTab('Users');\ncy.wait(configFile.smallTimeout);\ncy.get('.addExistingUserBtn').click();\ncy.get('#tbUserSearchText', { timeout: configFile.hugeTimeout }).clear().type(orgadmin);\ncy.wait(configFile.smallTimeout);\ncy.get('span:contains(\"' + orgadmin + '\")', { timeout: configFile.hugeTimeout }).click();\ncy.wait(configFile.smallTimeout);\ncy.get('.Select-placeholder').click();\ncy.get('[aria-label=\"Organization Administrators\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.modal-footer > .btn-primary', { timeout: configFile.hugeTimeout }).click({ force: true });\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n// Step 4 and 7\ncommon_1.Common.login(customerName, orgadmin, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(orgadmin, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncy.get('[title=\"Open Support\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('.supportPhone--left').should('exist');\ncy.get('h2 > .fa').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(stdcustomer);\ncy.get('[title=\"Open Support\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#helpCenterBtn1').should('not.exist');\ncy.get('h2 > .fa').click();\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n//Step 5\ncommon_1.Common.login(customerName, user, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(user, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Open Support\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#userComment').should('exist');\ncy.get('h2 > .fa').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n// Step 6\ncommon_1.Common.login(customerName, resuser, userpassword);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(resuser, userpassword), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Open Support\"]').click();\ncy.wait(configFile.tinyTimeout);\ncy.get('#userComment').should('exist');\ncy.get('h2 > .fa').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\n// Step 8 is skipped",
+              "err": {},
+              "uuid": "8e32c1c4-2cfc-40f6-9eed-934a70cf0669",
+              "parentUUID": "019b656a-721c-489f-826b-d7a047e713b4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "De-select Show Help center",
+              "fullTitle": "ECP-T2791 - Help Center  De-select Show Help center",
+              "timedOut": null,
+              "duration": 40793,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Step 9\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncommon_1.Common.navigateTo('Help Center');\ncommon_1.Common.switchTab('Knowledgebase Setup');\ncy.wait(configFile.smallTimeout);\ncy.get('#showHelpLink').uncheck({ force: true });\ncy.wait(configFile.tinyTimeout);\ncy.get('#save_btn').click({ force: true });\ncy.wait(configFile.smallTimeout);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.logout();\n// Step 10\ncommon_1.Common.login(customerName, orgadmin, userpassword);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncy.get('[title=\"Open Support\"]').click();\ncy.wait(configFile.tinyTimeout);\n//    cy.get('h3:contains(\"Have Questions or Comments?\")').should('exist')\n// cy.get('#helpCenterBtn1').should('not.exist')\ncy.get('h2 > .fa').click();\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);",
+              "err": {},
+              "uuid": "890c1fb0-0205-4cd2-8878-c13a9e3ac8e4",
+              "parentUUID": "019b656a-721c-489f-826b-d7a047e713b4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2791 - Help Center  Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6481,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "03cb16e9-c977-4627-9aff-af4a8032ba53",
+              "parentUUID": "019b656a-721c-489f-826b-d7a047e713b4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8e32c1c4-2cfc-40f6-9eed-934a70cf0669",
+            "890c1fb0-0205-4cd2-8878-c13a9e3ac8e4",
+            "03cb16e9-c977-4627-9aff-af4a8032ba53"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 341916,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

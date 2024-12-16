@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:48:32.060Z",
+    "end": "2024-12-15T03:50:46.708Z",
+    "duration": 134648,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "9e035fa7-d4bc-457e-b42d-0676a4834097",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3260- User is checking the UI of patient jacket.spec.ts",
+      "file": "cypress/test-suites/ECP-T3260- User is checking the UI of patient jacket.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b805b788-b8f1-4e47-abbc-cda695e04da0",
+          "title": "ECP-T3260- User is checking the UI of patient jacket",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ECP-T3260 - data prep",
+              "fullTitle": "ECP-T3260- User is checking the UI of patient jacket ECP-T3260 - data prep",
+              "timedOut": null,
+              "duration": 91473,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.reload();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('.pageTitle').should('be.visible'); }, { timeout: configFile.hugeTimeout });\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorkstationViewer: true,\n    allowWorklist: true\n}, facilityName);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName)).then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    var header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    //Upload a-01 study from resources folder\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n    cy.request({\n        url: oruUrl,\n        method: 'POST',\n        body: {\n            dataSourceSystemName: 'cypress-e2e-test',\n            patientInfo: {\n                mrn: \"a-01\",\n                name: \"Acceptance, Set 1\",\n                birthDate: \"19800808010101\",\n                patientSex: 'M'\n            },\n            patientVisit: {\n                admitDateTime: '20190101201212',\n                dischargeDateTime: ''\n            },\n            diagnosticReportInfo: {\n                \"contentType\": \"Text\",\n                \"status\": 'Preliminary',\n                \"content\": \"Testing THIS IS A REPORT!<br><br><br>Report text goes here....<br><br><br><br>CREATED BY LOAD TEST SCRIPT\",\n                \"reportDateTime\": '20190504201220',\n                \"principalInterpretingPhysicianName\": \"ID3^PrincipalInterpreter^Given^Middle^Suffix^Prefix\",\n                \"assistantInterpretingPhysicianName\": \"ID4^AssistantInterpreter^Given^Middle^Suffix^Prefix\",\n                \"customReportInfo\": {\n                    \"custom01\": \"Sample report from test-e2e cypress script\"\n                }\n            },\n            procedureInfo: {\n                \"accessionNumber\": \"1000-1\",\n                \"procedureCode\": \"CAPC\",\n                \"procedureDescription\": \"CTA CHEST\",\n                \"procedureStatus\": 'Ordered',\n                \"reasonForExam\": \"\",\n                \"relevantClinicalInfo\": \"<NTE.3.1>CREATED BY LOAD SCRIPT - Clinical Indications for requested exam: patient developed foul tasting drainage after dental surgery eval for infection or other abnormality .</NTE.3.1><NTE.3.1>Information desired from requested exam: DX .</NTE.3.1>\",\n                \"orderingDepartment\": \"\",\n                \"modality\": \"CT\",\n                \"bodyPart\": \"\",\n                \"priority\": \"R\",\n                \"scheduledDateTime\": \"\",\n                \"startedDateTime\": '20190504201212',\n                \"completedDateTime\": \"\",\n                \"cancelledDateTime\": \"\",\n                \"requestingPhysicianName\": \"Bruce^Banner^^MD^\",\n                \"referringPhysicianName\": \"ASDF^ASDF^ASDFE^^\",\n                \"attendingPhysicianName\": \"\",\n                \"technologist\": \"\",\n                \"visitClass\": \"\",\n                \"visitNumber\": \"\",\n                \"visitPrimaryLocation\": \"RAD\",\n                \"visitCurrentLocation\": \"\"\n            }\n        },\n        headers: header\n    });\n});\ncommon_1.Common.switchToCustomer('System');\ncommon_1.Common.navigateTo('System Settings');\ncommon_1.Common.switchTab('Localization');\ncy.get('.form-group > label:contains(\"Time Format\")').parent('.form-group').find('.Select-arrow-zone').click({ force: true });\ncy.get('[aria-label=\"12hr AM/PM\"]').click();\ncy.get('[id=\"save\"]').click({ force: true });\ncy.get('[id=\"save\"]').should('not.be.enabled', { timeout: configFile.mediumTimeout });",
+              "err": {},
+              "uuid": "31077de9-1c7f-4d86-86e1-8296fa012548",
+              "parentUUID": "b805b788-b8f1-4e47-abbc-cda695e04da0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 3-5",
+              "fullTitle": "ECP-T3260- User is checking the UI of patient jacket Step 3-5",
+              "timedOut": null,
+              "duration": 33753,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, accAdmUser, accAdmPass);\ncy.wait(configFile.smallTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(accAdmUser, accAdmPass));\n        cy.reload();\n    }\n});\ncommon_1.Common.navigateTo('Worklist');\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\ncy.contains(\"Clear All\").first().click();\nworklist_common_1.Worklist.filterByFacility(facilityName);\ncy.waitUntil(function () { return cy.get('[data-cy=\"worklistTableBody\"] span[title=\"a-01\"]', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\nchangeStatus('Dictated');\ncy.get(\"[data-cy='mappedPriorityCell']\").first().dblclick();\ncheckPJ();\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Exam Date');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Mod');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Exam Description');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Patient');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Gender');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Body Part');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Indication');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Organization');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Source');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Referring');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Images');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Exam Status');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Accession');\ncy.get('.lm_item_container div.rt-thead.-header').should('contain', 'Primary Location');\ncy.get('.pj__section-layout.priors-packet [title=\"Dictated\"]').should('have.text', 'Dictated');",
+              "err": {},
+              "uuid": "d2b50dcb-9528-4d5b-9583-10ba7f2bed28",
+              "parentUUID": "b805b788-b8f1-4e47-abbc-cda695e04da0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3260- User is checking the UI of patient jacket Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6607,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "b9962692-1210-40e7-9500-54fc221a2efd",
+              "parentUUID": "b805b788-b8f1-4e47-abbc-cda695e04da0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "31077de9-1c7f-4d86-86e1-8296fa012548",
+            "d2b50dcb-9528-4d5b-9583-10ba7f2bed28",
+            "b9962692-1210-40e7-9500-54fc221a2efd"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 131833,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:26:21.947Z",
+    "end": "2024-12-15T03:32:17.841Z",
+    "duration": 355894,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "3378dd2f-c5e6-49fc-9b34-f5239a9b853e",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2660-ExamDownloads.spec.ts",
+      "file": "cypress/test-suites/ECP-T2660-ExamDownloads.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f9ba5049-67f1-4b43-883f-04c9e5a3f432",
+          "title": "ECP-T2660 - Exam Downloads ",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Step 1-13",
+              "fullTitle": "ECP-T2660 - Exam Downloads  Step 1-13",
+              "timedOut": null,
+              "duration": 130627,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\n// Verify That All required features are enabled\nmeteor_1.Meteor.changeFeatures({\n    allowAutomaticActions: true,\n    allowPushEvidenceToPACS: true,\n    allowAPIs: true,\n    allowEdgeServer: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true\n}, facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n    examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-46\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n    cy.wait(configFile.smallTimeout);\n    examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-03\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"a-03\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\n//Step 1 \ncy.wait(configFile.smallTimeout);\ncy.get('.openExtra').first().click();\ncy.get('#downloadExamNow').click();\ncy.get('.DownloadQueue__Button > .btn-link').click();\ncy.get('[title=\"Queued\"]').should('exist');\ncy.get('.modal-header > .close > span').click();\n//Step 2 skipped\n//Step 3 and 4\ncy.get('.openExtra').last().click();\ncy.get('#downloadExamNow').click();\ncy.get('div:contains(2 exams are now ready to download.)').should('exist');\ncy.get('.DownloadQueue__Button > .btn-link').click();\ncy.get('th:contains(Patient)').should('exist');\ncy.get('th:contains(MRN)').should('exist');\ncy.get('th:contains(Exam Date)').should('exist');\ncy.get('th:contains(Description)').should('exist');\ncy.get('th:contains(MOD)').should('exist');\ncy.get('th:contains(Date Requested)').should('exist');\ncy.get('th:contains(Status)').should('exist');\ncy.get('th:contains(Actions)').should('exist');\n//Step 9,10 is skipeed\n//Step 11 and 12\ncy.get('td:contains(a-01)').should('exist');\ncy.get('td:contains(a-03)').should('exist');\ncy.get('.OrganizationDicomTags__Table__Actions > :nth-child(2) > .btn').last().click();\ncy.get('p:contains(Do you want to remove this download from the queue?)').should('exist');\ncy.get('button:contains(No)').should('exist');\ncy.get('button:contains(Yes, Remove)').should('exist');\ncy.get('button:contains(Yes, Remove)').click();\ncy.get('[title=\"Ready\"]').should('exist');\ncy.wait(configFile.smallTimeout);\ncy.get('.table-cell-patientId').should('have.text', 'a-03');\n//Step 5\ncy.get('.table-col-patient.sortable').should('exist').click();\ncy.get('.table-col-patientId.sortable').should('exist').click();\ncy.get('.table-col-examDate.sortable').should('exist').click();\ncy.get('.table-col-description.sortable').should('exist').click();\ncy.get('.table-col-modalities.sortable').should('exist').click().click();\ncy.get('.table-col-dateRequested.sortable').should('exist').click();\ncy.get('.table-col-status.sortable').should('exist').click();\n//Step 6\ncy.get('[title=\"Queued\"]').should('not.exist');\ncy.get('[title=\"Ready\"]').should('exist');\n//Step 13\ncy.get('.modal-header > .close > span').click();\ncy.get('#downloadExamNow').click();\ncy.get('div:contains(2 exams are now ready to download.)').should('exist');\ncy.get('.DownloadQueue__Button > .btn-link').click();\ncy.get('[title=\"Ready\"]').should('exist');\ncy.get('.table-cell-patientId').should('have.text', 'a-03a-01');\ncy.get('.modal-header > .close > span').click();",
+              "err": {},
+              "uuid": "d87088c7-f19e-42e9-9065-856db5bae6e8",
+              "parentUUID": "f9ba5049-67f1-4b43-883f-04c9e5a3f432",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 15-26",
+              "fullTitle": "ECP-T2660 - Exam Downloads  Step 15-26",
+              "timedOut": null,
+              "duration": 202171,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//Step 14 is skipped\n//Step 15 and 16\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facility2Name);\ncy.wait(configFile.smallTimeout);\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowEdgeServer: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true\n}, facility2Name);\ncy.wait(configFile.smallTimeout);\ncy.window().then(function (win) {\n    // @ts-ignore - removing Cypress error for missing chrome browser\n    window.top.chrome = true;\n});\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/c-38-6\", \" -keepAlive=1\");\n    cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n        .then(function (_a) {\n        var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n        console.log(code, stdout, stderr);\n    });\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"c-38-6\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.shareExam').click();\ncy.get('#organization').type(facilityName);\ncy.get('.multiStateButtonWrapper').click();\ncy.get('.addUser > .addRecipientBtn').click();\ncy.get('[title=\"View Only\"]').click();\ncy.get('[aria-label=\"Export\"]').click();\ncy.get('#shareExam').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facilityName);\ncy.reload();\ncy.waitUntil(function () { return cy.get('[title=\"c-38-6\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.openExtra').first().click();\ncy.get('#downloadExamNow').click();\ncy.get('.DownloadQueue__Button > .btn-link').click();\ncy.get('.table-cell-patientId').should('have.text', 'a-03a-01c-38-6');\ncy.get('.modal-header > .close > span').click();\n//Step 17,18 and 20\ncommon_1.Common.switchToFacility(facility2Name);\ncy.get('.DownloadQueue__Button > .btn-link').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.table-cell-patientId').should('not.exist');\ncy.get('.modal-header > .close > span').click();\ncy.waitUntil(function () { return cy.get('[title=\"c-38-6\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.openExtra').click();\ncy.get('.shareHistoryTab').click();\ncy.waitUntil(function () { return cy.get('.iconEdit').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.iconEdit').click();\ncy.get('label:contains(\"PERMISSION\")').parents('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"View Only\"]').click({ force: true });\ncy.get('.js-editsharedialog-save').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"View Only\"]').should('exist');\ncommon_1.Common.switchToFacility(facilityName);\ncy.waitUntil(function () { return cy.get('[title=\"c-38-6\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.DownloadQueue__Button > .btn-link').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.table-cell-patientId').should('have.text', 'a-03a-01');\ncommon_1.Common.switchToFacility(facility2Name);\ncy.wait(configFile.smallTimeout);\ncy.get('.openExtra').click();\ncy.get('.shareHistoryTab').click();\ncy.waitUntil(function () { return cy.get('.iconEdit').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.get('.iconEdit').click();\ncy.get('label:contains(\"PERMISSION\")').parents('.form-group').find('.Select-value').click({ force: true });\ncy.get('[aria-label=\"Export\"]').click({ force: true });\ncy.get('.js-editsharedialog-save').click();\ncy.wait(configFile.smallTimeout);\ncy.get('[title=\"Export\"]').should('exist');\ncommon_1.Common.switchToFacility(facilityName);\ncy.waitUntil(function () { return cy.get('[title=\"c-38-6\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.openExtra').first().click();\ncy.get('#downloadExamNow').click();\ncy.get('.DownloadQueue__Button > .btn-link').click();\ncy.get('.table-cell-patientId').should('have.text', 'a-03a-01c-38-6');\ncy.get('.modal-header > .close > span').click();\ncommon_1.Common.switchToFacility(facility2Name);\ncy.wait(configFile.smallTimeout);\ncy.get('.openExtra').click();\ncy.get('.shareHistoryTab').click();\ncy.waitUntil(function () { return cy.get('.iconEdit').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.revokeShareBtn').click();\ncy.get('#revokeShareYes').click();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\ncy.get('.DownloadQueue__Button > .btn-link').click();\ncy.get('.table-cell-patientId').should('have.text', 'a-03a-01');\n//  cy.get('[title=\"Downloaded\"]').should('exist')\ncy.get('.modal-header > .close > span').click();\n//Step 7,8,19 and 26\ncy.wait(configFile.smallTimeout);\ncy.get('.openExtra').first().click();\ncy.get('[data-cy=\"deleteExamBtn\"]').click();\ncy.get('[data-cy=\"confirmDeleteYes\"]').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.DownloadQueue__Button > .btn-link').click();\ncy.get('.table-cell-patientId').should('have.text', 'a-01');\ncy.get('.modal-header > .close > span').click();\ncy.get('.openExtra').first().click();\ncy.get('#downloadExamNow').click();\ncy.get('.DownloadQueue__Button > .btn-link').click();\ncy.get('.table-cell-patientId').should('have.text', 'a-01a-46');\ncy.get('.modal-header > .close > span').click();\ncommon_1.Common.navigateTo('System Tools');\ncy.get('[href=\"/downloadQueue\"]').click();\ncy.get('.delete-button-wrapper > span > .btn').click();\ncy.get('.btn-danger').click();\ncy.wait(configFile.smallTimeout);\ncy.get('.DownloadQueue__Button > .btn-link').click();\ncy.get('.table-cell-patientId').should('not.exist');\ncy.get('.modal-header > .close > span').click();\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('[title=\"a-46\"]').should('be.visible'); }, { timeout: configFile.hugeTimeout });\ncy.wait(configFile.smallTimeout);\ncy.get('.openExtra').first().click();\ncy.get('#downloadExamNow').click();\ncy.get('.DownloadQueue__Button > .btn-link').click();\ncy.get('.table-cell-patientId').should('have.text', 'a-46');\n// cy.get('.OrganizationDicomTags__Table__Actions > :nth-child(1) > .btn').click()\n// cy.reload()\n// cy.wait(configFile.smallTimeout)\n// cy.get('[title=\"Downloaded\"]').should('exist')\n// cy.get('h4:contains(Download Queue)').should('exist')\ncy.get('.modal-header > .close > span').click();\n//Step 21,23,24,25,27,28 and 29",
+              "err": {},
+              "uuid": "51ef410a-89dc-40ea-ad13-0e4260f2a826",
+              "parentUUID": "f9ba5049-67f1-4b43-883f-04c9e5a3f432",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2660 - Exam Downloads  Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 9501,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "7d3bde53-2b3e-4eb9-bf0b-2e44ea543247",
+              "parentUUID": "f9ba5049-67f1-4b43-883f-04c9e5a3f432",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "d87088c7-f19e-42e9-9065-856db5bae6e8",
+            "51ef410a-89dc-40ea-ad13-0e4260f2a826",
+            "7d3bde53-2b3e-4eb9-bf0b-2e44ea543247"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 342299,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

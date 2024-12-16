@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T04:11:35.676Z",
+    "end": "2024-12-15T04:13:03.826Z",
+    "duration": 88150,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "60ecb4f8-8978-420b-a1b9-31a6b7ea0eba",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2619-ClientServicesandClientServicesManagersSystemAdminAccess.spec.ts",
+      "file": "cypress/test-suites/ECP-T2619-ClientServicesandClientServicesManagersSystemAdminAccess.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c0d16932-1c1f-47ca-b4ab-60a0ca278c66",
+          "title": "ECP-T2619 - Client Services and Client Services Managers System Admin Access",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Login as Client Service",
+              "fullTitle": "ECP-T2619 - Client Services and Client Services Managers System Admin Access Login as Client Service",
+              "timedOut": null,
+              "duration": 63994,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, clientuser, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncy.get('[title=\"Admin Settings\"]').should('exist');\ncy.get('[title=\"Customers\"]').should('exist');\ncy.get('[title=\"User Management\"]').should('exist');\ncy.get('[title=\"Edge Servers\"]').should('exist');\ncy.get('[title=\"General Settings\"]').should('exist');\ncy.get('[title=\"System Users & Groups\"]').should('exist');\ncy.get('[title=\"Edge Servers\"]').click({ force: true });\ncy.get('[title=\"Status\"]').should('exist');\ncy.get('[title=\"User Management\"]').click({ force: true });\ncy.get('.editUserBtn').should('exist');\ncy.get('[title=\"Customers\"]').click({ force: true });\ncy.get('.NewOrgButton').should('exist');\ncy.get('[title=\"System Users & Groups\"]').click({ force: true });\ncy.get('#users').should('exist');\ncy.get('#userGroups').should('exist');\ncy.get('[title=\"General Settings\"]').click({ force: true });\ncy.get('h3:contains(Local User Sign In)').should('exist');\ncy.get('h3:contains(Show Structured Reports as Attachments)').should('exist');",
+              "err": {},
+              "uuid": "860473a6-e282-41cd-bcd0-381f62606958",
+              "parentUUID": "c0d16932-1c1f-47ca-b4ab-60a0ca278c66",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Login as Client Service Managers",
+              "fullTitle": "ECP-T2619 - Client Services and Client Services Managers System Admin Access Login as Client Service Managers",
+              "timedOut": null,
+              "duration": 10484,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Visit Base URL\ncommon_1.Common.login(customerName, clientmanager, userpassword);\ncommon_1.Common.switchToCustomer('System', configFile.timeout, true);\ncommon_1.Common.navigateTo('System Admin');\ncy.get('[title=\"Admin Settings\"]').should('exist');\ncy.get('[title=\"Billing\"]').should('exist').click({ force: true });\ncy.get('#runReport').should('exist');\ncy.get('[title=\"Customers\"]').should('exist').click({ force: true });\ncy.get('.NewOrgButton').should('exist');\ncy.get('[title=\"Edge Servers\"]').should('exist').click({ force: true });\ncy.get('[title=\"Status\"]').should('exist');\ncy.get('[title=\"General Settings\"]').should('exist');\ncy.get('[title=\"Help Center\"]').should('exist').click({ force: true });\ncy.get('#userDocumentation').should('exist');\ncy.get('[title=\"Notifications\"]').should('exist').click({ force: true });\ncy.get('[title=\"User Message\"]').should('exist');\ncy.get('[title=\"Problem Uploads\"]').should('exist').click({ force: true });\ncy.get('#details').should('exist');\ncy.get('#download').should('exist');\ncy.get('#delete').should('exist');\ncy.get('[title=\"System Users & Groups\"]').should('exist').click({ force: true });\ncy.get('#users').should('exist');\ncy.get('#userGroups').should('exist');\ncy.get('[title=\"User Management\"]').should('exist').click({ force: true });\ncy.get('.editUserBtn').should('exist');",
+              "err": {},
+              "uuid": "8bc84fd9-7c53-487e-9316-8cdaf42780a0",
+              "parentUUID": "c0d16932-1c1f-47ca-b4ab-60a0ca278c66",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2619 - Client Services and Client Services Managers System Admin Access Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 6778,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);",
+              "err": {},
+              "uuid": "599e857a-e1b6-44f6-af1b-4af6fa726193",
+              "parentUUID": "c0d16932-1c1f-47ca-b4ab-60a0ca278c66",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "860473a6-e282-41cd-bcd0-381f62606958",
+            "8bc84fd9-7c53-487e-9316-8cdaf42780a0",
+            "599e857a-e1b6-44f6-af1b-4af6fa726193"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 81256,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

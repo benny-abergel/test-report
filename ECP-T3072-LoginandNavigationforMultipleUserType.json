@@ -1,0 +1,187 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T03:36:17.530Z",
+    "end": "2024-12-15T03:43:59.074Z",
+    "duration": 461544,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "045da660-c478-4a9e-8cad-afbf91fbbe5f",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T3072-LoginandNavigationforMultipleUserType.spec.ts",
+      "file": "cypress/test-suites/ECP-T3072-LoginandNavigationforMultipleUserType.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "baa7d3f1-1bef-485a-b271-fd6682e95eab",
+          "title": "ECP-T3072 - Login and Navigation for Multiple User Type",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Mix Customer Facility",
+              "fullTitle": "ECP-T3072 - Login and Navigation for Multiple User Type Mix Customer Facility",
+              "timedOut": null,
+              "duration": 199570,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, cusadmin, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(cusadmin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncy.wait(configFile.smallTimeout);\ncy.get('div > span > .btn').invoke('text').then(function (text) {\n    expect(text).contain(customerName);\n});\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Organization Details');\ncy.get('div > span > .btn').invoke('text').then(function (text) {\n    expect(text).contain(customerName);\n});\ncy.get('#organizationName').invoke('val').then(function (text) {\n    expect(text).contain(customerName);\n});\ncommon_1.Common.switchToCustomer(customer2Name);\ncy.get('span:contains(\"My Organization\")').should('not.exist');\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('#facilityName').should('contain.text', facility2Name); }, { timeout: configFile.waitUntilTimeout });\ncy.waitUntil(function () { return cy.get('#customerName').should('contain.text', customer2Name); }, { timeout: configFile.waitUntilTimeout });\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "ddc8dbed-a831-4217-9e59-2a03d1e074e4",
+              "parentUUID": "baa7d3f1-1bef-485a-b271-fd6682e95eab",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Mix Customer Normal User",
+              "fullTitle": "ECP-T3072 - Login and Navigation for Multiple User Type Mix Customer Normal User",
+              "timedOut": null,
+              "duration": 71369,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, cus2admin, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(cus2admin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncy.wait(configFile.smallTimeout);\ncy.get('div > span > .btn').invoke('text').then(function (text) {\n    expect(text).contain(customerName);\n});\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Organization Details');\ncy.get('div > span > .btn').invoke('text').then(function (text) {\n    expect(text).contain(customerName);\n});\ncy.get('#organizationName').invoke('val').then(function (text) {\n    expect(text).contain(customerName);\n});\ncommon_1.Common.switchToCustomer(customer2Name);\ncy.get('span:contains(\"My Organization\")').should('not.exist');\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('#facilityName').should('contain.text', facility2Name); }, { timeout: configFile.waitUntilTimeout });\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "ce267fcf-c1bb-40fc-8505-dbd6c36a6f64",
+              "parentUUID": "baa7d3f1-1bef-485a-b271-fd6682e95eab",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Mix Facility Normal User",
+              "fullTitle": "ECP-T3072 - Login and Navigation for Multiple User Type Mix Facility Normal User",
+              "timedOut": null,
+              "duration": 75417,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, orgadmin, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(orgadmin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncy.wait(configFile.smallTimeout);\ncy.get('div > span > .btn').invoke('text').then(function (text) {\n    expect(text).contain(customerName);\n});\ncommon_1.Common.navigateTo('Dashboard');\ncy.get('#facilityName').invoke('text').then(function (text) {\n    expect(text).contain(facilityName);\n});\ncy.get('.Select-value').should('not.exist');\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Facility Details');\ncy.wait(configFile.smallTimeout);\ncy.get('#facilityName').invoke('text').then(function (text) {\n    expect(text).contain(facilityName);\n});\ncy.get('#organizationName').invoke('val').then(function (text) {\n    expect(text).contain(facilityName);\n});\ncommon_1.Common.switchToCustomer(customer2Name);\ncy.get('[title=\"My Facility\"]').should('not.exist');\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('#facilityName').should('contain.text', facility2Name); }, { timeout: configFile.waitUntilTimeout });\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "c38f8a8b-4bd9-48a1-a7f4-d300c6b8c9b4",
+              "parentUUID": "baa7d3f1-1bef-485a-b271-fd6682e95eab",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Mix Customer Facility NormalUser",
+              "fullTitle": "ECP-T3072 - Login and Navigation for Multiple User Type Mix Customer Facility NormalUser",
+              "timedOut": null,
+              "duration": 87594,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, cus3admin, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(cus3admin, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncy.wait(configFile.smallTimeout);\ncy.get('div > span > .btn').invoke('text').then(function (text) {\n    expect(text).contain(customerName);\n});\ncommon_1.Common.navigateTo('My Organization');\ncommon_1.Common.navigateTo('Organization Details');\ncy.get('div > span > .btn').invoke('text').then(function (text) {\n    expect(text).contain(customerName);\n});\ncy.get('#organizationName').invoke('val').then(function (text) {\n    expect(text).contain(customerName);\n});\ncommon_1.Common.switchToCustomer(customer2Name);\ncy.get('span:contains(\"My Organization\")').should('not.exist');\ncommon_1.Common.navigateTo('My Facility');\ncommon_1.Common.navigateTo('Facility Details');\ncy.wait(configFile.smallTimeout);\ncy.get('#facilityName').invoke('text').then(function (text) {\n    expect(text).contain(facility2Name);\n});\ncy.get('#organizationName').invoke('val').then(function (text) {\n    expect(text).contain(facility2Name);\n});\ncommon_1.Common.switchToCustomer(customer3Name);\ncy.get('[title=\"My Facility\"]').should('not.exist');\ncommon_1.Common.navigateTo('Sharing List');\ncy.waitUntil(function () { return cy.get('#facilityName').should('contain.text', facility3Name); }, { timeout: configFile.waitUntilTimeout });\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "b96ff461-e230-43ac-beea-013f4314524c",
+              "parentUUID": "baa7d3f1-1bef-485a-b271-fd6682e95eab",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T3072 - Login and Navigation for Multiple User Type Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 8632,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login();\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);\nmeteor_1.Meteor.changeFacilityStatus(facility3Name, false);",
+              "err": {},
+              "uuid": "33610eb4-2fe4-4cbc-b0fa-e4e53fa0736b",
+              "parentUUID": "baa7d3f1-1bef-485a-b271-fd6682e95eab",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ddc8dbed-a831-4217-9e59-2a03d1e074e4",
+            "ce267fcf-c1bb-40fc-8505-dbd6c36a6f64",
+            "c38f8a8b-4bd9-48a1-a7f4-d300c6b8c9b4",
+            "b96ff461-e230-43ac-beea-013f4314524c",
+            "33610eb4-2fe4-4cbc-b0fa-e4e53fa0736b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 442582,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}

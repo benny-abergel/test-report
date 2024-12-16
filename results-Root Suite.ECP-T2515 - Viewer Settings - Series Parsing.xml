@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="510.084" tests="6" failures="0">
+  <testsuite name="" timestamp="2024-12-15T02:21:07" tests="0" file="cypress/e2e/test-suites/ECP-T2515-ViewerSettingSeriesParsing.spec.ts" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Root Suite.ECP-T2515 - Viewer Settings - Series Parsing" timestamp="2024-12-15T02:21:07" tests="6" time="510.055" failures="0">
+    <testcase name="Test Preparation - Before Step - Upload exam and get viewer URL" time="163.155" classname="ECP-T2515 - Viewer Settings - Series Parsing">
+    </testcase>
+    <testcase name="ECP-T2515 - Step 1 to 11" time="90.688" classname="ECP-T2515 - Viewer Settings - Series Parsing">
+    </testcase>
+    <testcase name="Step 5 and 6" time="74.387" classname="ECP-T2515 - Viewer Settings - Series Parsing">
+    </testcase>
+    <testcase name="Step 7 - 11" time="80.126" classname="ECP-T2515 - Viewer Settings - Series Parsing">
+    </testcase>
+    <testcase name="Step 9, 10 and 11" time="70.685" classname="ECP-T2515 - Viewer Settings - Series Parsing">
+    </testcase>
+    <testcase name="ECP-T2515-cleanup" time="6.692" classname="ECP-T2515 - Viewer Settings - Series Parsing">
+    </testcase>
+  </testsuite>
+</testsuites>

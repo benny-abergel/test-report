@@ -1,0 +1,168 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-15T02:15:38.332Z",
+    "end": "2024-12-15T02:20:25.228Z",
+    "duration": 286896,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "fb5ef0e6-3668-465f-a0b0-6e3ca46c6b86",
+      "title": "",
+      "fullFile": "cypress/e2e/test-suites/ECP-T2657-ExamCommentsNotes.spec.ts",
+      "file": "cypress/test-suites/ECP-T2657-ExamCommentsNotes.spec.ts",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d3a75240-d3a6-4370-bb02-993833af00b1",
+          "title": "ECP-T2657 - Exam Comments/Notes",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Precondition",
+              "fullTitle": "ECP-T2657 - Exam Comments/Notes Precondition",
+              "timedOut": null,
+              "duration": 111773,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncy.wrap(meteor_1.Meteor.addFacilty(customerName, facility2Name), { timeout: configFile.hugeTimeout });\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facility2Name);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\n// Step 3 - Navigate to My Org > Admin Settings > Features tab. Enable features switches for APIs > HL7, Worklist, and PACS Workflow. Verify Worklist, Patient, Procedure, and My Org > IOCM History tabs only become available once all 3 features have been enabled.\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true,\n    allowCdUploader: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true\n}, facility2Name);\ncommon_1.Common.switchToFacility(facilityName);\nmeteor_1.Meteor.changeFeatures({\n    allowAPIs: true,\n    allowHl7: true,\n    allowWorklist: true,\n    allowCdUploader: true,\n    allowInboundSharing: true,\n    allowOutboundSharing: true\n}, facilityName);\ncy.wrap(meteor_1.Meteor.addUser(EmailID, password, facilityName, 'Organization Administrators'), { timeout: configFile.hugeTimeout });\ncommon_1.Common.createAPIToken(\"api_token_for_org_\".concat(facilityName))\n    .then(function (res) {\n    token = res.token;\n    orgId = res.orgId;\n    console.log('token: ', token, ' , orgId: ', orgId);\n    cy.wrap(token).as('token');\n    cy.wrap(orgId).as('orgId');\n    header = {\n        Authorization: \"Bearer \".concat(token),\n        Accept: 'application/json; charset=utf-8',\n        'Content-Type': 'application/json; charset=utf-8'\n    };\n    common_1.Common.navigateTo('Sharing List');\n    cy.waitUntil(function () { return cy.get('.data-tables__rows', { timeout: configFile.longTimeout }).should('be.visible'); }, { timeout: configFile.longTimeout });\n    cy.get('.data-tables__rows').then(function (el) {\n        if (el.find('.study > .hidden-bp').length < 1) {\n            var examUploadCmd = \"node utils/p10UploadDriver.js -baseUri=\".concat(configFile.url, \" -apiToken=\").concat(token, \" -maxParallel=5 -data=\").concat(\"resources/a-01\", \" -keepAlive=1\");\n            cy.exec(examUploadCmd, { log: true, env: { NODE_TLS_REJECT_UNAUTHORIZED: configFile.NODE_TLS_REJECT_UNAUTHORIZED }, timeout: configFile.hugeTimeout })\n                .then(function (_a) {\n                var code = _a.code, stdout = _a.stdout, stderr = _a.stderr;\n                console.log(code, stdout, stderr);\n            });\n        }\n    });\n});\n// c.switchToFacility(facilityName2);\n// ec.createUserAccount(EmailID,username,password);\ncommon_1.Common.logout();",
+              "err": {},
+              "uuid": "85bc8bbf-7441-45c1-9f14-7a2a79944824",
+              "parentUUID": "d3a75240-d3a6-4370-bb02-993833af00b1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 1- 10",
+              "fullTitle": "ECP-T2657 - Exam Comments/Notes Step 1- 10",
+              "timedOut": null,
+              "duration": 55815,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\nExamCommentsandNotes_1.ExamNotesandComments.commentpopup();\nExamCommentsandNotes_1.ExamNotesandComments.addcomment();\nExamCommentsandNotes_1.ExamNotesandComments.editcomment();\nExamCommentsandNotes_1.ExamNotesandComments.deletecommentAndUndo();\nExamCommentsandNotes_1.ExamNotesandComments.shareExamWithComment(facility2Name);",
+              "err": {},
+              "uuid": "ef9ff8bc-20a6-49df-be83-456402a0bb76",
+              "parentUUID": "d3a75240-d3a6-4370-bb02-993833af00b1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Step 11-20",
+              "fullTitle": "ECP-T2657 - Exam Comments/Notes Step 11-20",
+              "timedOut": null,
+              "duration": 97586,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, EmailID, password);\n//    m.login(customerName,'#headerLogo', configFile.url, false, EmailID, password);\ncy.wait(configFile.mediumTimeout);\ncy.get('body').then(function (elx) {\n    if (elx.find('.agreement').length > 0) {\n        cy.wrap(meteor_1.Meteor.acceptTermWS(EmailID, password), { timeout: configFile.hugeTimeout });\n        cy.reload();\n    }\n});\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\nExamCommentsandNotes_1.ExamNotesandComments.shareReceipt();\ncommon_1.Common.logout();\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.login(customerName, userName, userpassword);\ncommon_1.Common.switchToCustomer(customerName, configFile.timeout, true);\ncommon_1.Common.switchToFacility(facilityName);\ncy.wait(configFile.smallTimeout);\ncommon_1.Common.navigateTo('Sharing List');\ncy.wait(configFile.smallTimeout);\nExamCommentsandNotes_1.ExamNotesandComments.sharecreater(facilityName, username);",
+              "err": {},
+              "uuid": "58591293-b071-4aac-b5e6-c8e73c2bfec3",
+              "parentUUID": "d3a75240-d3a6-4370-bb02-993833af00b1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Disable facility and cleanup",
+              "fullTitle": "ECP-T2657 - Exam Comments/Notes Disable facility and cleanup",
+              "timedOut": null,
+              "duration": 7476,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "common_1.Common.login(customerName, userName, userpassword);\nmeteor_1.Meteor.changeFacilityStatus(facilityName, false);\nmeteor_1.Meteor.changeFacilityStatus(facility2Name, false);",
+              "err": {},
+              "uuid": "de0ba0eb-874a-439a-9693-9a1d36f7f402",
+              "parentUUID": "d3a75240-d3a6-4370-bb02-993833af00b1",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "85bc8bbf-7441-45c1-9f14-7a2a79944824",
+            "ef9ff8bc-20a6-49df-be83-456402a0bb76",
+            "58591293-b071-4aac-b5e6-c8e73c2bfec3",
+            "de0ba0eb-874a-439a-9693-9a1d36f7f402"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 272650,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "[name]",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/report/mochawesome",
+        "overwrite": true,
+        "reportFilename": "[name]",
+        "reportTitle": "SI PACS Automation",
+        "reportPageTitle": "SI PACS Automation",
+        "autoOpen": false
+      },
+      "version": "6.2.0"
+    }
+  }
+}
